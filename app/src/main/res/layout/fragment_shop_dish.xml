@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+
+    android:gravity="center">
+
+
+    <GridView
+        android:id="@+id/dish_list"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+
+        android:columnWidth="90dp"
+        android:gravity="center"
+        android:horizontalSpacing="10dp"
+        android:numColumns="auto_fit"
+        android:paddingLeft="@dimen/t10"
+        android:paddingRight="@dimen/t10"
+        android:paddingTop="@dimen/t10"
+        android:stretchMode="columnWidth"
+        android:verticalSpacing="10dp" />
+
+
+    <TextView
+        android:id="@+id/dish_nu"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:gravity="center"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="@dimen/t20"
+        android:layout_marginRight="@dimen/t20"
+        android:background="@drawable/radius_gray_border_press_gray"
+        android:layout_gravity="center"
+        android:text="+"
+        android:textColor="@color/W1"
+        android:textSize="@dimen/t30" />
+
+
+</RelativeLayout>

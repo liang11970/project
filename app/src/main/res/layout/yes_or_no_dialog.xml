@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/round_menu_bg" >
+
+    <LinearLayout
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="22.0dip"
+            android:gravity="center"
+            android:padding="10dp"
+            android:textColor="@color/learn_circle_tab_font"
+            android:textSize="@dimen/t15" />
+
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="0.5dp"
+            android:layout_marginTop="25dp"
+            android:background="@color/gap" />
+
+        <LinearLayout
+            android:id="@+id/yes_no"
+            android:layout_marginBottom="-0.5dp"
+            android:layout_marginLeft="-0.5dp"
+            android:layout_marginRight="-0.5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <Button
+                android:id="@+id/left"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_gravity="left"
+                android:layout_weight="1"
+                android:background="@drawable/btn_bottom_left_radius"
+                android:textColor="@color/text_color_press"
+                android:textSize="@dimen/t15" >
+            </Button>
+
+            <View
+                android:layout_width="0.5dp"
+                android:layout_height="40dp"
+                android:background="@color/gap" />
+
+            <Button
+                android:id="@+id/right"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_gravity="right"
+                android:layout_weight="1"
+                android:background="@drawable/btn_bottom_right_radius"
+                android:textColor="@color/text_color_press"
+                android:textSize="@dimen/t15" >
+            </Button>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/confirm_only"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:visibility="visible" >
+
+            <Button
+                android:id="@+id/right_confirm"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:background="@drawable/btn_bottom_radius"
+                android:textColor="@color/text_color_press"
+                android:textSize="@dimen/t15" >
+            </Button>
+        </LinearLayout>
+    </LinearLayout>
+
+</RelativeLayout>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/t03"
+        android:background="@color/white"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/meeting_name"
+            android:layout_width="match_parent"
+            android:layout_height="180dp"
+            android:layout_toLeftOf="@+id/meeting_time"
+            android:background="@drawable/ic_meeting_item"
+            android:gravity="center_vertical|right"
+            android:padding="@dimen/t10"
+            android:paddingLeft="@dimen/t110"
+            android:text="党中央第一次人民代表大会"
+            android:textColor="#007fca"
+            android:textSize="@dimen/t15" />
+
+        <TextView
+            android:id="@+id/meeting_time"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginLeft="@dimen/t10"
+            android:layout_marginTop="@dimen/t02"
+            android:text="6月22日" />
+
+
+        <TextView
+            android:id="@+id/meeting_address"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/meeting_name"
+            android:layout_marginBottom="@dimen/t10"
+            android:layout_marginLeft="@dimen/t10"
+            android:text="安徽省合肥市蜀山区"
+            android:textSize="@dimen/t13" />
+    </LinearLayout>
+
+
+</RelativeLayout>

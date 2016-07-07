@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <cn.com.projectdemos.meeting.widget.MyViewPager
+        android:id="@+id/vPager_learn_circle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/tab_layout"
+        android:layout_gravity="center"
+        android:layout_weight="1.0"
+        android:flipInterval="30"
+        android:persistentDrawingCache="animation" />
+
+    <LinearLayout
+        android:id="@+id/tab_layout"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/colorPrimary">
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/dynamic"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true"
+                android:gravity="center"
+                android:paddingLeft="6dp"
+                android:paddingRight="6dp"
+                android:text="外卖"
+                android:textColor="#ffffff"
+                android:textSize="15sp" />
+
+            <View
+                android:id="@+id/dynamic_line"
+                android:layout_width="wrap_content"
+                android:layout_height="3dp"
+                android:layout_alignLeft="@id/dynamic"
+                android:layout_alignParentBottom="true"
+                android:layout_alignRight="@id/dynamic"
+                android:background="#00ff00" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/teacher"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_centerHorizontal="true"
+                android:layout_centerInParent="true"
+                android:gravity="center"
+                android:paddingLeft="6dp"
+                android:paddingRight="6dp"
+                android:text="订单"
+                android:textColor="#ffffff"
+                android:textSize="15sp" />
+
+            <View
+                android:id="@+id/teacher_line"
+                android:layout_width="wrap_content"
+                android:layout_height="3dp"
+                android:layout_alignLeft="@id/teacher"
+                android:layout_alignParentBottom="true"
+                android:layout_alignRight="@id/teacher"
+                android:background="#00ff00" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/tab_three"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/student"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true"
+                android:gravity="center"
+                android:paddingLeft="6dp"
+                android:paddingRight="6dp"
+                android:text="我的信息"
+                android:textColor="#ffffff"
+                android:textSize="15sp" />
+
+            <View
+                android:id="@+id/student_line"
+                android:layout_width="wrap_content"
+                android:layout_height="3dp"
+                android:layout_alignLeft="@id/student"
+                android:layout_alignParentBottom="true"
+                android:layout_alignRight="@id/student"
+                android:background="#00ff00" />
+        </RelativeLayout>
+    </LinearLayout>
+
+
+</RelativeLayout>

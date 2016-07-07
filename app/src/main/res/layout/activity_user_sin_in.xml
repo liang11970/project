@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#bde0fa">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+
+        <TextView
+
+            android:id="@+id/title"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_centerHorizontal="true"
+            android:background="#4ca2eb"
+            android:gravity="center"
+            android:text="会议签到"
+            android:textColor="@color/white"
+            android:textSize="@dimen/t18" />
+
+
+        <TextView
+            android:id="@+id/title_meeting_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/title"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="@dimen/t20"
+            android:layout_marginRight="@dimen/t20"
+            android:layout_marginTop="@dimen/t60"
+            android:text="中华人民共和国全国人民代表大会"
+            android:textColor="@color/G1"
+            android:textSize="@dimen/t20" />
+
+
+        <TextView
+            android:id="@+id/title_meeting_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/title_meeting_name"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="@dimen/t20"
+            android:layout_marginRight="@dimen/t20"
+            android:layout_marginTop="@dimen/t50"
+            android:text="人大代表讨论会" />
+
+
+        <TextView
+            android:id="@+id/title_meeting_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/title_meeting_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/t20"
+            android:text="会议时间：2016.06.23" />
+
+
+        <TextView
+            android:id="@+id/title_meeting_over_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/title_meeting_time"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/t10"
+            android:text="会议时间：2016.06.23" />
+
+
+        <EditText
+            android:id="@+id/userPhoneNu"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_below="@+id/title_meeting_over_time"
+            android:layout_marginLeft="@dimen/t20"
+            android:layout_marginRight="@dimen/t20"
+            android:layout_marginTop="@dimen/t40"
+            android:background="@drawable/edit_text_bg"
+            android:gravity="left|center_vertical"
+            android:hint="请输入手机号"
+            android:inputType="number"
+            android:maxLength="11"
+            android:padding="@dimen/t10"
+            android:singleLine="true" />
+
+
+        <Button
+            android:id="@+id/btn_ok"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/userPhoneNu"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="@dimen/t80"
+            android:layout_marginLeft="@dimen/t20"
+            android:layout_marginRight="@dimen/t20"
+            android:layout_marginTop="@dimen/t80"
+            android:background="@drawable/btn_sin_in"
+            android:clickable="false"
+            android:text="签到"
+            android:textColor="@color/text_color_press" />
+
+    </RelativeLayout>
+
+</ScrollView>
