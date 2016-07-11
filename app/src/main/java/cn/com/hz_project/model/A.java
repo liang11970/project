@@ -1,4 +1,4 @@
-package cn.com.hz_project.model;
+﻿package cn.com.hz_project.model;
 
 /**
  * ==================================
@@ -10,5 +10,6 @@ package cn.com.hz_project.model;
  * <p>
  * ================================
  */
-public class A {
+public class A {//
 }
+////
