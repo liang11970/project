@@ -1,4 +1,4 @@
-package cn.com.hz_project.view;
+package cn.com.hz_project.app;
 
 import android.app.Application;
 
