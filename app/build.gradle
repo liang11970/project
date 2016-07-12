@@ -45,4 +45,5 @@ dependencies {
     compile 'io.reactivex:rxandroid:1.1.0'
     compile 'com.jakewharton.rxbinding:rxbinding:0.4.0'
     compile 'com.google.code.gson:gson:2.6.2'
+    compile 'com.orhanobut:logger:1.13'
 }
