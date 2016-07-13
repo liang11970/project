@@ -3,9 +3,19 @@ package cn.com.hz_project.view;
 import android.app.Activity;
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+import cn.com.hz_project.model.bean.MovieEntity;
 import cn.com.projectdemos.R;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
  * ==================================
@@ -18,12 +28,17 @@ import cn.com.projectdemos.R;
  * ================================
  */
 public class TestActivity extends Activity {
+    @Bind(R.id.click_me_BN)
+    Button clickMeBN;
+    @Bind(R.id.result_TV)
+    TextView resultTV;
     private Button bt;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_text);
-        bt = (Button)findViewById(R.id.zxing);
+        ButterKnife.bind(this);
+        bt = (Button) findViewById(R.id.zxing);
 //     bt.setOnClickListener(new View.OnClickListener() {
 //         @Override
 //         public void onClick(View v) {
@@ -31,6 +46,17 @@ public class TestActivity extends Activity {
 //         }
 //     });
 
-        bt.setOnClickListener( v -> Toast.makeText(getApplicationContext(), "Lambda", Toast.LENGTH_LONG).show());
+        bt.setOnClickListener(v -> Toast.makeText(getApplicationContext(), "Lambda", Toast.LENGTH_LONG).show());
+    }
+
+    @OnClick(R.id.click_me_BN)
+    public void onClick() {
+//        getMovie();
+    }
+
+    //进行网络请求
+    private void getMovie() {
+
+
     }
 }

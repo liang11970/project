@@ -1,4 +1,4 @@
-package cn.com.hz_project.model.server;
+package cn.com.hz_project.model.impl;
 
 /**
  * ==================================
