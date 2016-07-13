@@ -32,13 +32,13 @@ public class LoginActivity extends Activity {
             Toast.makeText(this,"当前网络不可用",Toast.LENGTH_SHORT).show();
         login=(Button)findViewById(R.id.login);
         user=(EditText)findViewById(R.id.user);
-        login.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (isMobileNO(String.valueOf(user.getText())));
+        login.setOnClickListener(view -> {
+            if (isMobileNO(String.valueOf(user.getText())));
                     else Toast.makeText(LoginActivity.this,"当前手机号码有问题，检查一下吧",Toast.LENGTH_SHORT).show();
-            }
+
+
         });
+
     }
     public static boolean isMobileNO(String mobiles){
 
