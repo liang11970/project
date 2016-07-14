@@ -5,6 +5,7 @@ import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
@@ -15,8 +16,15 @@ import java.util.regex.Pattern;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
+import cn.com.hz_project.model.bean.Login;
+import cn.com.hz_project.model.server.LoginService;
 import cn.com.projectdemos.R;
+import retrofit2.Retrofit;
+import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
+import retrofit2.converter.gson.GsonConverterFactory;
+import rx.Subscriber;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 public class LoginActivity extends Activity {
     @Bind(R.id.user)
@@ -26,29 +34,64 @@ public class LoginActivity extends Activity {
     @Bind(R.id.login)
     Button login;
 
+    private String baseUrl = "http://192.168.2.22:8080/WsbxMobile/loginCtrl/";
+    private Retrofit retrofit;
+    private LoginService loginService;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
-        if(isNetworkConnected(LoginActivity.this));
-            else
-            Toast.makeText(this,"当前网络不可用",Toast.LENGTH_SHORT).show();
 
-        login.setOnClickListener(view -> {
-            if (isMobileNO(String.valueOf(user.getText()))){
-
-                Toast.makeText(LoginActivity.this,"登录操作",Toast.LENGTH_SHORT).show();
-
-
-            }
-            else Toast.makeText(LoginActivity.this,"当前手机号码有问题，检查一下吧",Toast.LENGTH_SHORT).show();
-
-
-        });
+        initView();
+        initData();
 
     }
+
+
+    private void initView(){
+        retrofit = new Retrofit.Builder()
+                .baseUrl(baseUrl)
+                .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                .build();
+
+        loginService = retrofit.create(LoginService.class);
+    }
+
+    private void initData(){
+        if (!isNetworkConnected(LoginActivity.this))
+            Toast.makeText(this, "当前网络不可用", Toast.LENGTH_SHORT).show();
+        else {
+            //点击登录
+            login.setOnClickListener(view -> {
+                loginService.PostField(user.getText().toString(),password.getText().toString())
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(new Subscriber<Login>() {
+                            @Override
+                            public void onCompleted() {
+
+                            }
+
+                            @Override
+                            public void onError(Throwable e) {
+                                Log.i("----------",""+e.toString());
+                            }
+
+                            @Override
+                            public void onNext(Login login) {
+                                Toast.makeText(LoginActivity.this,login.getMsg(),Toast.LENGTH_SHORT).show();
+                                Log.i("----------",login.getObj().toString());
+                            }
+                        });
+
+            });
+        }
+    }
+
 
     public static boolean isMobileNO(String mobiles) {
 

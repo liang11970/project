@@ -17,7 +17,6 @@
     <EditText
         android:paddingLeft="20dp"
         android:id="@+id/user"
-        android:inputType="number"
         android:maxLength="11"
         android:background="@drawable/round_edittext"
         android:layout_marginTop="30dp"
