@@ -65,6 +65,7 @@
         app:layout_heightPercent="4.8%w"
         android:layout_alignBottom="@+id/cb_rempwd"
         android:layout_marginLeft="5dp"
+        android:gravity="fill"
         android:layout_toRightOf="@+id/cb_rempwd"
         android:text="记住密码" />
 
@@ -88,6 +89,7 @@
         app:layout_heightPercent="4.8%w"
         android:layout_alignBottom="@+id/cb_rempwd"
         android:layout_marginLeft="5dp"
+        android:gravity="fill"
         android:layout_toRightOf="@+id/cb_autologin"
         android:text="自动登录" />
 
