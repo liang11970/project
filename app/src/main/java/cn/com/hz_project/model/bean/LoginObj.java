@@ -19,6 +19,16 @@ public class LoginObj {
 //    private String userLevel;
 
 
+    public LoginObj() {
+    }
+
+    public LoginObj(String cusNumber, String departmentName, String dprtmntId, String loginName) {
+        this.cusNumber = cusNumber;
+        this.departmentName = departmentName;
+        this.dprtmntId = dprtmntId;
+        this.loginName = loginName;
+    }
+
     public String getCusNumber() {
         return cusNumber;
     }

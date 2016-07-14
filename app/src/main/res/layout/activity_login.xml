@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<cn.com.hz_project.tools.percent.PercentRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -8,83 +9,98 @@
     tools:context="cn.com.hz_project.view.activity.LoginActivity">
 
     <ImageView
-    android:layout_marginTop="130dp"
-    android:layout_marginRight="25dp"
-    android:layout_marginLeft="25dp"
-    android:background="@mipmap/title"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content" />
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_centerHorizontal="true"
+        android:background="@mipmap/title"
+        app:layout_heightPercent="10.9%w"
+        app:layout_marginTopPercent="23%h"
+        app:layout_widthPercent="94%w" />
+
     <EditText
-        android:paddingLeft="20dp"
         android:id="@+id/user"
-        android:maxLength="11"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_heightPercent="6.64%h"
+        app:layout_widthPercent="86.54%w"
         android:background="@drawable/round_edittext"
-        android:layout_marginTop="30dp"
-        android:layout_marginRight="25dp"
-        android:layout_marginLeft="25dp"
         android:hint="用户名"
-        android:layout_width="match_parent"
-        android:layout_height="45dp" />
-    <LinearLayout
-        android:background="#ffffff"
-        android:layout_marginLeft="25dp"
-        android:layout_marginRight="25dp"
-        android:layout_width="match_parent"
-        android:layout_height="1dp">
-    <TextView
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:background="#ECECEC"
-        android:layout_width="match_parent"
-        android:layout_height="1dp" />
-    </LinearLayout>
-    <EditText
+        android:maxLength="11"
         android:paddingLeft="20dp"
+        app:layout_marginLeftPercent="5%w"
+        app:layout_marginRightPercent="5%w"
+        app:layout_marginTopPercent="40%h" />
+
+    <EditText
         android:id="@+id/password"
-        android:inputType="textPassword"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_heightPercent="6.64%h"
+        app:layout_widthPercent="86.54%w"
+        android:layout_below="@+id/user"
         android:layout_marginTop="0dp"
         android:background="@drawable/down"
-        android:layout_marginRight="25dp"
-        android:layout_marginLeft="25dp"
         android:hint="密码"
-        android:layout_width="match_parent"
-        android:layout_height="45dp" />
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_marginTop="20dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-<CheckBox
-    android:layout_marginLeft="30dp"
-    android:button="@null"
-    android:background="@drawable/checkbox"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content" />
-<TextView
-    android:layout_marginLeft="5dp"
-    android:text="记住密码"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content" />
-        <CheckBox
-            android:layout_marginLeft="15dp"
-            android:button="@null"
-            android:background="@drawable/checkbox"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-        <TextView
-            android:layout_marginLeft="5dp"
-            android:text="自动登录"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-</LinearLayout>
+        android:inputType="textPassword"
+        android:paddingLeft="20dp"
+        app:layout_marginLeftPercent="5%w"
+        app:layout_marginRightPercent="5%w" />
+
+    <CheckBox
+        android:id="@+id/cb_rempwd"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_below="@+id/password"
+        android:background="@drawable/checkbox"
+        android:button="@null"
+        app:layout_heightPercent="4.8%w"
+        app:layout_marginLeftPercent="8.24%w"
+        app:layout_marginTopPercent="2.3%h"
+        app:layout_widthPercent="4.8%w" />
+
+    <TextView
+        android:id="@+id/tv_rempwd"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        app:layout_heightPercent="4.8%w"
+        android:layout_alignBottom="@+id/cb_rempwd"
+        android:layout_marginLeft="5dp"
+        android:layout_toRightOf="@+id/cb_rempwd"
+        android:text="记住密码" />
+
+    <CheckBox
+        android:id="@+id/cb_autologin"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_below="@+id/password"
+        android:layout_toRightOf="@+id/tv_rempwd"
+        android:background="@drawable/checkbox"
+        android:button="@null"
+        app:layout_heightPercent="4.8%w"
+        app:layout_marginLeftPercent="8.24%w"
+        app:layout_marginTopPercent="2.3%h"
+        app:layout_widthPercent="4.8%w" />
+
+    <TextView
+        android:id="@+id/tv_autologin"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        app:layout_heightPercent="4.8%w"
+        android:layout_alignBottom="@+id/cb_rempwd"
+        android:layout_marginLeft="5dp"
+        android:layout_toRightOf="@+id/cb_autologin"
+        android:text="自动登录" />
+
+
     <Button
         android:id="@+id/login"
-        android:layout_marginRight="50dp"
-        android:layout_marginLeft="40dp"
-        android:layout_marginTop="40dp"
-        android:textColor="#ffffff"
-        android:text="登录"
-        android:background="@drawable/button2"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-</LinearLayout>
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_autologin"
+        app:layout_marginTopPercent="4.67%h"
+        app:layout_marginLeftPercent="11.54%w"
+        app:layout_marginRightPercent="11.54%w"
+        android:background="@drawable/button2"
+        android:text="登录"
+        android:textColor="#ffffff" />
+</cn.com.hz_project.tools.percent.PercentRelativeLayout>

@@ -21,7 +21,10 @@ public class Login {
     }
 
     public void setObj(LoginObj obj) {
-        this.obj = obj;
+        if (obj != null)
+            this.obj = obj;
+        else
+            obj = new LoginObj("","","","");
     }
 
     public Boolean getSuccess() {

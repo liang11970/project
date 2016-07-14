@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -18,6 +19,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import cn.com.hz_project.model.bean.Login;
 import cn.com.hz_project.model.server.LoginService;
+import cn.com.hz_project.tools.utils.LogUtils;
 import cn.com.projectdemos.R;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
@@ -82,12 +84,13 @@ public class LoginActivity extends Activity {
                             @Override
                             public void onError(Throwable e) {
                                 Log.i("----------",""+e.toString());
+                                LogUtils.i(LoginActivity.this,"----------",e.toString());
                             }
 
                             @Override
                             public void onNext(Login login) {
                                 Toast.makeText(LoginActivity.this,login.getMsg(),Toast.LENGTH_SHORT).show();
-                                Log.i("----------",login.getObj().toString());
+                                LogUtils.i(LoginActivity.this,"----------",login.getObj().toString());
                             }
                         });
 
