@@ -20,4 +20,14 @@ public interface LoginService {
 
 //    @GET("top250")
 //    Observable<HttpResult<List<Subject>>> getTopMovie(@Query("start") int start, @Query("count") int count);
+
+/**
+     * 登录
+     * @param loginName
+     * @param password
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("login")
+    Observable<Login> PostField(@Field("loginName") String loginName, @Field("password") String password);
 }
