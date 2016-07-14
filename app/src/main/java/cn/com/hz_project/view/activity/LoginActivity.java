@@ -2,6 +2,7 @@ package cn.com.hz_project.view.activity;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
@@ -18,6 +19,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import cn.com.hz_project.model.bean.Login;
 import cn.com.hz_project.model.server.LoginService;
+import cn.com.hz_project.tools.utils.Md5;
 import cn.com.projectdemos.R;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
@@ -70,12 +72,13 @@ public class LoginActivity extends Activity {
         else {
             //点击登录
             login.setOnClickListener(view -> {
-                loginService.PostField(user.getText().toString(),password.getText().toString())
+                loginService.PostField(user.getText().toString(), Md5.getMD5(password.getText().toString()))
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe(new Subscriber<Login>() {
                             @Override
                             public void onCompleted() {
+
 
                             }
 
@@ -86,8 +89,14 @@ public class LoginActivity extends Activity {
 
                             @Override
                             public void onNext(Login login) {
-                                Toast.makeText(LoginActivity.this,login.getMsg(),Toast.LENGTH_SHORT).show();
-                                Log.i("----------",login.getObj().toString());
+
+
+                                if(login.isSuccess()){
+                                    startActivity(new Intent(LoginActivity.this,TwoActivity.class));
+                                }else {
+                                    Toast.makeText(LoginActivity.this,"密码错误",Toast.LENGTH_SHORT).show();
+                                }
+
                             }
                         });
 
