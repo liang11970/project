@@ -1,4 +1,4 @@
-package cn.com.hz_project.view.activity;
+﻿package cn.com.hz_project.view.activity;
 
 import android.app.Activity;
 import android.content.Context;
@@ -27,7 +27,7 @@ import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
 /**
- * 登录界面
+ * 登录界面(哈哈)
  */
 public class LoginActivity extends Activity {
     @Bind(R.id.user)
