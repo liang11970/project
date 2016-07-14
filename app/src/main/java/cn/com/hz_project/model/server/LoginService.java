@@ -1,8 +1,8 @@
-package cn.com.hz_project.model;
+package cn.com.hz_project.model.server;
 
 import java.util.List;
 
-import retrofit2.http.GET;
+import javax.security.auth.Subject;import retrofit2.http.GET;
 import retrofit2.http.Query;
 import rx.Observable;
 
@@ -18,6 +18,6 @@ import rx.Observable;
  */
 public interface LoginService {
 
-    @GET("top250")
-    Observable<HttpResult<List<Subject>>> getTopMovie(@Query("start") int start, @Query("count") int count);
+//    @GET("top250")
+//    Observable<HttpResult<List<Subject>>> getTopMovie(@Query("start") int start, @Query("count") int count);
 }
