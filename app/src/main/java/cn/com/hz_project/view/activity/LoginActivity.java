@@ -26,6 +26,9 @@ import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
+/**
+ * 登录界面
+ */
 public class LoginActivity extends Activity {
     @Bind(R.id.user)
     EditText user;
