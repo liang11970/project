@@ -1,4 +1,4 @@
-package cn.com.hz_project.view;
+package cn.com.hz_project.view.base;
 
 import android.app.Fragment;
 
