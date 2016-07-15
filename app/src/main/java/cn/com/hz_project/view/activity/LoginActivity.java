@@ -19,6 +19,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import cn.com.hz_project.model.bean.Login;
 import cn.com.hz_project.model.server.LoginService;
+import cn.com.hz_project.tools.url.Urls;
 import cn.com.hz_project.tools.utils.Md5;
 import cn.com.projectdemos.R;
 import retrofit2.Retrofit;
@@ -39,7 +40,7 @@ public class LoginActivity extends Activity {
     @Bind(R.id.login)
     Button login;
 
-    private String baseUrl = "http://192.168.2.22:8080/WsbxMobile/loginCtrl/";
+
     private Retrofit retrofit;
     private LoginService loginService;
 
@@ -58,7 +59,7 @@ public class LoginActivity extends Activity {
 
     private void initView(){
         retrofit = new Retrofit.Builder()
-                .baseUrl(baseUrl)
+                .baseUrl(Urls.LOGINURL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .build();
@@ -73,6 +74,7 @@ public class LoginActivity extends Activity {
             //点击登录
             login.setOnClickListener(view -> {
                 loginService.PostField(user.getText().toString(), Md5.getMD5(password.getText().toString()))
+
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe(new Subscriber<Login>() {
@@ -89,7 +91,6 @@ public class LoginActivity extends Activity {
 
                             @Override
                             public void onNext(Login login) {
-
 
                                 if(login.isSuccess()){
                                     startActivity(new Intent(LoginActivity.this,TwoActivity.class));
