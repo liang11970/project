@@ -10,5 +10,8 @@ package cn.com.hz_project.tools.url;
  * <p/>
  * ================================
  */
-public class A {
+public class Urls {
+
+    public static  final  String LOGINURL="http://192.168.2.22:8080/WsbxMobile/loginCtrl/";
+
 }
