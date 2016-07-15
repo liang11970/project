@@ -12,6 +12,7 @@ import cn.com.projectdemos.R;
 
 public class MainActivity extends Activity {
     private Handler mHandler = new Handler();
+
     private ImageView iv_welcome;
 
     private int alpha = 255;
