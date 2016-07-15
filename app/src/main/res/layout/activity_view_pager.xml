@@ -30,7 +30,8 @@
             android:textColor="@color/white"
             android:textSize="18dp"
             android:background="@drawable/bg_rbtn"
-            android:text="首页" />
+            android:text="首页"
+            android:padding="1dp"/>
 
         <RadioButton
             android:drawableTop="@mipmap/b"
