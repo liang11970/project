@@ -1,4 +1,4 @@
-﻿package cn.com.hz_project.view.activity;
+package cn.com.hz_project.view.activity;
 
 import android.app.Activity;
 import android.content.Context;
@@ -50,7 +50,6 @@ public class LoginActivity extends Activity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
-
         initView();
         initData();
 
@@ -73,14 +72,46 @@ public class LoginActivity extends Activity {
         else {
             //点击登录
             login.setOnClickListener(view -> {
-                loginService.PostField(user.getText().toString(), Md5.getMD5(password.getText().toString()))
+                /*
+                if (isMobileNO(String.valueOf(user.getText()))){
+                    loginService.PostField(user.getText().toString(), Md5.getMD5(password.getText().toString()))
+                            .subscribeOn(Schedulers.io())
+                            .observeOn(AndroidSchedulers.mainThread())
+                            .subscribe(new Subscriber<Login>() {
+                                @Override
+                                public void onCompleted() {
 
+                                }
+
+                                @Override
+                                public void onError(Throwable e) {
+                                    Log.i("----------",""+e.toString());
+                                }
+
+                                @Override
+                                public void onNext(Login login) {
+
+                                    if(login.isSuccess()){
+                                        startActivity(new Intent(LoginActivity.this,ViewPagerActivity.class));
+                                    }else {
+                                        Toast.makeText(LoginActivity.this,"帐号密码有问题检查一下吧",Toast.LENGTH_SHORT).show();
+                                    }
+
+                                }
+                            });
+                }
+                else {
+                    Toast.makeText(LoginActivity.this,"当前手机号码有问题，检查一下吧",Toast.LENGTH_SHORT).show();
+                }
+
+*/
+
+                loginService.PostField(user.getText().toString(), password.getText().toString(),2)
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe(new Subscriber<Login>() {
                             @Override
                             public void onCompleted() {
-
 
                             }
 
@@ -93,13 +124,16 @@ public class LoginActivity extends Activity {
                             public void onNext(Login login) {
 
                                 if(login.isSuccess()){
-                                    startActivity(new Intent(LoginActivity.this,TwoActivity.class));
+                                    startActivity(new Intent(LoginActivity.this,ViewPagerActivity.class));
                                 }else {
-                                    Toast.makeText(LoginActivity.this,"密码错误",Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(LoginActivity.this,"帐号密码有问题检查一下吧",Toast.LENGTH_SHORT).show();
                                 }
 
                             }
                         });
+
+
+
 
             });
         }
