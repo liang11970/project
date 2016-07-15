@@ -19,6 +19,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import cn.com.hz_project.model.bean.Login;
 import cn.com.hz_project.model.server.LoginService;
+import cn.com.hz_project.tools.url.Urls;
 import cn.com.hz_project.tools.utils.Md5;
 import cn.com.projectdemos.R;
 import retrofit2.Retrofit;
@@ -39,7 +40,7 @@ public class LoginActivity extends Activity {
     @Bind(R.id.login)
     Button login;
 
-    private String baseUrl = "http://192.168.2.22:8080/WsbxMobile/loginCtrl/";
+
     private Retrofit retrofit;
     private LoginService loginService;
 
@@ -49,7 +50,6 @@ public class LoginActivity extends Activity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
-
         initView();
         initData();
 
@@ -58,7 +58,7 @@ public class LoginActivity extends Activity {
 
     private void initView(){
         retrofit = new Retrofit.Builder()
-                .baseUrl(baseUrl)
+                .baseUrl(Urls.LOGINURL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .build();
@@ -72,13 +72,46 @@ public class LoginActivity extends Activity {
         else {
             //点击登录
             login.setOnClickListener(view -> {
-                loginService.PostField(user.getText().toString(), Md5.getMD5(password.getText().toString()))
+                /*
+                if (isMobileNO(String.valueOf(user.getText()))){
+                    loginService.PostField(user.getText().toString(), Md5.getMD5(password.getText().toString()))
+                            .subscribeOn(Schedulers.io())
+                            .observeOn(AndroidSchedulers.mainThread())
+                            .subscribe(new Subscriber<Login>() {
+                                @Override
+                                public void onCompleted() {
+
+                                }
+
+                                @Override
+                                public void onError(Throwable e) {
+                                    Log.i("----------",""+e.toString());
+                                }
+
+                                @Override
+                                public void onNext(Login login) {
+
+                                    if(login.isSuccess()){
+                                        startActivity(new Intent(LoginActivity.this,ViewPagerActivity.class));
+                                    }else {
+                                        Toast.makeText(LoginActivity.this,"帐号密码有问题检查一下吧",Toast.LENGTH_SHORT).show();
+                                    }
+
+                                }
+                            });
+                }
+                else {
+                    Toast.makeText(LoginActivity.this,"当前手机号码有问题，检查一下吧",Toast.LENGTH_SHORT).show();
+                }
+
+*/
+
+                loginService.PostField(user.getText().toString(), password.getText().toString(),2)
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe(new Subscriber<Login>() {
                             @Override
                             public void onCompleted() {
-
 
                             }
 
@@ -90,15 +123,17 @@ public class LoginActivity extends Activity {
                             @Override
                             public void onNext(Login login) {
 
-
                                 if(login.isSuccess()){
-                                    startActivity(new Intent(LoginActivity.this,TwoActivity.class));
+                                    startActivity(new Intent(LoginActivity.this,ViewPagerActivity.class));
                                 }else {
-                                    Toast.makeText(LoginActivity.this,"密码错误",Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(LoginActivity.this,"帐号密码有问题检查一下吧",Toast.LENGTH_SHORT).show();
                                 }
 
                             }
                         });
+
+
+
 
             });
         }
