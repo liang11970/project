@@ -1,4 +1,4 @@
-﻿package cn.com.hz_project.view.activity;
+package cn.com.hz_project.view.activity;
 
 import android.app.Activity;
 import android.content.Context;
