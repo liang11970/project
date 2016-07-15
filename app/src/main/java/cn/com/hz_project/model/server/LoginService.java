@@ -29,5 +29,5 @@ public interface LoginService {
      */
     @FormUrlEncoded
     @POST("login")
-    Observable<Login> PostField(@Field("loginName") String loginName, @Field("password") String password);
+    Observable<Login> PostField(@Field("loginName") String loginName, @Field("password") String password,@Field("mark")int key);
 }
