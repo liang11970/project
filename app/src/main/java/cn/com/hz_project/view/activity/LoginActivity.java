@@ -20,7 +20,6 @@ import butterknife.ButterKnife;
 import cn.com.hz_project.model.bean.Login;
 import cn.com.hz_project.model.server.LoginService;
 import cn.com.hz_project.tools.url.Urls;
-import cn.com.hz_project.tools.utils.Md5;
 import cn.com.projectdemos.R;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
