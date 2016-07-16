@@ -47,8 +47,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="cn.com.hz_project.view.activity.TwoActivity"></activity>
-        <activity android:name="cn.com.hz_project.view.activity.ViewPagerActivity"></activity>
+        <activity android:name="cn.com.hz_project.view.activity.TwoActivity" />
+        <activity android:name="cn.com.hz_project.view.activity.ViewPagerActivity" />
+        <activity android:name="cn.com.hz_project.view.activity.MeetingListActivity"></activity>
     </application>
 
 </manifest>
