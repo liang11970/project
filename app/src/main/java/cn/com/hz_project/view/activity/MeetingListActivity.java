@@ -67,6 +67,7 @@ public class MeetingListActivity extends AppCompatActivity implements View.OnCli
                 .subscribe(new Subscriber<MeetingBean>() {
                     @Override
                     public void onCompleted() {
+                        /* */
 
                     }
 
