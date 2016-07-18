@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<cn.com.hz_project.tools.percent.PercentRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="cn.com.hz_project.view.activity.OnlineQuizActivity">
+
+    <RelativeLayout
+        android:id="@+id/title"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="#3F7096"
+        app:layout_heightPercent="8%h"
+        app:layout_widthPercent="100%w">
+
+        <TextView
+            android:id="@+id/back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:text="返回"
+            android:textColor="#ffff"
+            android:textSize="22sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="在线提问"
+            android:textColor="#ffff"
+            android:textSize="22sp" />
+    </RelativeLayout>
+
+    <EditText
+        android:id="@+id/et_quiz_title"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_below="@+id/title"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/bg_edittext"
+        android:hint=" 请输入要提问的问题"
+        app:layout_heightPercent="8%h"
+        app:layout_marginTopPercent="15%h"
+        app:layout_widthPercent="80%w" />
+
+    <Spinner
+        android:id="@+id/quiz_spinner"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_below="@+id/et_quiz_title"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/bg_edittext"
+        android:entries="@array/spingarr"
+        app:layout_heightPercent="8%h"
+        app:layout_marginTopPercent="3%h"
+        app:layout_widthPercent="80%w" />
+
+    <EditText
+        android:id="@+id/et_quiz_content"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_below="@+id/quiz_spinner"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/bg_edittext"
+        android:gravity="top|left"
+        android:hint="问题描述"
+        android:paddingLeft="5dp"
+        android:paddingTop="5dp"
+        app:layout_heightPercent="30%h"
+        app:layout_marginTopPercent="3%h"
+        app:layout_widthPercent="80%w" />
+
+    <Button
+        android:id="@+id/btn_quiz"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/button2"
+        android:layout_below="@+id/et_quiz_content"
+        android:layout_centerHorizontal="true"
+        android:text="提问"
+        android:textColor="#ffffff"
+        app:layout_heightPercent="8%h"
+        app:layout_marginTopPercent="3%h"
+        app:layout_widthPercent="80%w"/>
+</cn.com.hz_project.tools.percent.PercentRelativeLayout>

@@ -1,16 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<cn.com.hz_project.tools.percent.PercentRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-     android:gravity="center"
-    android:orientation="vertical" >
+    android:layout_height="match_parent">
 
-    <Button
-        android:id="@+id/button1"
+    <RelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_heightPercent="8%h"
+        app:layout_widthPercent="100%w"
+        android:layout_alignParentTop="true"
+        android:background="#FF3D6D95">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:textSize="22sp"
+            android:textColor="#ffff"
+            android:text="互动"/>
+    </RelativeLayout>
 
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="jjj" />
+    <RadioGroup
+        android:id="@+id/rg_interact"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_heightPercent="6%h"
+        app:layout_widthPercent="60%w"
+        app:layout_marginTopPercent="11%h"
+        android:orientation="horizontal"
+        android:layout_centerHorizontal="true">
 
-</LinearLayout>
+        <RadioButton
+            android:id="@+id/rb_vote"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/bg_rb_interact"
+            android:layout_weight="1"
+            android:textSize="20sp"
+            android:text="投票"
+            android:gravity="center"
+            android:button="@null"/>
+
+        <RadioButton
+            android:id="@+id/rb_quiz"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/bg_rb_interact2"
+            android:layout_weight="1"
+            android:textSize="20sp"
+            android:text="提问"
+            android:gravity="center"
+            android:button="@null"/>
+    </RadioGroup>
+
+    <FrameLayout
+        android:id="@+id/fm_interact"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/rg_interact"
+        android:text="fragment"
+        app:layout_marginTopPercent="3%h"/>
+
+</cn.com.hz_project.tools.percent.PercentRelativeLayout>

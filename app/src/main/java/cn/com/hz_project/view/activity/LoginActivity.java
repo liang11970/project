@@ -33,6 +33,7 @@ import rx.schedulers.Schedulers;
  * 登录界面(哈哈)
  */
 public class LoginActivity extends Activity {
+
     @Bind(R.id.user)
     EditText user;
     @Bind(R.id.password)
