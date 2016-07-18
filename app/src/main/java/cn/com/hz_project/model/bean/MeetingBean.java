@@ -66,7 +66,7 @@ public class MeetingBean {
         private String MBD_NAME;
         private String STIME;
         private String ETIME;
-        private Object MBD_REMARKS;
+        private String MBD_REMARKS;
 
         public int getROWNO() {
             return ROWNO;
@@ -108,11 +108,11 @@ public class MeetingBean {
             this.ETIME = ETIME;
         }
 
-        public Object getMBD_REMARKS() {
+        public String getMBD_REMARKS() {
             return MBD_REMARKS;
         }
 
-        public void setMBD_REMARKS(Object MBD_REMARKS) {
+        public void setMBD_REMARKS(String MBD_REMARKS) {
             this.MBD_REMARKS = MBD_REMARKS;
         }
     }

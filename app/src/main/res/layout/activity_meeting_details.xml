@@ -86,7 +86,7 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="100dip"
+        android:layout_marginTop="120dip"
 
         android:text="会议名称" />
 
