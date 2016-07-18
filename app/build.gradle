@@ -49,10 +49,24 @@ dependencies {
     compile 'com.jakewharton.rxbinding:rxbinding:0.4.0'
     compile 'com.google.code.gson:gson:2.6.2'
     compile 'com.orhanobut:logger:1.13'
+<<<<<<< HEAD
     compile 'com.jakewharton:butterknife:7.0.1'
+=======
+>>>>>>> 0eeebf23b814d7c2b7fd47424a616a55c8c1e444
     //f
     compile 'com.github.wangjiegulu:ShadowViewHelper:1.0.1'
     compile 'de.greenrobot:greendao:2.1.0'
     compile 'de.greenrobot:greendao-generator:2.1.0'
+<<<<<<< HEAD
     compile 'com.android.support:recyclerview-v7:24.0.0'
+=======
+    compile files('libs/picasso-2.4.0.jar')
+    compile 'com.jakewharton:butterknife:5.1.1'
+    compile 'com.makeramen:roundedimageview:2.2.1'
+    compile 'com.android.support:design:23.3.0'
+    compile 'com.android.support:recyclerview-v7:23.3.0'
+    compile files('libs/vcameralibrary.jar')
+
+
+>>>>>>> 0eeebf23b814d7c2b7fd47424a616a55c8c1e444
 }

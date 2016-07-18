@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="cn.com.hz_project.view.activity.NewActivity"
+    android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+
+
+    >
+
+    <RelativeLayout
+        android:id="@+id/title_new"
+        android:layout_width="match_parent"
+        android:layout_height="45.0dip"
+        android:background="#46769E">
+
+
+        <ImageView
+            android:id="@+id/iv_back_meeting"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:padding="10dip"
+            android:src="@mipmap/back" />
+
+        <TextView
+            android:id="@+id/tv_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/iv_back_meeting"
+            android:text="返回"
+            android:paddingTop="5dip"
+            android:paddingBottom="5dip"
+            android:textColor="@color/city_item_bg_nor"
+
+            android:textSize="15sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="前沿科技"
+            android:textColor="@color/city_item_bg_nor"
+            android:textSize="16.0sp" />
+
+
+
+    </RelativeLayout>
+
+
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:layout_below="@+id/title_new"
+        android:id="@+id/id_swiperefresh"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
+
+
+        <cn.com.hz_project.view.widget.LoadMoreRecyclerView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/listView"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentTop="true"
+            />
+
+
+
+    </android.support.v4.widget.SwipeRefreshLayout>
+</RelativeLayout>

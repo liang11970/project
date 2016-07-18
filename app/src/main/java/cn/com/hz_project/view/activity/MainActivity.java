@@ -21,7 +21,7 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
-        setContentView(R.layout.activity_main2);
+        setContentView(R.layout.activity_mai);
         iv_welcome=(ImageView) findViewById(R.id.iv_welcome);
         iv_welcome.setAlpha(alpha);
         new Thread(new Runnable() {

@@ -15,8 +15,8 @@ import android.widget.Toast;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.InjectView;
 import cn.com.hz_project.model.bean.Login;
 import cn.com.hz_project.model.server.LoginService;
 import cn.com.hz_project.tools.url.Urls;
@@ -34,14 +34,17 @@ import rx.schedulers.Schedulers;
  */
 public class LoginActivity extends Activity {
 
+<<<<<<< HEAD
     @Bind(R.id.user)
+=======
+
+    @InjectView(R.id.user)
+>>>>>>> 0eeebf23b814d7c2b7fd47424a616a55c8c1e444
     EditText user;
-    @Bind(R.id.password)
+    @InjectView(R.id.password)
     EditText password;
-    @Bind(R.id.login)
+    @InjectView(R.id.login)
     Button login;
-
-
     private Retrofit retrofit;
     private LoginService loginService;
 
@@ -50,14 +53,14 @@ public class LoginActivity extends Activity {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_login);
-        ButterKnife.bind(this);
+        ButterKnife.inject(this);
         initView();
         initData();
 
     }
 
 
-    private void initView(){
+    private void initView() {
         retrofit = new Retrofit.Builder()
                 .baseUrl(Urls.LOGINURL)
                 .addConverterFactory(GsonConverterFactory.create())
@@ -67,7 +70,7 @@ public class LoginActivity extends Activity {
         loginService = retrofit.create(LoginService.class);
     }
 
-    private void initData(){
+    private void initData() {
         if (!isNetworkConnected(LoginActivity.this))
             Toast.makeText(this, "当前网络不可用", Toast.LENGTH_SHORT).show();
         else {
@@ -107,7 +110,7 @@ public class LoginActivity extends Activity {
 
 */
 
-                loginService.PostField(user.getText().toString(), MD5.md5crypt(password.getText().toString()),2)
+                loginService.PostField(user.getText().toString(), MD5.md5crypt(password.getText().toString()), 2)
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe(new Subscriber<Login>() {
@@ -118,22 +121,20 @@ public class LoginActivity extends Activity {
 
                             @Override
                             public void onError(Throwable e) {
-                                Log.i("----------",""+e.toString());
+                                Log.i("----------", "" + e.toString());
                             }
 
                             @Override
                             public void onNext(Login login) {
 
-                                if(login.isSuccess()){
-                                    startActivity(new Intent(LoginActivity.this,ViewPagerActivity.class));
-                                }else {
-                                    Toast.makeText(LoginActivity.this,"帐号密码有问题检查一下吧",Toast.LENGTH_SHORT).show();
+                                if (login.isSuccess()) {
+                                    startActivity(new Intent(LoginActivity.this, ViewPagerActivity.class));
+                                } else {
+                                    Toast.makeText(LoginActivity.this, "帐号密码有问题检查一下吧", Toast.LENGTH_SHORT).show();
                                 }
 
                             }
                         });
-
-
 
 
             });

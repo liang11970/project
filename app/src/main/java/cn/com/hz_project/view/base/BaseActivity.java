@@ -34,6 +34,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.Window;
 
 import cn.com.hz_project.tools.utils.ActivityTaskManager;
 
@@ -51,11 +52,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         if (null != extras) {
             getBundleExtras(extras);
         }
-        if (getContentViewLayoutID() != 0) {
-            setContentView(getContentViewLayoutID());
-        } else {
-            throw new IllegalArgumentException("You must return a right contentView layout resource Id");
-        }
+
         initViewsAndEvents();
 
     }
@@ -170,6 +167,5 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     protected abstract void initViewsAndEvents();
 
-    protected abstract int getContentViewLayoutID();
 
 }
