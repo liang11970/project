@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+    <RelativeLayout
+        android:id="@+id/title_meeting"
+        android:layout_width="match_parent"
+        android:layout_height="45.0dip"
+        android:background="#46769E">
+
+
+        <ImageView
+            android:id="@+id/iv_back_meeting"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:padding="10dip"
+            android:src="@mipmap/back" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/iv_back_meeting"
+            android:text="返回"
+            android:textColor="@color/city_item_bg_nor"
+
+            android:textSize="15sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="会议签到"
+            android:textColor="@color/city_item_bg_nor"
+            android:textSize="16.0sp" />
+
+
+    </RelativeLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dip"
+        android:layout_below="@+id/title_meeting"
+        android:layout_marginTop="10dip"
+        android:orientation="vertical">
+        <include layout="@layout/view_line" />
+
+
+        <RelativeLayout
+            android:id="@+id/rl_meeting_personnelList"
+            android:layout_width="match_parent"
+            android:layout_height="39dp">
+
+
+            <TextView
+                android:id="@+id/tv_Meeting_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:text="到场人员列表" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:padding="10dip"
+                android:src="@mipmap/list" />
+
+        </RelativeLayout>
+
+        <include layout="@layout/view_line" />
+
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_Meeting_Name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="100dip"
+
+        android:text="会议名称" />
+
+    <TextView
+        android:id="@+id/tv_Meeting_Time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_Meeting_Name"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="20dip"
+        android:text="会议时间: 20xx" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_Meeting_Time"
+        android:layout_gravity="center_horizontal"
+        android:padding="30dip"
+        android:text="顶顶顶顶顶顶顶顶顶顶顶顶顶顶得得得得得得得得得得得得得得得得得到得得得得得得得得得得得得得得得得得到" />
+
+
+    <EditText
+        android:layout_width="300dip"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/bt_meeting_signin"
+
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="20dip"
+        android:hint="请输入手机号码"
+        android:phoneNumber="true"
+        android:textSize="14sp" />
+
+    <Button
+        android:id="@+id/bt_meeting_signin"
+        android:layout_width="300dip"
+        android:layout_height="40dip"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="120dip"
+        android:background="@drawable/shape_signin"
+        android:text="签到"
+        android:textColor="@color/city_item_bg_nor"
+        android:textSize="15sp" />
+
+
+</RelativeLayout>
