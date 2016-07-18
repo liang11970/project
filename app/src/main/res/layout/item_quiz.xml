@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<cn.com.hz_project.tools.percent.PercentRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/iv_quiz"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@mipmap/quiz"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"/>
+
+    <TextView
+        android:id="@+id/tv_quiz_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/iv_quiz"
+        android:layout_marginLeft="10dp"
+        android:layout_alignTop="@+id/iv_quiz"
+        android:textSize="20sp"
+        android:text="提问标题"/>
+
+    <TextView
+        android:id="@+id/tv_quiz_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/iv_quiz"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="5dp"
+        android:layout_below="@+id/tv_quiz_title"
+        android:textSize="16sp"
+        android:text="时间:2016-7-18"/>
+
+    <TextView
+        android:id="@+id/tv_quiz_content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/iv_quiz"
+        android:layout_marginLeft="10dp"
+        android:layout_alignBottom="@+id/iv_quiz"
+        android:maxLines="2"
+        android:textSize="16sp"
+        android:text="这是提问的内容简要信息这是提问的内容简要信息这是提问的内容简要信息这是提问的内容简要信息"/>
+
+
+</cn.com.hz_project.tools.percent.PercentRelativeLayout>

@@ -1,4 +1,4 @@
-package cn.com.hz_project.app;
+﻿package cn.com.hz_project.app;
 
 import android.app.Application;
 
@@ -13,6 +13,11 @@ import android.app.Application;
  * ================================
  */
 public class MyApplication extends Application {
+
+
+//init
+
+
 
 
 
