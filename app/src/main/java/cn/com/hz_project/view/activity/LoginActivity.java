@@ -124,7 +124,7 @@ public class LoginActivity extends Activity {
                             public void onNext(Login login) {
 
                                 if (login.isSuccess()) {
-                                    startActivity(new Intent(LoginActivity.this, NewActivity.class));
+                                    startActivity(new Intent(LoginActivity.this, ViewPagerActivity.class));
                                 } else {
                                     Toast.makeText(LoginActivity.this, "帐号密码有问题检查一下吧", Toast.LENGTH_SHORT).show();
                                 }

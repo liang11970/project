@@ -56,11 +56,10 @@ dependencies {
     compile 'de.greenrobot:greendao-generator:2.1.0'
     compile files('libs/picasso-2.4.0.jar')
     compile 'com.jakewharton:butterknife:5.1.1'
-
     compile 'com.makeramen:roundedimageview:2.2.1'
-
-
     compile 'com.android.support:design:23.3.0'
     compile 'com.android.support:recyclerview-v7:23.3.0'
+    compile files('libs/vcameralibrary.jar')
+
 
 }

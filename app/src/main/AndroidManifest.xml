@@ -49,11 +49,9 @@
         </activity>
         <activity android:name="cn.com.hz_project.view.activity.TwoActivity" />
         <activity android:name="cn.com.hz_project.view.activity.ViewPagerActivity" />
-<<<<<<< HEAD
         <activity android:name="cn.com.hz_project.view.activity.NewActivity"></activity>
-=======
         <activity android:name="cn.com.hz_project.view.activity.MeetingListActivity"></activity>
->>>>>>> 77039f295e8eea5478b9ebf580a8975237e0e41a
+
     </application>
 
 </manifest>

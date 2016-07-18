@@ -17,6 +17,7 @@ import android.widget.LinearLayout;
 
 import java.util.ArrayList;
 
+import cn.com.hz_project.tools.utils.LogUtils;
 import cn.com.projectdemos.R;
 
 /**
@@ -26,10 +27,13 @@ import cn.com.projectdemos.R;
  */
 public class LoadMoreRecyclerView extends RecyclerView {
 
+    boolean isLoading;// 正在加载；
+
     private boolean isScrollingToBottom = true;
     private FloatingActionButton floatingActionButton;
     private LoadMoreListener mLoadingListener;
     private ArrayList<View> mFootViews = new ArrayList<>();
+    private View footView;
 
     public LoadMoreRecyclerView(Context context) {
         super(context);
@@ -95,9 +99,14 @@ public class LoadMoreRecyclerView extends RecyclerView {
             }
             if (layoutManager.getChildCount() > 0&& lastVisibleItemPosition >= layoutManager.getItemCount() - 1
                     &&  layoutManager.getItemCount() > layoutManager.getChildCount()) {
-                    View footView = mFootViews.get(0);
-                footView.setVisibility(View.VISIBLE);
-                mLoadingListener.onLoadMore();
+                    footView = mFootViews.get(0);
+                if(!isLoading){
+                    isLoading=true;
+                    footView.setVisibility(View.VISIBLE);
+                    mLoadingListener.onLoadMore();
+                }
+
+
             }
         }
     }
@@ -119,7 +128,8 @@ public class LoadMoreRecyclerView extends RecyclerView {
      * 加载完毕
      */
     public void loadComplete(){
-        mFootViews.get(0).setVisibility(GONE);
+        isLoading=false;
+        footView.setVisibility(View.GONE);
     }
 
 }

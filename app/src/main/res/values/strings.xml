@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:xliff="http://schemas.android.com/tools">
     <string name="app_name">司法局</string>
 
     <string name="app_picker_name">Applications</string>
@@ -126,5 +126,15 @@
 
     <string name="viewfinderview_status_text1">将二维码/条码放入取景框内</string>
     <string name="viewfinderview_status_text2">即可自动扫描</string>
+    <string name="libs_just">刚刚</string>
+    <string name="libs_before_minute"><xliff:g id="MINUTE">%1$s</xliff:g>分钟前</string>
+    <string name="libs_before_hour"><xliff:g id="HOUR">%1$s</xliff:g>小时前</string>
+    <string name="libs_today">今天</string>
+    <string name="libs_yestoday">昨天</string>
+    <string name="libs_before_yestoday">前天</string>
+    <string name="libs_n_day_before">%d天前</string>
+    <string name="common_label_am">上午</string>
+    <string name="common_label_yesterday">昨天</string>
+    <string name="common_label_pm">下午</string>
 
 </resources>

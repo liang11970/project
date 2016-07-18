@@ -10,8 +10,6 @@ import cn.com.hz_project.tools.utils.LogUtils;
 import rx.Subscriber;
 
 /**
- * 作者：chs on 2016/4/28 10:34
- * 邮箱：657083984@qq.com
  */
 public class NewsPresenter implements NewsContract.Presenter {
     private BusinessTask mNewsTask;
@@ -31,9 +29,9 @@ public class NewsPresenter implements NewsContract.Presenter {
            case 0:
                getSocial(page ,type);
                break;
-//           case 1:
-//               getSport(page,type);
-//               break;
+           case 1:
+               getSport(page,type);
+               break;
 //           case 2:
 //               getTechnology(page,type);
 //               break;
@@ -69,24 +67,24 @@ public class NewsPresenter implements NewsContract.Presenter {
             }
         }, page,type);
     }
-//    public void getSport(int page,int type) {
-//        mNewsTask.geNewsList(new Subscriber<String>() {
-//            @Override
-//            public void onCompleted() {
-//                LogUtils.e("PicturePresenter", "onCompleted");
-//            }
-//            @Override
-//            public void onError(Throwable e) {
-//                LogUtils.e("PicturePresenter", "onError");
-//            }
-//            @Override
-//            public void onNext(String s) {
-//                if(!TextUtils.isEmpty(s)){
-//                    mNewsView.showInfo(GsonUtil.changeGsonToBean(s,NewsEntity.class));
-//                }
-//            }
-//        }, page,type);
-//    }
+    public void getSport(int page,int type) {
+        mNewsTask.geNewsList(new Subscriber<String>() {
+            @Override
+            public void onCompleted() {
+                LogUtils.e("PicturePresenter", "onCompleted");
+            }
+            @Override
+            public void onError(Throwable e) {
+                LogUtils.e("PicturePresenter", "onError");
+            }
+            @Override
+            public void onNext(String s) {
+                if(!TextUtils.isEmpty(s)){
+                    mNewsView.showInfo(GsonUtil.changeGsonToBean(s,HttpResult.class));
+                }
+            }
+        }, page,type);
+    }
 //    public void getTechnology(int page,int type) {
 //        mNewsTask.geNewsList(new Subscriber<String>() {
 //            @Override

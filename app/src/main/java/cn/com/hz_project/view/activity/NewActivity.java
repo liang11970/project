@@ -12,6 +12,7 @@ import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -122,15 +123,19 @@ public class NewActivity extends Activity implements NewsContract.View {
         LogUtils.e("log",entity.getObj().size()+"");
 
         if(entity.getObj().size()==0){
+            Toast.makeText(NewActivity.this,"没有数据了",Toast.LENGTH_LONG);
+            mAdapter.notifyDataSetChanged();
+        }else {
+            if(currentPage==1){
+                mDataList.clear();
+            }
+            mDataList.addAll(entity.getObj());
+            mAdapter.notifyDataSetChanged();
+            idSwiperefresh.setRefreshing(false);
             listView.loadComplete();
         }
 
-        if(currentPage==1){
-            mDataList.clear();
-        }
-        mDataList.addAll(entity.getObj());
-        mAdapter.notifyDataSetChanged();
-        idSwiperefresh.setRefreshing(false);
+
 
     }
 
