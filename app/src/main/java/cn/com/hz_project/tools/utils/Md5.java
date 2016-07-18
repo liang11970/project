@@ -2,6 +2,9 @@ package cn.com.hz_project.tools.utils;
 public class MD5
 {
 
+    //加密
+
+
     public MD5(Object ob)
     {
         this();

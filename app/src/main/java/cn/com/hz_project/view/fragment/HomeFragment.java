@@ -26,9 +26,6 @@ import cn.com.projectdemos.R;
 public class HomeFragment extends Fragment{
 	
 	Resources resources;
-  //  private ViewPager mPager;
-    private ArrayList<Fragment> fragmentsList;
-    private ImageView ivBottomLine;
     private TextView tvTabNew, tvTabHot,tvTabjiagou,tvTabjieshao;
 
     private int currIndex = 0;
@@ -36,10 +33,7 @@ public class HomeFragment extends Fragment{
     private int offset = 0;
     private int position_one;
     public final static int num = 4 ;
-    Fragment home1;
-    Fragment home2;
-	Fragment home3;
-	Fragment home4;
+
 	View view;
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -150,87 +144,6 @@ public class HomeFragment extends Fragment{
 	        }
 	    };
 
-	    public class MyOnPageChangeListener implements OnPageChangeListener {
 
-	        @Override
-	        public void onPageSelected(int arg0) {
-	            Animation animation = null;
-	            switch (arg0) {
-	            case 0:
-					view.findViewById(R.id.buju1).setBackgroundColor(getResources().getColor(R.color.huise));
-					view.findViewById(R.id.buju2).setBackgroundColor(getResources().getColor(R.color.white));
-					view.findViewById(R.id.buju3).setBackgroundColor(getResources().getColor(R.color.white));
-					view.findViewById(R.id.buju4).setBackgroundColor(getResources().getColor(R.color.white));
-	                if (currIndex == 1) {
-	                    animation = new TranslateAnimation(position_one, offset, 0, 0);
-	                }
-					if (currIndex == 2) {
-						animation = new TranslateAnimation(position_one*2+0, offset, 0, 0);
-					}
-					if (currIndex == 3) {
-						animation = new TranslateAnimation(position_one*3+0, offset, 0, 0);
-					}
-	                break;
-	            case 1:
-					view.findViewById(R.id.buju1).setBackgroundColor(getResources().getColor(R.color.white));
-					view.findViewById(R.id.buju2).setBackgroundColor(getResources().getColor(R.color.huise));
-					view.findViewById(R.id.buju3).setBackgroundColor(getResources().getColor(R.color.white));
-					view.findViewById(R.id.buju4).setBackgroundColor(getResources().getColor(R.color.white));
-	                if (currIndex == 0) {
-	                    animation = new TranslateAnimation(offset, position_one, 0, 0);
-	                }else
-					if (currIndex==2){
-						animation = new TranslateAnimation(position_one*2, 0+position_one, 0, 0);
-					}
-					if (currIndex==3){
-						animation = new TranslateAnimation(position_one*3, 0+position_one, 0, 0);
-					}
-	                break;
-					case 2:
-						view.findViewById(R.id.buju1).setBackgroundColor(getResources().getColor(R.color.white));
-						view.findViewById(R.id.buju2).setBackgroundColor(getResources().getColor(R.color.white));
-						view.findViewById(R.id.buju3).setBackgroundColor(getResources().getColor(R.color.huise));
-						view.findViewById(R.id.buju4).setBackgroundColor(getResources().getColor(R.color.white));
-						if (currIndex == 0) {
-							animation = new TranslateAnimation(0, position_one*2, 0, 0);
-						}
-						if (currIndex == 1) {
-							animation = new TranslateAnimation(0+position_one, position_one*2, 0, 0);
-						}
-						else
-						if (currIndex==3) {
-							animation = new TranslateAnimation(position_one*3, 0+2*position_one, 0, 0);
-						}
-						break;
-					case 3:
-						view.findViewById(R.id.buju1).setBackgroundColor(getResources().getColor(R.color.white));
-						view.findViewById(R.id.buju2).setBackgroundColor(getResources().getColor(R.color.white));
-						view.findViewById(R.id.buju3).setBackgroundColor(getResources().getColor(R.color.white));
-						view.findViewById(R.id.buju4).setBackgroundColor(getResources().getColor(R.color.huise));
-						if (currIndex == 0) {
-							animation = new TranslateAnimation(offset, position_one*3, 0, 0);
-						}
-						if (currIndex == 1) {
-							animation = new TranslateAnimation(0+position_one, position_one*3, 0, 0);
-						}
-						if (currIndex == 2) {
-							animation = new TranslateAnimation(0+2*position_one, position_one*3, 0, 0);
-						}
-						break;
-	            }
-	            currIndex = arg0;
-	            animation.setFillAfter(true);
-	            animation.setDuration(300);
-	            ivBottomLine.startAnimation(animation);
-	        }
-
-	        @Override
-	        public void onPageScrolled(int arg0, float arg1, int arg2) {
-	        }
-
-	        @Override
-	        public void onPageScrollStateChanged(int arg0) {
-	        }
-	    }
 
 }
