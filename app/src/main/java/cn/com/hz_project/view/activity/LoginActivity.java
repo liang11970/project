@@ -162,12 +162,7 @@ public class LoginActivity extends Activity {
 //                            });
 //                }else {
                     loginService.PostField(user.getText().toString(), Md5.md5crypt(password.getText().toString()), 2)
-                            .doOnNext(new Action1<Login>() {
-                                @Override
-                                public void call(Login login) {
-                                    service.save(login);
-                                }
-                            })
+                            .doOnNext(login1 -> service.save(login1))
                             .subscribeOn(Schedulers.io())
                             .observeOn(AndroidSchedulers.mainThread())
                             .subscribe(new Subscriber<Login>() {

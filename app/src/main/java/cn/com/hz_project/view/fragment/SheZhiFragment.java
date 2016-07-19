@@ -18,7 +18,14 @@ public class SheZhiFragment extends Fragment {
                              Bundle savedInstanceState) {
         // TODO Auto-generated method stub
         View view = inflater.inflate(R.layout.fragment_shezhi, null);
+
+        getData();
         return view;
+    }
+
+    private void getData() {
+
+
     }
 
 }
