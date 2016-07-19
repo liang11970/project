@@ -80,9 +80,10 @@ public class NewActivity extends Activity implements NewsContract.View {
         mAdapter = new BaseAdapter<HttpResult.ObjBean>(mContext,R.layout.item_new,mDataList,listView) {
                                        @Override
                                        public void convert(ViewHolder holder, final HttpResult.ObjBean newslistEntity) {
-                                           holder.setText(R.id.tv_title,newslistEntity.getNBD_TITLE());
+//                                           holder.setText(R.id.tv_title,newslistEntity.getNBD_TITLE());
                                            holder.setText(R.id.tv_time,newslistEntity.getTIME());
-                                           holder.setText(R.id.tv_content,newslistEntity.getSUBSTR());
+//                                           holder.setText(R.id.tv_content,newslistEntity.getSUBSTR());
+                                           holder.setText(R.id.tv_content,newslistEntity.getNBD_TITLE());
                                            holder.setImageWithUrl(R.id.iv_picasso,newslistEntity.getNBD_PICTURE_URL());
                                            holder.setOnClickListener(R.id.start_time_repairs, new View.OnClickListener() {
                                                @Override

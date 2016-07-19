@@ -1,8 +1,13 @@
 package cn.com.hz_project.model.server;
 
 import cn.com.hz_project.model.bean.DataResponse;
+import cn.com.hz_project.model.bean.Login;
+import cn.com.hz_project.model.bean.Title;
 import cn.com.hz_project.model.bean.UploadFile;
 import okhttp3.RequestBody;
+import retrofit2.http.Body;
+import retrofit2.http.Field;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
@@ -24,4 +29,12 @@ public interface FileServer {
     @Multipart
     Observable<DataResponse<UploadFile>> uploadFile(@Part("file\"; filename=\"avatar.png\"") RequestBody file);
 
+
+    /**
+     * 登录
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("login")
+    Observable<Login> postText(@Body Title bean);
 }

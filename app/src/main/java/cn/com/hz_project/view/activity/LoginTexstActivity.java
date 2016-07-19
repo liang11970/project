@@ -3,11 +3,9 @@ package cn.com.hz_project.view.activity;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
-import android.util.Base64;
 import android.util.Log;
 import android.view.Window;
 import android.widget.Button;
@@ -15,13 +13,14 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import cn.com.hz_project.model.bean.Login;
+import cn.com.hz_project.model.bean.Title;
+import cn.com.hz_project.model.server.FileServer;
 import cn.com.hz_project.model.server.LoginService;
 import cn.com.hz_project.model.server.PreferencesService;
 import cn.com.hz_project.tools.url.Urls;
@@ -32,13 +31,12 @@ import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
-import rx.functions.Action1;
 import rx.schedulers.Schedulers;
 
 /**
  * 登录界面(哈哈)
  */
-public class LoginActivity extends Activity {
+public class LoginTexstActivity extends Activity {
 
     @InjectView(R.id.user)
     EditText user;
@@ -51,7 +49,7 @@ public class LoginActivity extends Activity {
     @InjectView(R.id.cb_autologin)
     CheckBox cbAutologin;
     private Retrofit retrofit;
-    private LoginService loginService;
+    private FileServer loginService;
     private PreferencesService service;
 
     @Override
@@ -73,9 +71,7 @@ public class LoginActivity extends Activity {
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .build();
 
-        loginService = retrofit.create(LoginService.class);
-
-        service = new PreferencesService(this);
+        loginService = retrofit.create(FileServer.class);
     }
 
     private void initData() {
@@ -92,7 +88,7 @@ public class LoginActivity extends Activity {
 
 
 
-        if (!isNetworkConnected(LoginActivity.this))
+        if (!isNetworkConnected(LoginTexstActivity.this))
             Toast.makeText(this, "当前网络不可用", Toast.LENGTH_SHORT).show();
         else {
             //点击登录
@@ -161,13 +157,7 @@ public class LoginActivity extends Activity {
 //                                }
 //                            });
 //                }else {
-                    loginService.PostField(user.getText().toString(), Md5.md5crypt(password.getText().toString()), 2)
-                            .doOnNext(new Action1<Login>() {
-                                @Override
-                                public void call(Login login) {
-                                    service.save(login);
-                                }
-                            })
+                    loginService.postText(new Title(1,"admin","dd","dd"))
                             .subscribeOn(Schedulers.io())
                             .observeOn(AndroidSchedulers.mainThread())
                             .subscribe(new Subscriber<Login>() {
@@ -185,18 +175,17 @@ public class LoginActivity extends Activity {
                                 public void onNext(Login login) {
 
                                     if (login.isSuccess()) {
-
-
-
-
-
-                                        startActivity(new Intent(LoginActivity.this, ViewPagerActivity.class));
+                                        startActivity(new Intent(LoginTexstActivity.this, ViewPagerActivity.class));
                                     } else {
-                                        Toast.makeText(LoginActivity.this, "帐号密码有问题检查一下吧", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(LoginTexstActivity.this, "帐号密码有问题检查一下吧", Toast.LENGTH_SHORT).show();
                                     }
 
                                 }
                             });
+
+//                }
+
+
 
 
 
