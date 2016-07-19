@@ -1,6 +1,7 @@
 package cn.com.hz_project.view.activity;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -61,6 +62,7 @@ public class MeetingDetailsActivity extends Activity implements View.OnClickList
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.rl_meeting_personnelList:
+                startActivity(new Intent(getApplicationContext(),MeetingStaffPieActivity.class));
                 break;
             case R.id.bt_meeting_signin:
                 break;

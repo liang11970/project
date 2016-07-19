@@ -49,28 +49,35 @@
         </activity>
         <activity android:name="cn.com.hz_project.view.activity.TwoActivity" />
         <activity android:name="cn.com.hz_project.view.activity.ViewPagerActivity" />
-<<<<<<< HEAD
+
+
         <activity android:name="cn.com.hz_project.view.activity.OnlineQuizActivity" />
         <activity android:name="cn.com.hz_project.view.activity.NewActivity" />
         <activity android:name="cn.com.hz_project.view.activity.MeetingListActivity" />
         <activity android:name="cn.com.hz_project.view.activity.FileActivity"></activity>
-=======
 
         <!--<activity android:name="cn.com.hz_project.view.activity.TwoActivity"></activity>-->
 
-        <activity android:name="cn.com.hz_project.view.activity.OnlineQuizActivity"/>
+        <activity android:name="cn.com.hz_project.view.activity.OnlineQuizActivity" />
 
         <!--<activity android:name="cn.com.hz_project.view.activity.TwoActivity" />-->
         <!--<activity android:name="cn.com.hz_project.view.activity.ViewPagerActivity" />-->
-        
+
         <activity android:name="cn.com.hz_project.view.activity.NewActivity"></activity>
 
-        <activity android:name="cn.com.hz_project.view.activity.MeetingSignListActivity"/>
-        <activity android:name="cn.com.hz_project.view.activity.MeetingDetailsActivity"/>
-        <activity android:name="cn.com.hz_project.view.activity.AddMeetingActivity"/>
+        <activity android:name="cn.com.hz_project.view.activity.MeetingSignListActivity" />
+        <activity android:name="cn.com.hz_project.view.activity.MeetingDetailsActivity" />
+        <activity android:name="cn.com.hz_project.view.activity.AddMeetingActivity" />
+        <activity android:name="cn.com.hz_project.view.activity.MeetingStaffListingActivity"/>
         <activity android:name="cn.com.hz_project.view.activity.MeetingListActivity"></activity>
 
->>>>>>> 5b5ff2c48bbe569a8940746741410982d5728c7d
     </application>
+
+    <manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+        <application>
+            <activity android:name="cn.com.hz_project.view.activity.MeetingStaffListingActivity"></activity>
+        </application>
+    </manifest>
 
 </manifest>
