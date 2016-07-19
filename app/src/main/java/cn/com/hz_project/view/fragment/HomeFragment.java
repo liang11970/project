@@ -1,14 +1,14 @@
 package cn.com.hz_project.view.fragment;
 
-import java.util.ArrayList;
-
-
+import android.app.Activity;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.LinearLayoutManager;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -16,39 +16,84 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
-import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
+import android.widget.VideoView;
 
 import com.wangjie.shadowviewhelper.ShadowProperty;
 import com.wangjie.shadowviewhelper.ShadowViewHelper;
 
+import java.util.ArrayList;
+
+import butterknife.ButterKnife;
+import butterknife.InjectView;
+import cn.com.hz_project.model.bean.HttpResult;
+import cn.com.hz_project.presenter.activityPresenter.NewsContract;
+import cn.com.hz_project.presenter.activityPresenter.NewsPresenter;
+import cn.com.hz_project.view.activity.NewActivity;
 import cn.com.hz_project.view.activity.SecondActivity;
+import cn.com.hz_project.view.base.BaseAdapter;
+import cn.com.hz_project.view.base.ViewHolder;
+import cn.com.hz_project.view.widget.LoadMoreRecyclerView;
+import cn.com.hz_project.view.widget.RecycleViewDivider;
 import cn.com.projectdemos.R;
 
-public class HomeFragment extends Fragment{
+public class HomeFragment extends Fragment implements NewsContract.View{
 
     Resources resources;
+    @InjectView(R.id.tv_tab_1)
+    TextView tvTab1;
+    @InjectView(R.id.buju1)
+    LinearLayout buju1;
+    @InjectView(R.id.tv_tab_2)
+    TextView tvTab2;
+    @InjectView(R.id.buju2)
+    LinearLayout buju2;
+    @InjectView(R.id.tv_tab_3)
+    TextView tvTab3;
+    @InjectView(R.id.buju3)
+    LinearLayout buju3;
+    @InjectView(R.id.tv_tab_4)
+    TextView tvTab4;
+    @InjectView(R.id.buju4)
+    LinearLayout buju4;
+    @InjectView(R.id.linearLayout1)
+    LinearLayout linearLayout1;
+
+    @InjectView(R.id.listView)
+    LoadMoreRecyclerView listView;
+    @InjectView(R.id.id_swiperefresh)
+    SwipeRefreshLayout idSwiperefresh;
     //  private ViewPager mPager;
     private ArrayList<Fragment> fragmentsList;
     // private ImageView ivBottomLine;
-    private TextView tvTabNew, tvTabHot,tvTabjiagou,tvTabjieshao;
+    private TextView tvTabNew, tvTabHot, tvTabjiagou, tvTabjieshao;
 
     private int currIndex = 0;
     private int bottomLineWidth;
     private int offset = 0;
     private int position_one;
-    public final static int num = 4 ;
+    public final static int num = 4;
     Fragment home1;
     Fragment home2;
     Fragment home3;
     Fragment home4;
     View view;
+    private ArrayList<HttpResult.ObjBean> mDataList;
+    private Activity mediaController;
+    private BaseAdapter<HttpResult.ObjBean> mAdapter;
+    private int currentPage;
+    private NewsPresenter mPresenter;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // TODO Auto-generated method stub
         view = inflater.inflate(R.layout.fragment_home, null);
         //view.findViewById(R.id.buju1).setBackgroundColor(getResources().getColor(R.color.huise));
+
+        mPresenter = new NewsPresenter(this);
         ShadowViewHelper.bindShadowHelper(
                 new ShadowProperty()
                         .setShadowColor(0x77000000)
@@ -66,17 +111,20 @@ public class HomeFragment extends Fragment{
         animation.setDuration(300);
         // ivBottomLine.startAnimation(animation);
 
+        ButterKnife.inject(this, view);
+        initView();
+
+
         return view;
     }
 
-<<<<<<< HEAD
     private void initEvent() {
 
         Uri uri = Uri.parse("http://192.168.2.35:8080/WsbxMobile/page/video/1468896951611.avi");
-        mediaController.setMediaController(new MediaController(getContext()));
-        mediaController.setVideoURI(uri);
-        mediaController.start();
-        mediaController.requestFocus();
+//        mediaController.setMediaController(new MediaController(getContext()));
+//        mediaController.setVideoURI(uri);
+//        mediaController.start();
+//        mediaController.requestFocus();
 
     }
 
@@ -114,8 +162,6 @@ public class HomeFragment extends Fragment{
         mPresenter.start(currentPage, 1);
     }
 
-=======
->>>>>>> 5b5ff2c48bbe569a8940746741410982d5728c7d
     private void InitTextView(View parentView) {
         tvTabNew = (TextView) parentView.findViewById(R.id.tv_tab_1);
         tvTabHot = (TextView) parentView.findViewById(R.id.tv_tab_2);
@@ -129,13 +175,13 @@ public class HomeFragment extends Fragment{
         tvTabNew.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getActivity(), SecondActivity.class));
+                startActivity(new Intent(getActivity(), NewActivity.class));
             }
         });
         tvTabHot.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getActivity(), SecondActivity.class));
+                startActivity(new Intent(getActivity(), NewActivity.class));
             }
         });
         tvTabjiagou.setOnClickListener(new View.OnClickListener() {
@@ -152,7 +198,6 @@ public class HomeFragment extends Fragment{
         });
 
     }
-
 
 
     private void InitViewPager(View parentView) {
@@ -182,9 +227,31 @@ public class HomeFragment extends Fragment{
         getActivity().getWindowManager().getDefaultDisplay().getMetrics(dm);
         int screenW = dm.widthPixels;
         offset = (int) ((screenW / num - bottomLineWidth) / 4);
-        Log.e("11111111",""+offset);
+        Log.e("11111111", "" + offset);
         int avg = (int) (screenW / num);
         position_one = avg + offset;
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        ButterKnife.reset(this);
+    }
+
+    @Override
+    public void showInfo(HttpResult entity) {
+
+
+            if(currentPage==1){
+                mDataList.clear();
+            }
+            mDataList.addAll(entity.getObj());
+            mAdapter.notifyDataSetChanged();
+            idSwiperefresh.setRefreshing(false);
+            listView.loadComplete();
+
+
+
     }
 
     public class MyOnClickListener implements View.OnClickListener {
@@ -198,7 +265,9 @@ public class HomeFragment extends Fragment{
         public void onClick(View v) {
 //            mPager.setCurrentItem(index);
         }
-    };
+    }
+
+    ;
 
     public class MyOnPageChangeListener implements OnPageChangeListener {
 
@@ -215,10 +284,10 @@ public class HomeFragment extends Fragment{
                         animation = new TranslateAnimation(position_one, offset, 0, 0);
                     }
                     if (currIndex == 2) {
-                        animation = new TranslateAnimation(position_one*2+0, offset, 0, 0);
+                        animation = new TranslateAnimation(position_one * 2 + 0, offset, 0, 0);
                     }
                     if (currIndex == 3) {
-                        animation = new TranslateAnimation(position_one*3+0, offset, 0, 0);
+                        animation = new TranslateAnimation(position_one * 3 + 0, offset, 0, 0);
                     }
                     break;
                 case 1:
@@ -228,12 +297,11 @@ public class HomeFragment extends Fragment{
                     view.findViewById(R.id.buju4).setBackgroundColor(getResources().getColor(R.color.white));
                     if (currIndex == 0) {
                         animation = new TranslateAnimation(offset, position_one, 0, 0);
-                    }else
-                    if (currIndex==2){
-                        animation = new TranslateAnimation(position_one*2, 0+position_one, 0, 0);
+                    } else if (currIndex == 2) {
+                        animation = new TranslateAnimation(position_one * 2, 0 + position_one, 0, 0);
                     }
-                    if (currIndex==3){
-                        animation = new TranslateAnimation(position_one*3, 0+position_one, 0, 0);
+                    if (currIndex == 3) {
+                        animation = new TranslateAnimation(position_one * 3, 0 + position_one, 0, 0);
                     }
                     break;
                 case 2:
@@ -242,14 +310,12 @@ public class HomeFragment extends Fragment{
                     view.findViewById(R.id.buju3).setBackgroundColor(getResources().getColor(R.color.huise));
                     view.findViewById(R.id.buju4).setBackgroundColor(getResources().getColor(R.color.white));
                     if (currIndex == 0) {
-                        animation = new TranslateAnimation(0, position_one*2, 0, 0);
+                        animation = new TranslateAnimation(0, position_one * 2, 0, 0);
                     }
                     if (currIndex == 1) {
-                        animation = new TranslateAnimation(0+position_one, position_one*2, 0, 0);
-                    }
-                    else
-                    if (currIndex==3) {
-                        animation = new TranslateAnimation(position_one*3, 0+2*position_one, 0, 0);
+                        animation = new TranslateAnimation(0 + position_one, position_one * 2, 0, 0);
+                    } else if (currIndex == 3) {
+                        animation = new TranslateAnimation(position_one * 3, 0 + 2 * position_one, 0, 0);
                     }
                     break;
                 case 3:
@@ -258,13 +324,13 @@ public class HomeFragment extends Fragment{
                     view.findViewById(R.id.buju3).setBackgroundColor(getResources().getColor(R.color.white));
                     view.findViewById(R.id.buju4).setBackgroundColor(getResources().getColor(R.color.huise));
                     if (currIndex == 0) {
-                        animation = new TranslateAnimation(offset, position_one*3, 0, 0);
+                        animation = new TranslateAnimation(offset, position_one * 3, 0, 0);
                     }
                     if (currIndex == 1) {
-                        animation = new TranslateAnimation(0+position_one, position_one*3, 0, 0);
+                        animation = new TranslateAnimation(0 + position_one, position_one * 3, 0, 0);
                     }
                     if (currIndex == 2) {
-                        animation = new TranslateAnimation(0+2*position_one, position_one*3, 0, 0);
+                        animation = new TranslateAnimation(0 + 2 * position_one, position_one * 3, 0, 0);
                     }
                     break;
             }

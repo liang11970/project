@@ -25,7 +25,7 @@ import cn.com.hz_project.model.bean.Login;
 import cn.com.hz_project.model.server.LoginService;
 import cn.com.hz_project.model.server.PreferencesService;
 import cn.com.hz_project.tools.url.Urls;
-import cn.com.hz_project.tools.utils.MD5;
+import cn.com.hz_project.tools.utils.Md5;
 import cn.com.projectdemos.R;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
@@ -158,7 +158,7 @@ public class LoginActivity extends Activity {
 //                                }
 //                            });
 //                }else {
-                    loginService.PostField(user.getText().toString(), MD5.md5crypt(password.getText().toString()), 2)
+                    loginService.PostField(user.getText().toString(), Md5.md5crypt(password.getText().toString()), 2)
                             .subscribeOn(Schedulers.io())
                             .observeOn(AndroidSchedulers.mainThread())
                             .subscribe(new Subscriber<Login>() {

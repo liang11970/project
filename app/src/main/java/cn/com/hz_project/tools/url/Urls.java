@@ -12,11 +12,7 @@ package cn.com.hz_project.tools.url;
  */
 public class Urls {
 
-<<<<<<< HEAD
-    public static final String QUIZ="http://192.168.2.205:8080/WsbxMobile/appCtrl/";
-=======
     public static final String QUIZ="http://192.168.2.35:8080/WsbxMobile/appCtrl/";
->>>>>>> 5b5ff2c48bbe569a8940746741410982d5728c7d
     //登录
     public static  final  String LOGINURL="http://192.168.2.205:8080/WsbxMobile/loginCtrl/";
 
