@@ -98,6 +98,8 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/tv_Meeting_Name"
         android:layout_centerHorizontal="true"
+        android:layout_marginLeft="45dip"
+        android:layout_marginRight="45dip"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="30dip"
         android:text="会议时间: 20xx"
@@ -120,6 +122,7 @@
         android:layout_width="300dip"
         android:layout_height="wrap_content"
         android:layout_above="@+id/bt_meeting_signin"
+        android:gravity="center"
 
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="20dip"

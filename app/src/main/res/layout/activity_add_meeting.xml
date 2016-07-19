@@ -97,6 +97,8 @@
                 android:id="@+id/ed_meetingContent"
                 android:layout_width="match_parent"
                 android:layout_height="200dip"
+                android:textSize="15dip"
+
                 android:gravity="top"
                 android:hint="会议内容" />
 

@@ -11,10 +11,10 @@
 
         <ImageView
             android:id="@+id/iv_meeting"
-            android:layout_width="80.0dp"
+            android:layout_width="90.0dp"
             android:layout_centerVertical="true"
-            android:layout_height="80.0dp"
-            android:padding="3.0dp"
+            android:layout_height="90.0dp"
+            android:padding="7.0dp"
             android:layout_marginTop="5dip"
             android:layout_marginBottom="5dip"
             android:layout_marginLeft="5dip"

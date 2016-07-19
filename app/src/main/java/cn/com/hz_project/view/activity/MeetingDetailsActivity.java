@@ -31,7 +31,7 @@ public class MeetingDetailsActivity extends Activity implements View.OnClickList
     Button btMeetingSignin;
     @InjectView(R.id.tv_Meeting_content)
     TextView tvMeetingContent;
-    private int meetingId;
+    private String meetingId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,7 +46,7 @@ public class MeetingDetailsActivity extends Activity implements View.OnClickList
 
     private void initData() {
         Bundle extras = getIntent().getExtras();
-        meetingId = (int) extras.get("ID");
+        meetingId = (String) extras.get("ID");
         tvMeetingName.setText(extras.get("name") + "");
         tvMeetingTime.setText("会议时间:" + extras.get("startTime") + "至" + extras.get("endTime"));
         tvMeetingContent.setText(extras.get("content")+"");
