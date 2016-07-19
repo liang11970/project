@@ -101,7 +101,7 @@ public class HomeFragment extends Fragment implements NewsContract.View {
 
     private void initEvent() {
 
-        Uri uri = Uri.parse("http://www.iqiyi.com/common/flashplayer/20160713/1705f98c2359.swf");
+        Uri uri = Uri.parse("http://192.168.2.35:8080/WsbxMobile/page/video/1468896951611.avi");
         mediaController.setMediaController(new MediaController(getContext()));
         mediaController.setVideoURI(uri);
         mediaController.start();
