@@ -5,6 +5,7 @@ import cn.com.hz_project.model.bean.Login;
 import cn.com.hz_project.model.bean.Title;
 import cn.com.hz_project.model.bean.UploadFile;
 import okhttp3.RequestBody;
+import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
@@ -37,4 +38,11 @@ public interface FileServer {
     @FormUrlEncoded
     @POST("login")
     Observable<Login> postText(@Body Title bean);
+
+
+
+        @Multipart
+        @POST("/")
+        Call<String> upload(@Part("fileName") String des, @Part("file\"; filename=\"1.txt") RequestBody file);
+
 }

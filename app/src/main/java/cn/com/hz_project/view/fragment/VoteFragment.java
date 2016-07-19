@@ -28,7 +28,7 @@ public class VoteFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         View view = LayoutInflater.from(getActivity()).inflate(R.layout.fragment_vote, null);
-
+        ButterKnife.inject(this, view);
 
         wvVote.loadUrl("https://detail.tmall.com/item.htm?spm=a220m.1000858.1000725.1.RMmNFy&id=535829741534&areaId=310100&cat_id=2&rn=e0e747853de22a92b2971dbef58cb732&user_id=1973345958&is_b=1");
         wvVote.setWebViewClient(new WebViewClient() {
@@ -43,7 +43,7 @@ public class VoteFragment extends Fragment {
         WebSettings settings = wvVote.getSettings();
         settings.setJavaScriptEnabled(true);
 
-        ButterKnife.inject(this, view);
+
         return view;
     }
 

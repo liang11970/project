@@ -37,10 +37,11 @@ public class PersonFragment extends Fragment {
         // TODO Auto-generated method stub
         View view = inflater.inflate(R.layout.fragment_person, null);
 
+        ButterKnife.inject(this, view);
         initView();
         initData();
 
-        ButterKnife.inject(this, view);
+
         return view;
     }
 

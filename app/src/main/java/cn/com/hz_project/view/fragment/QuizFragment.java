@@ -49,10 +49,11 @@ public class QuizFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = LayoutInflater.from(getActivity()).inflate(R.layout.fragment_quiz, null);
 
+        ButterKnife.inject(this, view);
         initView(view);
         initData();
 
-        ButterKnife.inject(this, view);
+
         return view;
     }
 
