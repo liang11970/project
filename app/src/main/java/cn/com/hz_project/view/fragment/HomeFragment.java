@@ -69,6 +69,53 @@ public class HomeFragment extends Fragment{
         return view;
     }
 
+<<<<<<< HEAD
+    private void initEvent() {
+
+        Uri uri = Uri.parse("http://192.168.2.35:8080/WsbxMobile/page/video/1468896951611.avi");
+        mediaController.setMediaController(new MediaController(getContext()));
+        mediaController.setVideoURI(uri);
+        mediaController.start();
+        mediaController.requestFocus();
+
+    }
+
+    private void initView() {
+        mDataList = new ArrayList<>();
+        mAdapter = new BaseAdapter<HttpResult.ObjBean>(getContext(), R.layout.item_new, mDataList, listView) {
+            @Override
+            public void convert(ViewHolder holder, final HttpResult.ObjBean newslistEntity) {
+                holder.setText(R.id.tv_title, newslistEntity.getNBD_TITLE());
+                holder.setText(R.id.tv_time, newslistEntity.getTIME());
+                holder.setText(R.id.tv_content, newslistEntity.getSUBSTR());
+                holder.setImageWithUrl(R.id.iv_picasso, newslistEntity.getNBD_PICTURE_URL());
+                holder.setOnClickListener(R.id.start_time_repairs, new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+//                        Intent intent = new Intent(NewActivity.this, TwoActivity.class);
+//                        startActivity(intent);
+                    }
+                });
+            }
+        };
+
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
+        listView.setLayoutManager(layoutManager);
+        listView.addItemDecoration(new RecycleViewDivider(getContext()));
+        listView.setAdapter(mAdapter);
+        initdata();
+
+
+    }
+
+    private void initdata() {
+
+        currentPage = 1;
+        mPresenter.start(currentPage, 1);
+    }
+
+=======
+>>>>>>> 5b5ff2c48bbe569a8940746741410982d5728c7d
     private void InitTextView(View parentView) {
         tvTabNew = (TextView) parentView.findViewById(R.id.tv_tab_1);
         tvTabHot = (TextView) parentView.findViewById(R.id.tv_tab_2);

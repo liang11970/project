@@ -53,16 +53,16 @@
         android:layout_below="@+id/password"
         android:background="@drawable/checkbox"
         android:button="@null"
-        app:layout_heightPercent="4.8%w"
+        app:layout_heightPercent="5.8%w"
         app:layout_marginLeftPercent="8.24%w"
         app:layout_marginTopPercent="2.3%h"
-        app:layout_widthPercent="4.8%w" />
+        app:layout_widthPercent="5.8%w" />
 
     <TextView
         android:id="@+id/tv_rempwd"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
-        app:layout_heightPercent="4.8%w"
+        app:layout_heightPercent="5.8%w"
         android:layout_alignBottom="@+id/cb_rempwd"
         android:layout_marginLeft="5dp"
         android:gravity="fill"
@@ -77,10 +77,10 @@
         android:layout_toRightOf="@+id/tv_rempwd"
         android:background="@drawable/checkbox"
         android:button="@null"
-        app:layout_heightPercent="4.8%w"
+        app:layout_heightPercent="5.8%w"
         app:layout_marginLeftPercent="8.24%w"
         app:layout_marginTopPercent="2.3%h"
-        app:layout_widthPercent="4.8%w" />
+        app:layout_widthPercent="5.8%w" />
 
     <TextView
         android:id="@+id/tv_autologin"
