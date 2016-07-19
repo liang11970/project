@@ -2,10 +2,8 @@ package cn.com.hz_project.view.fragment;
 
 import android.content.Intent;
 import android.content.res.Resources;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.util.DisplayMetrics;
@@ -13,12 +11,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
 import android.widget.LinearLayout;
-import android.widget.MediaController;
 import android.widget.TextView;
-import android.widget.VideoView;
 
 import com.wangjie.shadowviewhelper.ShadowProperty;
 import com.wangjie.shadowviewhelper.ShadowViewHelper;
@@ -36,6 +31,7 @@ import cn.com.hz_project.view.base.BaseAdapter;
 import cn.com.hz_project.view.base.ViewHolder;
 import cn.com.hz_project.view.widget.LoadMoreRecyclerView;
 import cn.com.hz_project.view.widget.RecycleViewDivider;
+import cn.com.hz_project.view.widget.SlideShowView;
 import cn.com.projectdemos.R;
 
 public class HomeFragment extends Fragment implements NewsContract.View {
@@ -65,7 +61,8 @@ public class HomeFragment extends Fragment implements NewsContract.View {
     @InjectView(R.id.id_swiperefresh)
     SwipeRefreshLayout idSwiperefresh;
     @InjectView(R.id.mediaController)
-    VideoView mediaController;
+    SlideShowView mediaController;
+
     //  private ViewPager mPager;
     private ArrayList<Fragment> fragmentsList;
     // private ImageView ivBottomLine;
@@ -126,18 +123,18 @@ public class HomeFragment extends Fragment implements NewsContract.View {
 
     private void initEvent() {
 
-        Uri uri = Uri.parse("192.168.2.35:8080/WsbxMobile/page/video/1468896951611.avi");
-        mediaController.setMediaController(new MediaController(getContext()));
-        mediaController.setVideoURI(uri);
-        mediaController.start();
-        mediaController.requestFocus();
+//        Uri uri = Uri.parse("192.168.2.35:8080/WsbxMobile/page/video/1468896951611.avi");
+//        mediaController.setMediaController(new MediaController(getContext()));
+//        mediaController.setVideoURI(uri);
+//        mediaController.start();
+//        mediaController.requestFocus();
 
 
         listView.setLoadMoreListener(new LoadMoreRecyclerView.LoadMoreListener() {
             @Override
             public void onLoadMore() {
                 currentPage++;
-                mPresenter.start(currentPage,1);
+                mPresenter.start(currentPage, 1);
             }
         });
 
@@ -290,7 +287,7 @@ public class HomeFragment extends Fragment implements NewsContract.View {
             @Override
             public void onRefresh() {
                 currentPage = 1;
-                mPresenter.start(currentPage,0);
+                mPresenter.start(currentPage, 0);
 
             }
         });
