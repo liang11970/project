@@ -49,6 +49,7 @@
         android:layout_below="@+id/title_meeting"
         android:layout_marginTop="10dip"
         android:orientation="vertical">
+
         <include layout="@layout/view_line" />
 
 
@@ -86,9 +87,10 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="100dip"
+        android:layout_marginTop="120dip"
+        android:text="会议名称"
 
-        android:text="会议名称" />
+        android:textSize="20dip" />
 
     <TextView
         android:id="@+id/tv_Meeting_Time"
@@ -97,16 +99,20 @@
         android:layout_below="@+id/tv_Meeting_Name"
         android:layout_centerHorizontal="true"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="20dip"
-        android:text="会议时间: 20xx" />
+        android:layout_marginTop="30dip"
+        android:text="会议时间: 20xx"
+        android:textSize="17dip" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/tv_Meeting_Time"
         android:layout_gravity="center_horizontal"
-        android:padding="30dip"
-        android:text="顶顶顶顶顶顶顶顶顶顶顶顶顶顶得得得得得得得得得得得得得得得得得到得得得得得得得得得得得得得得得得得到" />
+        android:layout_marginTop="20dip"
+        android:layout_marginLeft="45dip"
+        android:layout_marginRight="45dip"
+        android:text="顶顶顶顶顶顶顶顶顶顶顶顶顶顶得得得得得得得得得得得得得得得得得到得得得得得得得得得得得得得得得得得到"
+        android:textSize="16dip" />
 
 
     <EditText

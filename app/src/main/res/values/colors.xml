@@ -12,6 +12,7 @@
 
     <color name="trans">#00000000</color>
     <color name="exercis_background">#f8f8f8</color>
+    <color name="white1">#ffffff</color>
     <color name="black_no_transparent">#FF000000</color>
     <color name="provinces_item_bg_nor">#f0f6f6</color>
     <color name="provinces_item_bg_sel">#52c4d4</color>

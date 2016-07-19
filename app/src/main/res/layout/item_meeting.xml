@@ -1,22 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content"
+    android:background="@color/white1">
 
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="10.0dp">
+        >
 
         <ImageView
             android:id="@+id/iv_meeting"
-            android:layout_width="90.0dp"
-            android:layout_height="90.0dp"
+            android:layout_width="80.0dp"
+            android:layout_centerVertical="true"
+            android:layout_height="80.0dp"
+            android:padding="3.0dp"
+            android:layout_marginTop="5dip"
+            android:layout_marginBottom="5dip"
+            android:layout_marginLeft="5dip"
             android:src="@mipmap/img_meeting" />
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
             android:layout_marginLeft="10dp"
             android:layout_toRightOf="@+id/iv_meeting"
             android:orientation="vertical">
@@ -25,6 +32,8 @@
                 android:id="@+id/tv_Meeting_Name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:lines="1"
                 android:text="会议名称"
                 android:textSize="18dp" />
 
@@ -42,8 +51,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dip"
                 android:ellipsize="end"
-                android:lines="2"
-                android:text="内容简要得顶顶顶顶顶顶顶顶顶顶顶顶顶顶得得得得得得得得得得得得得得得得得到得得得得得得得得得得得得得得得得得到"
+                android:maxLines="2"
+                android:text="sss顶顶顶顶顶顶顶顶顶顶顶顶顶顶得得得得得得得得得得得得得得得得得到得得得得得得得得得得得得得得得得得到"
                 android:textSize="15dip" />
 
         </LinearLayout>
