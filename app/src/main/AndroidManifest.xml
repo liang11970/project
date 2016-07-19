@@ -53,23 +53,28 @@
         <activity android:name="cn.com.hz_project.view.activity.NewActivity" />
         <activity android:name="cn.com.hz_project.view.activity.MeetingListActivity" />
         <activity android:name="cn.com.hz_project.view.activity.FileActivity"></activity>
-=======
+        =======
 
         <!--<activity android:name="cn.com.hz_project.view.activity.TwoActivity"></activity>-->
 
-        <activity android:name="cn.com.hz_project.view.activity.OnlineQuizActivity"/>
+        <activity android:name="cn.com.hz_project.view.activity.OnlineQuizActivity" />
 
         <!--<activity android:name="cn.com.hz_project.view.activity.TwoActivity" />-->
         <!--<activity android:name="cn.com.hz_project.view.activity.ViewPagerActivity" />-->
 
 
-        <activity android:name="cn.com.hz_project.view.activity.LoginTexstActivity"/>
-        <activity android:name="cn.com.hz_project.view.activity.MeetingSignListActivity"/>
-        <activity android:name="cn.com.hz_project.view.activity.MeetingDetailsActivity"/>
-        <activity android:name="cn.com.hz_project.view.activity.AddMeetingActivity"/>
+        <activity android:name="cn.com.hz_project.view.activity.LoginTexstActivity" />
+        <activity android:name="cn.com.hz_project.view.activity.MeetingSignListActivity" />
+        <activity
+            android:name="cn.com.hz_project.view.activity.MeetingDetailsActivity"
+            android:theme="@android:style/Theme.Light.NoTitleBar" />
+        <activity
+            android:name="cn.com.hz_project.view.activity.AddMeetingActivity"
+            android:theme="@android:style/Theme.Light.NoTitleBar" />
+        <activity android:name="cn.com.hz_project.view.activity.MeetingStaffPieActivity" />
+        <activity android:name="cn.com.hz_project.view.activity.MeetingStaffListingActivity" />
         <activity android:name="cn.com.hz_project.view.activity.MeetingListActivity"></activity>
 
->>>>>>> 5b5ff2c48bbe569a8940746741410982d5728c7d
     </application>
 
 </manifest>
