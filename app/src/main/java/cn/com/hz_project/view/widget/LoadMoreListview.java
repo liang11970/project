@@ -54,6 +54,8 @@ public class LoadMoreListview extends ListView implements AbsListView.OnScrollLi
     }
 
 
+
+
     public interface IsLoadingListener {
         public void onload();
     }

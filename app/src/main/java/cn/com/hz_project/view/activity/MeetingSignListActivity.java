@@ -5,9 +5,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
+import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -50,6 +54,12 @@ public class MeetingSignListActivity extends Activity implements View.OnClickLis
     private List<MeetingBean.ObjBean> meetList;
     private MeetingListAdapter meetingListAdapter;
     private List<MeetingBean.ObjBean> page2List;
+    private int mtotalItemCout;
+    private int lastItem;
+    private boolean isLoading;
+    private PopupWindow popupWindow;
+    private LinearLayout ll_pop;
+    private int longClickPosition;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -127,24 +137,73 @@ public class MeetingSignListActivity extends Activity implements View.OnClickLis
         lvMeeting.setOnLoadMordListener(this);
         lvMeeting.setAdapter(meetingListAdapter);
 
-        lvMeeting.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(getApplicationContext(),MeetingDetailsActivity.class);
-                intent.putExtra("name", meetList.get(position).getMBD_NAME());
-                intent.putExtra("startTime",meetList.get(position).getSTIME());
-                intent.putExtra("endTime",meetList.get(position).getETIME());
-                intent.putExtra("content",meetList.get(position).getMBD_REMARKS());
-                intent.putExtra("ID",meetList.get(position).getMBD_REMARKS());
-                startActivity(intent);
-            }
-        });
+
     }
 
     private void initView() {
         ivBackMeeting.setOnClickListener(this);
         tvBack.setOnClickListener(this);
         tvAddMeeting.setOnClickListener(this);
+
+        lvMeeting.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(getApplicationContext(), MeetingDetailsActivity.class);
+                intent.putExtra("name", meetList.get(position).getMBD_NAME());
+                intent.putExtra("startTime", meetList.get(position).getSTIME());
+                intent.putExtra("endTime", meetList.get(position).getETIME());
+                intent.putExtra("content", meetList.get(position).getMBD_REMARKS());
+                intent.putExtra("ID", meetList.get(position).getMBD_REMARKS());
+                startActivity(intent);
+            }
+        });
+
+
+        lvMeeting.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                longClickPosition = position;
+                View pop = view.inflate(getApplicationContext(), R.layout.item_pop_meeting, null);
+                ll_pop = (LinearLayout) pop.findViewById(R.id.ll_pop);
+                ll_pop.setOnClickListener(MeetingSignListActivity.this);
+                if (popupWindow != null) {
+                    popupWindow.dismiss();
+                    popupWindow = null;
+                }
+                popupWindow = new PopupWindow(pop, -2, -2);
+                int[] location = new int[2];
+                view.getLocationInWindow(location);
+                popupWindow.showAtLocation(parent, Gravity.TOP + Gravity.CENTER_HORIZONTAL, 200, location[1]);
+                return true;
+            }
+        });
+
+        lvMeeting.setOnScrollListener(new AbsListView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(AbsListView view, int scrollState) {
+                if (lastItem == mtotalItemCout && scrollState == SCROLL_STATE_IDLE) {
+                    if (!isLoading) {
+                        onload();
+                    }
+                }
+
+                if (popupWindow != null) {
+                    popupWindow.dismiss();
+                    popupWindow = null;
+
+                }
+
+            }
+
+            @Override
+            public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+                mtotalItemCout = totalItemCount;
+                lastItem = firstVisibleItem + visibleItemCount;
+
+            }
+        });
+
+
         initRefreshLayout();
     }
 
@@ -177,7 +236,19 @@ public class MeetingSignListActivity extends Activity implements View.OnClickLis
             case R.id.tv_addMeeting:
                 startActivity(new Intent(getApplicationContext(), AddMeetingActivity.class));
                 break;
+            case R.id.ll_pop:
+                DeleteList();
         }
+    }
+
+    private void DeleteList() {
+        if (popupWindow != null) {
+            popupWindow.dismiss();
+            popupWindow = null;
+        }
+        meetList.remove(longClickPosition);
+        meetingListAdapter.notifyDataSetChanged();
+        ToastUtils.show(getApplicationContext(),"会议已删除");
     }
 
     @Override

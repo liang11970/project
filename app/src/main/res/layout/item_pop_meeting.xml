@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ll_pop"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:textColor="@color/city_item_bg_nor"
+        android:text="删除会议"
+        android:padding="7dip"
+        android:background="@drawable/shape_pop"
+        android:id="@+id/tv_del"
+        android:layout_height="wrap_content" />
+
+</LinearLayout>

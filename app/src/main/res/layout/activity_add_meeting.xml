@@ -54,7 +54,7 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30.0dip"
+            android:layout_marginTop="60.0dip"
             android:ellipsize="end"
             android:hint="请输入会议名称"
             android:lines="1" />
@@ -96,7 +96,7 @@
             <EditText
                 android:id="@+id/ed_meetingContent"
                 android:layout_width="match_parent"
-                android:layout_height="180dip"
+                android:layout_height="200dip"
                 android:gravity="top"
                 android:hint="会议内容" />
 
@@ -105,7 +105,7 @@
                 android:layout_width="300dip"
                 android:layout_height="40dip"
                 android:layout_below="@+id/ed_meetingContent"
-                android:layout_marginTop="20dip"
+                android:layout_marginTop="30dip"
                 android:layout_centerHorizontal="true"
                 android:background="@drawable/shape_signin"
                 android:text="签到"
