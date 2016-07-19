@@ -59,6 +59,8 @@ public class PreferencesService {
         editor.putString("roleId", login.getObj().getRoleId());
         editor.putInt("userId", login.getObj().getUserId());
         editor.putInt("userLevel", login.getObj().getUserLevel());
+        editor.putString("telPhone",login.getObj().getTelPhone());
+        editor.putString("imgUrl", login.getObj().getImgUrl());
         editor.commit();
     }
 
@@ -81,6 +83,8 @@ public class PreferencesService {
         params.put("roleId", preferences.getString("roleId",""));
         params.put("userId", preferences.getInt("userId",0)+"");
         params.put("userLevel", preferences.getInt("userLevel",0)+"");
+        params.put("telPhone", preferences.getString("telPhone","000000"));
+        params.put("imgUrl", preferences.getString("imgUrl","http://pic14.nipic.com/20110427/2944718_000916112196_2.jpg"));
         return params;
     }
 

@@ -18,7 +18,7 @@ public class Login {
     /**
      * success : true
      * msg : 用户登录成功!
-     * obj : {"loginIp":"","userId":1,"loginName":"13563251254","realName":"admin","cusNumber":"系统管理员","orgCode":"2","departmentName":"上海市张江","roleId":"9","role":"","roleArray":[],"orgClassKey":"","userLevel":0,"dprtmntId":"1"}
+     * obj : {"loginIp":"","userId":1,"loginName":"13563251254","realName":"系统管理员","cusNumber":"系统管理员","orgCode":"2","departmentName":"上海市张江","imgUrl":"/page/img/1468896899350.gif","telPhone":null,"roleId":"9","role":"","roleArray":[],"orgClassKey":"","userLevel":0,"dprtmntId":"1"}
      */
 
     private boolean success;
@@ -27,10 +27,12 @@ public class Login {
      * loginIp :
      * userId : 1
      * loginName : 13563251254
-     * realName : admin
+     * realName : 系统管理员
      * cusNumber : 系统管理员
      * orgCode : 2
      * departmentName : 上海市张江
+     * imgUrl : /page/img/1468896899350.gif
+     * telPhone : null
      * roleId : 9
      * role :
      * roleArray : []
@@ -73,6 +75,8 @@ public class Login {
         private String cusNumber;
         private String orgCode;
         private String departmentName;
+        private String imgUrl;
+        private String telPhone;
         private String roleId;
         private String role;
         private String orgClassKey;
@@ -136,6 +140,22 @@ public class Login {
             this.departmentName = departmentName;
         }
 
+        public String getImgUrl() {
+            return imgUrl;
+        }
+
+        public void setImgUrl(String imgUrl) {
+            this.imgUrl = imgUrl;
+        }
+
+        public String getTelPhone() {
+            return telPhone;
+        }
+
+        public void setTelPhone(String telPhone) {
+            this.telPhone = telPhone;
+        }
+
         public String getRoleId() {
             return roleId;
         }
@@ -184,9 +204,4 @@ public class Login {
             this.roleArray = roleArray;
         }
     }
-
-
-
-
-
 }
