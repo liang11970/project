@@ -59,4 +59,10 @@
     <item>@string/preferences_front_light_auto</item>
     <item>@string/preferences_front_light_off</item>
   </string-array>
+
+  <string-array name="spingarr">
+    <item>  专家回答</item>
+    <item>  普通回答</item>
+
+  </string-array>
 </resources>

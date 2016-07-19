@@ -12,8 +12,8 @@ import android.widget.Toast;
 
 import java.util.List;
 
-import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.InjectView;
 import cn.com.hz_project.model.bean.MeetingBean;
 import cn.com.hz_project.model.server.MeetingService;
 import cn.com.hz_project.view.adapter.MeetingListAdapter;
@@ -27,15 +27,15 @@ import rx.schedulers.Schedulers;
 
 public class MeetingListActivity extends AppCompatActivity implements View.OnClickListener {
 
-    @Bind(R.id.iv_back_meeting)
-    ImageView ivBackMeeting;
-    @Bind(R.id.title_meeting)
-    RelativeLayout titleMeeting;
-    @Bind(R.id.lv_meeting)
-    ListView lvMeeting;
-    @Bind(R.id.tv_back)
-    TextView tvBack;
 
+    @InjectView(R.id.iv_back_meeting)
+    ImageView ivBackMeeting;
+    @InjectView(R.id.tv_back)
+    TextView tvBack;
+    @InjectView(R.id.title_meeting)
+    RelativeLayout titleMeeting;
+    @InjectView(R.id.lv_meeting)
+    ListView lvMeeting;
     private MeetingService meetingService;
     private int pageNum = 1;
     private List<MeetingBean.ObjBean> meetList;
@@ -45,7 +45,7 @@ public class MeetingListActivity extends AppCompatActivity implements View.OnCli
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_meeting_list);
-        ButterKnife.bind(this);
+        ButterKnife.inject(this);
         initView();
         initData();
     }
@@ -74,7 +74,7 @@ public class MeetingListActivity extends AppCompatActivity implements View.OnCli
                     public void onError(Throwable e) {
 
                         Log.e("请求失败", e.getMessage());
-                        Toast.makeText(getApplicationContext(),"请求网络失败",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "请求网络失败", Toast.LENGTH_SHORT).show();
                     }
 
                     @Override
@@ -91,7 +91,7 @@ public class MeetingListActivity extends AppCompatActivity implements View.OnCli
     }
 
     private void showData() {
-        meetingListAdapter = new MeetingListAdapter(this,meetList);
+        meetingListAdapter = new MeetingListAdapter(this, meetList);
         lvMeeting.setAdapter(meetingListAdapter);
     }
 

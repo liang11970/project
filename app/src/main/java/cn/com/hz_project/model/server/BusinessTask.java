@@ -9,8 +9,7 @@ import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
 /**
- * 作者：chs on 2016/4/26 10:39
- * 邮箱：657083984@qq.com
+ * 网络请求
  */
 public class BusinessTask {
 
@@ -19,13 +18,13 @@ public class BusinessTask {
     public void geNewsList(Subscriber<String> subscriber, int currentPage, int type) {
         NewServer newsService = HttpUtils.getInstance().initRetrofitWithHeader().create(NewServer.class);
         Observable<String> observable = null;
-//        switch (type) {
-//            case 0:
-//                observable = newsService.getSocial(currentPage, 10);
-//                break;
-//            case 1:
-//                observable = newsService.getSport(currentPage, 10);
-//                break;
+        switch (type) {
+            case 0:
+                observable= newsService.PostField(currentPage,type);
+                break;
+            case 1:
+                observable = newsService.PostField(currentPage, type);
+                break;
 //            case 2:
 //                observable = newsService.getTechnology(currentPage, 10);
 //                break;
@@ -41,9 +40,8 @@ public class BusinessTask {
 //            case 6:
 //                observable = newsService.getHealth(currentPage, 10);
 //                break;
-//        }
+        }
 
-        observable= newsService.PostField(currentPage,0);
 
         if (observable != null) {
             observable

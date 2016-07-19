@@ -25,6 +25,8 @@
                 android:id="@+id/tv_Meeting_Name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:lines="1"
                 android:text="会议名称"
                 android:textSize="18dp" />
 

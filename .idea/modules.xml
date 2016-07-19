@@ -4,7 +4,11 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/daogreen/daogreen.iml" filepath="$PROJECT_DIR$/daogreen/daogreen.iml" />
+<<<<<<< HEAD
+      <module fileurl="file://$PROJECT_DIR$/project.iml" filepath="$PROJECT_DIR$/project.iml" />
+=======
       <module fileurl="file://$PROJECT_DIR$/projectJudicial.iml" filepath="$PROJECT_DIR$/projectJudicial.iml" />
+>>>>>>> 0eeebf23b814d7c2b7fd47424a616a55c8c1e444
     </modules>
   </component>
 </project>

@@ -10,11 +10,13 @@ import android.widget.TextView;
 
 import java.util.List;
 
-import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.InjectView;
 import cn.com.hz_project.model.bean.MeetingBean;
+import cn.com.projectdemos.R;
+
 /**
- * Created by Tan on 2016/7/16 0016.
+ * Created by Tan on 2016/7/16 0016.f
  */
 public class MeetingListAdapter extends BaseAdapter {
     private Context mContext;
@@ -51,35 +53,36 @@ public class MeetingListAdapter extends BaseAdapter {
         if (convertView == null) {
             convertView = View.inflate(mContext, R.layout.item_meeting, null);
             viewHolder = new ViewHolder(convertView);
-             viewHolder.tvMeetingName= (TextView) convertView.findViewById(R.id.tv_Meeting_Name);
-            viewHolder.tvMeetingTime= (TextView) convertView.findViewById(R.id.tv_Meeting_Time);
-            viewHolder.tvMeetingContent= (TextView) convertView.findViewById(R.id.tv_Meeting_content);
+            viewHolder.tvMeetingName = (TextView) convertView.findViewById(R.id.tv_Meeting_Name);
+            viewHolder.tvMeetingTime = (TextView) convertView.findViewById(R.id.tv_Meeting_Time);
+            viewHolder.tvMeetingContent = (TextView) convertView.findViewById(R.id.tv_Meeting_content);
             viewHolder.tvSignInState = (TextView) convertView.findViewById(R.id.tv_SignIn_State);
             convertView.setTag(viewHolder);
-        }else {
+        } else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
 
         viewHolder.tvMeetingName.setText(mMeetList.get(position).getMBD_NAME());
         viewHolder.tvMeetingTime.setText(mMeetList.get(position).getSTIME());
-        viewHolder.tvMeetingContent.setText(mMeetList.get(position).getMBD_REMARKS()+"");
-        return null;
+        viewHolder.tvMeetingContent.setText(mMeetList.get(position).getMBD_REMARKS() + "");
+        return convertView;
     }
 
+
     static class ViewHolder {
-        @Bind(R.id.iv_meeting)
+        @InjectView(R.id.iv_meeting)
         ImageView ivMeeting;
-        @Bind(R.id.tv_Meeting_Name)
+        @InjectView(R.id.tv_Meeting_Name)
         TextView tvMeetingName;
-        @Bind(R.id.tv_Meeting_Time)
+        @InjectView(R.id.tv_Meeting_Time)
         TextView tvMeetingTime;
-        @Bind(R.id.tv_Meeting_content)
+        @InjectView(R.id.tv_Meeting_content)
         TextView tvMeetingContent;
-        @Bind(R.id.tv_SignIn_State)
+        @InjectView(R.id.tv_SignIn_State)
         TextView tvSignInState;
 
         ViewHolder(View view) {
-            ButterKnife.bind(this, view);
+            ButterKnife.inject(this, view);
         }
     }
 }

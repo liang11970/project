@@ -3,8 +3,7 @@
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_height="match_parent">
 
     <RelativeLayout
         android:id="@+id/title_meeting"
@@ -27,9 +26,9 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_toRightOf="@+id/iv_back_meeting"
-            android:text="返回"
-            android:paddingTop="5dip"
             android:paddingBottom="5dip"
+            android:paddingTop="5dip"
+            android:text="返回"
             android:textColor="@color/city_item_bg_nor"
 
             android:textSize="15sp" />
@@ -43,6 +42,7 @@
             android:textSize="16.0sp" />
 
         <TextView
+            android:id="@+id/tv_addMeeting"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
@@ -57,13 +57,22 @@
     </RelativeLayout>
 
 
-    <ListView
-        android:id="@+id/lv_meeting"
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/swipeContainer"
+
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/title_meeting">
 
-    </ListView>
+
+        <cn.com.hz_project.view.widget.LoadMoreListview
+            android:id="@+id/lv_meeting"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+
+            />
+
+    </android.support.v4.widget.SwipeRefreshLayout>
 
 
 </RelativeLayout>
