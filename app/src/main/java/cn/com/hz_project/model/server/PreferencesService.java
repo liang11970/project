@@ -59,6 +59,7 @@ public class PreferencesService {
         editor.putString("roleId", login.getObj().getRoleId());
         editor.putInt("userId", login.getObj().getUserId());
         editor.putInt("userLevel", login.getObj().getUserLevel());
+        editor.putString("ubdExpert",login.getObj().getUbdExpert());
         editor.putString("telPhone",login.getObj().getTelPhone());
         editor.putString("imgUrl", login.getObj().getImgUrl());
         editor.commit();
@@ -80,6 +81,7 @@ public class PreferencesService {
         params.put("orgClassKey", preferences.getString("orgClassKey",""));
         params.put("orgCode", preferences.getString("orgCode",""));
         params.put("role", preferences.getString("role",""));
+        params.put("ubdExpert",preferences.getString("ubdExpert",""));
         params.put("roleId", preferences.getString("roleId",""));
         params.put("userId", preferences.getInt("userId",0)+"");
         params.put("userLevel", preferences.getInt("userLevel",0)+"");

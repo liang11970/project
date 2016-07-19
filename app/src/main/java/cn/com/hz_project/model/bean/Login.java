@@ -80,9 +80,19 @@ public class Login {
         private String roleId;
         private String role;
         private String orgClassKey;
+
+        public String getUbdExpert() {
+            return ubdExpert;
+        }
+
+        public void setUbdExpert(String ubdExpert) {
+            this.ubdExpert = ubdExpert;
+        }
+
         private int userLevel;
         private String dprtmntId;
         private List<?> roleArray;
+        private String ubdExpert;
 
         public String getLoginIp() {
             return loginIp;

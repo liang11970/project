@@ -119,6 +119,7 @@
 
 
     <EditText
+        android:id="@+id/et_phoneNum"
         android:layout_width="300dip"
         android:layout_height="wrap_content"
         android:layout_above="@+id/bt_meeting_signin"
