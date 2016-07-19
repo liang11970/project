@@ -22,6 +22,7 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 import cn.com.hz_project.model.bean.MeetingBean;
 import cn.com.hz_project.model.server.MeetingService;
+import cn.com.hz_project.model.server.PreferencesService;
 import cn.com.hz_project.tools.url.Urls;
 import cn.com.hz_project.tools.utils.ToastUtils;
 import cn.com.hz_project.view.adapter.MeetingListAdapter;
@@ -60,6 +61,7 @@ public class MeetingSignListActivity extends Activity implements View.OnClickLis
     private PopupWindow popupWindow;
     private LinearLayout ll_pop;
     private int longClickPosition;
+    private PreferencesService preferencesService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -144,6 +146,13 @@ public class MeetingSignListActivity extends Activity implements View.OnClickLis
         ivBackMeeting.setOnClickListener(this);
         tvBack.setOnClickListener(this);
         tvAddMeeting.setOnClickListener(this);
+
+        preferencesService = new PreferencesService(getApplicationContext());
+        if (preferencesService.getPerferences().get("roleId").equals("9")) {
+            tvAddMeeting.setVisibility(View.VISIBLE);
+        }else {
+            tvAddMeeting.setVisibility(View.INVISIBLE);
+        }
 
         lvMeeting.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
