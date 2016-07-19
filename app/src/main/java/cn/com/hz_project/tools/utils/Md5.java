@@ -1,17 +1,17 @@
 package cn.com.hz_project.tools.utils;
-public class MD5
+public class Md5
 {
 
     //加密
 
 
-    public MD5(Object ob)
+    public Md5(Object ob)
     {
         this();
         Update(ob.toString());
     }
 
-    public MD5()
+    public Md5()
     {
         Init();
     }
@@ -256,7 +256,7 @@ public class MD5
 
     public static String md5crypt(String input)
     {
-        MD5 md5 = new MD5();
+        Md5 md5 = new Md5();
         md5.Init();
         md5.Update(input);
         return md5.asHex();
