@@ -12,14 +12,16 @@ package cn.com.hz_project.tools.url;
  */
 public class Urls {
 
-
-    //提问
-    public static final String QUIZ="http://116.228.202.122:8080/WsbxMobile/appCtrl/";
-
+    public static final String QUIZ="http://192.168.2.35:8080/WsbxMobile/appCtrl/";
     //登录
-    public static  final  String LOGINURL="http://116.228.202.122:8080/WsbxMobile/loginCtrl/";
+    public static  final  String LOGINURL="http://192.168.2.205:8080/WsbxMobile/loginCtrl/";
 
     //新闻
-    public static  final  String NEWS="http://116.228.202.122:8080/WsbxMobile/newsctrl/";
+    public static  final  String NEWS="http://192.168.2.205:8080/WsbxMobile/newsctrl/";
+
+
+
+
+    public static final String baseURL = "http://116.228.202.122:8080/WsbxMobile/appCtrl/";
 
 }

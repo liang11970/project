@@ -3,15 +3,19 @@ package cn.com.hz_project.view.activity;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.util.Base64;
 import android.util.Log;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -19,6 +23,7 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 import cn.com.hz_project.model.bean.Login;
 import cn.com.hz_project.model.server.LoginService;
+import cn.com.hz_project.model.server.PreferencesService;
 import cn.com.hz_project.tools.url.Urls;
 import cn.com.hz_project.tools.utils.Md5;
 import cn.com.projectdemos.R;
@@ -27,6 +32,7 @@ import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Action1;
 import rx.schedulers.Schedulers;
 
 /**
@@ -40,8 +46,13 @@ public class LoginActivity extends Activity {
     EditText password;
     @InjectView(R.id.login)
     Button login;
+    @InjectView(R.id.cb_rempwd)
+    CheckBox cbRempwd;
+    @InjectView(R.id.cb_autologin)
+    CheckBox cbAutologin;
     private Retrofit retrofit;
     private LoginService loginService;
+    private PreferencesService service;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,9 +74,24 @@ public class LoginActivity extends Activity {
                 .build();
 
         loginService = retrofit.create(LoginService.class);
+
+        service = new PreferencesService(this);
     }
 
     private void initData() {
+
+//        service = new PreferencesService(this);
+//
+//        Map<String, String> params = service.getPerferences();
+//        user.setText(params.get("name"));
+//        password.setText(Base64.encodeToString(params.get("md5password").getBytes(), Base64.DEFAULT));
+//
+//        if(params.get("checkbox").equals("true")){
+//            cbRempwd.setChecked(true);
+//        }
+
+
+
         if (!isNetworkConnected(LoginActivity.this))
             Toast.makeText(this, "当前网络不可用", Toast.LENGTH_SHORT).show();
         else {
@@ -103,38 +129,78 @@ public class LoginActivity extends Activity {
                     Toast.makeText(LoginActivity.this,"当前手机号码有问题，检查一下吧",Toast.LENGTH_SHORT).show();
                 }
 
+
+
 */
 
-                loginService.PostField(user.getText().toString(), Md5.md5crypt(password.getText().toString()), 2)
-                        .subscribeOn(Schedulers.io())
-                        .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe(new Subscriber<Login>() {
-                            @Override
-                            public void onCompleted() {
+//                if(cbRempwd.isChecked()){
+//                    loginService.PostField(user.getText().toString(), MD5.md5crypt(password.getText().toString()), 2)
+//                            .subscribeOn(Schedulers.io())
+//                            .observeOn(AndroidSchedulers.mainThread())
+//                            .doOnNext(login1 -> service.save(user.getText().toString(), new String(Base64.encode(password.getText().toString().getBytes(), Base64.DEFAULT)),true))
+//                            .subscribe(new Subscriber<Login>() {
+//                                @Override
+//                                public void onCompleted() {
+//
+//                                }
+//
+//                                @Override
+//                                public void onError(Throwable e) {
+//                                    Log.i("----------", "" + e.toString());
+//                                }
+//
+//                                @Override
+//                                public void onNext(Login login) {
+//
+//                                    if (login.isSuccess()) {
+//                                        startActivity(new Intent(LoginActivity.this, ViewPagerActivity.class));
+//                                    } else {
+//                                        Toast.makeText(LoginActivity.this, "帐号密码有问题检查一下吧", Toast.LENGTH_SHORT).show();
+//                                    }
+//
+//                                }
+//                            });
+//                }else {
+                    loginService.PostField(user.getText().toString(), Md5.md5crypt(password.getText().toString()), 2)
+                            .doOnNext(login1 -> service.save(login1))
+                            .subscribeOn(Schedulers.io())
+                            .observeOn(AndroidSchedulers.mainThread())
+                            .subscribe(new Subscriber<Login>() {
+                                @Override
+                                public void onCompleted() {
 
-                            }
-
-                            @Override
-                            public void onError(Throwable e) {
-                                Log.i("----------", "" + e.toString());
-                            }
-
-                            @Override
-                            public void onNext(Login login) {
-
-                                if (login.isSuccess()) {
-                                    startActivity(new Intent(LoginActivity.this, ViewPagerActivity.class));
-                                } else {
-                                    Toast.makeText(LoginActivity.this, "帐号密码有问题检查一下吧", Toast.LENGTH_SHORT).show();
                                 }
 
-                            }
-                        });
+                                @Override
+                                public void onError(Throwable e) {
+                                    Log.i("----------", "" + e.toString());
+                                }
+
+                                @Override
+                                public void onNext(Login login) {
+
+                                    if (login.isSuccess()) {
+
+
+
+
+
+                                        startActivity(new Intent(LoginActivity.this, ViewPagerActivity.class));
+                                    } else {
+                                        Toast.makeText(LoginActivity.this, "帐号密码有问题检查一下吧", Toast.LENGTH_SHORT).show();
+                                    }
+
+                                }
+                            });
+
+
 
 
             });
         }
     }
+
+
 
 
     public static boolean isMobileNO(String mobiles) {

@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/title_meeting"
+        android:layout_width="match_parent"
+        android:layout_height="45.0dip"
+        android:background="#46769E">
+
+
+        <ImageView
+            android:id="@+id/iv_back_meeting"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:padding="10dip"
+            android:src="@mipmap/back" />
+
+        <TextView
+            android:id="@+id/tv_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/iv_back_meeting"
+            android:paddingBottom="5dip"
+            android:paddingTop="5dip"
+            android:text="返回"
+            android:textColor="@color/city_item_bg_nor"
+
+            android:textSize="15sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="添加会议"
+            android:textColor="@color/city_item_bg_nor"
+            android:textSize="16.0sp" />
+
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/title_meeting"
+        android:orientation="vertical"
+        android:padding="45dip">
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="60.0dip"
+            android:ellipsize="end"
+            android:hint="请输入会议名称"
+            android:lines="1" />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15.0dip"
+            android:orientation="horizontal">
+
+            <EditText
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="4.5"
+                android:hint="会议开始" />
+
+            <TextView
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="到" />
+
+            <EditText
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="4.5"
+                android:hint="会议结束" />
+        </LinearLayout>
+
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15.0dip">
+
+
+            <EditText
+                android:id="@+id/ed_meetingContent"
+                android:layout_width="match_parent"
+                android:layout_height="200dip"
+                android:textSize="15dip"
+
+                android:gravity="top"
+                android:hint="会议内容" />
+
+            <Button
+                android:id="@+id/bt_meeting_signin"
+                android:layout_width="300dip"
+                android:layout_height="40dip"
+                android:layout_below="@+id/ed_meetingContent"
+                android:layout_marginTop="30dip"
+                android:layout_centerHorizontal="true"
+                android:background="@drawable/shape_signin"
+                android:text="签到"
+                android:textColor="@color/city_item_bg_nor"
+                android:textSize="15sp" />
+        </RelativeLayout>
+
+
+    </LinearLayout>
+
+
+</RelativeLayout>

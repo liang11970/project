@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="80dp"
+    android:layout_height="90dp"
     android:id="@+id/ll_onclick"
 
     >
@@ -12,30 +12,27 @@
     <LinearLayout
 
         android:layout_below="@+id/title_shenpi"
-        android:layout_marginTop="5dp"
         android:gravity="center_vertical"
         android:orientation="horizontal"
         android:id="@+id/start_time_repairs"
         android:layout_width="match_parent"
-        android:layout_height="70dp"
+        android:layout_height="90dp"
         android:clickable="true" >
 
 
         <LinearLayout
-            android:orientation="horizontal"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:layout_weight="3"
+            android:layout_weight="4"
 
             >
 
             <ImageView
                 android:id="@+id/iv_picasso"
-                android:layout_marginLeft="5dp"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginBottom="5dp"
-
+                android:layout_height="75dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="8dp"
 
                 />
 
@@ -49,7 +46,7 @@
             android:orientation="vertical"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:layout_weight="1"
+            android:layout_weight="2"
             android:layout_marginLeft="8dp"
 
             >
@@ -66,12 +63,14 @@
                     android:id="@+id/tv_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="ss"
+                    android:text="发布人"
                     android:layout_alignParentLeft="true"
+                    android:visibility="gone"
                     />
 
 
                 <TextView
+                    android:layout_marginTop="8dp"
                     android:id="@+id/tv_time"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -107,6 +106,7 @@
                     android:textSize="16sp"
                     android:maxLines="2"
                     android:ellipsize="end"
+                    android:textColor="@color/translucence"
                     />
 
 

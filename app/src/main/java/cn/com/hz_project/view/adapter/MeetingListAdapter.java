@@ -16,7 +16,7 @@ import cn.com.hz_project.model.bean.MeetingBean;
 import cn.com.projectdemos.R;
 
 /**
- * Created by Tan on 2016/7/16 0016.
+ * Created by Tan on 2016/7/16 0016.f
  */
 public class MeetingListAdapter extends BaseAdapter {
     private Context mContext;
@@ -65,11 +65,11 @@ public class MeetingListAdapter extends BaseAdapter {
         viewHolder.tvMeetingName.setText(mMeetList.get(position).getMBD_NAME());
         viewHolder.tvMeetingTime.setText(mMeetList.get(position).getSTIME());
         viewHolder.tvMeetingContent.setText(mMeetList.get(position).getMBD_REMARKS() + "");
-        return null;
+        return convertView;
     }
 
 
-    static  class ViewHolder {
+    static class ViewHolder {
         @InjectView(R.id.iv_meeting)
         ImageView ivMeeting;
         @InjectView(R.id.tv_Meeting_Name)

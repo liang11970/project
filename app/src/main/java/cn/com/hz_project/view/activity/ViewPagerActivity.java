@@ -22,8 +22,8 @@ public class ViewPagerActivity extends FragmentActivity {
     Fragment homeFragment;
     Fragment personFragment;
     Fragment sorttypeFragment;
-    private FragmentManager fragmentManager;
-    private FragmentTransaction transaction;
+    public static FragmentManager fragmentManager;
+    public static FragmentTransaction transaction;
     private RadioGroup radioGroup;
 
     @Override
