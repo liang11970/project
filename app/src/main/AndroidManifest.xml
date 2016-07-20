@@ -47,7 +47,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="cn.com.hz_project.view.activity.TwoActivity" />
+        <activity android:name="cn.com.hz_project.view.activity.NewContentActivity" />
         <activity android:name="cn.com.hz_project.view.activity.ViewPagerActivity" />
         <activity android:name="cn.com.hz_project.view.activity.OnlineQuizActivity" />
         <activity android:name="cn.com.hz_project.view.activity.NewActivity" />

@@ -29,4 +29,8 @@ public interface NewServer {
     @POST("newslist")
     Observable<String> PostField(@Field("page") int page,@Field("tab")int tab);
 
+    @FormUrlEncoded
+    @POST("newscontext")
+    Observable<String> PostFieldContext(@Field("NBD_ID") int nbd_id);
+
 }

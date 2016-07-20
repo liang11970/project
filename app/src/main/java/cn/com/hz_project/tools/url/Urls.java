@@ -18,6 +18,8 @@ public class Urls {
 
     //新闻
     public static  final  String NEWS="http://192.168.2.205:8080/WsbxMobile/newsctrl/";
+    //详情新闻
+    public static String NEWSCONTEXT="http://192.168.2.240:8080/WsbxMobile/newsctrl/";
 
 
 

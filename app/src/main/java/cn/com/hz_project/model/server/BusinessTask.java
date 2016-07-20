@@ -15,8 +15,8 @@ public class BusinessTask {
 
 
 
-    public void geNewsList(Subscriber<String> subscriber, int currentPage, int type) {
-        NewServer newsService = HttpUtils.getInstance().initRetrofitWithHeader().create(NewServer.class);
+    public void geNewsList(Subscriber<String> subscriber, int currentPage, int type,String url) {
+        NewServer newsService = HttpUtils.getInstance().initRetrofitWithHeader(url).create(NewServer.class);
         Observable<String> observable = null;
         switch (type) {
             case 0:
@@ -25,21 +25,10 @@ public class BusinessTask {
             case 1:
                 observable = newsService.PostField(currentPage, type);
                 break;
-//            case 2:
-//                observable = newsService.getTechnology(currentPage, 10);
-//                break;
-//            case 3:
-//                observable = newsService.getWorld(currentPage, 10);
-//                break;
-//            case 4:
-//                observable = newsService.getRecreation(currentPage, 10);
-//                break;
-//            case 5:
-//                observable = newsService.getRemarkable(currentPage, 10);
-//                break;
-//            case 6:
-//                observable = newsService.getHealth(currentPage, 10);
-//                break;
+            case 2:
+                observable = newsService.PostFieldContext(currentPage);
+                break;
+
         }
 
 

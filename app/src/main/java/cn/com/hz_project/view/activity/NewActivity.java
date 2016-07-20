@@ -6,39 +6,26 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
-import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
 import cn.com.hz_project.model.bean.HttpResult;
-import cn.com.hz_project.model.server.NewServer;
 import cn.com.hz_project.presenter.activityPresenter.NewsContract;
 import cn.com.hz_project.presenter.activityPresenter.NewsPresenter;
-import cn.com.hz_project.tools.url.Urls;
 import cn.com.hz_project.tools.utils.LogUtils;
-import cn.com.hz_project.view.adapter.NewListViewAdapter;
 import cn.com.hz_project.view.base.BaseAdapter;
 import cn.com.hz_project.view.base.ViewHolder;
-import cn.com.hz_project.view.widget.LoadListView;
-import cn.com.hz_project.view.widget.LoadMoreRecyclerView;
+import cn.com.hz_project.view.widget.LoadMorRecyclerView;
 import cn.com.hz_project.view.widget.RecycleViewDivider;
 import cn.com.projectdemos.R;
-import retrofit2.Retrofit;
-import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
-import retrofit2.converter.gson.GsonConverterFactory;
-import rx.Subscriber;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
 
 public class NewActivity extends Activity implements NewsContract.View {
 
@@ -49,10 +36,11 @@ public class NewActivity extends Activity implements NewsContract.View {
     TextView tvBack;
     @InjectView(R.id.title_new)
     RelativeLayout titleNew;
-    @InjectView(R.id.listView)
-    LoadMoreRecyclerView listView;
+
     @InjectView(R.id.id_swiperefresh)
     SwipeRefreshLayout idSwiperefresh;
+    @InjectView(R.id.listView)
+    LoadMorRecyclerView listView;
     private Context mContext;
     private BaseAdapter<HttpResult.ObjBean> mAdapter;
     private NewsPresenter mPresenter;
@@ -76,44 +64,53 @@ public class NewActivity extends Activity implements NewsContract.View {
     }
 
     private void initView() {
-        mDataList = new ArrayList<>();
-        mAdapter = new BaseAdapter<HttpResult.ObjBean>(mContext,R.layout.item_new,mDataList,listView) {
-                                       @Override
-                                       public void convert(ViewHolder holder, final HttpResult.ObjBean newslistEntity) {
-//                                           holder.setText(R.id.tv_title,newslistEntity.getNBD_TITLE());
-                                           holder.setText(R.id.tv_time,newslistEntity.getTIME());
-//                                           holder.setText(R.id.tv_content,newslistEntity.getSUBSTR());
-                                           holder.setText(R.id.tv_content,newslistEntity.getNBD_TITLE());
-                                           holder.setImageWithUrl(R.id.iv_picasso,newslistEntity.getNBD_PICTURE_URL());
-                                           holder.setOnClickListener(R.id.start_time_repairs, new View.OnClickListener() {
-                                               @Override
-                                               public void onClick(View v) {
-                        Intent intent = new Intent(NewActivity.this,TwoActivity.class);
-                        startActivity(intent);
-                                               }
-                                           });
-                                       }
-                                   };
 
-                                   LinearLayoutManager layoutManager = new LinearLayoutManager(mContext);
-                                   listView.setLayoutManager(layoutManager);
-                                    listView.addItemDecoration(new RecycleViewDivider(this));
-                                   listView.setAdapter(mAdapter);
-                                    intitdata();
+        intitdata();
+        mDataList = new ArrayList<>();
+        mAdapter = new BaseAdapter<HttpResult.ObjBean>(mContext, R.layout.item_new, mDataList, listView) {
+            @Override
+            public void convert(ViewHolder holder, final HttpResult.ObjBean newslistEntity) {
+//                                           holder.setText(R.id.tv_title,newslistEntity.getNBD_TITLE());
+                holder.setText(R.id.tv_time, newslistEntity.getTIME());
+//                                           holder.setText(R.id.tv_content,newslistEntity.getSUBSTR());
+                holder.setText(R.id.tv_content, newslistEntity.getNBD_TITLE());
+                holder.setImageWithUrl(R.id.iv_picasso, newslistEntity.getNBD_PICTURE_URL());
+                holder.setOnClickListener(R.id.start_time_repairs, new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+
+
+                        Intent intent = new Intent(NewActivity.this, NewContentActivity.class);
+                        intent.putExtra("id", newslistEntity.getNBD_ID());
+                        com.orhanobut.logger.Logger.e(newslistEntity.getNBD_ID()+"");
+                        startActivity(intent);
+                    }
+                });
+            }
+        };
+
+        LinearLayoutManager layoutManager = new LinearLayoutManager(mContext);
+
+        listView.setLayoutManager(layoutManager);
+        listView.addItemDecoration(new RecycleViewDivider(this));
+        listView.setAdapter(mAdapter);
+        listView.setAutoLoadMoreEnable(true);
+
     }
 
     private void intitdata() {
 
-         currentPage = 1;
-        mPresenter.start(currentPage,0);
+        currentPage = 1;
+        mPresenter.start(currentPage, 0);
     }
 
     private void initEvent() {
-        listView.setLoadMoreListener(new LoadMoreRecyclerView.LoadMoreListener() {
+        listView.setLoadMoreListener(new LoadMorRecyclerView.LoadMoreListener() {
             @Override
             public void onLoadMore() {
                 currentPage++;
-                mPresenter.start(currentPage,0);
+                mPresenter.start(currentPage, 0);
             }
         });
     }
@@ -121,26 +118,29 @@ public class NewActivity extends Activity implements NewsContract.View {
     @Override
     public void showInfo(HttpResult entity) {
 
-        LogUtils.e("log",entity.getObj().size()+"");
+        LogUtils.e("log", entity.getObj().size() + "");
 
-        if(entity.getObj().size()==0){
-            Toast.makeText(NewActivity.this,"没有数据了",Toast.LENGTH_LONG);
-            mAdapter.notifyDataSetChanged();
+        if (entity.getObj().size()==0) {
+                listView.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(NewActivity.this,"没有数据了",Toast.LENGTH_LONG).show();
+                        listView.notifyMoreFinish(false);
+                        listView.loadComplete();
+                        mAdapter.notifyDataSetChanged();
+                    }
+                },1000);
         }else {
-            if(currentPage==1){
+
+            if (currentPage == 1) {
                 mDataList.clear();
             }
             mDataList.addAll(entity.getObj());
             mAdapter.notifyDataSetChanged();
             idSwiperefresh.setRefreshing(false);
-            listView.loadComplete();
         }
 
-
-
     }
-
-
 
 
     //--------------------------------------------------
@@ -148,6 +148,7 @@ public class NewActivity extends Activity implements NewsContract.View {
     public void onClick() {
         this.finish();
     }
+
     @Override
     protected void onStart() {
         super.onStart();
@@ -167,7 +168,8 @@ public class NewActivity extends Activity implements NewsContract.View {
             @Override
             public void onRefresh() {
                 currentPage = 1;
-                mPresenter.start(currentPage,0);
+                mPresenter.start(currentPage, 0);
+                listView.setAutoLoadMoreEnable(true);
 
             }
         });
