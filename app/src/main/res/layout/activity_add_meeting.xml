@@ -52,6 +52,7 @@
         android:padding="45dip">
 
         <EditText
+            android:id="@+id/et_meetingName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="60.0dip"
@@ -66,24 +67,43 @@
             android:layout_marginTop="15.0dip"
             android:orientation="horizontal">
 
-            <EditText
+            <LinearLayout
+                android:id="@+id/ll_stime"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="4.5"
-                android:hint="会议开始" />
+                android:layout_weight="4.5">
+
+                <EditText
+                    android:id="@+id/et_sTime"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    android:hint="会议开始" />
+
+            </LinearLayout>
 
             <TextView
                 android:layout_width="0dip"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="到" />
 
-            <EditText
+
+            <LinearLayout
+                android:id="@+id/ll_etime"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="4.5"
-                android:hint="会议结束" />
+                android:layout_weight="4.5">
+
+                <EditText
+                    android:id="@+id/et_etime"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="会议结束" />
+            </LinearLayout>
+
         </LinearLayout>
 
 
@@ -97,18 +117,18 @@
                 android:id="@+id/ed_meetingContent"
                 android:layout_width="match_parent"
                 android:layout_height="200dip"
-                android:textSize="15dip"
-
                 android:gravity="top"
-                android:hint="会议内容" />
+
+                android:hint="会议内容"
+                android:textSize="15dip" />
 
             <Button
-                android:id="@+id/bt_meeting_signin"
+                android:id="@+id/bt_add_meeting"
                 android:layout_width="300dip"
                 android:layout_height="40dip"
                 android:layout_below="@+id/ed_meetingContent"
-                android:layout_marginTop="30dip"
                 android:layout_centerHorizontal="true"
+                android:layout_marginTop="30dip"
                 android:background="@drawable/shape_signin"
                 android:text="签到"
                 android:textColor="@color/city_item_bg_nor"

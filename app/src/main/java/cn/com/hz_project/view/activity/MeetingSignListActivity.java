@@ -162,7 +162,7 @@ public class MeetingSignListActivity extends Activity implements View.OnClickLis
                 intent.putExtra("startTime", meetList.get(position).getSTIME());
                 intent.putExtra("endTime", meetList.get(position).getETIME());
                 intent.putExtra("content", meetList.get(position).getMBD_REMARKS());
-                intent.putExtra("ID", meetList.get(position).getMBD_REMARKS());
+                intent.putExtra("ID", meetList.get(position).getMBD_ID());
                 startActivity(intent);
             }
         });

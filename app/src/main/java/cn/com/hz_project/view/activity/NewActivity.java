@@ -6,39 +6,26 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
-import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
 import cn.com.hz_project.model.bean.HttpResult;
-import cn.com.hz_project.model.server.NewServer;
 import cn.com.hz_project.presenter.activityPresenter.NewsContract;
 import cn.com.hz_project.presenter.activityPresenter.NewsPresenter;
-import cn.com.hz_project.tools.url.Urls;
 import cn.com.hz_project.tools.utils.LogUtils;
-import cn.com.hz_project.view.adapter.NewListViewAdapter;
 import cn.com.hz_project.view.base.BaseAdapter;
 import cn.com.hz_project.view.base.ViewHolder;
-import cn.com.hz_project.view.widget.LoadListView;
 import cn.com.hz_project.view.widget.LoadMoreRecyclerView;
 import cn.com.hz_project.view.widget.RecycleViewDivider;
 import cn.com.projectdemos.R;
-import retrofit2.Retrofit;
-import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
-import retrofit2.converter.gson.GsonConverterFactory;
-import rx.Subscriber;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
 
 public class NewActivity extends Activity implements NewsContract.View {
 
