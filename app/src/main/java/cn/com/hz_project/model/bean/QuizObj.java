@@ -22,6 +22,15 @@ public class QuizObj implements Serializable{
     private String WQD_CONTEXT;
     private String WQD_ID;
     private String WQD_QUESTION;
+    private String UBD_REAL_NAME;
+
+    public String getUBD_REAL_NAME() {
+        return UBD_REAL_NAME;
+    }
+
+    public void setUBD_REAL_NAME(String UBD_REAL_NAME) {
+        this.UBD_REAL_NAME = UBD_REAL_NAME;
+    }
 
     public String getROWNO() {
         return ROWNO;

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<cn.com.hz_project.tools.percent.PercentRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<cn.com.hz_project.tools.percent.PercentRelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -17,7 +18,7 @@
         android:gravity="center"
         android:text="在线提问"
         android:textSize="20sp"
-        app:layout_heightPercent="7%h"
+        app:layout_heightPercent="6%h"
         app:layout_widthPercent="30%w" />
 
     <cn.com.hz_project.view.widget.LoadMoreSwipe

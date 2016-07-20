@@ -101,6 +101,7 @@ public class QuizItemActivity extends Activity {
         title.setText(obj.getWQD_QUESTION());
         time.setText(obj.getTIME());
         content.setText(obj.getWQD_CONTEXT());
+        sponsor.setText(obj.getUBD_REAL_NAME());
 
 
         listView.setAdapter(answerAdapter);
