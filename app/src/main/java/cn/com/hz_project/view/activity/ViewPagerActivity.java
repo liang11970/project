@@ -5,7 +5,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.view.Menu;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
@@ -29,7 +28,7 @@ public class ViewPagerActivity extends FragmentActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_view_pager);
+        setContentView(R.layout.activity_view_pager1);
         fragmentManager = getSupportFragmentManager();
         radioGroup = (RadioGroup)findViewById(R.id.radioGroup1);
         ((RadioButton)radioGroup.findViewById(R.id.radio0)).setChecked(true);

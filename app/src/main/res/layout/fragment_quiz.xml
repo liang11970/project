@@ -10,8 +10,6 @@
         android:id="@+id/btn_onlinequiz"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_heightPercent="7%h"
-        app:layout_widthPercent="30%w"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
         android:layout_marginBottom="10dp"
@@ -19,11 +17,21 @@
         android:background="@drawable/btn_onlinequiz"
         android:gravity="center"
         android:text="在线提问"
-        android:textSize="20sp" />
+        android:textColor="#fff"
+        android:textSize="20sp"
+        app:layout_heightPercent="6%h"
+        app:layout_widthPercent="30%w" />
 
-    <ListView
-        android:id="@+id/list_quiz"
+    <cn.com.hz_project.view.widget.LoadMoreSwipe
+        android:id="@+id/layout_swiperefresh"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/btn_onlinequiz" />
+        android:layout_below="@+id/btn_onlinequiz">
+
+        <ListView
+            android:id="@+id/list_quiz"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </cn.com.hz_project.view.widget.LoadMoreSwipe>
 </cn.com.hz_project.tools.percent.PercentRelativeLayout>

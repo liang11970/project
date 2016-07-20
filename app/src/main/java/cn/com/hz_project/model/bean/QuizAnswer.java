@@ -5,9 +5,9 @@ import java.util.ArrayList;
 /**
  * Created by ku on 2016/7/19.
  */
-public class Quiz {
+public class QuizAnswer {
     private String msg;
-    private ArrayList<QuizObj> obj;
+    private ArrayList<QuizAnswerObj> obj;
     private boolean success;
 
     public String getMsg() {
@@ -18,11 +18,11 @@ public class Quiz {
         this.msg = msg;
     }
 
-    public ArrayList<QuizObj> getObj() {
+    public ArrayList<QuizAnswerObj> getObj() {
         return obj;
     }
 
-    public void setObj(ArrayList<QuizObj> obj) {
+    public void setObj(ArrayList<QuizAnswerObj> obj) {
         this.obj = obj;
     }
 

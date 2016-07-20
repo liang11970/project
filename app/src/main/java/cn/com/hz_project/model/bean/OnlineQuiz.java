@@ -1,13 +1,11 @@
 package cn.com.hz_project.model.bean;
 
-import java.util.ArrayList;
-
 /**
- * Created by ku on 2016/7/19.
+ * Created by ku on 2016/7/18.
  */
-public class Quiz {
+public class OnlineQuiz {
     private String msg;
-    private ArrayList<QuizObj> obj;
+    private String obj;
     private boolean success;
 
     public String getMsg() {
@@ -18,11 +16,11 @@ public class Quiz {
         this.msg = msg;
     }
 
-    public ArrayList<QuizObj> getObj() {
+    public String getObj() {
         return obj;
     }
 
-    public void setObj(ArrayList<QuizObj> obj) {
+    public void setObj(String obj) {
         this.obj = obj;
     }
 
