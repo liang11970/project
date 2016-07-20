@@ -29,6 +29,7 @@ import cn.com.hz_project.view.activity.NewActivity;
 import cn.com.hz_project.view.activity.SecondActivity;
 import cn.com.hz_project.view.base.BaseAdapter;
 import cn.com.hz_project.view.base.ViewHolder;
+import cn.com.hz_project.view.widget.LoadMorRecyclerView;
 import cn.com.hz_project.view.widget.LoadMoreRecyclerView;
 import cn.com.hz_project.view.widget.RecycleViewDivider;
 import cn.com.hz_project.view.widget.SlideShowView;
@@ -57,7 +58,7 @@ public class HomeFragment extends Fragment implements NewsContract.View {
     LinearLayout linearLayout1;
 
     @InjectView(R.id.listView)
-    LoadMoreRecyclerView listView;
+    LoadMorRecyclerView listView;
     @InjectView(R.id.id_swiperefresh)
     SwipeRefreshLayout idSwiperefresh;
     @InjectView(R.id.mediaController)
@@ -130,7 +131,7 @@ public class HomeFragment extends Fragment implements NewsContract.View {
 //        mediaController.requestFocus();
 
 
-        listView.setLoadMoreListener(new LoadMoreRecyclerView.LoadMoreListener() {
+        listView.setLoadMoreListener(new LoadMorRecyclerView.LoadMoreListener() {
             @Override
             public void onLoadMore() {
                 currentPage++;
@@ -260,7 +261,6 @@ public class HomeFragment extends Fragment implements NewsContract.View {
         mDataList.addAll(entity.getObj());
         mAdapter.notifyDataSetChanged();
         idSwiperefresh.setRefreshing(false);
-        listView.loadComplete();
 
 
     }

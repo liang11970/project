@@ -52,15 +52,17 @@ public class HttpUtils {
 
         return retrofit;
     }
-    public Retrofit initRetrofitWithHeader(){
+    public Retrofit initRetrofitWithHeader(String url){
         Retrofit retrofit = new Retrofit.Builder()
                 .client(genericClient())
                 .addConverterFactory(ScalarsConverterFactory.create())
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
-                .baseUrl(Urls.NEWS)
+                .baseUrl(url)
                 .build();
         return retrofit;
     }
+
+
 
     public static OkHttpClient genericClient() {
         OkHttpClient httpClient = new OkHttpClient.Builder()

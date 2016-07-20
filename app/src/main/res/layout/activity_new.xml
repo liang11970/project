@@ -59,7 +59,7 @@
 
 
 
-        <cn.com.hz_project.view.widget.LoadMoreRecyclerView
+        <cn.com.hz_project.view.widget.LoadMorRecyclerView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/listView"

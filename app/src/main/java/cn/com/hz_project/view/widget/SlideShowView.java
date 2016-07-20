@@ -29,8 +29,7 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
 
-import butterknife.OnClick;
-import cn.com.hz_project.view.activity.TwoActivity;
+import cn.com.hz_project.view.activity.NewContentActivity;
 import cn.com.projectdemos.R;
 
 
@@ -136,7 +135,7 @@ public class SlideShowView extends FrameLayout implements View.OnClickListener{
 
     @Override
     public void onClick(View view) {
-        Intent intent = new Intent(getContext(), TwoActivity.class);
+        Intent intent = new Intent(getContext(), NewContentActivity.class);
                         getContext().startActivity(intent);
     }
 
