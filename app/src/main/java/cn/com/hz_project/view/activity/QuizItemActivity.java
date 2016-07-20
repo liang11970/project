@@ -64,6 +64,9 @@ public class QuizItemActivity extends Activity {
     @InjectView(R.id.list_answer)
     ListView listView;
 
+    @InjectView(R.id.back)
+    TextView back;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -103,6 +106,17 @@ public class QuizItemActivity extends Activity {
         listView.setAdapter(answerAdapter);
 
         queryAns();
+
+        /**
+         * 点击返回退出该界面
+         */
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
     }
 
     /**
@@ -134,6 +148,7 @@ public class QuizItemActivity extends Activity {
                         listView.setAdapter(answerAdapter);
                     }
                 });
+
     }
 
 

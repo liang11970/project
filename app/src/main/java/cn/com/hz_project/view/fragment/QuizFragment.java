@@ -97,6 +97,9 @@ public class QuizFragment extends Fragment{
 
         getData(currentPage);
 
+        /**
+         * 问题详情点击
+         */
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
