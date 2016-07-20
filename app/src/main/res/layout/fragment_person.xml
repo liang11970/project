@@ -39,6 +39,7 @@
             android:layout_weight="1"
             android:textSize="20sp"
             android:text="投票"
+            android:textColor="#fff"
             android:gravity="center"
             android:button="@null"/>
 
@@ -50,6 +51,7 @@
             android:layout_weight="1"
             android:textSize="20sp"
             android:text="提问"
+            android:textColor="#fff"
             android:gravity="center"
             android:button="@null"/>
     </RadioGroup>

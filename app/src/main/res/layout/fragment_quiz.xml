@@ -17,6 +17,7 @@
         android:background="@drawable/btn_onlinequiz"
         android:gravity="center"
         android:text="在线提问"
+        android:textColor="#fff"
         android:textSize="20sp"
         app:layout_heightPercent="6%h"
         app:layout_widthPercent="30%w" />
