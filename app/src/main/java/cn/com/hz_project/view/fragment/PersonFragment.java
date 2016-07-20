@@ -9,20 +9,18 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-
-
-import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.InjectView;
 import cn.com.projectdemos.R;
 
 public class PersonFragment extends Fragment {
-    @Bind(R.id.rg_interact)
+    @InjectView(R.id.rg_interact)
     RadioGroup rg_interact;
 
-    @Bind(R.id.rb_vote)
+    @InjectView(R.id.rb_vote)
     RadioButton rb_vote;
 
-    @Bind(R.id.rb_quiz)
+    @InjectView(R.id.rb_quiz)
     RadioButton rb_quiz;
 
 
@@ -36,7 +34,7 @@ public class PersonFragment extends Fragment {
                              Bundle savedInstanceState) {
         // TODO Auto-generated method stub
         View view = inflater.inflate(R.layout.fragment_person,null);
-        ButterKnife.bind(this, view);
+        ButterKnife.inject(this, view);
 
         initView();
         initData();

@@ -49,17 +49,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-<<<<<<< HEAD
-        <activity android:name="cn.com.hz_project.view.activity.TwoActivity"></activity>
 
+        <activity android:name="cn.com.hz_project.view.activity.TwoActivity"/>
+
+        <activity android:name="cn.com.hz_project.view.activity.NewActivity"/>
+        <activity android:name="cn.com.hz_project.view.activity.MeetingListActivity"/>
         <activity android:name="cn.com.hz_project.view.activity.OnlineQuizActivity"/>
-=======
-        <activity android:name="cn.com.hz_project.view.activity.TwoActivity" />
-        <activity android:name="cn.com.hz_project.view.activity.ViewPagerActivity" />
-        <activity android:name="cn.com.hz_project.view.activity.NewActivity"></activity>
-        <activity android:name="cn.com.hz_project.view.activity.MeetingListActivity"></activity>
+        <activity android:name="cn.com.hz_project.view.activity.QuizItemActivity"/>
 
->>>>>>> 0eeebf23b814d7c2b7fd47424a616a55c8c1e444
     </application>
 
 </manifest>

@@ -1,7 +1,9 @@
 package cn.com.hz_project.model.server;
 
 import cn.com.hz_project.model.bean.Login;
+import cn.com.hz_project.model.bean.OnlineQuiz;
 import cn.com.hz_project.model.bean.Quiz;
+import cn.com.hz_project.model.bean.QuizAnswer;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.POST;
@@ -37,7 +39,7 @@ public interface LoginService {
      */
     @FormUrlEncoded
     @POST("addQuestion")
-    Observable<Quiz> Quiz(@Field("USER_ID") String userId, @Field("WQD_QUESTION") String title, @Field("WQD_CONTEXT")String content, @Field("WQD_ANSWER_ROLE") int obj);
+    Observable<OnlineQuiz> Quiz(@Field("USER_ID") String userId, @Field("WQD_QUESTION") String title, @Field("WQD_CONTEXT")String content, @Field("WQD_ANSWER_ROLE") int obj);
 
     /**
      * 问题列表
@@ -46,4 +48,17 @@ public interface LoginService {
     @POST("querQuestion")
     Observable<Quiz> Quiz(@Field("PAGE") int page);
 
+    /**
+     * 回答问题
+     */
+    @FormUrlEncoded
+    @POST("addAnswer")
+    Observable<QuizAnswer> QuizReply(@Field("USER_ID") int uesrId,@Field("WQD_ID") String quizId,@Field("WAD_CONTEXT") String content);
+
+    /**
+     * 查询问题答案
+     */
+    @FormUrlEncoded
+    @POST("queryAnswerByid")
+    Observable<QuizAnswer> QueryAns(@Field("WQD_ID") String id, @Field("PAGE")String page);
 }

@@ -1,24 +1,21 @@
 package cn.com.hz_project.view.activity;
 
 import android.app.Activity;
-import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import butterknife.Bind;
 import butterknife.ButterKnife;
-import cn.com.hz_project.model.bean.Login;
-import cn.com.hz_project.model.bean.Quiz;
+import butterknife.InjectView;
+import cn.com.hz_project.model.bean.OnlineQuiz;
 import cn.com.hz_project.model.server.LoginService;
 import cn.com.hz_project.tools.url.Urls;
-import cn.com.hz_project.tools.utils.MD5;
 import cn.com.projectdemos.R;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
@@ -29,20 +26,22 @@ import rx.schedulers.Schedulers;
 
 public class OnlineQuizActivity extends Activity {
 
-    @Bind(R.id.et_quiz_title)
+    @InjectView(R.id.et_quiz_title)
     EditText quizTitle;
 
-    @Bind(R.id.et_quiz_content)
+    @InjectView(R.id.et_quiz_content)
     EditText quizContent;
 
-    @Bind(R.id.quiz_spinner)
+    @InjectView(R.id.quiz_spinner)
     Spinner quizAnsObj;
 
-    @Bind(R.id.btn_quiz)
+    @InjectView(R.id.btn_quiz)
     Button quiz;
 
     private Retrofit retrofit;
     private LoginService loginService;
+
+    private int ansObj = -1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +49,7 @@ public class OnlineQuizActivity extends Activity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_onlinequiz);
 
+        ButterKnife.inject(this);
         retrofit = new Retrofit.Builder()
                 .baseUrl(Urls.QUIZ)
                 .addConverterFactory(GsonConverterFactory.create())
@@ -58,7 +58,25 @@ public class OnlineQuizActivity extends Activity {
 
         loginService = retrofit.create(LoginService.class);
 
-        ButterKnife.bind(this);
+        /**
+         * spinner选中值的获取
+         */
+        quizAnsObj.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if (position == 0)
+                    ansObj = 2;
+                else if (position == 1)
+                    ansObj = 1;
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+
 
         /**
          * 返回点击
@@ -76,10 +94,10 @@ public class OnlineQuizActivity extends Activity {
         quiz.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                loginService.Quiz("1",quizTitle.getText().toString(),quizContent.getText().toString(),1)
+                loginService.Quiz("1",quizTitle.getText().toString(),quizContent.getText().toString(),ansObj)
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe(new Subscriber<Quiz>() {
+                        .subscribe(new Subscriber<OnlineQuiz>() {
                             @Override
                             public void onCompleted() {
                                 
@@ -91,7 +109,7 @@ public class OnlineQuizActivity extends Activity {
                             }
 
                             @Override
-                            public void onNext(Quiz quiz) {
+                            public void onNext(OnlineQuiz quiz) {
                                 if (quiz.isSuccess() == true){
                                     Toast.makeText(OnlineQuizActivity.this,quiz.getMsg(),Toast.LENGTH_SHORT).show();
                                     finish();

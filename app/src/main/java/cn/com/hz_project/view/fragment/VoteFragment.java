@@ -10,15 +10,15 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
-import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.InjectView;
 import cn.com.projectdemos.R;
 
 /**
  * Created by ku on 2016/7/16.
  */
 public class VoteFragment extends Fragment{
-    @Bind(R.id.wv_vote)
+    @InjectView(R.id.wv_vote)
     WebView wv_vote;
 
     @Nullable
@@ -27,9 +27,9 @@ public class VoteFragment extends Fragment{
 
         View view = LayoutInflater.from(getActivity()).inflate(R.layout.fragment_vote,null);
 
-        ButterKnife.bind(this,view);
+        ButterKnife.inject(this,view);
 
-        wv_vote.loadUrl("https://detail.tmall.com/item.htm?spm=a220m.1000858.1000725.1.RMmNFy&id=535829741534&areaId=310100&cat_id=2&rn=e0e747853de22a92b2971dbef58cb732&user_id=1973345958&is_b=1");
+        wv_vote.loadUrl("http://mp.weixin.qq.com/s?src=3&timestamp=1468910533&ver=1&signature=RbnX4tUBODpql9qsvp4jJRDrtHc-LSXXm9gSM*BNY*M1iyxZAFmTcAp0BIOouqvvdFBdqnbsKoRVcPUGcUskCOEMeV*UXEaaCZ4zhB-6nc6ZQsmrWOvaLAXsTylb6COHDmQPRiweUDUmNTEqDPJwJsK9dY2X1Nli1Gybroh47NU=");
         wv_vote.setWebViewClient(new WebViewClient(){
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
