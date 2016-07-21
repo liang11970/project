@@ -20,9 +20,12 @@
             android:src="@mipmap/back" />
 
         <TextView
+            android:id="@+id/tv_back"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
+            android:paddingTop="5dip"
+            android:paddingBottom="5dip"
             android:layout_toRightOf="@+id/iv_back_meeting"
             android:text="返回"
             android:textColor="@color/city_item_bg_nor"
@@ -48,8 +51,8 @@
         android:background="@drawable/shape_pop"
         android:layout_below="@+id/title_meeting"
         android:layout_alignParentRight="true"
-        android:layout_margin="10dip"
-        android:padding="15dip"
+        android:layout_margin="5dip"
+        android:padding="10dip"
         android:text="到场人员列表"
         android:textColor="@color/city_item_bg_nor"
         android:textSize="15sp" />

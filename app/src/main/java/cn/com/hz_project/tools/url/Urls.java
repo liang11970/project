@@ -22,8 +22,8 @@ public class Urls {
     public static String NEWSCONTEXT="http://192.168.2.240:8080/WsbxMobile/newsctrl/";
 
 
-
-
+    //内网
+//    public static final String baseURL = "http://192.168.2.205:8080/WsbxMobile/appCtrl/";
+    //外网
     public static final String baseURL = "http://116.228.202.122:8080/WsbxMobile/appCtrl/";
-
 }

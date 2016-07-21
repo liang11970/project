@@ -1,6 +1,9 @@
 package cn.com.hz_project.view.activity;
 
+
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -11,11 +14,22 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.orhanobut.dialogplus.DialogPlus;
+
 import butterknife.ButterKnife;
 import butterknife.InjectView;
+import cn.com.hz_project.model.bean.MeetingSignInBean;
+import cn.com.hz_project.model.server.MeetingService;
 import cn.com.hz_project.model.server.PreferencesService;
+import cn.com.hz_project.tools.url.Urls;
 import cn.com.hz_project.tools.utils.ToastUtils;
 import cn.com.projectdemos.R;
+import retrofit2.Retrofit;
+import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
+import retrofit2.converter.gson.GsonConverterFactory;
+import rx.Subscriber;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 public class MeetingDetailsActivity extends Activity implements View.OnClickListener {
 
@@ -39,6 +53,14 @@ public class MeetingDetailsActivity extends Activity implements View.OnClickList
     EditText etPhoneNum;
     private String meetingId;
     private PreferencesService preferencesService;
+    private boolean complete = false;
+    private MeetingService meetingService;
+    private boolean isAdmin;
+    private Bundle extras;
+    private String qd_user_id;
+    private String content;
+    private DialogPlus dialog;
+    private String signPhoneNum;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,8 +74,9 @@ public class MeetingDetailsActivity extends Activity implements View.OnClickList
     }
 
     private void initData() {
-        Bundle extras = getIntent().getExtras();
-        meetingId = (String) extras.get("ID");
+        extras = getIntent().getExtras();
+        meetingId = (String) extras.get("ID").toString();
+        content = (String) extras.get("content");
         tvMeetingName.setText(extras.get("name") + "");
         tvMeetingTime.setText("会议时间:" + extras.get("startTime") + "至" + extras.get("endTime"));
         tvMeetingContent.setText(extras.get("content") + "");
@@ -63,10 +86,12 @@ public class MeetingDetailsActivity extends Activity implements View.OnClickList
     private void initView() {
         preferencesService = new PreferencesService(getApplicationContext());
         if (preferencesService.getPerferences().get("roleId").equals("9")) {
+            isAdmin = true;
 
             etPhoneNum.setVisibility(View.VISIBLE);
             rlMeetingPersonnelList.setVisibility(View.VISIBLE);
-        }else {
+        } else {
+            isAdmin = false;
             etPhoneNum.setVisibility(View.INVISIBLE);
             rlMeetingPersonnelList.setVisibility(View.INVISIBLE);
 
@@ -87,7 +112,106 @@ public class MeetingDetailsActivity extends Activity implements View.OnClickList
                 startActivity(new Intent(getApplicationContext(), MeetingStaffPieActivity.class));
                 break;
             case R.id.bt_meeting_signin:
+                /**管理员*/
+                if (isAdmin) {
+                    signPhoneNum = etPhoneNum.getText().toString();
+                    signInRequestCreate();
+                    signInRequestData();
+
+                    /**普通用户*/
+                } else {
+                    qd_user_id = preferencesService.getPerferences().get("userId");
+
+                    if (!complete) {/**判断重复签到*/
+                        signInRequestCreate();
+                        signInRequestData();
+                    } else {
+                        ToastUtils.show(getApplicationContext(), "已签到成功，请不要重复签到");
+                    }
+                }
+
                 break;
         }
+    }
+
+    private void signInRequestData() {
+        if (signPhoneNum != null) {
+            qd_user_id = signPhoneNum;
+        }
+        meetingService.getMeetingSignIn(extras.get("ID").toString()
+                , preferencesService.getPerferences().get("userId")
+                , content, qd_user_id)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<MeetingSignInBean>() {
+                    @Override
+                    public void onCompleted() {
+                        complete = true;
+//                        showwDialog();
+//                        showDDialog();
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+//                        showDDialog();
+//                        showwDialog();
+                        Log.e("异常", e.toString());
+                        showDDialog();
+                        ToastUtils.show(getApplicationContext(), "签到失败,请检查网络");
+
+                    }
+
+                    @Override
+                    public void onNext(MeetingSignInBean meetingSignInBean) {
+                        Log.e("会议签到,签到返回数据1", meetingSignInBean.getMsg().toString());
+                        showDDialog();
+
+                        etPhoneNum.setText("");
+                    }
+                });
+
+
+    }
+
+    private void showDDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(MeetingDetailsActivity.this);
+        builder.setTitle("提示");
+        builder.setMessage("您已签到成功!");
+        builder.setPositiveButton("确定", new DialogInterface.OnClickListener() { //设置确定按钮
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+        builder.create().show();
+    }
+
+
+    private void showwDialog() {
+        ;
+
+        DialogInterface.OnClickListener dialogOnclicListener = new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        };
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("提示");
+        builder.setMessage("您已签到成功!");
+        builder.setPositiveButton("确定", dialogOnclicListener);
+        builder.create().show();
+
+    }
+
+    private void signInRequestCreate() {
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(Urls.baseURL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                .build();
+        meetingService = retrofit.create(MeetingService.class);
     }
 }
