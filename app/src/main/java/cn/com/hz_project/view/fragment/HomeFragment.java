@@ -15,6 +15,7 @@ import android.view.animation.TranslateAnimation;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.orhanobut.logger.Logger;
 import com.wangjie.shadowviewhelper.ShadowProperty;
 import com.wangjie.shadowviewhelper.ShadowViewHelper;
 
@@ -243,7 +244,7 @@ public class HomeFragment extends Fragment implements NewsContract.View {
         getActivity().getWindowManager().getDefaultDisplay().getMetrics(dm);
         int screenW = dm.widthPixels;
         offset = (int) ((screenW / num - bottomLineWidth) / 4);
-        Log.e("11111111", "" + offset);
+        Logger.e(offset+"");
         int avg = (int) (screenW / num);
         position_one = avg + offset;
     }
