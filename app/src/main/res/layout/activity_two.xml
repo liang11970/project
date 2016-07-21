@@ -45,6 +45,13 @@
     </RelativeLayout>
 
 
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:layout_below="@+id/title_new"
+        android:id="@+id/id_swiperefresh"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
     <ScrollView
         android:layout_below="@+id/title_new"
         android:layout_width="match_parent"
@@ -98,11 +105,12 @@
                     >
 
                     <TextView
+                        android:id="@+id/tv_num_n"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="15dp"
                         android:ellipsize="end"
-
+                        android:text="阅读量"
                         android:textSize="16sp" />
 
                     <TextView
@@ -177,6 +185,8 @@
 
 
     </ScrollView>
+
+    </android.support.v4.widget.SwipeRefreshLayout>
 
 
 </RelativeLayout>

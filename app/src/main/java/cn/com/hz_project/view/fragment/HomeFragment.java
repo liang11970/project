@@ -26,6 +26,7 @@ import cn.com.hz_project.model.bean.HttpResult;
 import cn.com.hz_project.presenter.activityPresenter.NewsContract;
 import cn.com.hz_project.presenter.activityPresenter.NewsPresenter;
 import cn.com.hz_project.view.activity.NewActivity;
+import cn.com.hz_project.view.activity.NewContentActivity;
 import cn.com.hz_project.view.activity.SecondActivity;
 import cn.com.hz_project.view.base.BaseAdapter;
 import cn.com.hz_project.view.base.ViewHolder;
@@ -153,8 +154,10 @@ public class HomeFragment extends Fragment implements NewsContract.View {
                 holder.setOnClickListener(R.id.start_time_repairs, new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-//                        Intent intent = new Intent(NewActivity.this, TwoActivity.class);
-//                        startActivity(intent);
+                        Intent intent = new Intent(getContext(), NewContentActivity.class);
+                        intent.putExtra("id", newslistEntity.getNBD_ID());
+                        com.orhanobut.logger.Logger.e(newslistEntity.getNBD_ID()+"");
+                        startActivity(intent);
                     }
                 });
             }

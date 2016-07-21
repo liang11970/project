@@ -27,6 +27,7 @@ import cn.com.hz_project.model.server.PreferencesService;
 import cn.com.hz_project.tools.url.Urls;
 import cn.com.hz_project.tools.utils.Md5;
 import cn.com.projectdemos.R;
+import cn.pedant.SweetAlert.SweetAlertDialog;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -97,6 +98,13 @@ public class LoginActivity extends Activity {
         else {
             //点击登录
             login.setOnClickListener(view -> {
+
+
+                SweetAlertDialog pDialog = new SweetAlertDialog(this, SweetAlertDialog.PROGRESS_TYPE)
+                        .setTitleText("登陆中...");
+                pDialog.show();
+
+
                 /*
                 if (isMobileNO(String.valueOf(user.getText()))){
                     loginService.PostField(user.getText().toString(), Md5.getMD5(password.getText().toString()))
@@ -168,22 +176,19 @@ public class LoginActivity extends Activity {
                             .subscribe(new Subscriber<Login>() {
                                 @Override
                                 public void onCompleted() {
-
+                                    pDialog.dismiss();
                                 }
 
                                 @Override
                                 public void onError(Throwable e) {
                                     Log.i("----------", "" + e.toString());
+                                    pDialog.dismiss();
                                 }
 
                                 @Override
                                 public void onNext(Login login) {
 
                                     if (login.isSuccess()) {
-
-
-
-
 
                                         startActivity(new Intent(LoginActivity.this, ViewPagerActivity.class));
                                     } else {

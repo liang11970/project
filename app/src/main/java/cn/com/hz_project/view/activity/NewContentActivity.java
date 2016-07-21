@@ -2,7 +2,9 @@ package cn.com.hz_project.view.activity;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -44,6 +46,10 @@ public class NewContentActivity extends AppCompatActivity implements NewContext.
     LinearLayout context;
     @InjectView(R.id.iv_back_meeting)
     ImageView ivBackMeeting;
+    @InjectView(R.id.id_swiperefresh)
+    SwipeRefreshLayout idSwiperefresh;
+    @InjectView(R.id.tv_num_n)
+    TextView tvNumN;
     private NewPresenter mPresenter;
     private Context mContext;
 
@@ -51,15 +57,26 @@ public class NewContentActivity extends AppCompatActivity implements NewContext.
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_two);
-        this.mContext=this;
+        this.mContext = this;
         ButterKnife.inject(this);
+        tvNumN.setVisibility(View.GONE);
         mPresenter = new NewPresenter(this);
+
+        idSwiperefresh.setColorSchemeResources(R.color.colorPrimary, R.color.colorAccent,
+                R.color.green);
+
+
+        idSwiperefresh.post(new Runnable() {
+            @Override
+            public void run() {
+                // Runnable为了能够第一次进入页面的时候显示加载进度条
+                idSwiperefresh.setRefreshing(true);
+            }
+        });
         Bundle extras = getIntent().getExtras();
         int id = extras.getInt("id");
         Logger.e(id + "");
         initData(id);
-
-
 
 
     }
@@ -75,18 +92,20 @@ public class NewContentActivity extends AppCompatActivity implements NewContext.
     public void showInfo(NewsContext entity) {
 
         Logger.e(entity.getObj().get(0).getNBD_CONTEXT());
-        Logger.e(entity.getObj().get(0).getNBD_READNUMBER()+"");
+        Logger.e(entity.getObj().get(0).getNBD_READNUMBER() + "");
         Logger.e(entity.getObj().get(0).getTIME());
         Logger.e(entity.getObj().get(0).getNBD_CONTEXT());
         Logger.e(entity.getObj().get(0).getNBD_PICTURE_URL());
+        tvNumN.setVisibility(View.VISIBLE);
 
         tvTitle.setText(entity.getObj().get(0).getNBD_TITLE());
-        tvNum.setText(entity.getObj().get(0).getNBD_READNUMBER()+"");
+        tvNum.setText(entity.getObj().get(0).getNBD_READNUMBER() + "");
         tvTime.setText(entity.getObj().get(0).getTIME());
         tvContext.setText(entity.getObj().get(0).getNBD_CONTEXT());
-        Picasso.with(mContext).load(entity.getObj().get(0).getNBD_PICTURE_URL()).resize(1250,500)
+        Picasso.with(mContext).load(entity.getObj().get(0).getNBD_PICTURE_URL()).resize(1250, 500)
                 .centerCrop().into(lvImage);
 
+        idSwiperefresh.setRefreshing(false);
 
 
     }

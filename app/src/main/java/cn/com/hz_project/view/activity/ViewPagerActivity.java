@@ -18,9 +18,6 @@ public class ViewPagerActivity extends FragmentActivity {
 
     public final static int num = 4 ;
 
-    Fragment homeFragment;
-    Fragment personFragment;
-    Fragment sorttypeFragment;
     public static FragmentManager fragmentManager;
     public static FragmentTransaction transaction;
     private RadioGroup radioGroup;

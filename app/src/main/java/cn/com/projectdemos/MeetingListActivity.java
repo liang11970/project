@@ -30,7 +30,7 @@ public class MeetingListActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_meeting_list);
-        mMeetingList = (ListView) findViewById(R.id.meeting_list);
+        mMeetingList = (ListView) findViewById(R.id.lv_meeting);
 
 
         HttpUtils.get(Constants.URL_MEETING_LIST, new AsyncHttpResponseHandler() {
