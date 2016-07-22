@@ -21,10 +21,10 @@ public interface MeetingService {
     Observable<MeetingBean> getMeetData (@Query("page") int pageNub );
 
     @GET("addMeetItem")
-    Observable<MeetingSignInBean> getMeetingSignIn(@Query("meet_id") String MBD_ID,
-                                                   @Query("login_user_id") String userId,
-                                                   @Query("remarks") String MBD_REMARKS,
-                                                   @Query("qd_user_id") String qd_user_id );
+    Observable<MeetingSignInBean> getMeetingSignIn(@Query("MEET_ID") String MBD_ID,
+                                                   @Query("LOGIN_USER_ID") String userId,
+                                                   @Query("PHONE") String qd_user_id,
+                                                   @Query("MARK") String MBD_REMARKS);
     @FormUrlEncoded
     @POST("addMeet")
     Observable<MeetingAddBean> getMeetingAdd(@Field("name") String name,

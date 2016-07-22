@@ -123,6 +123,14 @@ public class MeetingSignListActivity extends Activity implements View.OnClickLis
 
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        pageNum = 1;
+        initData();
+
+    }
+
     private void addList() {
         if (page2List.size() != 0) {
             for (MeetingBean.ObjBean bean : page2List) {
