@@ -16,6 +16,7 @@ import java.util.List;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import cn.com.hz_project.model.bean.StaffBean;
+import cn.com.hz_project.tools.url.Urls;
 import cn.com.projectdemos.R;
 
 /**
@@ -67,7 +68,7 @@ public class StaffAdapter extends BaseAdapter {
         viewHolder.tvPstnName.setText(mData.get(position).getUBD_PSTN_NAME());
 
         Picasso.with(mContext)
-                .load(mData.get(position).getUBD_IMG_URL())
+                .load(Urls.touxiang+mData.get(position).getUBD_IMG_URL())
                 .error(R.mipmap.man_error)
                 .into(viewHolder.ivHeadX);
 
