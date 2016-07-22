@@ -96,6 +96,18 @@ public class MeetingBean {
             return STIME;
         }
 
+        @Override
+        public String toString() {
+            return "ObjBean{" +
+                    "ROWNO=" + ROWNO +
+                    ", MBD_ID=" + MBD_ID +
+                    ", MBD_NAME='" + MBD_NAME + '\'' +
+                    ", STIME='" + STIME + '\'' +
+                    ", ETIME='" + ETIME + '\'' +
+                    ", MBD_REMARKS='" + MBD_REMARKS + '\'' +
+                    '}';
+        }
+
         public void setSTIME(String STIME) {
             this.STIME = STIME;
         }

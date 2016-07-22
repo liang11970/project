@@ -41,7 +41,6 @@
                 android:id="@+id/tv_Meeting_Time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dip"
                 android:text="会议时间: 20xx.xx.xx xx:xx-xx:xx"
                 android:textSize="16dp" />
 
@@ -49,7 +48,6 @@
                 android:id="@+id/tv_Meeting_content"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dip"
                 android:ellipsize="end"
                 android:maxLines="2"
                 android:text="sss顶顶顶顶顶顶顶顶顶顶顶顶顶顶得得得得得得得得得得得得得得得得得到得得得得得得得得得得得得得得得得得到"
@@ -63,6 +61,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:text="未签到"
+            android:visibility="invisible"
             android:textSize="18dp" />
 
     </RelativeLayout>

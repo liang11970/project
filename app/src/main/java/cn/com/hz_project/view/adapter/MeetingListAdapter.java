@@ -63,7 +63,11 @@ public class MeetingListAdapter extends BaseAdapter {
         }
 
         viewHolder.tvMeetingName.setText(mMeetList.get(position).getMBD_NAME());
-        viewHolder.tvMeetingTime.setText(mMeetList.get(position).getSTIME());
+        String etime = mMeetList.get(position).getETIME();
+        String stime = mMeetList.get(position).getSTIME();
+        String substringE = etime.substring(etime.length()-8, etime.length()-3);
+        String substringS = stime.substring(0, stime.length()-3);
+        viewHolder.tvMeetingTime.setText("会议时间:"+substringS+"-"+substringE);
         viewHolder.tvMeetingContent.setText(mMeetList.get(position).getMBD_REMARKS() + "");
         return convertView;
     }

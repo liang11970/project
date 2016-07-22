@@ -23,6 +23,7 @@ import cn.com.hz_project.presenter.activityPresenter.NewsPresenter;
 import cn.com.hz_project.tools.utils.LogUtils;
 import cn.com.hz_project.view.base.BaseAdapter;
 import cn.com.hz_project.view.base.ViewHolder;
+import cn.com.hz_project.view.widget.LoadMorRecyclerView;
 import cn.com.hz_project.view.widget.LoadMoreRecyclerView;
 import cn.com.hz_project.view.widget.RecycleViewDivider;
 import cn.com.projectdemos.R;
@@ -37,7 +38,7 @@ public class NewActivity extends Activity implements NewsContract.View {
     @InjectView(R.id.title_new)
     RelativeLayout titleNew;
     @InjectView(R.id.listView)
-    LoadMoreRecyclerView listView;
+    LoadMorRecyclerView listView;
     @InjectView(R.id.id_swiperefresh)
     SwipeRefreshLayout idSwiperefresh;
     private Context mContext;
@@ -75,8 +76,10 @@ public class NewActivity extends Activity implements NewsContract.View {
                                            holder.setOnClickListener(R.id.start_time_repairs, new View.OnClickListener() {
                                                @Override
                                                public void onClick(View v) {
-                        Intent intent = new Intent(NewActivity.this,QuizItemActivity.class);
-                        startActivity(intent);
+                                                   Intent intent = new Intent(NewActivity.this,NewContentActivity.class);
+                                                   intent.putExtra("id", newslistEntity.getNBD_ID());
+                                                   com.orhanobut.logger.Logger.e(newslistEntity.getNBD_ID()+"");
+                                                   startActivity(intent);
                                                }
                                            });
                                        }
@@ -96,7 +99,7 @@ public class NewActivity extends Activity implements NewsContract.View {
     }
 
     private void initEvent() {
-        listView.setLoadMoreListener(new LoadMoreRecyclerView.LoadMoreListener() {
+        listView.setLoadMoreListener(new LoadMorRecyclerView.LoadMoreListener() {
             @Override
             public void onLoadMore() {
                 currentPage++;
@@ -111,7 +114,8 @@ public class NewActivity extends Activity implements NewsContract.View {
         LogUtils.e("log",entity.getObj().size()+"");
 
         if(entity.getObj().size()==0){
-            Toast.makeText(NewActivity.this,"没有数据了",Toast.LENGTH_LONG);
+
+
             mAdapter.notifyDataSetChanged();
         }else {
             if(currentPage==1){
@@ -120,7 +124,6 @@ public class NewActivity extends Activity implements NewsContract.View {
             mDataList.addAll(entity.getObj());
             mAdapter.notifyDataSetChanged();
             idSwiperefresh.setRefreshing(false);
-//            listView.loadComplete();
         }
 
 
