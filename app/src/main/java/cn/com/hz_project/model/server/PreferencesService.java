@@ -3,6 +3,7 @@ package cn.com.hz_project.model.server;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -20,7 +21,6 @@ import cn.com.hz_project.model.bean.Login;
  */
 public class PreferencesService {
 
-
     private Context context;
 
     public PreferencesService(Context context) {
@@ -28,18 +28,35 @@ public class PreferencesService {
     }
 
     /**
-     * 保存参数
+     * 登录界面保存参数（账号，密码，记住密码，自动登录）
      */
-    public void save(String name, String pawd,Boolean tag) {
+    public void save(String name,String pawd,String remPwd,String autoLogin) {
         //获得SharedPreferences对象
         SharedPreferences preferences = context.getSharedPreferences("loginpwd", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
-        editor.putBoolean("checkbox", tag);
+
         editor.putString("name", name);
-        editor.putString("md5password", pawd);
+        editor.putString("pwd", pawd);
+        editor.putString("remPwd", remPwd);
+        editor.putString("autoLogin", autoLogin);
+
         editor.commit();
     }
 
+    /**
+     * 登录界面获取参数
+     */
+    public HashMap getLoginInfo(){
+        SharedPreferences preferences = context.getSharedPreferences("loginpwd", Context.MODE_PRIVATE);
+
+        HashMap<String,String> map = new HashMap<>();
+        map.put("name",preferences.getString("name",""));
+        map.put("pwd",preferences.getString("pwd",""));
+        map.put("remPwd",preferences.getString("remPwd","false"));
+        map.put("autoLogin",preferences.getString("autoLogin","false"));
+
+        return map;
+    }
 
     /**
      * 保存参数
@@ -89,8 +106,5 @@ public class PreferencesService {
         params.put("imgUrl", preferences.getString("imgUrl","http://pic14.nipic.com/20110427/2944718_000916112196_2.jpg"));
         return params;
     }
-
-
-
 
 }

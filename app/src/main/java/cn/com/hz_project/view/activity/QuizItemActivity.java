@@ -19,6 +19,7 @@ import cn.com.hz_project.model.bean.QuizAnswer;
 import cn.com.hz_project.model.bean.QuizAnswerObj;
 import cn.com.hz_project.model.bean.QuizObj;
 import cn.com.hz_project.model.server.LoginService;
+import cn.com.hz_project.model.server.PreferencesService;
 import cn.com.hz_project.tools.url.Urls;
 import cn.com.hz_project.tools.utils.LogUtils;
 import cn.com.hz_project.view.adapter.AnswerAdapter;
@@ -42,6 +43,7 @@ public class QuizItemActivity extends Activity {
     private LoginService loginService;
     private ArrayList<QuizAnswerObj> ansList;
     private AnswerAdapter answerAdapter;
+    private PreferencesService preferencesService;
 
     @InjectView(R.id.quiz_title)
     TextView title;
@@ -94,7 +96,7 @@ public class QuizItemActivity extends Activity {
 
 
         answerAdapter = new AnswerAdapter(ansList,QuizItemActivity.this);
-
+        preferencesService = new PreferencesService(this);
     }
 
     private void initData() {
@@ -159,7 +161,7 @@ public class QuizItemActivity extends Activity {
                 /**
                 * 提交答案
                  */
-                loginService.QuizReply(1, obj.getWQD_ID(), answer.getText().toString())
+                loginService.QuizReply(preferencesService.getPerferences().get("userId"), obj.getWQD_ID(), answer.getText().toString())
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe(new Subscriber<QuizAnswer>() {
