@@ -87,7 +87,7 @@ public class LoadMoreSwipe extends SwipeRefreshLayout implements AbsListView.OnS
     }
     //判断是否是上拉操作
     private boolean isPullUp() {
-        return (mYDown - mLastY) >= mTouchSlop;
+        return (mYDown - mLastY) >= mTouchSlop + 200;
     }
 
     //加载操作

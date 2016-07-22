@@ -65,4 +65,5 @@ dependencies {
     compile 'com.orhanobut:dialogplus:1.11@aar'
     compile files('libs/vcameralibrary.jar')
     compile files('libs/universal-image-loader-1.8.6-with-sources.jar')
+    compile 'com.zhy:autolayout:1.4.3'
 }

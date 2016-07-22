@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+<com.zhy.autolayout.AutoRelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <ImageView
         android:id="@+id/iv_photo"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="10dp"
         android:src="@mipmap/ic_photo" />
@@ -17,8 +18,8 @@
         android:layout_height="wrap_content"
         android:layout_toRightOf="@+id/iv_photo"
         android:layout_alignTop="@+id/iv_photo"
-        android:layout_marginLeft="10dp"
-        android:textSize="20sp"
+        android:layout_marginLeft="15px"
+        android:textSize="50px"
         android:text="王霸丹"/>
 
     <TextView
@@ -26,9 +27,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_toRightOf="@+id/replyer"
-        android:layout_marginLeft="15dp"
+        android:layout_marginLeft="15px"
         android:layout_alignBottom="@+id/replyer"
-        android:textSize="20sp"
+        android:textSize="40px"
         android:text="时间:2016.07.08 13:25:25"/>
 
     <TextView
@@ -38,8 +39,8 @@
         android:layout_toRightOf="@+id/iv_photo"
         android:layout_below="@+id/replyer"
         android:layout_alignLeft="@+id/replyer"
-        android:layout_marginTop="15dp"
-        android:textSize="20sp"
+        android:layout_marginTop="30px"
+        android:textSize="50px"
         android:text="这是回答内容"/>
 
-</RelativeLayout>
+</com.zhy.autolayout.AutoRelativeLayout>
