@@ -25,6 +25,7 @@ import cn.com.hz_project.model.server.PreferencesService;
 import cn.com.hz_project.tools.url.Urls;
 import cn.com.hz_project.tools.utils.ToastUtils;
 import cn.com.projectdemos.R;
+import cn.pedant.SweetAlert.SweetAlertDialog;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -67,6 +68,9 @@ public class MeetingDetailsActivity extends Activity implements View.OnClickList
     private String content;
     private DialogPlus dialog;
     private String signPhoneNum;
+    private String user_id;
+    private String mark;
+    private SweetAlertDialog pDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,7 +97,10 @@ public class MeetingDetailsActivity extends Activity implements View.OnClickList
     }
 
     private void initView() {
-        preferencesService = new PreferencesService(getApplicationContext());
+        preferencesService = new PreferencesService(this);
+        user_id = preferencesService.getPerferences().get("userId");
+        Log.e("会议签到", "ID为" + qd_user_id);
+
         if (preferencesService.getPerferences().get("roleId").equals("9")) {
             isAdmin = true;
 
@@ -123,6 +130,8 @@ public class MeetingDetailsActivity extends Activity implements View.OnClickList
                 startActivity(intent);
                 break;
             case R.id.bt_meeting_signin:
+
+                showDIalog();
                 /**管理员*/
                 if (isAdmin) {
                     signPhoneNum = etPhoneNum.getText().toString();
@@ -131,9 +140,8 @@ public class MeetingDetailsActivity extends Activity implements View.OnClickList
 
                     /**普通用户*/
                 } else {
-                    qd_user_id = preferencesService.getPerferences().get("userId");
-
                     if (!complete) {/**判断重复签到*/
+                        qd_user_id = user_id;
                         signInRequestCreate();
                         signInRequestData();
                     } else {
@@ -145,19 +153,29 @@ public class MeetingDetailsActivity extends Activity implements View.OnClickList
         }
     }
 
+    private void showDIalog() {
+        pDialog = new SweetAlertDialog(this, SweetAlertDialog.PROGRESS_TYPE)
+                .setTitleText("正在签到..");
+        pDialog.show();
+    }
+
     private void signInRequestData() {
-        if (signPhoneNum != null) {
-            qd_user_id = signPhoneNum;
+        if (signPhoneNum.length()!=0) {
+            mark = "2";
+        } else {
+            mark = "1";
         }
+        Log.e("会议签到","admin"+preferencesService.getPerferences().get("roleId")+"==="+extras.get("ID").toString()+"====="+qd_user_id+"====="+signPhoneNum+"====="+mark);
         meetingService.getMeetingSignIn(extras.get("ID").toString()
-                , preferencesService.getPerferences().get("userId")
-                , content, qd_user_id)
+                , user_id
+                , signPhoneNum, mark)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<MeetingSignInBean>() {
                     @Override
                     public void onCompleted() {
                         complete = true;
+                        pDialog.dismiss();
 //                        showwDialog();
 //                        showDDialog();
 
@@ -165,10 +183,9 @@ public class MeetingDetailsActivity extends Activity implements View.OnClickList
 
                     @Override
                     public void onError(Throwable e) {
-//                        showDDialog();
-//                        showwDialog();
                         Log.e("异常", e.toString());
                         showDDialog("签到失败,请检查网络");
+                        pDialog.dismiss();
 
                     }
 
@@ -198,27 +215,9 @@ public class MeetingDetailsActivity extends Activity implements View.OnClickList
     }
 
 
-    private void showwDialog() {
-        ;
-
-        DialogInterface.OnClickListener dialogOnclicListener = new DialogInterface.OnClickListener() {
-
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.dismiss();
-            }
-        };
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("提示");
-        builder.setMessage("您已签到成功!");
-        builder.setPositiveButton("确定", dialogOnclicListener);
-        builder.create().show();
-
-    }
-
     private void signInRequestCreate() {
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(Urls.baseURL)
+                .baseUrl("http://192.168.2.17:8080/WsbxMobile/appCtrl/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .build();

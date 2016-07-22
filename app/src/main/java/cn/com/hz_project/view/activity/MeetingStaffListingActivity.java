@@ -16,8 +16,17 @@ import java.util.logging.Logger;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import cn.com.hz_project.model.bean.StaffBean;
+import cn.com.hz_project.model.server.MeetingService;
+import cn.com.hz_project.tools.url.Urls;
+import cn.com.hz_project.tools.utils.ToastUtils;
 import cn.com.hz_project.view.adapter.StaffAdapter;
 import cn.com.projectdemos.R;
+import retrofit2.Retrofit;
+import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
+import retrofit2.converter.gson.GsonConverterFactory;
+import rx.Subscriber;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 public class MeetingStaffListingActivity extends Activity implements View.OnClickListener {
 
@@ -32,6 +41,8 @@ public class MeetingStaffListingActivity extends Activity implements View.OnClic
     private List<StaffBean.ObjBean> staffdata;
     private StaffAdapter staffAdapter;
     private StaffBean bean;
+    private String meetingID;
+    private MeetingService meetingService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,13 +55,49 @@ public class MeetingStaffListingActivity extends Activity implements View.OnClic
     }
 
     private void initData() {
-        Bundle extras = getIntent().getExtras();
-        bean = (StaffBean) extras.get("staffData");
-        showStaff();
+
+        meetingID = (String) getIntent().getExtras().get("meetingIDa");
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(Urls.baseURL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                .build();
+
+
+        meetingService = retrofit.create(MeetingService.class);
+
+        meetingService.getStaffData(meetingID)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<StaffBean>() {
+
+
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        ToastUtils.show(getApplicationContext(), "请求数据失败,请检查网络");
+
+                    }
+
+                    @Override
+                    public void onNext(StaffBean staffBean) {
+                        Log.e("饼图", staffBean.getObj().toString());
+                        bean = staffBean;
+
+                        showStaff();
+
+                    }
+                });
+
+
     }
 
     private void showStaff() {
-        staffAdapter = new StaffAdapter(getApplicationContext(),bean.getObj());
+        staffAdapter = new StaffAdapter(getApplicationContext(), bean.getObj());
         lvStaffList.setAdapter(staffAdapter);
     }
 

@@ -89,7 +89,7 @@ public class MeetingStaffPieActivity extends Activity implements View.OnClickLis
 
                     @Override
                     public void onNext(StaffBean staffBean) {
-                        Log.e("饼图",staffBean.getObj().toString());
+                        Log.e("饼图", staffBean.getObj().toString());
                         staffdata = staffBean;
 
 
@@ -109,7 +109,7 @@ public class MeetingStaffPieActivity extends Activity implements View.OnClickLis
                 break;
             case R.id.bt_staff_listing:
                 Intent intent = new Intent(this, MeetingStaffListingActivity.class);
-                intent.putExtra("staffData", (Serializable) staffdata);
+                intent.putExtra("meetingIDa", meetingID);
                 startActivity(intent);
 
         }
