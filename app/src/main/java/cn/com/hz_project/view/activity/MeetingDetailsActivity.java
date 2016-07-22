@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -33,6 +34,7 @@ import rx.schedulers.Schedulers;
 
 public class MeetingDetailsActivity extends Activity implements View.OnClickListener {
 
+
     @InjectView(R.id.iv_back_meeting)
     ImageView ivBackMeeting;
     @InjectView(R.id.title_meeting)
@@ -41,16 +43,20 @@ public class MeetingDetailsActivity extends Activity implements View.OnClickList
     TextView tvMeetingTv;
     @InjectView(R.id.rl_meeting_personnelList)
     RelativeLayout rlMeetingPersonnelList;
+    @InjectView(R.id.ll_list)
+    LinearLayout llList;
     @InjectView(R.id.tv_Meeting_Name)
     TextView tvMeetingName;
     @InjectView(R.id.tv_Meeting_Time)
     TextView tvMeetingTime;
-    @InjectView(R.id.bt_meeting_signin)
-    Button btMeetingSignin;
     @InjectView(R.id.tv_Meeting_content)
     TextView tvMeetingContent;
     @InjectView(R.id.et_phoneNum)
     EditText etPhoneNum;
+    @InjectView(R.id.bt_meeting_signin)
+    Button btMeetingSignin;
+    @InjectView(R.id.tv_Meeting_eTime)
+    TextView tvMeetingETime;
     private String meetingId;
     private PreferencesService preferencesService;
     private boolean complete = false;
@@ -78,7 +84,10 @@ public class MeetingDetailsActivity extends Activity implements View.OnClickList
         meetingId = (String) extras.get("ID").toString();
         content = (String) extras.get("content");
         tvMeetingName.setText(extras.get("name") + "");
-        tvMeetingTime.setText("会议时间:" + extras.get("startTime") + "至" + extras.get("endTime"));
+        String startTime = (String) extras.get("startTime");
+        String endTime = (String) extras.get("endTime");
+        tvMeetingTime.setText("开始时间:" + startTime.substring(0, startTime.length() - 3));
+        tvMeetingETime.setText("结束时间:" + endTime.substring(0, endTime.length() - 3));
         tvMeetingContent.setText(extras.get("content") + "");
 
     }
@@ -109,7 +118,9 @@ public class MeetingDetailsActivity extends Activity implements View.OnClickList
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.rl_meeting_personnelList:
-                startActivity(new Intent(getApplicationContext(), MeetingStaffPieActivity.class));
+                Intent intent = new Intent(getApplicationContext(), MeetingStaffPieActivity.class);
+                intent.putExtra("meetingID", meetingId);
+                startActivity(intent);
                 break;
             case R.id.bt_meeting_signin:
                 /**管理员*/
@@ -157,15 +168,14 @@ public class MeetingDetailsActivity extends Activity implements View.OnClickList
 //                        showDDialog();
 //                        showwDialog();
                         Log.e("异常", e.toString());
-                        showDDialog();
-                        ToastUtils.show(getApplicationContext(), "签到失败,请检查网络");
+                        showDDialog("签到失败,请检查网络");
 
                     }
 
                     @Override
                     public void onNext(MeetingSignInBean meetingSignInBean) {
                         Log.e("会议签到,签到返回数据1", meetingSignInBean.getMsg().toString());
-                        showDDialog();
+                        showDDialog(meetingSignInBean.getMsg());
 
                         etPhoneNum.setText("");
                     }
@@ -174,10 +184,10 @@ public class MeetingDetailsActivity extends Activity implements View.OnClickList
 
     }
 
-    private void showDDialog() {
+    private void showDDialog(String message) {
         AlertDialog.Builder builder = new AlertDialog.Builder(MeetingDetailsActivity.this);
         builder.setTitle("提示");
-        builder.setMessage("您已签到成功!");
+        builder.setMessage(message);
         builder.setPositiveButton("确定", new DialogInterface.OnClickListener() { //设置确定按钮
             @Override
             public void onClick(DialogInterface dialog, int which) {

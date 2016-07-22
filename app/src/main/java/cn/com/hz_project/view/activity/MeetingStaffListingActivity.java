@@ -2,14 +2,21 @@ package cn.com.hz_project.view.activity;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import java.io.Serializable;
+import java.util.List;
+import java.util.logging.Logger;
+
 import butterknife.ButterKnife;
 import butterknife.InjectView;
+import cn.com.hz_project.model.bean.StaffBean;
+import cn.com.hz_project.view.adapter.StaffAdapter;
 import cn.com.projectdemos.R;
 
 public class MeetingStaffListingActivity extends Activity implements View.OnClickListener {
@@ -22,6 +29,9 @@ public class MeetingStaffListingActivity extends Activity implements View.OnClic
     ListView lvStaffList;
     @InjectView(R.id.tv_back)
     TextView tvBack;
+    private List<StaffBean.ObjBean> staffdata;
+    private StaffAdapter staffAdapter;
+    private StaffBean bean;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,10 +40,23 @@ public class MeetingStaffListingActivity extends Activity implements View.OnClic
         ButterKnife.inject(this);
 
         initView();
+        initData();
+    }
+
+    private void initData() {
+        Bundle extras = getIntent().getExtras();
+        bean = (StaffBean) extras.get("staffData");
+        showStaff();
+    }
+
+    private void showStaff() {
+        staffAdapter = new StaffAdapter(getApplicationContext(),bean.getObj());
+        lvStaffList.setAdapter(staffAdapter);
     }
 
     private void initView() {
-
+        ivBackMeeting.setOnClickListener(this);
+        tvBack.setOnClickListener(this);
     }
 
     @Override
