@@ -53,7 +53,7 @@ public interface LoginService {
      */
     @FormUrlEncoded
     @POST("addAnswer")
-    Observable<QuizAnswer> QuizReply(@Field("USER_ID") int uesrId,@Field("WQD_ID") String quizId,@Field("WAD_CONTEXT") String content);
+    Observable<QuizAnswer> QuizReply(@Field("USER_ID") String uesrId,@Field("WQD_ID") String quizId,@Field("WAD_CONTEXT") String content);
 
     /**
      * 查询问题答案

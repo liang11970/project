@@ -3,11 +3,9 @@ package cn.com.hz_project.view.activity;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
-import android.util.Base64;
 import android.util.Log;
 import android.view.Window;
 import android.widget.Button;
@@ -15,7 +13,7 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import java.util.Map;
+import java.util.HashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -25,6 +23,7 @@ import cn.com.hz_project.model.bean.Login;
 import cn.com.hz_project.model.server.LoginService;
 import cn.com.hz_project.model.server.PreferencesService;
 import cn.com.hz_project.tools.url.Urls;
+import cn.com.hz_project.tools.utils.AESUtils;
 import cn.com.hz_project.tools.utils.Md5;
 import cn.com.projectdemos.R;
 import cn.pedant.SweetAlert.SweetAlertDialog;
@@ -33,11 +32,10 @@ import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
-import rx.functions.Action1;
 import rx.schedulers.Schedulers;
 
 /**
- * 登录界面(哈哈)
+ * 登录界面
  */
 public class LoginActivity extends Activity {
 
@@ -54,6 +52,8 @@ public class LoginActivity extends Activity {
     private Retrofit retrofit;
     private LoginService loginService;
     private PreferencesService service;
+    private SweetAlertDialog pDialog;
+    private HashMap<String, String> map;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,7 +66,6 @@ public class LoginActivity extends Activity {
 
     }
 
-
     private void initView() {
         retrofit = new Retrofit.Builder()
                 .baseUrl(Urls.LOGINURL)
@@ -77,135 +76,124 @@ public class LoginActivity extends Activity {
         loginService = retrofit.create(LoginService.class);
 
         service = new PreferencesService(this);
+        map = service.getLoginInfo();
+        pDialog = new SweetAlertDialog(this, SweetAlertDialog.PROGRESS_TYPE)
+                .setTitleText("登陆中...");
     }
 
     private void initData() {
 
-//        service = new PreferencesService(this);
-//
-//        Map<String, String> params = service.getPerferences();
-//        user.setText(params.get("name"));
-//        password.setText(Base64.encodeToString(params.get("md5password").getBytes(), Base64.DEFAULT));
-//
-//        if(params.get("checkbox").equals("true")){
-//            cbRempwd.setChecked(true);
-//        }
-
-
+        //检测记住密码/自动登录
+        detectLogin();
 
         if (!isNetworkConnected(LoginActivity.this))
             Toast.makeText(this, "当前网络不可用", Toast.LENGTH_SHORT).show();
         else {
             //点击登录
             login.setOnClickListener(view -> {
-
-
-                SweetAlertDialog pDialog = new SweetAlertDialog(this, SweetAlertDialog.PROGRESS_TYPE)
-                        .setTitleText("登陆中...");
-                pDialog.show();
-
-
-                /*
-                if (isMobileNO(String.valueOf(user.getText()))){
-                    loginService.PostField(user.getText().toString(), Md5.getMD5(password.getText().toString()))
-                            .subscribeOn(Schedulers.io())
-                            .observeOn(AndroidSchedulers.mainThread())
-                            .subscribe(new Subscriber<Login>() {
-                                @Override
-                                public void onCompleted() {
-
-                                }
-
-                                @Override
-                                public void onError(Throwable e) {
-                                    Log.i("----------",""+e.toString());
-                                }
-
-                                @Override
-                                public void onNext(Login login) {
-
-                                    if(login.isSuccess()){
-                                        startActivity(new Intent(LoginActivity.this,ViewPagerActivity.class));
-                                    }else {
-                                        Toast.makeText(LoginActivity.this,"帐号密码有问题检查一下吧",Toast.LENGTH_SHORT).show();
-                                    }
-
-                                }
-                            });
-                }
-                else {
-                    Toast.makeText(LoginActivity.this,"当前手机号码有问题，检查一下吧",Toast.LENGTH_SHORT).show();
-                }
-
-
-
-*/
-
-//                if(cbRempwd.isChecked()){
-//                    loginService.PostField(user.getText().toString(), MD5.md5crypt(password.getText().toString()), 2)
-//                            .subscribeOn(Schedulers.io())
-//                            .observeOn(AndroidSchedulers.mainThread())
-//                            .doOnNext(login1 -> service.save(user.getText().toString(), new String(Base64.encode(password.getText().toString().getBytes(), Base64.DEFAULT)),true))
-//                            .subscribe(new Subscriber<Login>() {
-//                                @Override
-//                                public void onCompleted() {
-//
-//                                }
-//
-//                                @Override
-//                                public void onError(Throwable e) {
-//                                    Log.i("----------", "" + e.toString());
-//                                }
-//
-//                                @Override
-//                                public void onNext(Login login) {
-//
-//                                    if (login.isSuccess()) {
-//                                        startActivity(new Intent(LoginActivity.this, ViewPagerActivity.class));
-//                                    } else {
-//                                        Toast.makeText(LoginActivity.this, "帐号密码有问题检查一下吧", Toast.LENGTH_SHORT).show();
-//                                    }
-//
-//                                }
-//                            });
-//                }else {
-                    loginService.PostField(user.getText().toString(), Md5.md5crypt(password.getText().toString()), 2)
-                            .doOnNext(login1 -> service.save(login1))
-                            .subscribeOn(Schedulers.io())
-                            .observeOn(AndroidSchedulers.mainThread())
-                            .subscribe(new Subscriber<Login>() {
-                                @Override
-                                public void onCompleted() {
-                                    pDialog.dismiss();
-                                }
-
-                                @Override
-                                public void onError(Throwable e) {
-                                    Log.i("----------", "" + e.toString());
-                                    pDialog.dismiss();
-                                }
-
-                                @Override
-                                public void onNext(Login login) {
-
-                                    if (login.isSuccess()) {
-
-                                        startActivity(new Intent(LoginActivity.this, ViewPagerActivity.class));
-                                    } else {
-                                        Toast.makeText(LoginActivity.this, "帐号密码有问题检查一下吧", Toast.LENGTH_SHORT).show();
-                                    }
-
-                                }
-                            });
-
-
-
-
+                login(pDialog);
             });
         }
     }
 
 
+    /**
+     * 该方法为登录操作
+     * @param pDialog
+     */
+    private void login(final SweetAlertDialog pDialog) {
+
+        detectUserChoose();//登录前检测用户选择，并保存信息
+
+        pDialog.show();
+        loginService.PostField(user.getText().toString(), Md5.md5crypt(password.getText().toString()), 2)
+                .doOnNext(login1 -> service.save(login1))
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<Login>() {
+                    @Override
+                    public void onCompleted() {
+                        pDialog.dismiss();
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Log.i("----------", "" + e.toString());
+                        pDialog.dismiss();
+                    }
+
+                    @Override
+                    public void onNext(Login login) {
+
+                        if (login.isSuccess()) {
+
+                            startActivity(new Intent(LoginActivity.this, ViewPagerActivity.class));
+                        } else {
+                            Toast.makeText(LoginActivity.this, "帐号密码有问题检查一下吧", Toast.LENGTH_SHORT).show();
+                        }
+
+                    }
+                });
+    }
+
+    /**
+     * 检测用户的选择状态，并保存信息
+     */
+    private void detectUserChoose() {
+
+        if (cbRempwd.isChecked() == true){
+            if (cbAutologin.isChecked() == true)
+            saveInfo(user.getText().toString(),password.getText().toString(),"true","true");
+            else
+                saveInfo(user.getText().toString(),password.getText().toString(),"true","false");
+        }else
+            saveInfo(user.getText().toString(),"","false","false");
+    }
+
+    /**
+     * 保存登录参数
+     */
+    private void saveInfo(String userName,String pwd,String remPwd,String autoLogin) {
+        try {
+            service.save(userName,pwd,remPwd,autoLogin);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    /**
+     * 该方法用于判断是否记住密码，自动登录
+     * 思路:1.先从sp里获取上次登录是否选择了记住密码，当为false时，正常输入正常登录；
+     *      2.当为true时，从sp里获取账号，密码，是否自动登录；
+     *      3.当自动登录为true时自动登录，false时点击登录；
+     */
+    private void detectLogin() {
+        /**
+         * 检测用户上次登录是否选择了记住密码
+         */
+        if (map.get("remPwd").equals("true")) {//当上次状态为记住密码
+            user.setText(map.get("name"));
+            try {
+                password.setText(map.get("pwd"));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            cbRempwd.setChecked(true);
+
+            if (map.get("autoLogin").equals("true")) {//当上次状态为自动登录
+                //选择自动登录,保存登录信息并执行自动登录
+                cbAutologin.setChecked(true);
+                saveInfo(user.getText().toString(),password.getText().toString(),String.valueOf(cbRempwd.isChecked()),String.valueOf(cbAutologin.isChecked()));
+                login(pDialog);
+            }
+        }else {//没有选择记住密码
+            user.setText(map.get("name"));
+            password.setText("");
+            cbRempwd.setChecked(false);
+            cbAutologin.setChecked(false);
+        }
+    }
 
 
     public static boolean isMobileNO(String mobiles) {

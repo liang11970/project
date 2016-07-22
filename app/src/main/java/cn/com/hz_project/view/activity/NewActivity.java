@@ -75,7 +75,7 @@ public class NewActivity extends Activity implements NewsContract.View {
                                            holder.setOnClickListener(R.id.start_time_repairs, new View.OnClickListener() {
                                                @Override
                                                public void onClick(View v) {
-                        Intent intent = new Intent(NewActivity.this,TwoActivity.class);
+                        Intent intent = new Intent(NewActivity.this,QuizItemActivity.class);
                         startActivity(intent);
                                                }
                                            });
@@ -120,7 +120,7 @@ public class NewActivity extends Activity implements NewsContract.View {
             mDataList.addAll(entity.getObj());
             mAdapter.notifyDataSetChanged();
             idSwiperefresh.setRefreshing(false);
-            listView.loadComplete();
+//            listView.loadComplete();
         }
 
 
