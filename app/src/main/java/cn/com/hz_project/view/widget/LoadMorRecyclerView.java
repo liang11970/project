@@ -104,7 +104,7 @@ public class LoadMorRecyclerView extends RecyclerView {
             } else {
                 lastVisibleItemPosition = ((LinearLayoutManager) layoutManager).findLastVisibleItemPosition();
             }
-            if (mIsFooterEnable&&layoutManager.getChildCount() > 0&& lastVisibleItemPosition >= layoutManager.getItemCount() - 1 &&  layoutManager.getItemCount() > layoutManager.getChildCount()) {
+            if (layoutManager.getChildCount() > 0&& lastVisibleItemPosition >= layoutManager.getItemCount() - 1 &&  layoutManager.getItemCount() > layoutManager.getChildCount()) {
                     View footView = mFootViews.get(0);
                 footView.setVisibility(View.VISIBLE);
                 mLoadingListener.onLoadMore();

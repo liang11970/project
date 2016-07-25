@@ -69,7 +69,6 @@
         <!--<activity android:name="cn.com.hz_project.view.activity.ViewPagerActivity" />-->
 
 
-        <activity android:name="cn.com.hz_project.view.activity.LoginTexstActivity" />
         <activity android:name="cn.com.hz_project.view.activity.MeetingSignListActivity" />
         <activity
             android:name="cn.com.hz_project.view.activity.MeetingDetailsActivity"
