@@ -114,6 +114,7 @@ public class MeetingBean {
                     ", STIME='" + STIME + '\'' +
                     ", ETIME='" + ETIME + '\'' +
                     ", MBD_REMARKS='" + MBD_REMARKS + '\'' +
+                    ", isSign=" + isSign +
                     '}';
         }
 

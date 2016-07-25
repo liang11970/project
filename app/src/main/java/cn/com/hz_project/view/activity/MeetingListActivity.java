@@ -83,7 +83,7 @@ public class MeetingListActivity extends AppCompatActivity implements View.OnCli
 
                     @Override
                     public void onNext(MeetingBean meetingBean) {
-                        Log.e("请求成功++", meetingBean.toString());
+                        Log.e("请求成功++", meetingBean.getObj().toString());
                         meetList = meetingBean.getObj();
                         showData();
 

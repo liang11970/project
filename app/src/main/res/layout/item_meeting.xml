@@ -35,7 +35,7 @@
                 android:ellipsize="end"
                 android:lines="1"
                 android:text="会议名称哈哈哈哈哈哈呵嗯嗯嗯嗯呵"
-                android:maxEms="11"
+                android:maxEms="8"
                 android:textSize="18dp" />
 
             <TextView
@@ -64,7 +64,6 @@
             android:text="未签到"
             android:layout_margin="5dip"
             android:layout_alignBottom="@+id/tv_Meeting_Name"
-            android:visibility="invisible"
             android:textSize="18dp" />
 
     </RelativeLayout>
