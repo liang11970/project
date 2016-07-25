@@ -4,7 +4,9 @@ import cn.com.hz_project.model.bean.DataResponse;
 import cn.com.hz_project.model.bean.Login;
 import cn.com.hz_project.model.bean.Title;
 import cn.com.hz_project.model.bean.UploadFile;
+import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.Field;
@@ -26,23 +28,13 @@ import rx.Observable;
  */
 public interface FileServer {
 
-    @POST("/file")
-    @Multipart
-    Observable<DataResponse<UploadFile>> uploadFile(@Part("file\"; filename=\"avatar.png\"") RequestBody file);
-
 
     /**
-     * 登录
+     * 单
      * @return
      */
-    @FormUrlEncoded
-    @POST("login")
-    Observable<Login> postText(@Body Title bean);
-
-
-
-        @Multipart
-        @POST("/")
-        Call<String> upload(@Part("fileName") String des, @Part("file\"; filename=\"1.txt") RequestBody file);
+    @Multipart
+    @POST("appCtrl/uploadfile")
+    public Call<String> postFile(@Part("file\"; filename=\"faq.docx") RequestBody fileBody);
 
 }

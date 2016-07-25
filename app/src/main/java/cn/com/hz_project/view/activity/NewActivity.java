@@ -20,6 +20,7 @@ import butterknife.OnClick;
 import cn.com.hz_project.model.bean.HttpResult;
 import cn.com.hz_project.presenter.activityPresenter.NewsContract;
 import cn.com.hz_project.presenter.activityPresenter.NewsPresenter;
+import cn.com.hz_project.tools.ACache;
 import cn.com.hz_project.tools.utils.LogUtils;
 import cn.com.hz_project.view.base.BaseAdapter;
 import cn.com.hz_project.view.base.ViewHolder;
@@ -64,10 +65,14 @@ public class NewActivity extends Activity implements NewsContract.View {
     }
 
     private void initView() {
+
+
+
         mDataList = new ArrayList<>();
         mAdapter = new BaseAdapter<HttpResult.ObjBean>(mContext,R.layout.item_new,mDataList,listView) {
                                        @Override
                                        public void convert(ViewHolder holder, final HttpResult.ObjBean newslistEntity) {
+
 //                                           holder.setText(R.id.tv_title,newslistEntity.getNBD_TITLE());
                                            holder.setText(R.id.tv_time,newslistEntity.getTIME());
 //                                           holder.setText(R.id.tv_content,newslistEntity.getSUBSTR());

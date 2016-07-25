@@ -2,6 +2,7 @@ package cn.com.hz_project.view.activity;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
@@ -262,7 +263,7 @@ public class MeetingSignListActivity extends Activity implements View.OnClickLis
 
     private void deleteRequest() {
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(Urls.DeletMeeting)
+                .baseUrl(Urls.baseURL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .build();
