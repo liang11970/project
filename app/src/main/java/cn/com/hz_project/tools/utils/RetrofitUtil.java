@@ -23,7 +23,7 @@ public class RetrofitUtil {
         if (retrofit == null) {
             synchronized (RetrofitUtil.class) {
                 Retrofit.Builder builder = new Retrofit.Builder();
-                retrofit = builder.baseUrl("http://192.168.2.17:8080/WsbxMobile/appCtrl/")
+                retrofit = builder.baseUrl("http://192.168.2.26:8080/WsbxMobile/appCtrl/")
                         .client(okHttpClient)
                         .addConverterFactory(GsonConverterFactory.create())
                         .addCallAdapterFactory(RxJavaCallAdapterFactory.create())

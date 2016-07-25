@@ -3,6 +3,8 @@ package cn.com.hz_project.tools;
 import android.os.Handler;
 import android.os.Message;
 
+import com.orhanobut.logger.Logger;
+
 import cn.com.hz_project.model.ProgressListener;
 
 /**
@@ -22,7 +24,9 @@ public class DefaultProgressListener implements ProgressListener {
 
     @Override
     public void onProgress(long hasWrittenLen, long totalLen, boolean hasFinish) {
-        System.out.println("----the current " + hasWrittenLen + "----" + totalLen + "-----" + (hasWrittenLen * 100 / totalLen));
+
+
+        Logger.e("----the current hasWrittenLen" + hasWrittenLen + "----totalLen" + totalLen + "-----" + (hasWrittenLen * 100 / totalLen));
 
         int percent = (int) (hasWrittenLen * 100 / totalLen);
         if (percent > 100) percent = 100;
