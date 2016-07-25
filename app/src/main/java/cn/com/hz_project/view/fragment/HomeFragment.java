@@ -26,6 +26,7 @@ import butterknife.InjectView;
 import cn.com.hz_project.model.bean.HttpResult;
 import cn.com.hz_project.presenter.activityPresenter.NewsContract;
 import cn.com.hz_project.presenter.activityPresenter.NewsPresenter;
+import cn.com.hz_project.view.activity.MeetingSignListActivity;
 import cn.com.hz_project.view.activity.NewActivity;
 import cn.com.hz_project.view.activity.NewContentActivity;
 import cn.com.hz_project.view.activity.SecondActivity;
@@ -133,7 +134,7 @@ public class HomeFragment extends Fragment implements NewsContract.View {
 //        mediaController.requestFocus();
 
 
-        listView.setLoadMoreListener(new LoadMorRecyclerView.LoadMoreListener() {
+            listView.setLoadMoreListener(new LoadMorRecyclerView.LoadMoreListener() {
             @Override
             public void onLoadMore() {
                 currentPage++;
@@ -192,7 +193,7 @@ public class HomeFragment extends Fragment implements NewsContract.View {
         tvTabNew.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getActivity(), NewActivity.class));
+                startActivity(new Intent(getActivity(), MeetingSignListActivity.class));
             }
         });
         tvTabHot.setOnClickListener(new View.OnClickListener() {

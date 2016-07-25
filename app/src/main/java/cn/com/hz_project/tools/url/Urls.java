@@ -17,9 +17,9 @@ public class Urls {
     public static  final  String LOGINURL="http://116.228.202.122:8080/WsbxMobile/loginCtrl/";
 
     //新闻
-    public static  final  String NEWS="http://192.168.2.205:8080/WsbxMobile/newsctrl/";
+    public static  final  String NEWS="http://116.228.202.122:8080/WsbxMobile/newsctrl/";
     //详情新闻
-    public static String NEWSCONTEXT="http://192.168.2.240:8080/WsbxMobile/newsctrl/";
+    public static String NEWSCONTEXT="http://116.228.202.122:8080/WsbxMobile/newsctrl/";
 
 
     //内网
