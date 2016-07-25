@@ -21,6 +21,7 @@ import cn.com.projectdemos.R;
 public class MeetingListAdapter extends BaseAdapter {
     private Context mContext;
     private List<MeetingBean.ObjBean> mMeetList;
+    private int isSign;
 
     public MeetingListAdapter(Context context, List<MeetingBean.ObjBean> meetList) {
         this.mContext = context;
@@ -69,6 +70,13 @@ public class MeetingListAdapter extends BaseAdapter {
         String substringS = stime.substring(0, stime.length()-3);
         viewHolder.tvMeetingTime.setText("会议时间:"+substringS+"-"+substringE);
         viewHolder.tvMeetingContent.setText(mMeetList.get(position).getMBD_REMARKS() + "");
+        isSign = mMeetList.get(position).getIsSign();
+        if (isSign == 1){
+            viewHolder.tvSignInState.setText("未签到");
+
+        }else if (isSign ==0){
+            viewHolder.tvSignInState.setText("已签到");
+        }
         return convertView;
     }
 
