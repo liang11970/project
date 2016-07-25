@@ -23,6 +23,7 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 import cn.com.hz_project.model.bean.DeleteMeeting;
 import cn.com.hz_project.model.bean.MeetingBean;
+import cn.com.hz_project.model.bean.MeetingListBean;
 import cn.com.hz_project.model.server.MeetingService;
 import cn.com.hz_project.model.server.PreferencesService;
 import cn.com.hz_project.tools.url.Urls;
@@ -55,9 +56,9 @@ public class MeetingSignListActivity extends Activity implements View.OnClickLis
     SwipeRefreshLayout swipeContainer;
     private MeetingService meetingService;
     private int pageNum = 1;
-    private List<MeetingBean.ObjBean> meetList;
+    private List<MeetingListBean.ObjBean> meetList;
     private MeetingListAdapter meetingListAdapter;
-    private List<MeetingBean.ObjBean> page2List;
+    private List<MeetingListBean.ObjBean> page2List;
     private int mtotalItemCout;
     private int lastItem;
     private boolean isLoading;
@@ -88,10 +89,10 @@ public class MeetingSignListActivity extends Activity implements View.OnClickLis
         meetingService = retrofit.create(MeetingService.class);
 
 
-        meetingService.getMeetData(userId,pageNum)
+        meetingService.getMeetData(pageNum,userId)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<MeetingBean>() {
+                .subscribe(new Subscriber<MeetingListBean>() {
                     @Override
                     public void onCompleted() {
 
@@ -105,7 +106,7 @@ public class MeetingSignListActivity extends Activity implements View.OnClickLis
                     }
 
                     @Override
-                    public void onNext(MeetingBean meetingBean) {
+                    public void onNext(MeetingListBean meetingBean) {
                         Log.e("请求成功++", meetingBean.toString());
                         Log.e("请求成功++", "pageNum===" + pageNum + "");
 
@@ -137,7 +138,7 @@ public class MeetingSignListActivity extends Activity implements View.OnClickLis
 
     private void addList() {
         if (page2List.size() != 0) {
-            for (MeetingBean.ObjBean bean : page2List) {
+            for (MeetingListBean.ObjBean bean : page2List) {
                 meetList.add(bean);
             }
             meetingListAdapter.notifyDataSetChanged();

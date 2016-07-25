@@ -56,7 +56,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="60.0dip"
-            android:ellipsize="end"
             android:hint="请输入会议名称"
             android:lines="1" />
 
@@ -138,7 +137,7 @@
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="30dip"
                 android:background="@drawable/shape_signin"
-                android:text="签到"
+                android:text="添加会议"
                 android:textColor="@color/city_item_bg_nor"
                 android:textSize="15sp" />
         </RelativeLayout>

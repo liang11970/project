@@ -68,10 +68,7 @@ dependencies {
     compile files('libs/vcameralibrary.jar')
     compile files('libs/universal-image-loader-1.8.6-with-sources.jar')
     compile 'com.zhy:autolayout:1.4.3'
-<<<<<<< HEAD
     compile project(':library')
 }
-=======
 
-}
->>>>>>> bdacad03a38c67a4b83e302be20b1d420b92ca36
+
