@@ -30,6 +30,7 @@ import cn.com.hz_project.tools.utils.ToastUtils;
 import cn.com.hz_project.view.adapter.MeetingListAdapter;
 import cn.com.hz_project.view.widget.LoadMoreListview;
 import cn.com.projectdemos.R;
+import cn.com.projectdemos.utils.ColorUtil;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -64,6 +65,8 @@ public class MeetingSignListActivity extends Activity implements View.OnClickLis
     private LinearLayout ll_pop;
     private int longClickPosition;
     private PreferencesService preferencesService;
+    private PreferencesService preferencesService1;
+    private String userId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,7 +88,7 @@ public class MeetingSignListActivity extends Activity implements View.OnClickLis
         meetingService = retrofit.create(MeetingService.class);
 
 
-        meetingService.getMeetData(pageNum)
+        meetingService.getMeetData(userId,pageNum)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<MeetingBean>() {
@@ -158,8 +161,9 @@ public class MeetingSignListActivity extends Activity implements View.OnClickLis
         tvBack.setOnClickListener(this);
         tvAddMeeting.setOnClickListener(this);
 
-        preferencesService = new PreferencesService(getApplicationContext());
-        if (preferencesService.getPerferences().get("roleId").equals("9")) {
+        this.preferencesService = new PreferencesService(getApplicationContext());
+        userId = preferencesService.getPerferences().get("userId");
+        if (this.preferencesService.getPerferences().get("roleId").equals("9")) {
             tvAddMeeting.setVisibility(View.VISIBLE);
         }else {
             tvAddMeeting.setVisibility(View.INVISIBLE);

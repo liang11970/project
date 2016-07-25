@@ -18,7 +18,7 @@ import rx.Observable;
  */
 public interface MeetingService {
     @GET("meetList")
-    Observable<MeetingBean> getMeetData (@Query("page") int pageNub );
+    Observable<MeetingBean> getMeetData (@Query("USER_ID") String userId,@Query("page") int pageNub);
 
     @GET("addMeetItem")
     Observable<MeetingSignInBean> getMeetingSignIn(@Query("MEET_ID") String MBD_ID,

@@ -157,6 +157,8 @@ public class MeetingDetailsActivity extends Activity implements View.OnClickList
         pDialog = new SweetAlertDialog(this, SweetAlertDialog.PROGRESS_TYPE)
                 .setTitleText("正在签到..");
         pDialog.show();
+
+
     }
 
     private void signInRequestData() {
@@ -176,6 +178,9 @@ public class MeetingDetailsActivity extends Activity implements View.OnClickList
                     public void onCompleted() {
                         complete = true;
                         pDialog.dismiss();
+
+
+
 //                        showwDialog();
 //                        showDDialog();
 

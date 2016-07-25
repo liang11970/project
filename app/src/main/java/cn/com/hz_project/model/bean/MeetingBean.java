@@ -67,6 +67,15 @@ public class MeetingBean {
         private String STIME;
         private String ETIME;
         private String MBD_REMARKS;
+        private int isSign;
+
+        public int getIsSign() {
+            return isSign;
+        }
+
+        public void setIsSign(int isSign) {
+            this.isSign = isSign;
+        }
 
         public int getROWNO() {
             return ROWNO;
