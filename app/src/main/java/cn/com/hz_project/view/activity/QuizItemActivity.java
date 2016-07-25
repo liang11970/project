@@ -171,7 +171,7 @@ public class QuizItemActivity extends Activity {
                 /**
                 * 提交答案
                  */
-                if (answer.getText().toString() == ""){
+                if (answer.getText().toString().equals("")){
                     Toast.makeText(QuizItemActivity.this,"答案不能为空",Toast.LENGTH_SHORT).show();
                 }else {
                     loginService.QuizReply(preferencesService.getPerferences().get("userId"), obj.getWQD_ID(), answer.getText().toString())
