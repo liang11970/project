@@ -26,6 +26,7 @@ import butterknife.InjectView;
 import cn.com.hz_project.model.bean.HttpResult;
 import cn.com.hz_project.presenter.activityPresenter.NewsContract;
 import cn.com.hz_project.presenter.activityPresenter.NewsPresenter;
+import cn.com.hz_project.view.activity.MeetingSignListActivity;
 import cn.com.hz_project.view.activity.NewActivity;
 import cn.com.hz_project.view.activity.NewContentActivity;
 import cn.com.hz_project.view.activity.SecondActivity;
@@ -133,7 +134,7 @@ public class HomeFragment extends Fragment implements NewsContract.View {
 //        mediaController.requestFocus();
 
 
-        listView.setLoadMoreListener(new LoadMorRecyclerView.LoadMoreListener() {
+            listView.setLoadMoreListener(new LoadMorRecyclerView.LoadMoreListener() {
             @Override
             public void onLoadMore() {
                 currentPage++;
@@ -148,9 +149,9 @@ public class HomeFragment extends Fragment implements NewsContract.View {
         mAdapter = new BaseAdapter<HttpResult.ObjBean>(getContext(), R.layout.item_new, mDataList, listView) {
             @Override
             public void convert(ViewHolder holder, final HttpResult.ObjBean newslistEntity) {
-                holder.setText(R.id.tv_title, newslistEntity.getNBD_TITLE());
+                holder.setText(R.id.tv_content, newslistEntity.getNBD_TITLE());
                 holder.setText(R.id.tv_time, newslistEntity.getTIME());
-                holder.setText(R.id.tv_content, newslistEntity.getSUBSTR());
+//                holder.setText(R.id.tv_content, newslistEntity.getSUBSTR());
                 holder.setImageWithUrl(R.id.iv_picasso, newslistEntity.getNBD_PICTURE_URL());
                 holder.setOnClickListener(R.id.start_time_repairs, new View.OnClickListener() {
                     @Override
@@ -192,7 +193,7 @@ public class HomeFragment extends Fragment implements NewsContract.View {
         tvTabNew.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getActivity(), NewActivity.class));
+                startActivity(new Intent(getActivity(), MeetingSignListActivity.class));
             }
         });
         tvTabHot.setOnClickListener(new View.OnClickListener() {

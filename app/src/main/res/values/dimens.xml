@@ -46,6 +46,8 @@
     <dimen name="t110">110dp</dimen>
     <dimen name="t130">120dp</dimen>
     <dimen name="t120">130dp</dimen>
+    <dimen name="dialog_corner_radius">4dp</dimen>
+    <dimen name="dialog_msg_min_height">112dp</dimen>
 
 
 </resources>

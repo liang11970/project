@@ -29,6 +29,7 @@ import cn.com.hz_project.model.server.MeetingService;
 import cn.com.hz_project.tools.url.Urls;
 import cn.com.hz_project.tools.utils.ToastUtils;
 import cn.com.projectdemos.R;
+import cn.pedant.SweetAlert.SweetAlertDialog;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -69,6 +70,7 @@ public class AddMeetingActivity extends FragmentActivity implements View.OnClick
     private TimePickerDialog timeSelector;
     private Date dateStime;
     private Date dateEtime;
+    private SweetAlertDialog pDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,6 +87,7 @@ public class AddMeetingActivity extends FragmentActivity implements View.OnClick
         sTime = etSTime.getText().toString();
         eTime = etSTime.getText().toString();
         content = edMeetingContent.getText().toString();
+
         Log.e("添加会议", "meetingName=" + meetingName + "content=" + content + "eTime=" + eTime + "sTime=" + sTime);
 
 
@@ -136,14 +139,24 @@ public class AddMeetingActivity extends FragmentActivity implements View.OnClick
 
     }
 
+    private void showDIalog() {
+        pDialog = new SweetAlertDialog(this, SweetAlertDialog.PROGRESS_TYPE)
+                .setTitleText("正在添加..请稍候");
+        pDialog.show();
+
+
+    }
+
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.bt_add_meeting:
                 initData();
 
+                showDIalog();
                 /**非空判断*/
                 if (meetingName.length() == 0 || content.length() == 0 || eTime.length() == 0 || sTime.length() == 0) {
+                    pDialog.dismiss();
                     ToastUtils.show(getApplicationContext(), "请将会议信息填写完整");
                     return;
                 }
@@ -152,7 +165,7 @@ public class AddMeetingActivity extends FragmentActivity implements View.OnClick
                 if (dateStime != null && dateEtime != null) {
 
                     if (dateStime.compareTo(dateEtime) > 0) {
-
+                        pDialog.dismiss();
                         ToastUtils.show(getApplicationContext(), "会议结束时间早于开始时间,请重新选择时间");
                         return;
                     }
@@ -200,11 +213,13 @@ public class AddMeetingActivity extends FragmentActivity implements View.OnClick
                 .subscribe(new Subscriber<MeetingAddBean>() {
                     @Override
                     public void onCompleted() {
+                        pDialog.dismiss();
 
                     }
 
                     @Override
                     public void onError(Throwable e) {
+                        pDialog.dismiss();
                         ToastUtils.show(AddMeetingActivity.this, "提交失败");
 
                     }

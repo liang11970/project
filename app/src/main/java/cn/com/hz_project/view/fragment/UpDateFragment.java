@@ -1,21 +1,21 @@
 package cn.com.hz_project.view.fragment;
 
+import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
-import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import com.orhanobut.logger.Logger;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -23,16 +23,15 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
 import cn.com.hz_project.model.UploadFileRequestBody;
-import cn.com.hz_project.model.server.FileServer;
+import cn.com.hz_project.model.server.PreferencesService;
 import cn.com.hz_project.model.server.UploadService;
 import cn.com.hz_project.tools.DefaultProgressListener;
 import cn.com.hz_project.tools.utils.RetrofitUtil;
-import cn.com.hz_project.tools.utils.scalars.ScalarsConverterFactory;
 import cn.com.hz_project.view.activity.ViewPagerActivity;
 import cn.com.projectdemos.R;
+import cn.pedant.SweetAlert.SweetAlertDialog;
 import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
-import retrofit2.Retrofit;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
@@ -41,20 +40,23 @@ import rx.schedulers.Schedulers;
  * Created by peng on 2016/7/15.
  */
 public class UpDateFragment extends Fragment {
-    @InjectView(R.id.xuanze)
     TextView xuanze;
+    public static EditText lujing;
+    @InjectView(R.id.back)
+    TextView back;
+
+
     @InjectView(R.id.submit_file)
     Button submitFile;
-    private Retrofit retrofit;
-    private FileServer netWorkService;
+    private PreferencesService service;
+    private HashMap map;
+    private SweetAlertDialog pDialog;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // TODO Auto-generated method stub
         View view = inflater.inflate(R.layout.activity_up_date, null);
-        net();
-
         view.findViewById(R.id.back).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -64,13 +66,48 @@ public class UpDateFragment extends Fragment {
                 ViewPagerActivity.transaction.commit();
             }
         });
+        xuanze = (TextView) view.findViewById(R.id.xuanze);
+        xuanze.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+                intent.setType("*/*");//设置类型，我这里是任意类型，任意后缀的可以这样写。
+                intent.addCategory(Intent.CATEGORY_OPENABLE);
+                startActivityForResult(intent, 1);
+
+            }
+        });
+        lujing = (EditText) view.findViewById(R.id.lujing);
+
+        lujing.setText(ViewPagerActivity.lujing);
+
         ButterKnife.inject(this, view);
 
-        xuanze.setOnClickListener(view1 -> {
-            Logger.e("上传文件按钮");
 
 
-            File file = new File(Environment.getExternalStorageDirectory(), "faq.docx");
+        return view;
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        ButterKnife.reset(this);
+    }
+
+    @OnClick(R.id.submit_file)
+    public void onClick() {
+
+        if(ViewPagerActivity.lujing.isEmpty()){
+            Toast.makeText(getContext(),"请选择文件",Toast.LENGTH_LONG).show();
+        }else {
+            final ProgressDialog dialog = new ProgressDialog(getContext());
+            dialog.setMessage("上传中，请稍后...");
+            dialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+            dialog.setCancelable(false);
+            dialog.show();
+
+            File file = new File(ViewPagerActivity.lujing);
+
             UploadService uploadFileService = RetrofitUtil.createService(UploadService.class);
             Map<String, String> optionMap = new HashMap<>();
             optionMap.put("Platformtype", "Android");
@@ -85,54 +122,27 @@ public class UpDateFragment extends Fragment {
                     observeOn(AndroidSchedulers.mainThread()).
                     subscribe(new Subscriber<ResponseBody>() {
                         @Override
-                        public void onCompleted() {}
+                        public void onCompleted() {
+                            dialog.dismiss();
+
+                        }
 
                         @Override
                         public void onError(Throwable e) {
-                            System.out.println("---the error is ---" + e);
                         }
 
                         @Override
                         public void onNext(ResponseBody s) {
-                            try {
-                                System.out.println("---the next string is --" + s.string());
-                            } catch (IOException e) {
-                                e.printStackTrace();
-                            }
+                            Toast.makeText(getContext(),"上传成功",Toast.LENGTH_LONG).show();
+
                         }
                     });
+        }
 
 
-        });
 
-        return view;
     }
 
-    private void net() {
-
-
-        retrofit = new Retrofit.Builder()
-                .baseUrl("http://192.168.2.17:8080/WsbxMobile/")
-                .addConverterFactory(ScalarsConverterFactory.create())
-                .build();
-
-        //让框架自动实现我们的请求接口,让我们的请求接口可以被调用
-        netWorkService = retrofit.create(FileServer.class);
-    }
-
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        ButterKnife.reset(this);
-    }
-
-    @OnClick(R.id.submit_file)
-    public void onClick() {
-//        netWorkService.postFile()
-
-        Logger.e("上传文件");
-    }
 
     private Handler mHandler = new Handler() {
         @Override
@@ -141,13 +151,9 @@ public class UpDateFragment extends Fragment {
                 case 1:
                     if (msg.what > 0) {
 //                        uploadImageView.updatePercent(msg.what);
-                        Log.e("dd","dd");
                     }
                     break;
             }
         }
     };
-
-
-
 }

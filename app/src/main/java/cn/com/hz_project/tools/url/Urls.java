@@ -17,13 +17,19 @@ public class Urls {
     public static  final  String LOGINURL="http://116.228.202.122:8080/WsbxMobile/loginCtrl/";
 
     //新闻
-    public static  final  String NEWS="http://192.168.2.205:8080/WsbxMobile/newsctrl/";
+    public static  final  String NEWS="http://116.228.202.122:8080/WsbxMobile/newsctrl/";
     //详情新闻
-    public static String NEWSCONTEXT="http://192.168.2.240:8080/WsbxMobile/newsctrl/";
+    public static String NEWSCONTEXT="http://116.228.202.122:8080/WsbxMobile/newsctrl/";
 
 
-    //内网
-//    public static final String baseURL = "http://192.168.2.205:8080/WsbxMobile/appCtrl/";
+    //文件下载
+    public static final String FileURL = "http://116.228.202.122:8080/WsbxMobile/page/file/";
+
+
+
+    //文件上传
+    public static final String FileUpURL ="http://116.228.202.122:8080/WsbxMobile/appCtrl/";
+
     //外网
     public static final String baseURL = "http://116.228.202.122:8080/WsbxMobile/appCtrl/";
     //删除会议

@@ -9,6 +9,8 @@
     <color name="colorPrimary">#31c7fa</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+    <color name="tranBlackLight">#22000000</color>
+    <color name="tranBlackDark">#66000000</color>
 
     <color name="trans">#00000000</color>
     <color name="exercis_background">#f8f8f8</color>

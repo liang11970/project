@@ -57,6 +57,7 @@ public class MeetingStaffListingActivity extends Activity implements View.OnClic
     private void initData() {
 
         meetingID = (String) getIntent().getExtras().get("meetingIDa");
+        com.orhanobut.logger.Logger.e("到场人员列表,会议ID是:"+meetingID);
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(Urls.baseURL)
                 .addConverterFactory(GsonConverterFactory.create())

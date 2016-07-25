@@ -1,5 +1,6 @@
 package cn.com.hz_project.view.activity;
 
+import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -10,6 +11,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.orhanobut.logger.Logger;
 import com.squareup.picasso.Picasso;
 
@@ -21,7 +23,7 @@ import cn.com.hz_project.presenter.activityPresenter.NewContext;
 import cn.com.hz_project.presenter.activityPresenter.NewPresenter;
 import cn.com.projectdemos.R;
 
-public class NewContentActivity extends AppCompatActivity implements NewContext.View {
+public class NewContentActivity extends Activity implements NewContext.View {
 
 
     @InjectView(R.id.tv_back)
@@ -75,7 +77,6 @@ public class NewContentActivity extends AppCompatActivity implements NewContext.
         });
         Bundle extras = getIntent().getExtras();
         int id = extras.getInt("id");
-        Logger.e(id + "");
         initData(id);
 
 
@@ -102,10 +103,14 @@ public class NewContentActivity extends AppCompatActivity implements NewContext.
         tvNum.setText(entity.getObj().get(0).getNBD_READNUMBER() + "");
         tvTime.setText(entity.getObj().get(0).getTIME());
         tvContext.setText(entity.getObj().get(0).getNBD_CONTEXT());
-        Picasso.with(mContext).load(entity.getObj().get(0).getNBD_PICTURE_URL()).resize(1250, 500)
-                .centerCrop().into(lvImage);
+//        Picasso.with(mContext).load(entity.getObj().get(0).getNBD_PICTURE_URL()).resize(1250, 500)
+//                .centerCrop().into(lvImage);
 
-        idSwiperefresh.setRefreshing(false);
+
+
+        Glide.with(this).load(entity.getObj().get(0).getNBD_PICTURE_URL()).skipMemoryCache(true).override(1250, 500).into(lvImage);
+
+
 
 
     }
@@ -114,5 +119,29 @@ public class NewContentActivity extends AppCompatActivity implements NewContext.
     @OnClick(R.id.iv_back_meeting)
     public void onClick() {
         this.finish();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+        Glide.get(this).clearMemory();
+    }
+
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+
+
+        idSwiperefresh.post(new Runnable() {
+            @Override
+            public void run() {
+                // Runnable为了能够第一次进入页面的时候显示加载进度条
+                idSwiperefresh.setRefreshing(false);
+            }
+        });
+
     }
 }

@@ -39,6 +39,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 </LinearLayout>
+
+
+
+
+
+
     <TextView
         android:id="@+id/xuanze"
         android:background="@drawable/buttons"
@@ -62,24 +68,37 @@
         android:layout_width="match_parent"
         android:layout_height="85px">
 <EditText
+    android:id="@+id/lujing"
     android:hint="    名称"
     android:background="@drawable/edittext"
     android:layout_width="280dp"
     android:layout_height="85px" />
     </LinearLayout>
-    <LinearLayout
-        android:layout_marginTop="15dp"
-        android:gravity="center"
-        android:layout_width="match_parent"
-        android:layout_height="450px">
-        <EditText
-            android:paddingTop="10dp"
-            android:gravity="left"
-            android:hint="    文件简介"
-            android:background="@drawable/edittext"
-            android:layout_width="280dp"
-            android:layout_height="fill_parent" />
-    </LinearLayout>
+
+
+
+        <LinearLayout
+            android:layout_marginTop="15dp"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="450px">
+
+
+
+            <EditText
+                android:paddingTop="10dp"
+                android:gravity="left"
+                android:hint="    文件简介"
+                android:background="@drawable/edittext"
+                android:layout_width="280dp"
+                android:layout_height="fill_parent" />
+
+
+        </LinearLayout>
+
+
+
+
     <LinearLayout
         android:layout_marginTop="15dp"
         android:gravity="center"

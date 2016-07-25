@@ -3,6 +3,7 @@ package cn.com.hz_project.model.server;
 import cn.com.hz_project.model.bean.DeleteMeeting;
 import cn.com.hz_project.model.bean.MeetingAddBean;
 import cn.com.hz_project.model.bean.MeetingBean;
+import cn.com.hz_project.model.bean.MeetingListBean;
 import cn.com.hz_project.model.bean.MeetingSignInBean;
 import cn.com.hz_project.model.bean.StaffBean;
 import retrofit2.Call;
@@ -18,7 +19,7 @@ import rx.Observable;
  */
 public interface MeetingService {
     @GET("meetList")
-    Observable<MeetingBean> getMeetData (@Query("page") int pageNub );
+    Observable<MeetingListBean> getMeetData (@Query("page") int pageNub,@Query("USER_ID") String userId);
 
     @GET("addMeetItem")
     Observable<MeetingSignInBean> getMeetingSignIn(@Query("MEET_ID") String MBD_ID,

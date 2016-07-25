@@ -1,8 +1,11 @@
 package cn.com.hz_project.view.activity;
 
+
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -10,8 +13,14 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import java.io.Serializable;
-import java.util.List;
+import com.github.mikephil.charting.charts.PieChart;
+import com.github.mikephil.charting.components.Legend;
+import com.github.mikephil.charting.data.Entry;
+import com.github.mikephil.charting.data.PieData;
+import com.github.mikephil.charting.data.PieDataSet;
+import com.orhanobut.logger.Logger;
+
+import java.util.ArrayList;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -37,9 +46,12 @@ public class MeetingStaffPieActivity extends Activity implements View.OnClickLis
     Button btStaffListing;
     @InjectView(R.id.tv_back)
     TextView tvBack;
+    @InjectView(R.id.chart)
+    PieChart chart;
     private MeetingService meetingService;
     private String meetingID;
     private StaffBean staffdata;
+    private PieChart mChart;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +60,87 @@ public class MeetingStaffPieActivity extends Activity implements View.OnClickLis
         ButterKnife.inject(this);
 
         initview();
-        initData();
+//        initData();
+        mChart = (PieChart) findViewById(R.id.chart);
+        meetingID = (String) getIntent().getExtras().get("meetingID");
+        PieData pieData = getPie(4, 100);
+        showChart(mChart, pieData);
+
+    }
+
+    private PieData getPie(int count, int range) {
+        ArrayList<String> content = new ArrayList<String>();
+
+        content.add(0, "教育部");
+        content.add(1, "技术部");
+        content.add(2, "保障部");
+        content.add(3, "商务部");
+
+
+        ArrayList<Entry> data = new ArrayList<>();
+        float num0 = 22;
+        float num1 = 33;
+        float num2 = 11;
+        float num3 = 30;
+
+        data.add(new Entry(num0, 0));
+        data.add(new Entry(num1, 1));
+        data.add(new Entry(num2, 2));
+        data.add(new Entry(num3, 3));
+
+        PieDataSet pieDataSet = new PieDataSet(data, "各部门到场人数");
+        pieDataSet.setSliceSpace(1f); /**饼图间间隔*/
+
+
+        ArrayList<Integer> colors = new ArrayList<Integer>();
+        colors.add(Color.parseColor("#b284f3"));
+        colors.add(Color.parseColor("#fe7c2e"));
+        colors.add(Color.parseColor("#7494d6"));
+        colors.add(Color.parseColor("#42c0fa"));
+        pieDataSet.setColors(colors);  /**设置颜色*/
+
+
+        DisplayMetrics metrics = getResources().getDisplayMetrics();
+        float px = 5 * (metrics.densityDpi / 160f);
+        pieDataSet.setSelectionShift(px);
+
+        PieData pieData = new PieData(content, pieDataSet);
+        pieData.setValueTextSize(14f);
+        pieData.setValueTextColor(getResources().getColor(R.color.white));
+        pieData.setDrawValues(true);
+        return pieData;
+
+    }
+
+    private void showChart(PieChart mChart, PieData pieData) {
+        mChart.setHoleRadius(50f);
+        mChart.setTransparentCircleRadius(54f);
+        mChart.setDrawCenterText(true);
+        mChart.setDrawHoleEnabled(true);
+        mChart.setCenterText("签到人数占总人数百分比");
+        mChart.setCenterTextSize(14);  //饼图中间文字大小
+        mChart.setDescriptionTextSize(12);  //饼图模块描述字体大小
+        mChart.setRotationAngle(90);
+
+        mChart.setNoDataText("正在加载数据");
+        mChart.setRotationEnabled(true);
+        mChart.setDrawSliceText(true); //是否显示各模块在饼图名称
+        mChart.setUsePercentValues(true); //
+
+        mChart.setDescription(null);
+
+        mChart.setData(pieData);
+
+        Legend legend = mChart.getLegend();
+        legend.setPosition(Legend.LegendPosition.BELOW_CHART_CENTER);
+//        legend.setFormSize(10f);
+        legend.setTextSize(14);
+        legend.setXEntrySpace(5f);
+        legend.setYEntrySpace(5f);
+        legend.setWordWrapEnabled(true);
+
+
+        mChart.animateXY(1000, 1000);
 
 
     }
@@ -60,7 +152,8 @@ public class MeetingStaffPieActivity extends Activity implements View.OnClickLis
     }
 
     private void initData() {
-        meetingID = (String) getIntent().getExtras().get("meetingID");
+
+        Logger.e("到场人员列表饼图,会议ID:"+meetingID);
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(Urls.baseURL)
                 .addConverterFactory(GsonConverterFactory.create())
@@ -91,6 +184,8 @@ public class MeetingStaffPieActivity extends Activity implements View.OnClickLis
                     public void onNext(StaffBean staffBean) {
                         Log.e("饼图", staffBean.getObj().toString());
                         staffdata = staffBean;
+                        PieData pieData = getPie(4, 100);
+                        showChart(mChart, pieData);
 
 
                     }

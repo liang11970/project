@@ -5,7 +5,7 @@ import java.util.List;
 /**
  * Created by Tan on 2016/7/16 0016.
  */
-public class MeetingBean {
+public class MeetingListBean {
     /**
      * success : true
      * msg : 查询会议列表成功

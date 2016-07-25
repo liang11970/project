@@ -59,34 +59,24 @@
         android:textColor="@color/city_item_bg_nor"
         android:textSize="15sp" />
 
-    <ScrollView
+
+    <com.github.mikephil.charting.charts.PieChart
+        android:id="@+id/chart"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@id/bt_staff_listing">
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <!--<com.github.mikephil.charting.charts.PieChart-->
-                <!--android:id="@+id/chart"-->
-
-                <!--android:layout_width="match_parent"-->
-
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_below="@+id/bt_staff_listing" />-->
-
-            <!--<TextView-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="30dip"-->
-                <!--android:layout_below="@+id/chart"-->
-
-                <!--/>-->
-
-        </RelativeLayout>
+        android:layout_height="400dip"
 
 
-    </ScrollView>
+        android:layout_below="@+id/bt_staff_listing"
+
+
+         />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="30dip"
+        android:layout_below="@+id/chart"
+
+        />
 
 
 </RelativeLayout>
