@@ -16,6 +16,7 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 import cn.com.hz_project.model.bean.MeetingBean;
 import cn.com.hz_project.model.server.MeetingService;
+import cn.com.hz_project.model.server.PreferencesService;
 import cn.com.hz_project.view.adapter.MeetingListAdapter;
 import cn.com.projectdemos.R;
 import retrofit2.Retrofit;
@@ -40,6 +41,7 @@ public class MeetingListActivity extends AppCompatActivity implements View.OnCli
     private int pageNum = 1;
     private List<MeetingBean.ObjBean> meetList;
     private MeetingListAdapter meetingListAdapter;
+    private PreferencesService preferencesService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +54,8 @@ public class MeetingListActivity extends AppCompatActivity implements View.OnCli
 
     private void initData() {
 
+        preferencesService = new PreferencesService(this);
+        String userId = preferencesService.getPerferences().get("userId");
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("http://192.168.2.22:8080/WsbxMobile/appCtrl/")
                 .addConverterFactory(GsonConverterFactory.create())
@@ -61,7 +65,7 @@ public class MeetingListActivity extends AppCompatActivity implements View.OnCli
         meetingService = retrofit.create(MeetingService.class);
 
 
-        meetingService.getMeetData(pageNum)
+        meetingService.getMeetData(userId,pageNum)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<MeetingBean>() {
