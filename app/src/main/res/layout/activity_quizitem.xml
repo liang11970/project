@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<cn.com.hz_project.tools.percent.PercentRelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<cn.com.hz_project.tools.percent.PercentRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -32,98 +31,108 @@
             android:textSize="22sp" />
     </RelativeLayout>
 
-    <RelativeLayout
-        android:id="@+id/question"
+    <ScrollView
+        android:id="@+id/sv_question"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="120dp"
         android:layout_below="@+id/title"
-        android:layout_margin="5dp"
-        android:background="@drawable/bg_quizitem">
+        android:background="@drawable/bg_quizitem"
+        android:layout_margin="5dp">
 
-    <ImageView
-        android:id="@+id/iv_quizitem"
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
-        android:src="@mipmap/quiz"
-        android:layout_marginLeft="10dp"/>
+        <com.zhy.autolayout.AutoRelativeLayout
+            android:id="@+id/question"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            >
 
-    <TextView
-        android:id="@+id/quiz_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_toRightOf="@+id/iv_quizitem"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="15dp"
-        android:textSize="20sp"
-        android:text="问题标题"/>
+            <ImageView
+                android:id="@+id/iv_quizitem"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="10dp"
+                android:src="@mipmap/quiz" />
 
-    <TextView
-        android:id="@+id/quiz_sponsor"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/quiz_title"
-        android:layout_alignLeft="@+id/quiz_title"
-        android:layout_marginTop="8dp"
-        android:textSize="16sp"
-        android:text="王某某"/>
+            <TextView
+                android:id="@+id/quiz_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/iv_quizitem"
+                android:layout_marginLeft="15px"
+                android:layout_toRightOf="@+id/iv_quizitem"
+                android:text="问题标题"
+                android:textSize="50px" />
 
-    <TextView
-        android:id="@+id/quiz_time"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_toRightOf="@+id/quiz_sponsor"
-        android:layout_alignBottom="@+id/quiz_sponsor"
-        android:layout_marginLeft="10sp"
-        android:textSize="16sp"
-        android:text="时间:2016.07.10 13:25:25"/>
+            <TextView
+                android:id="@+id/quiz_sponsor"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/quiz_title"
+                android:layout_below="@+id/quiz_title"
+                android:layout_marginTop="15px"
+                android:text="王某某"
+                android:textSize="40px" />
 
-    <TextView
-        android:id="@+id/quiz_content"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/quiz_sponsor"
-        android:layout_below="@+id/quiz_sponsor"
-        android:layout_marginTop="10dp"
-        android:textSize="16sp"
-        android:text="这个是问题的具体描述，请仔细看看，恩恩就是这样的"/>
+            <TextView
+                android:id="@+id/quiz_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/quiz_sponsor"
+                android:layout_marginLeft="15px"
+                android:layout_toRightOf="@+id/quiz_sponsor"
+                android:text="时间:2016.07.10 13:25:25"
+                android:textSize="40px" />
 
-    </RelativeLayout>
+            <TextView
+                android:id="@+id/quiz_content"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/quiz_sponsor"
+                android:layout_below="@+id/quiz_sponsor"
+                android:layout_marginTop="15px"
+                android:text="这个是问题的具体描述，请仔细看看，恩恩就是这样的"
+                android:textSize="50px" />
+
+        </com.zhy.autolayout.AutoRelativeLayout>
+    </ScrollView>
+
     <ListView
         android:id="@+id/list_answer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/question"
         android:layout_above="@+id/answer"
-        />
+        android:layout_below="@+id/sv_question" />
 
     <RelativeLayout
         android:id="@+id/answer"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_marginBottom="8dp"
-        android:layout_alignParentBottom="true">
-
-    <EditText
-        android:id="@+id/et_quiz"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/bg_quizitem"
-        android:layout_marginLeft="8dp"
-        android:layout_toLeftOf="@+id/btn_quiz"
-        android:layout_marginRight="5dp"
-        android:hint="请输入回答内容"/>
-
-    <Button
-        android:id="@+id/btn_quiz"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:background="@drawable/bg_btn_reply"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="8dp"
-        android:paddingLeft="35dp"
-        android:paddingRight="35dp"
-        android:onClick="click"
-        android:text="回答"/>
+        android:layout_marginBottom="8dp">
+
+        <EditText
+            android:id="@+id/et_quiz"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="5dp"
+            android:layout_toLeftOf="@+id/btn_quiz"
+            android:background="@drawable/bg_quizitem"
+            android:hint=" 请输入回答内容" />
+
+        <Button
+            android:id="@+id/btn_quiz"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="8dp"
+            android:background="@drawable/bg_btn_reply"
+            android:onClick="click"
+            android:paddingLeft="35dp"
+            android:paddingRight="35dp"
+            android:text="回答" />
     </RelativeLayout>
 </cn.com.hz_project.tools.percent.PercentRelativeLayout>

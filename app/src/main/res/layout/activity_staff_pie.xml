@@ -17,6 +17,7 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:padding="10dip"
+
             android:src="@mipmap/back" />
 
         <TextView
@@ -24,9 +25,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:paddingTop="5dip"
-            android:paddingBottom="5dip"
             android:layout_toRightOf="@+id/iv_back_meeting"
+            android:paddingBottom="5dip"
+            android:paddingTop="5dip"
             android:text="返回"
             android:textColor="@color/city_item_bg_nor"
 
@@ -44,18 +45,48 @@
     </RelativeLayout>
 
     <Button
-        android:onClick="clickToPie"
         android:id="@+id/bt_staff_listing"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/shape_pop"
-        android:layout_below="@+id/title_meeting"
         android:layout_alignParentRight="true"
+        android:layout_below="@+id/title_meeting"
         android:layout_margin="5dip"
+        android:background="@drawable/shape_pop"
+        android:onClick="clickToPie"
+
         android:padding="10dip"
         android:text="到场人员列表"
         android:textColor="@color/city_item_bg_nor"
         android:textSize="15sp" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/bt_staff_listing">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <!--<com.github.mikephil.charting.charts.PieChart-->
+                <!--android:id="@+id/chart"-->
+
+                <!--android:layout_width="match_parent"-->
+
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_below="@+id/bt_staff_listing" />-->
+
+            <!--<TextView-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="30dip"-->
+                <!--android:layout_below="@+id/chart"-->
+
+                <!--/>-->
+
+        </RelativeLayout>
+
+
+    </ScrollView>
 
 
 </RelativeLayout>

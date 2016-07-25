@@ -2,6 +2,7 @@ package cn.com.hz_project.view.activity;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
@@ -20,6 +21,7 @@ import java.util.List;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
+import cn.com.hz_project.model.bean.DeleteMeeting;
 import cn.com.hz_project.model.bean.MeetingBean;
 import cn.com.hz_project.model.server.MeetingService;
 import cn.com.hz_project.model.server.PreferencesService;
@@ -107,6 +109,7 @@ public class MeetingSignListActivity extends Activity implements View.OnClickLis
 
                         if (pageNum == 1) {
                             meetList = meetingBean.getObj();
+                            Log.e("请求成功,会议时间",meetingBean.getObj().toString());
                             showData();
                         } else if (pageNum != 1) {
                             page2List = meetingBean.getObj();
@@ -118,6 +121,14 @@ public class MeetingSignListActivity extends Activity implements View.OnClickLis
                     }
                 });
 
+
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        pageNum = 1;
+        initData();
 
     }
 
@@ -246,8 +257,41 @@ public class MeetingSignListActivity extends Activity implements View.OnClickLis
                 startActivity(new Intent(getApplicationContext(), AddMeetingActivity.class));
                 break;
             case R.id.ll_pop:
-                DeleteList();
+                deleteRequest();
         }
+    }
+
+    private void deleteRequest() {
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(Urls.baseURL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                .build();
+        MeetingService meetingService =  retrofit.create(MeetingService.class);
+
+        meetingService.getDeleteMeeting(meetList.get(longClickPosition).getMBD_ID()+"")
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<DeleteMeeting>() {
+                    @Override
+                    public void onCompleted() {
+                        DeleteList();
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        ToastUtils.show(MeetingSignListActivity.this,"删除失败,请检查网络");
+
+                    }
+
+                    @Override
+                    public void onNext(DeleteMeeting deleteMeeting) {
+                        Log.e("会议列表",deleteMeeting.toString());
+                        ToastUtils.show(MeetingSignListActivity.this,deleteMeeting.getMsg()+"");
+
+                    }
+                });
+
     }
 
     private void DeleteList() {
@@ -257,7 +301,6 @@ public class MeetingSignListActivity extends Activity implements View.OnClickLis
         }
         meetList.remove(longClickPosition);
         meetingListAdapter.notifyDataSetChanged();
-        ToastUtils.show(getApplicationContext(),"会议已删除");
     }
 
     @Override

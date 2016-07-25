@@ -15,6 +15,7 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 import cn.com.hz_project.model.bean.OnlineQuiz;
 import cn.com.hz_project.model.server.LoginService;
+import cn.com.hz_project.model.server.PreferencesService;
 import cn.com.hz_project.tools.url.Urls;
 import cn.com.projectdemos.R;
 import retrofit2.Retrofit;
@@ -42,6 +43,7 @@ public class OnlineQuizActivity extends Activity {
     private LoginService loginService;
 
     private int ansObj = -1;
+    private PreferencesService preferencesService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +59,7 @@ public class OnlineQuizActivity extends Activity {
                 .build();
 
         loginService = retrofit.create(LoginService.class);
+        preferencesService = new PreferencesService(this);
 
         /**
          * spinner选中值的获取
@@ -77,7 +80,6 @@ public class OnlineQuizActivity extends Activity {
         });
 
 
-
         /**
          * 返回点击
          */
@@ -94,7 +96,7 @@ public class OnlineQuizActivity extends Activity {
         quiz.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                loginService.Quiz("1",quizTitle.getText().toString(),quizContent.getText().toString(),ansObj)
+                loginService.Quiz(preferencesService.getPerferences().get("userId"),quizTitle.getText().toString(),quizContent.getText().toString(),ansObj)
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe(new Subscriber<OnlineQuiz>() {

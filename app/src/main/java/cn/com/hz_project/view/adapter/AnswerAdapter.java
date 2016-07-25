@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -62,6 +63,7 @@ public class AnswerAdapter extends BaseAdapter{
         myViewHolder.replyer.setText(list.get(position).getUBD_REAL_NAME());
         myViewHolder.content.setText(list.get(position).getWAD_CONTEXT());
         myViewHolder.time.setText(list.get(position).getTIME());
+//        myViewHolder.time.setText();
 
 
         return convertView;
@@ -71,11 +73,13 @@ public class AnswerAdapter extends BaseAdapter{
         TextView replyer;
         TextView time;
         TextView content;
+        ImageView icon;
 
         public MyViewHolder(View view) {
             replyer = (TextView) view.findViewById(R.id.replyer);
             time = (TextView) view.findViewById(R.id.time);
             content = (TextView) view.findViewById(R.id.content);
+            icon = (ImageView) view.findViewById(R.id.iv_photo);
         }
     }
 }

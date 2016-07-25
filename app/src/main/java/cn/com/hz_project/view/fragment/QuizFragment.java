@@ -15,6 +15,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import cn.com.hz_project.model.bean.OnlineQuiz;
@@ -37,7 +38,7 @@ import rx.schedulers.Schedulers;
 /**
  * Created by ku on 2016/7/16.
  */
-public class QuizFragment extends Fragment{
+public class QuizFragment extends Fragment {
     @InjectView(R.id.btn_onlinequiz)
     Button btn_onlinquiz;
 
@@ -58,7 +59,7 @@ public class QuizFragment extends Fragment{
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view  = LayoutInflater.from(getActivity()).inflate(R.layout.fragment_quiz,null);
+        View view = LayoutInflater.from(getActivity()).inflate(R.layout.fragment_quiz, null);
 
         initView(view);
         initData();
@@ -75,7 +76,7 @@ public class QuizFragment extends Fragment{
 
         loginService = retrofit.create(LoginService.class);
 
-        ButterKnife.inject(this,view);
+        ButterKnife.inject(this, view);
 
         list = new ArrayList<>();
 
@@ -94,7 +95,8 @@ public class QuizFragment extends Fragment{
                 startActivity(new Intent(getContext(), OnlineQuizActivity.class));
             }
         });
-
+        adapter = new QuizAdapter(getActivity(), list);
+        listView.setAdapter(adapter);
         getData(currentPage);
 
         /**
@@ -104,7 +106,7 @@ public class QuizFragment extends Fragment{
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 intent = new Intent(getActivity(), QuizItemActivity.class);
-                intent.putExtra("Obj",list.get(position));
+                intent.putExtra("Obj", list.get(position));
                 startActivity(intent);
             }
         });
@@ -116,7 +118,7 @@ public class QuizFragment extends Fragment{
             @Override
             public void onRefresh() {
                 currentPage = 1;
-                Toast.makeText(getActivity(),"您调皮了一下",Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getActivity(), "您调皮了一下", Toast.LENGTH_SHORT).show();
                 list.clear();
 
                 getData(currentPage);
@@ -142,7 +144,7 @@ public class QuizFragment extends Fragment{
     /**
      * 获取数据
      */
-    private void getData(int PAGE){
+    private void getData(int PAGE) {
         loginService.Quiz(PAGE)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -154,18 +156,17 @@ public class QuizFragment extends Fragment{
 
                     @Override
                     public void onError(Throwable e) {
-                        Log.i("----------",""+e.toString());
+                        Log.i("----------", "" + e.toString());
                     }
 
                     @Override
                     public void onNext(Quiz quiz) {
-                        if (quiz.getObj().size() == 0){
-                            Toast.makeText(getActivity(),"没有更多了",Toast.LENGTH_SHORT).show();
+                        if (quiz.getObj().size() == 0) {
+                            Toast.makeText(getActivity(), "没有更多了", Toast.LENGTH_SHORT).show();
                         }
                         list.addAll(quiz.getObj());
-                        adapter = new QuizAdapter(getActivity(),list);
-                        listView.setAdapter(adapter);
-//                        adapter.notifyDataSetChanged();
+
+                        adapter.notifyDataSetChanged();
 
                         swipe.setRefreshing(false);
                         swipe.setLoading(false);
