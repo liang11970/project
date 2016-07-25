@@ -2,6 +2,10 @@ package cn.com.hz_project.app;
 
 import android.app.Application;
 
+import cn.com.hz_project.model.server.FileServer;
+import cn.com.hz_project.tools.utils.scalars.ScalarsConverterFactory;
+import retrofit2.Retrofit;
+
 /**
  * ==================================
  * Created by wangl on 2016/7/11.时间14:11
@@ -15,7 +19,22 @@ import android.app.Application;
 public class MyApplication extends Application {
 
 
-//init
+    /**
+     * 声明请求的接口
+     */
+    public static FileServer netWorkService;
+
+    /**
+     * 网络请求框架
+     */
+    public static Retrofit retrofit;
+
+    @Override
+    public void onCreate() {
+        super.onCreate();
+
+
+    }
 
 
 }

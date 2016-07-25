@@ -14,6 +14,8 @@ import android.widget.GridView;
 import android.widget.SimpleAdapter;
 
 
+import com.orhanobut.logger.Logger;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -62,6 +64,12 @@ public class SortFragment extends Fragment{
 				Fragment sortFragment = new UpDateFragment();
 				ViewPagerActivity.transaction.replace(R.id.content, sortFragment);
 				ViewPagerActivity.transaction.commit();
+
+
+				Logger.e("点击了文件上传");
+
+
+
 			}
 		});
 		view.findViewById(R.id.download).setOnClickListener(new View.OnClickListener() {

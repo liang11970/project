@@ -1,6 +1,7 @@
 <resources xmlns:xliff="http://schemas.android.com/tools">
     <string name="app_name">司法局</string>
 
+    <string name="scale_up_show_behavior">com.yanzhenjie.definebehavior.behavior.ScaleUpShowBehavior</string>
     <string name="app_picker_name">Applications</string>
     <string name="bookmark_picker_name">Bookmarks</string>
     <string name="button_add_calendar">Add to calendar</string>

@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.orhanobut.logger.Logger;
 import com.squareup.picasso.Picasso;
 
 import butterknife.ButterKnife;
@@ -50,6 +51,9 @@ public class SheZhiFragment extends Fragment {
         tvdepartmentName.setText(service.getPerferences().get("departmentName"));
 
         Picasso.with(getContext()).load("http://192.168.2.35:8080/WsbxMobile"+service.getPerferences().get("imgUrl")).into(ivtop);
+
+        Logger.e(service.getPerferences().get("imgUrl"));
+        Logger.e("http://192.168.2.35:8080/WsbxMobile"+service.getPerferences().get("imgUrl"));
 
     }
 
