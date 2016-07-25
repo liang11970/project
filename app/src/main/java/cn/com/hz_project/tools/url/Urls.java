@@ -22,12 +22,19 @@ public class Urls {
     public static String NEWSCONTEXT="http://116.228.202.122:8080/WsbxMobile/newsctrl/";
 
 
-    //内网
-//    public static final String baseURL = "http://192.168.2.205:8080/WsbxMobile/appCtrl/";
+    //文件下载
+    public static final String FileURL = "http://116.228.202.122:8080/WsbxMobile/page/file/";
+
+
+
+    //文件上传
+    public static final String FileUpURL ="http://116.228.202.122:8080/WsbxMobile/appCtrl/";
+
     //外网
     public static final String baseURL = "http://116.228.202.122:8080/WsbxMobile/appCtrl/";
     //删除会议
     public static final String DeletMeeting = "http://192.168.2.17:8080/WsbxMobile/appCtrl/";
     //到场人员头像
     public static final String touxiang = "http://116.228.202.122:8080/WsbxMobile";
+
 }
