@@ -6,15 +6,17 @@ import android.os.Handler;
 import android.os.Message;
 import android.os.Bundle;
 import android.view.Window;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 
 import cn.com.projectdemos.R;
 
 public class MainActivity extends Activity {
     private Handler mHandler = new Handler();
-
     private ImageView iv_welcome;
-
+    Animation alphaAnim;
     private int alpha = 255;
     private int b = 0;
     @Override
@@ -23,6 +25,12 @@ public class MainActivity extends Activity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_mai);
         iv_welcome=(ImageView) findViewById(R.id.iv_welcome);
+
+        alphaAnim = new AlphaAnimation(0.1f,1.0f);
+        alphaAnim.setDuration(3000);
+        alphaAnim.setFillBefore(true);
+        iv_welcome.startAnimation(alphaAnim);
+
         iv_welcome.setAlpha(alpha);
         new Thread(new Runnable() {
             public void run() {
