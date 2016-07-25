@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zhy.autolayout.AutoRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/iv_quizitem"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="10dp"
+        android:src="@mipmap/quiz" />
+
+    <TextView
+        android:id="@+id/quiz_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/iv_quizitem"
+        android:layout_marginLeft="15px"
+        android:layout_toRightOf="@+id/iv_quizitem"
+        android:text="问题标题"
+        android:textSize="50px" />
+
+    <TextView
+        android:id="@+id/quiz_sponsor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/quiz_title"
+        android:layout_below="@+id/quiz_title"
+        android:layout_marginTop="15px"
+        android:text="王某某"
+        android:textSize="40px" />
+
+    <TextView
+        android:id="@+id/quiz_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/quiz_sponsor"
+        android:layout_marginLeft="15px"
+        android:layout_toRightOf="@+id/quiz_sponsor"
+        android:text="时间:2016.07.10 13:25:25"
+        android:textSize="40px" />
+
+    <TextView
+        android:id="@+id/quiz_content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/quiz_sponsor"
+        android:layout_below="@+id/quiz_sponsor"
+        android:layout_marginTop="15px"
+        android:text="这个是问题的具体描述，请仔细看看，恩恩就是这样的"
+        android:textSize="50px" />
+</com.zhy.autolayout.AutoRelativeLayout>
