@@ -4,11 +4,14 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -44,17 +47,18 @@ public class QuizItemActivity extends Activity {
     private ArrayList<QuizAnswerObj> ansList;
     private AnswerAdapter answerAdapter;
     private PreferencesService preferencesService;
+    private View view;
 
-    @InjectView(R.id.quiz_title)
+//    @InjectView(R.id.quiz_title)
     TextView title;
-
-    @InjectView(R.id.quiz_sponsor)
+//
+//    @InjectView(R.id.quiz_sponsor)
     TextView sponsor;
-
-    @InjectView(R.id.quiz_time)
+//
+//    @InjectView(R.id.quiz_time)
     TextView time;
-
-    @InjectView(R.id.quiz_content)
+//
+//    @InjectView(R.id.quiz_content)
     TextView content;
 
     @InjectView(R.id.et_quiz)
@@ -73,6 +77,7 @@ public class QuizItemActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quizitem);
+        getWindow().setSoftInputMode( WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
 
         ButterKnife.inject(this);
 
@@ -94,9 +99,15 @@ public class QuizItemActivity extends Activity {
         loginService = retrofit.create(LoginService.class);
         ansList = new ArrayList<>();
 
+        view = LayoutInflater.from(QuizItemActivity.this).inflate(R.layout.itemquiz_headerview,null);
 
         answerAdapter = new AnswerAdapter(ansList,QuizItemActivity.this);
         preferencesService = new PreferencesService(this);
+
+        title = (TextView) view.findViewById(R.id.quiz_title);
+        sponsor = (TextView) view.findViewById(R.id.quiz_sponsor);
+        content = (TextView) view.findViewById(R.id.quiz_content);
+        time = (TextView) view.findViewById(R.id.quiz_time);
     }
 
     private void initData() {
@@ -105,9 +116,8 @@ public class QuizItemActivity extends Activity {
         content.setText(obj.getWQD_CONTEXT());
         sponsor.setText(obj.getUBD_REAL_NAME());
 
-
+        listView.addHeaderView(view);
         listView.setAdapter(answerAdapter);
-
         queryAns();
 
         /**
@@ -161,28 +171,32 @@ public class QuizItemActivity extends Activity {
                 /**
                 * 提交答案
                  */
-                loginService.QuizReply(preferencesService.getPerferences().get("userId"), obj.getWQD_ID(), answer.getText().toString())
-                        .subscribeOn(Schedulers.io())
-                        .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe(new Subscriber<QuizAnswer>() {
-                            @Override
-                            public void onCompleted() {
+                if (answer.getText().toString() == ""){
+                    Toast.makeText(QuizItemActivity.this,"答案不能为空",Toast.LENGTH_SHORT).show();
+                }else {
+                    loginService.QuizReply(preferencesService.getPerferences().get("userId"), obj.getWQD_ID(), answer.getText().toString())
+                            .subscribeOn(Schedulers.io())
+                            .observeOn(AndroidSchedulers.mainThread())
+                            .subscribe(new Subscriber<QuizAnswer>() {
+                                @Override
+                                public void onCompleted() {
 
-                            }
+                                }
 
-                            @Override
-                            public void onError(Throwable e) {
-                                Log.i("----------", "" + e.toString());
-                            }
+                                @Override
+                                public void onError(Throwable e) {
+                                    Log.i("----------", "" + e.toString());
+                                }
 
-                            @Override
-                            public void onNext(QuizAnswer quiz) {
-                                answer.setText("");
-                                ansList = quiz.getObj();
-                                answerAdapter = new AnswerAdapter(ansList,QuizItemActivity.this);
-                                listView.setAdapter(answerAdapter);
-                            }
-                        });
+                                @Override
+                                public void onNext(QuizAnswer quiz) {
+                                    answer.setText("");
+                                    ansList = quiz.getObj();
+                                    answerAdapter = new AnswerAdapter(ansList, QuizItemActivity.this);
+                                    listView.setAdapter(answerAdapter);
+                                }
+                            });
+                }
                 break;
 
         }
