@@ -296,7 +296,7 @@ public class HomeFragment extends Fragment implements NewsContract.View {
 
     }
 
-   
+
 
 
 

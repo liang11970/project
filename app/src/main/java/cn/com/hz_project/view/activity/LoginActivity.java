@@ -3,6 +3,7 @@ package cn.com.hz_project.view.activity;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
@@ -135,6 +136,12 @@ public class LoginActivity extends BaseActivity {
                     public void onNext(Login login) {
 
                         if (login.isSuccess()) {
+
+                            SharedPreferences preferences=getSharedPreferences("logintag",Context.MODE_PRIVATE);
+                            SharedPreferences.Editor editor=preferences.edit();
+                            editor.putBoolean("tag",login.isSuccess());
+                            editor.commit();
+
                             startActivity(new Intent(LoginActivity.this, ViewPagerActivity.class));
                             finish();
                         } else {

@@ -12,14 +12,14 @@ import java.util.List;
 
 import cn.com.hz_project.model.bean.Title;
 import cn.com.hz_project.view.adapter.LingdaoAdapter;
+import cn.com.hz_project.view.base.BaseActivity;
 import cn.com.projectdemos.R;
 
-public class SecondActivity extends Activity {
+public class SecondActivity extends BaseActivity {
     private List<Title> fruitList = new ArrayList<Title>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_second);
         initFruits();
         LingdaoAdapter adapter = new LingdaoAdapter(SecondActivity.this,
@@ -33,6 +33,12 @@ public class SecondActivity extends Activity {
             }
         });
     }
+
+    @Override
+    protected void initViewsAndEvents() {
+
+    }
+
     private void initFruits() {
         Title apple = new Title(R.mipmap.man1,"郑善和","1959年3月出生，汉族，籍贯福建福州，中共党员，1977年6月参加工作，大学学历，现任上海市司法局党委书记、局长，市监狱管理局第一政委。曾任市公安局经济保卫总队副总队长，市公安局政治部副主任、主任，市公安局副局长，市监狱管理局党委书记，市...","上海市司法局党委书记");
         fruitList.add(apple);

@@ -204,4 +204,7 @@ private RadioButton qq;
     public static boolean isGooglePhotosUri(Uri uri) {
         return "com.google.android.apps.photos.content".equals(uri.getAuthority());
     }
+
+
+
 }
