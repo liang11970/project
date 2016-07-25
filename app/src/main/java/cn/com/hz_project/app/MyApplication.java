@@ -19,10 +19,7 @@ import retrofit2.Retrofit;
 public class MyApplication extends Application {
 
 
-    /**
-     * 声明请求的接口
-     */
-    public static FileServer netWorkService;
+
 
     /**
      * 网络请求框架

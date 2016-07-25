@@ -87,6 +87,7 @@ public class AddMeetingActivity extends FragmentActivity implements View.OnClick
         sTime = etSTime.getText().toString();
         eTime = etSTime.getText().toString();
         content = edMeetingContent.getText().toString();
+
         Log.e("添加会议", "meetingName=" + meetingName + "content=" + content + "eTime=" + eTime + "sTime=" + sTime);
 
 

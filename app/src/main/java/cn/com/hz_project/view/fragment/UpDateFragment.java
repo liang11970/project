@@ -3,11 +3,9 @@ package cn.com.hz_project.view.fragment;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,7 +14,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.orhanobut.logger.Logger;
 
 import java.io.File;
 import java.util.HashMap;
@@ -100,44 +97,49 @@ public class UpDateFragment extends Fragment {
     @OnClick(R.id.submit_file)
     public void onClick() {
 
+        if(ViewPagerActivity.lujing.isEmpty()){
+            Toast.makeText(getContext(),"请选择文件",Toast.LENGTH_LONG).show();
+        }else {
+            final ProgressDialog dialog = new ProgressDialog(getContext());
+            dialog.setMessage("上传中，请稍后...");
+            dialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+            dialog.setCancelable(false);
+            dialog.show();
 
-        final ProgressDialog dialog = new ProgressDialog(getContext());
-        dialog.setMessage("上传中，请稍后...");
-        dialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-        dialog.setCancelable(false);
-        dialog.show();
+            File file = new File(ViewPagerActivity.lujing);
 
-        File file = new File(ViewPagerActivity.lujing);
+            UploadService uploadFileService = RetrofitUtil.createService(UploadService.class);
+            Map<String, String> optionMap = new HashMap<>();
+            optionMap.put("Platformtype", "Android");
+            optionMap.put("userName","zhangsan") ;
 
-        UploadService uploadFileService = RetrofitUtil.createService(UploadService.class);
-        Map<String, String> optionMap = new HashMap<>();
-        optionMap.put("Platformtype", "Android");
-        optionMap.put("userName","zhangsan") ;
+            Map<String, RequestBody> requestBodyMap = new HashMap<>();
+            UploadFileRequestBody fileRequestBody = new UploadFileRequestBody(file, new DefaultProgressListener(mHandler,1));
+            requestBodyMap.put("file\"; filename=\"" + file.getName(), fileRequestBody);
 
-        Map<String, RequestBody> requestBodyMap = new HashMap<>();
-        UploadFileRequestBody fileRequestBody = new UploadFileRequestBody(file, new DefaultProgressListener(mHandler,1));
-        requestBodyMap.put("file\"; filename=\"" + file.getName(), fileRequestBody);
+            uploadFileService.uploadFileInfo(optionMap, requestBodyMap).
+                    subscribeOn(Schedulers.io()).
+                    observeOn(AndroidSchedulers.mainThread()).
+                    subscribe(new Subscriber<ResponseBody>() {
+                        @Override
+                        public void onCompleted() {
+                            dialog.dismiss();
 
-        uploadFileService.uploadFileInfo(optionMap, requestBodyMap).
-                subscribeOn(Schedulers.io()).
-                observeOn(AndroidSchedulers.mainThread()).
-                subscribe(new Subscriber<ResponseBody>() {
-                    @Override
-                    public void onCompleted() {
-                        dialog.dismiss();
+                        }
 
-                    }
+                        @Override
+                        public void onError(Throwable e) {
+                        }
 
-                    @Override
-                    public void onError(Throwable e) {
-                    }
-
-                    @Override
-                    public void onNext(ResponseBody s) {
+                        @Override
+                        public void onNext(ResponseBody s) {
                             Toast.makeText(getContext(),"上传成功",Toast.LENGTH_LONG).show();
 
-                    }
-                });
+                        }
+                    });
+        }
+
+
 
     }
 

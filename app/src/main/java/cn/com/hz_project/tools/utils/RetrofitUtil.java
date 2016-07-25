@@ -2,6 +2,7 @@ package cn.com.hz_project.tools.utils;
 
 import java.util.concurrent.TimeUnit;
 
+import cn.com.hz_project.tools.url.Urls;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
@@ -23,7 +24,7 @@ public class RetrofitUtil {
         if (retrofit == null) {
             synchronized (RetrofitUtil.class) {
                 Retrofit.Builder builder = new Retrofit.Builder();
-                retrofit = builder.baseUrl("http://192.168.2.26:8080/WsbxMobile/appCtrl/")
+                retrofit = builder.baseUrl(Urls.FileUpURL)
                         .client(okHttpClient)
                         .addConverterFactory(GsonConverterFactory.create())
                         .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
