@@ -7,7 +7,16 @@
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:layout_centerHorizontal="true"
+        android:layout_margin="10dp"
         android:src="@mipmap/icon1"/>
+
+    <ImageView
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="60dp"
+        android:layout_centerHorizontal="true"
+        
+        android:src="@mipmap/alreadydown"/>
 
     <TextView
         android:id="@+id/textview"
