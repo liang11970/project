@@ -54,6 +54,7 @@ public class LoginActivity extends Activity {
     private PreferencesService service;
     private SweetAlertDialog pDialog;
     private HashMap<String, String> map;
+    private Intent intent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,6 +80,8 @@ public class LoginActivity extends Activity {
         map = service.getLoginInfo();
         pDialog = new SweetAlertDialog(this, SweetAlertDialog.PROGRESS_TYPE)
                 .setTitleText("登陆中...");
+
+        intent = getIntent();
     }
 
     private void initData() {
@@ -126,8 +129,8 @@ public class LoginActivity extends Activity {
                     public void onNext(Login login) {
 
                         if (login.isSuccess()) {
-
                             startActivity(new Intent(LoginActivity.this, ViewPagerActivity.class));
+                            finish();
                         } else {
                             Toast.makeText(LoginActivity.this, "帐号密码有问题检查一下吧", Toast.LENGTH_SHORT).show();
                         }
@@ -185,6 +188,9 @@ public class LoginActivity extends Activity {
                 //选择自动登录,保存登录信息并执行自动登录
                 cbAutologin.setChecked(true);
                 saveInfo(user.getText().toString(),password.getText().toString(),String.valueOf(cbRempwd.isChecked()),String.valueOf(cbAutologin.isChecked()));
+                if (intent.getBooleanExtra("isQuit",false) == true ){
+                    //不登录
+                }else
                 login(pDialog);
             }
         }else {//没有选择记住密码
