@@ -37,4 +37,6 @@ public class Urls {
     //到场人员头像
     public static final String touxiang = "http://116.228.202.122:8080/WsbxMobile";
 
+
+
 }
