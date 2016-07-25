@@ -23,7 +23,7 @@ import java.util.ArrayList;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
-import cn.com.hz_project.model.bean.StaffBean;
+import cn.com.hz_project.model.bean.StaffBeanModle;
 import cn.com.hz_project.model.server.MeetingService;
 import cn.com.hz_project.tools.url.Urls;
 import cn.com.hz_project.tools.utils.ToastUtils;
@@ -49,7 +49,7 @@ public class MeetingStaffPieActivity extends Activity implements View.OnClickLis
     PieChart chart;
     private MeetingService meetingService;
     private String meetingID;
-    private StaffBean staffdata;
+    private StaffBeanModle staffdata;
     private PieChart mChart;
 
     @Override
@@ -163,7 +163,7 @@ public class MeetingStaffPieActivity extends Activity implements View.OnClickLis
         meetingService.getStaffData(meetingID)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<StaffBean>() {
+                .subscribe(new Subscriber<StaffBeanModle>() {
 
 
                     @Override
@@ -178,7 +178,7 @@ public class MeetingStaffPieActivity extends Activity implements View.OnClickLis
                     }
 
                     @Override
-                    public void onNext(StaffBean staffBean) {
+                    public void onNext(StaffBeanModle staffBean) {
                         Log.e("饼图", staffBean.getObj().toString());
                         staffdata = staffBean;
                         PieData pieData = getPie(4, 100);
