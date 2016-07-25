@@ -106,7 +106,7 @@ public class NewListViewAdapter extends BaseAdapter {
 
         viewHolder.tv_title.setText(mlist.get(i).getNBD_TITLE());
         viewHolder.tv_time.setText(mlist.get(i).getTIME());
-        viewHolder.tv_content.setText(mlist.get(i).getSUBSTR());
+//        viewHolder.tv_content.setText(mlist.get(i).getSUBSTR());
 
 
         Picasso.with(mContext).load(mlist.get(i).getNBD_PICTURE_URL()).fit().transform(mTransformation).into(viewHolder.iv_picasso);

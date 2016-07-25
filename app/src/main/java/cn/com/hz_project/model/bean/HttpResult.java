@@ -55,7 +55,6 @@ public class HttpResult{
         private int ROWNO;
         private int NBD_ID;
         private String NBD_TITLE;
-        private String SUBSTR;
         private String NBD_PICTURE_URL;
         private String TIME;
 
@@ -83,13 +82,6 @@ public class HttpResult{
             this.NBD_TITLE = NBD_TITLE;
         }
 
-        public String getSUBSTR() {
-            return SUBSTR;
-        }
-
-        public void setSUBSTR(String SUBSTR) {
-            this.SUBSTR = SUBSTR;
-        }
 
         public String getNBD_PICTURE_URL() {
             return NBD_PICTURE_URL;
