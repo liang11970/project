@@ -61,6 +61,7 @@ public class LoginActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        overridePendingTransition(R.anim.ap2,R.anim.ap1);
         ButterKnife.inject(this);
         initView();
         initData();

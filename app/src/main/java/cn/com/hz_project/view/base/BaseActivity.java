@@ -74,7 +74,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     @Override
     public void finish() {
         super.finish();
-        
+
         ActivityTaskManager.getInstance().removeActivity("baseActivity");
 
     }
