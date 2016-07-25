@@ -25,6 +25,7 @@ import cn.com.hz_project.model.server.PreferencesService;
 import cn.com.hz_project.tools.url.Urls;
 import cn.com.hz_project.tools.utils.AESUtils;
 import cn.com.hz_project.tools.utils.Md5;
+import cn.com.hz_project.view.base.BaseActivity;
 import cn.com.projectdemos.R;
 import cn.pedant.SweetAlert.SweetAlertDialog;
 import retrofit2.Retrofit;
@@ -37,7 +38,7 @@ import rx.schedulers.Schedulers;
 /**
  * 登录界面
  */
-public class LoginActivity extends Activity {
+public class LoginActivity extends BaseActivity {
 
     @InjectView(R.id.user)
     EditText user;
@@ -59,11 +60,15 @@ public class LoginActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_login);
         ButterKnife.inject(this);
         initView();
         initData();
+
+    }
+
+    @Override
+    protected void initViewsAndEvents() {
 
     }
 

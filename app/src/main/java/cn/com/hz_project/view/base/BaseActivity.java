@@ -46,6 +46,8 @@ public abstract class BaseActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        getSupportActionBar().hide();
         ActivityTaskManager.getInstance().putActivity("baseActivity",this);
 
         Bundle extras = getIntent().getExtras();
@@ -72,7 +74,9 @@ public abstract class BaseActivity extends AppCompatActivity {
     @Override
     public void finish() {
         super.finish();
-        ActivityTaskManager.getInstance().removeActivity("base");
+        
+        ActivityTaskManager.getInstance().removeActivity("baseActivity");
+
     }
 
 
