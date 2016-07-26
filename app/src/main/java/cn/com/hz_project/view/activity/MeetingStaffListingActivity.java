@@ -9,13 +9,11 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import java.io.Serializable;
 import java.util.List;
-import java.util.logging.Logger;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
-import cn.com.hz_project.model.bean.StaffBean;
+import cn.com.hz_project.model.bean.StaffBeanModle;
 import cn.com.hz_project.model.server.MeetingService;
 import cn.com.hz_project.tools.url.Urls;
 import cn.com.hz_project.tools.utils.ToastUtils;
@@ -38,9 +36,9 @@ public class MeetingStaffListingActivity extends Activity implements View.OnClic
     ListView lvStaffList;
     @InjectView(R.id.tv_back)
     TextView tvBack;
-    private List<StaffBean.ObjBean> staffdata;
+    private List<StaffBeanModle.ObjBean> staffdata;
     private StaffAdapter staffAdapter;
-    private StaffBean bean;
+    private StaffBeanModle bean;
     private String meetingID;
     private MeetingService meetingService;
 
@@ -70,7 +68,7 @@ public class MeetingStaffListingActivity extends Activity implements View.OnClic
         meetingService.getStaffData(meetingID)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<StaffBean>() {
+                .subscribe(new Subscriber<StaffBeanModle>() {
 
 
                     @Override
@@ -85,9 +83,9 @@ public class MeetingStaffListingActivity extends Activity implements View.OnClic
                     }
 
                     @Override
-                    public void onNext(StaffBean staffBean) {
-                        Log.e("饼图", staffBean.getObj().toString());
-                        bean = staffBean;
+                    public void onNext(StaffBeanModle staffBeanModle) {
+                        Log.e("饼图", staffBeanModle.getObj().toString());
+                        bean = staffBeanModle;
 
                         showStaff();
 

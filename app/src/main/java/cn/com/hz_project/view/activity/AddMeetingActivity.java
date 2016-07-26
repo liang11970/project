@@ -2,7 +2,6 @@ package cn.com.hz_project.view.activity;
 
 
 import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -20,7 +19,6 @@ import com.jzxiang.pickerview.listener.OnDateSetListener;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.logging.Logger;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
