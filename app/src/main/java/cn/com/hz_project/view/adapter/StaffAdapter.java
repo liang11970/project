@@ -15,7 +15,7 @@ import java.util.List;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
-import cn.com.hz_project.model.bean.StaffBean;
+import cn.com.hz_project.model.bean.StaffBeanModle;
 import cn.com.hz_project.tools.url.Urls;
 import cn.com.projectdemos.R;
 
@@ -24,9 +24,9 @@ import cn.com.projectdemos.R;
  */
 public class StaffAdapter extends BaseAdapter {
     private final Context mContext;
-    private final List<StaffBean.ObjBean> mData;
+    private final List<StaffBeanModle.ObjBean> mData;
 
-    public StaffAdapter(Context context, List<StaffBean.ObjBean> staffdata) {
+    public StaffAdapter(Context context, List<StaffBeanModle.ObjBean> staffdata) {
         this.mContext = context;
         this.mData = staffdata;
     }
