@@ -20,9 +20,12 @@ import android.widget.ProgressBar;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.makeramen.roundedimageview.RoundedTransformationBuilder;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Transformation;
+
+import cn.com.projectdemos.R;
 
 
 public class ViewHolder extends RecyclerView.ViewHolder {
@@ -112,15 +115,16 @@ public class ViewHolder extends RecyclerView.ViewHolder {
         ImageView view = getView(viewId);
 
 
-        Picasso.with(mContext).load(url).fit().transform(mTransformation).into(view);
+//        Picasso.with(mContext).load(url).fit().transform(mTransformation).into(view);
 
-//        Glide.with(mContext)
-//                .load(url)
-//                .centerCrop()
-//                .crossFade()
-//                .placeholder(R.mipmap.pic_loading)
-//                .error(R.mipmap.pic_loading)
-//                .into(view);
+
+        Glide.with(mContext)
+                .load(url)
+                .centerCrop()
+                .crossFade()
+                .placeholder(R.mipmap.ic_launcher)
+                .error(R.mipmap.ic_launcher)
+                .into(view);
         return this;
     }
 

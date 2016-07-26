@@ -43,6 +43,8 @@ public class PreferencesService {
         editor.commit();
     }
 
+
+
     /**
      * 登录界面获取参数
      */
@@ -81,6 +83,8 @@ public class PreferencesService {
         editor.putString("imgUrl", login.getObj().getImgUrl());
         editor.commit();
     }
+
+
 
 
     /**

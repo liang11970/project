@@ -39,11 +39,11 @@ public class NewsPresenter implements NewsContract.Presenter {
         mNewsTask.geNewsList(new Subscriber<String>() {
             @Override
             public void onCompleted() {
-                LogUtils.e("PicturePresenter", "onCompleted");
+//                LogUtils.e("PicturePresenter", "onCompleted");
             }
             @Override
             public void onError(Throwable e) {
-                LogUtils.e("PicturePresenter", "onError");
+//                LogUtils.e("PicturePresenter", "onError");
             }
             @Override
             public void onNext(String s) {
@@ -57,11 +57,11 @@ public class NewsPresenter implements NewsContract.Presenter {
         mNewsTask.geNewsList(new Subscriber<String>() {
             @Override
             public void onCompleted() {
-                LogUtils.e("PicturePresenter", "onCompleted");
+//                LogUtils.e("PicturePresenter", "onCompleted");
             }
             @Override
             public void onError(Throwable e) {
-                LogUtils.e("PicturePresenter", "onError");
+//                LogUtils.e("PicturePresenter", "onError");
             }
             @Override
             public void onNext(String s) {

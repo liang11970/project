@@ -4,13 +4,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <!--标题栏-->
     <RelativeLayout
         android:id="@+id/title"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:background="#3F7096"
-        app:layout_heightPercent="8%h"
-        app:layout_widthPercent="100%w">
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:background="#3F7096">
 
         <TextView
             android:id="@+id/back"
@@ -31,79 +30,86 @@
             android:textSize="22sp" />
     </RelativeLayout>
 
-    <ScrollView
-        android:id="@+id/sv_question"
+    <!--问题详情以及答案-->
+    <!--<ScrollView
         android:layout_width="match_parent"
-        android:layout_height="120dp"
+        android:layout_height="match_parent"
+        android:layout_margin="5dp"
         android:layout_below="@+id/title"
-        android:background="@drawable/bg_quizitem"
-        android:layout_margin="5dp">
-
-        <com.zhy.autolayout.AutoRelativeLayout
-            android:id="@+id/question"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            >
-
-            <ImageView
-                android:id="@+id/iv_quizitem"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="10dp"
-                android:src="@mipmap/quiz" />
-
-            <TextView
-                android:id="@+id/quiz_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignTop="@+id/iv_quizitem"
-                android:layout_marginLeft="15px"
-                android:layout_toRightOf="@+id/iv_quizitem"
-                android:text="问题标题"
-                android:textSize="50px" />
-
-            <TextView
-                android:id="@+id/quiz_sponsor"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignLeft="@+id/quiz_title"
-                android:layout_below="@+id/quiz_title"
-                android:layout_marginTop="15px"
-                android:text="王某某"
-                android:textSize="40px" />
-
-            <TextView
-                android:id="@+id/quiz_time"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignBottom="@+id/quiz_sponsor"
-                android:layout_marginLeft="15px"
-                android:layout_toRightOf="@+id/quiz_sponsor"
-                android:text="时间:2016.07.10 13:25:25"
-                android:textSize="40px" />
-
-            <TextView
-                android:id="@+id/quiz_content"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignLeft="@+id/quiz_sponsor"
-                android:layout_below="@+id/quiz_sponsor"
-                android:layout_marginTop="15px"
-                android:text="这个是问题的具体描述，请仔细看看，恩恩就是这样的"
-                android:textSize="50px" />
-
-        </com.zhy.autolayout.AutoRelativeLayout>
-    </ScrollView>
-
-    <ListView
-        android:id="@+id/list_answer"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:layout_above="@+id/answer"
-        android:layout_below="@+id/sv_question" />
+        android:fillViewport="true">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">-->
+
+            <!--<com.zhy.autolayout.AutoRelativeLayout
+                android:id="@+id/question"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                >
+
+                <ImageView
+                    android:id="@+id/iv_quizitem"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="10dp"
+                    android:src="@mipmap/quiz" />
+
+                <TextView
+                    android:id="@+id/quiz_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@+id/iv_quizitem"
+                    android:layout_marginLeft="15px"
+                    android:layout_toRightOf="@+id/iv_quizitem"
+                    android:text="问题标题"
+                    android:textSize="50px" />
+
+                <TextView
+                    android:id="@+id/quiz_sponsor"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/quiz_title"
+                    android:layout_below="@+id/quiz_title"
+                    android:layout_marginTop="15px"
+                    android:text="王某某"
+                    android:textSize="40px" />
+
+                <TextView
+                    android:id="@+id/quiz_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/quiz_sponsor"
+                    android:layout_marginLeft="15px"
+                    android:layout_toRightOf="@+id/quiz_sponsor"
+                    android:text="时间:2016.07.10 13:25:25"
+                    android:textSize="40px" />
+
+                <TextView
+                    android:id="@+id/quiz_content"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/quiz_sponsor"
+                    android:layout_below="@+id/quiz_sponsor"
+                    android:layout_marginTop="15px"
+                    android:text="这个是问题的具体描述，请仔细看看，恩恩就是这样的"
+                    android:textSize="50px" />
+
+            </com.zhy.autolayout.AutoRelativeLayout>-->
+
+            <ListView
+                android:id="@+id/list_answer"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/title"
+                android:layout_above="@+id/answer"
+                />
+        <!--</RelativeLayout>
+    </ScrollView>-->
 
     <RelativeLayout
         android:id="@+id/answer"

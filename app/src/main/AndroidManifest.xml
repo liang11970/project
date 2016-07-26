@@ -61,7 +61,6 @@
         <activity android:name="cn.com.hz_project.view.activity.ViewPagerActivity" />
         <activity android:name="cn.com.hz_project.view.activity.OnlineQuizActivity" />
         <activity android:name="cn.com.hz_project.view.activity.NewActivity" />
-        <activity android:name="cn.com.hz_project.view.activity.MeetingListActivity" />
         <activity android:name="cn.com.hz_project.view.activity.FileActivity"/>
 
         <!--<activity android:name="cn.com.hz_project.view.activity.TwoActivity"></activity>-->

@@ -43,9 +43,6 @@ import cn.com.projectdemos.R;
 public class ViewPagerActivity extends FragmentActivity {
     private static final int FILE_SELECT_CODE = 0X111;
     public final static int num = 4 ;
-    Fragment homeFragment;
-    Fragment personFragment;
-    Fragment sorttypeFragment;
     public static FragmentManager fragmentManager;
     public static FragmentTransaction transaction;
     private RadioGroup radioGroup;
@@ -207,4 +204,7 @@ private RadioButton qq;
     public static boolean isGooglePhotosUri(Uri uri) {
         return "com.google.android.apps.photos.content".equals(uri.getAuthority());
     }
+
+
+
 }

@@ -16,6 +16,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.orhanobut.dialogplus.DialogPlus;
+import com.orhanobut.logger.Logger;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -86,6 +87,7 @@ public class MeetingDetailsActivity extends Activity implements View.OnClickList
     private void initData() {
         extras = getIntent().getExtras();
         meetingId = (String) extras.get("ID").toString();
+        Logger.e("会议详情,会议ID:"+meetingId);
         content = (String) extras.get("content");
         tvMeetingName.setText(extras.get("name") + "");
         String startTime = (String) extras.get("startTime");
@@ -126,6 +128,7 @@ public class MeetingDetailsActivity extends Activity implements View.OnClickList
         switch (v.getId()) {
             case R.id.rl_meeting_personnelList:
                 Intent intent = new Intent(getApplicationContext(), MeetingStaffPieActivity.class);
+
                 intent.putExtra("meetingID", meetingId);
                 startActivity(intent);
                 break;
@@ -145,7 +148,9 @@ public class MeetingDetailsActivity extends Activity implements View.OnClickList
                         signInRequestCreate();
                         signInRequestData();
                     } else {
+                        pDialog.dismiss();
                         ToastUtils.show(getApplicationContext(), "已签到成功，请不要重复签到");
+
                     }
                 }
 
@@ -222,7 +227,7 @@ public class MeetingDetailsActivity extends Activity implements View.OnClickList
 
     private void signInRequestCreate() {
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://192.168.2.17:8080/WsbxMobile/appCtrl/")
+                .baseUrl(Urls.baseURL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .build();

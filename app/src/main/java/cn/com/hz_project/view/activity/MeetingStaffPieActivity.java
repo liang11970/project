@@ -18,6 +18,7 @@ import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
+import com.orhanobut.logger.Logger;
 
 import java.util.ArrayList;
 
@@ -61,6 +62,7 @@ public class MeetingStaffPieActivity extends Activity implements View.OnClickLis
         initview();
 //        initData();
         mChart = (PieChart) findViewById(R.id.chart);
+        meetingID = (String) getIntent().getExtras().get("meetingID");
         PieData pieData = getPie(4, 100);
         showChart(mChart, pieData);
 
@@ -150,7 +152,8 @@ public class MeetingStaffPieActivity extends Activity implements View.OnClickLis
     }
 
     private void initData() {
-        meetingID = (String) getIntent().getExtras().get("meetingID");
+
+        Logger.e("到场人员列表饼图,会议ID:"+meetingID);
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(Urls.baseURL)
                 .addConverterFactory(GsonConverterFactory.create())

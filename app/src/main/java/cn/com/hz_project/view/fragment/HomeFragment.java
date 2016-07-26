@@ -31,6 +31,7 @@ import cn.com.hz_project.view.activity.NewActivity;
 import cn.com.hz_project.view.activity.NewContentActivity;
 import cn.com.hz_project.view.activity.SecondActivity;
 import cn.com.hz_project.view.base.BaseAdapter;
+import cn.com.hz_project.view.base.BaseFragment;
 import cn.com.hz_project.view.base.ViewHolder;
 import cn.com.hz_project.view.widget.LoadMorRecyclerView;
 import cn.com.hz_project.view.widget.LoadMoreRecyclerView;
@@ -127,11 +128,6 @@ public class HomeFragment extends Fragment implements NewsContract.View {
 
     private void initEvent() {
 
-//        Uri uri = Uri.parse("192.168.2.35:8080/WsbxMobile/page/video/1468896951611.avi");
-//        mediaController.setMediaController(new MediaController(getContext()));
-//        mediaController.setVideoURI(uri);
-//        mediaController.start();
-//        mediaController.requestFocus();
 
 
             listView.setLoadMoreListener(new LoadMorRecyclerView.LoadMoreListener() {
@@ -149,9 +145,9 @@ public class HomeFragment extends Fragment implements NewsContract.View {
         mAdapter = new BaseAdapter<HttpResult.ObjBean>(getContext(), R.layout.item_new, mDataList, listView) {
             @Override
             public void convert(ViewHolder holder, final HttpResult.ObjBean newslistEntity) {
-                holder.setText(R.id.tv_title, newslistEntity.getNBD_TITLE());
+                holder.setText(R.id.tv_content, newslistEntity.getNBD_TITLE());
                 holder.setText(R.id.tv_time, newslistEntity.getTIME());
-                holder.setText(R.id.tv_content, newslistEntity.getSUBSTR());
+//                holder.setText(R.id.tv_content, newslistEntity.getSUBSTR());
                 holder.setImageWithUrl(R.id.iv_picasso, newslistEntity.getNBD_PICTURE_URL());
                 holder.setOnClickListener(R.id.start_time_repairs, new View.OnClickListener() {
                     @Override
@@ -256,6 +252,7 @@ public class HomeFragment extends Fragment implements NewsContract.View {
         ButterKnife.reset(this);
     }
 
+
     @Override
     public void showInfo(HttpResult entity) {
 
@@ -298,4 +295,10 @@ public class HomeFragment extends Fragment implements NewsContract.View {
         });
 
     }
+
+
+
+
+
+
 }

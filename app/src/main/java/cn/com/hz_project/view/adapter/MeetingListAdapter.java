@@ -13,6 +13,7 @@ import java.util.List;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import cn.com.hz_project.model.bean.MeetingBean;
+import cn.com.hz_project.model.bean.MeetingListBean;
 import cn.com.projectdemos.R;
 
 /**
@@ -20,10 +21,10 @@ import cn.com.projectdemos.R;
  */
 public class MeetingListAdapter extends BaseAdapter {
     private Context mContext;
-    private List<MeetingBean.ObjBean> mMeetList;
+    private List<MeetingListBean.ObjBean> mMeetList;
     private int isSign;
 
-    public MeetingListAdapter(Context context, List<MeetingBean.ObjBean> meetList) {
+    public MeetingListAdapter(Context context, List<MeetingListBean.ObjBean> meetList) {
         this.mContext = context;
         this.mMeetList = meetList;
     }
@@ -71,10 +72,10 @@ public class MeetingListAdapter extends BaseAdapter {
         viewHolder.tvMeetingTime.setText("会议时间:"+substringS+"-"+substringE);
         viewHolder.tvMeetingContent.setText(mMeetList.get(position).getMBD_REMARKS() + "");
         isSign = mMeetList.get(position).getIsSign();
-        if (isSign == 1){
+        if (isSign==1){
             viewHolder.tvSignInState.setText("未签到");
 
-        }else if (isSign ==0){
+        }else if (isSign==0){
             viewHolder.tvSignInState.setText("已签到");
         }
         return convertView;

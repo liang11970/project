@@ -4,8 +4,10 @@ import cn.com.hz_project.model.bean.Login;
 import cn.com.hz_project.model.bean.OnlineQuiz;
 import cn.com.hz_project.model.bean.Quiz;
 import cn.com.hz_project.model.bean.QuizAnswer;
+import cn.com.hz_project.model.bean.ServerFile;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
+import retrofit2.http.GET;
 import retrofit2.http.POST;
 import rx.Observable;
 
@@ -61,4 +63,10 @@ public interface LoginService {
     @FormUrlEncoded
     @POST("queryAnswerByid")
     Observable<QuizAnswer> QueryAns(@Field("WQD_ID") String id, @Field("PAGE")String page);
+
+    /**
+     * 查询文献列表
+     */
+    @GET("fileList")
+    Observable<ServerFile> getFileList();
 }
