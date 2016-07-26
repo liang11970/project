@@ -9,9 +9,7 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import java.io.Serializable;
 import java.util.List;
-import java.util.logging.Logger;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -30,14 +28,17 @@ import rx.schedulers.Schedulers;
 
 public class MeetingStaffListingActivity extends Activity implements View.OnClickListener {
 
+
     @InjectView(R.id.iv_back_meeting)
     ImageView ivBackMeeting;
+    @InjectView(R.id.tv_back)
+    TextView tvBack;
     @InjectView(R.id.title_meeting)
     RelativeLayout titleMeeting;
     @InjectView(R.id.lv_staff_list)
     ListView lvStaffList;
-    @InjectView(R.id.tv_back)
-    TextView tvBack;
+    @InjectView(R.id.tv_null)
+    TextView tvNull;
     private List<StaffBean.ObjBean> staffdata;
     private StaffAdapter staffAdapter;
     private StaffBean bean;
@@ -57,7 +58,6 @@ public class MeetingStaffListingActivity extends Activity implements View.OnClic
     private void initData() {
 
         meetingID = (String) getIntent().getExtras().get("meetingIDa");
-        com.orhanobut.logger.Logger.e("到场人员列表,会议ID是:"+meetingID);
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(Urls.baseURL)
                 .addConverterFactory(GsonConverterFactory.create())
@@ -80,14 +80,20 @@ public class MeetingStaffListingActivity extends Activity implements View.OnClic
 
                     @Override
                     public void onError(Throwable e) {
+                        tvNull.setVisibility(View.VISIBLE);
                         ToastUtils.show(getApplicationContext(), "请求数据失败,请检查网络");
+
 
                     }
 
                     @Override
                     public void onNext(StaffBean staffBean) {
-                        Log.e("饼图", staffBean.getObj().toString());
                         bean = staffBean;
+                        Log.e("到场人员列表", staffBean.toString());
+                        if (staffBean.getObj().size()<1){
+                            tvNull.setVisibility(View.VISIBLE);
+                            return;
+                        }
 
                         showStaff();
 
