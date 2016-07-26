@@ -1,5 +1,6 @@
 package cn.com.hz_project.view.activity;
 
+import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -21,7 +22,7 @@ import cn.com.hz_project.presenter.activityPresenter.NewContext;
 import cn.com.hz_project.presenter.activityPresenter.NewPresenter;
 import cn.com.projectdemos.R;
 
-public class NewContentActivity extends AppCompatActivity implements NewContext.View {
+public class NewContentActivity extends Activity implements NewContext.View {
 
 
     @InjectView(R.id.tv_back)

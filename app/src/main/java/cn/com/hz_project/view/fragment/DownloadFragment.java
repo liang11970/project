@@ -9,33 +9,29 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+import android.widget.Toast;
 
 
-import com.ljd.retrofit.progress.DownloadProgressHandler;
-import com.ljd.retrofit.progress.ProgressHelper;
-
-import java.io.BufferedInputStream;
 import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
 
-import cn.com.hz_project.model.server.DownloadApi;
+import cn.com.hz_project.model.DataManager;
+import cn.com.hz_project.model.HDialogBuilder;
+import cn.com.hz_project.model.server.FileApi;
+import cn.com.hz_project.model.server.FileCallback;
+import cn.com.hz_project.tools.url.Urls;
 import cn.com.hz_project.view.activity.ViewPagerActivity;
 import cn.com.projectdemos.R;
-import okhttp3.OkHttpClient;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
  * Created by peng on 2016/7/15.
  */
 public class DownloadFragment extends Fragment {
+    private TextView txtProgress;
+    private HDialogBuilder hDialogBuilder;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -60,69 +56,64 @@ public class DownloadFragment extends Fragment {
 
 
     private void retrofitDownload(){
-        //监听下载进度
-        final ProgressDialog dialog = new ProgressDialog(getContext());
-        dialog.setProgressNumberFormat("%1d KB/%2d KB");
-        dialog.setTitle("下载");
-        dialog.setMessage("正在下载，请稍后...");
-        dialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-        dialog.setCancelable(false);
-        dialog.show();
-
-        Retrofit.Builder retrofitBuilder = new Retrofit.Builder()
-                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
-                .addConverterFactory(GsonConverterFactory.create())
-                .baseUrl("http://msoftdl.360.cn");
-        OkHttpClient.Builder builder = ProgressHelper.addProgress(null);
-        DownloadApi retrofit = retrofitBuilder
-                .client(builder.build())
-                .build().create(DownloadApi.class);
-
-        ProgressHelper.setProgressHandler(new DownloadProgressHandler() {
-            @Override
-            protected void onProgress(long bytesRead, long contentLength, boolean done) {
-                Log.e("是否在主线程中运行", String.valueOf(Looper.getMainLooper() == Looper.myLooper()));
-                Log.e("onProgress",String.format("%d%% done\n",(100 * bytesRead) / contentLength));
-                Log.e("done","--->" + String.valueOf(done));
-
-
-                dialog.setMax((int) (contentLength/1024));
-                dialog.setProgress((int) (bytesRead/1024));
-
-                if(done){
-                    dialog.dismiss();
-                }
-            }
-        });
-
-        Call<ResponseBody> call = retrofit.retrofitDownload();
-        call.enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                try {
-                    InputStream is = response.body().byteStream();
-                    File file = new File(Environment.getExternalStorageDirectory(), "12345.apk");
-                    FileOutputStream fos = new FileOutputStream(file);
-                    BufferedInputStream bis = new BufferedInputStream(is);
-                    byte[] buffer = new byte[1024];
-                    int len;
-                    while ((len = bis.read(buffer)) != -1) {
-                        fos.write(buffer, 0, len);
-                        fos.flush();
+        String fileName = "afdc147f-9fa4-4395-a044-ff2a7d23dee9.apk";
+        String fileStoreDir = Environment.getExternalStorageDirectory().getAbsolutePath() + File
+                .separator + "Judicial";
+        String fileStoreName = fileName;
+        showLoadingDialog();
+        FileApi.getInstance(Urls.FileURL)
+                .loadFileByName(fileName, new FileCallback(fileStoreDir, fileStoreName) {
+                    @Override
+                    public void onSuccess(File file) {
+                        super.onSuccess(file);
+                        hDialogBuilder.dismiss();
+                        Toast.makeText(getContext(),"下载成功",Toast.LENGTH_LONG).show();
                     }
-                    fos.close();
-                    bis.close();
-                    is.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
 
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                    @Override
+                    public void progress(long progress, long total) {
+                        updateProgress(progress, total);
+                    }
 
-            }
-        });
+                    @Override
+                    public void onFailure(Call<ResponseBody> call, Throwable t) {
+                        hDialogBuilder.dismiss();
+                        call.cancel();
+                        Toast.makeText(getContext(),"下载失败",Toast.LENGTH_LONG).show();
+                    }
+                });
 
     }
+
+    /**
+     * 显示下载对话框
+     */
+    private void showLoadingDialog() {
+        txtProgress = (TextView) View.inflate(getContext(), R.layout.layout_hd_dialog_custom_tv, null);
+        hDialogBuilder = new HDialogBuilder(getContext());
+        hDialogBuilder.setCustomView(txtProgress)
+                .title("下载")
+                .nBtnText("取消")
+                .nBtnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        hDialogBuilder.dismiss();
+                        FileApi.cancelLoading();
+                    }
+                }).show();
+
+    }
+
+    /**
+     * 更新下载进度
+     *
+     * @param progress
+     * @param total
+     */
+    private void updateProgress(long progress, long total) {
+        txtProgress.setText(String.format("正在下载：(%s/%s)",
+                DataManager.getFormatSize(progress),
+                DataManager.getFormatSize(total)));
+    }
+
 }
