@@ -21,6 +21,8 @@ public class SecondActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_second);
+
+
         initFruits();
         LingdaoAdapter adapter = new LingdaoAdapter(SecondActivity.this,
                 R.layout.item_p, fruitList);

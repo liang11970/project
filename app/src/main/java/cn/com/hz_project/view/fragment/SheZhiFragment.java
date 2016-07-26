@@ -70,10 +70,6 @@ public class SheZhiFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-//                Intent intent = new Intent(getActivity(), LoginActivity.class);
-//                intent.putExtra("isQuit",true);
-//                startActivity(intent);
-
                 SharedPreferences preferences=getContext().getSharedPreferences("logintag", Context.MODE_PRIVATE);
 
                 SharedPreferences.Editor editor=preferences.edit();
