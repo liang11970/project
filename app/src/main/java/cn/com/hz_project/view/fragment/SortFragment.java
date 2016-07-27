@@ -48,9 +48,8 @@ public class SortFragment extends Fragment {
     private FileListAdapter adapter;
     private DownLoadUtils downLoadUtils;
 
-        private String path = Environment.getExternalStorageDirectory().getAbsolutePath() + File
+    private String path = Environment.getExternalStorageDirectory().getAbsolutePath() + File
             .separator + "Judicial";
-//    private String path = Environment.getDataDirectory().getAbsolutePath() + File.separator + "myfile";
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

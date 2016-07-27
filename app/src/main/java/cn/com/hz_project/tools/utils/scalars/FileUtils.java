@@ -2,6 +2,7 @@ package cn.com.hz_project.tools.utils.scalars;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Vector;
 
 /**
@@ -10,8 +11,8 @@ import java.util.Vector;
 public class FileUtils {
 
     // 获取当前目录下所有的文件
-    public static Vector<String> getAllFileName(String fileAbsolutePath) throws IOException {
-        Vector<String> vecFile = new Vector<String>();
+    public static ArrayList<String> getAllFileName(String fileAbsolutePath) throws IOException {
+        ArrayList<String> vecFile = new ArrayList<String>();
         File file = new File(fileAbsolutePath);
 
         CreateText(file);

@@ -30,7 +30,7 @@ public class FileListAdapter extends BaseAdapter{
     private ArrayList<HashMap<String,String>> newList;
     private String path = Environment.getExternalStorageDirectory().getAbsolutePath() + File
             .separator + "Judicial";
-    private Vector<String> fileVec;
+    private ArrayList<String> fileVec;
 
     public FileListAdapter(ArrayList<ServerFileObj> list, Context context){
         this.list = list;
