@@ -13,7 +13,6 @@ import java.util.List;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
-import cn.com.hz_project.model.bean.StaffBean;
 import cn.com.hz_project.model.server.MeetingService;
 import cn.com.hz_project.tools.url.Urls;
 import cn.com.hz_project.tools.utils.ToastUtils;
@@ -39,9 +38,9 @@ public class MeetingStaffListingActivity extends Activity implements View.OnClic
     ListView lvStaffList;
     @InjectView(R.id.tv_null)
     TextView tvNull;
-    private List<StaffBean.ObjBean> staffdata;
-    private StaffAdapter staffAdapter;
-    private StaffBean bean;
+//    private List<StaffBean.ObjBean> staffdata;
+//    private StaffAdapter staffAdapter;
+//    private StaffBean bean;
     private String meetingID;
     private MeetingService meetingService;
 
@@ -67,46 +66,46 @@ public class MeetingStaffListingActivity extends Activity implements View.OnClic
 
         meetingService = retrofit.create(MeetingService.class);
 
-        meetingService.getStaffData(meetingID)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<StaffBean>() {
-
-
-                    @Override
-                    public void onCompleted() {
-
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        tvNull.setVisibility(View.VISIBLE);
-                        ToastUtils.show(getApplicationContext(), "请求数据失败,请检查网络");
-
-
-                    }
-
-                    @Override
-                    public void onNext(StaffBean staffBean) {
-                        bean = staffBean;
-                        Log.e("到场人员列表", staffBean.toString());
-                        if (staffBean.getObj().size()<1){
-                            tvNull.setVisibility(View.VISIBLE);
-                            return;
-                        }
-
-                        showStaff();
-
-                    }
-                });
+//        meetingService.getStaffData(meetingID)
+//                .subscribeOn(Schedulers.io())
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .subscribe(new Subscriber<StaffBean>() {
+//
+//
+//                    @Override
+//                    public void onCompleted() {
+//
+//                    }
+//
+//                    @Override
+//                    public void onError(Throwable e) {
+//                        tvNull.setVisibility(View.VISIBLE);
+//                        ToastUtils.show(getApplicationContext(), "请求数据失败,请检查网络");
+//
+//
+//                    }
+//
+//                    @Override
+//                    public void onNext(StaffBean staffBean) {
+//                        bean = staffBean;
+//                        Log.e("到场人员列表", staffBean.toString());
+//                        if (staffBean.getObj().size()<1){
+//                            tvNull.setVisibility(View.VISIBLE);
+//                            return;
+//                        }
+//
+//                        showStaff();
+//
+//                    }
+//                });
 
 
     }
 
-    private void showStaff() {
-        staffAdapter = new StaffAdapter(getApplicationContext(), bean.getObj());
-        lvStaffList.setAdapter(staffAdapter);
-    }
+//    private void showStaff() {
+//        staffAdapter = new StaffAdapter(getApplicationContext(), bean.getObj());
+//        lvStaffList.setAdapter(staffAdapter);
+//    }
 
     private void initView() {
         ivBackMeeting.setOnClickListener(this);

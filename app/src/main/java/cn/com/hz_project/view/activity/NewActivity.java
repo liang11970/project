@@ -89,7 +89,7 @@ public class NewActivity extends BaseActivity implements NewsContract.View {
                                            holder.setOnClickListener(R.id.start_time_repairs, new View.OnClickListener() {
                                                @Override
                                                public void onClick(View v) {
-                                                   Intent intent = new Intent(NewActivity.this,NewContentActivity.class);
+                                                   Intent intent = new Intent(NewActivity.this,FileActivity.class);
                                                    intent.putExtra("id", newslistEntity.getNBD_ID());
                                                    Logger.e(newslistEntity.getNBD_ID()+"");
                                                    com.orhanobut.logger.Logger.e(newslistEntity.getNBD_ID()+"");
