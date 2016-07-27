@@ -160,14 +160,12 @@ public class SortFragment extends Fragment {
 
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-
                 try {
                     if (FileUtils.getAllFileName(path) != null) {
                         for (String fileName : FileUtils.getAllFileName(path)) {
-                            if (fileName.equals(list.get(position).getFILE_URL_NAME())) {//如果文件已存在
+                            if (fileName.equals(list.get(position).getFILE_NAME())) {//如果文件已存在
                                 isExits = true;
-                                intent = JudgeFileTypeUtils.openFile(list.get(position).getFILE_URL_NAME(), path+"/"+list.get(position).getFILE_URL_NAME());
+                                intent = JudgeFileTypeUtils.openFile(list.get(position).getFILE_NAME(), path+"/"+list.get(position).getFILE_NAME());
                                 startActivity(intent);
                             }
                         }
