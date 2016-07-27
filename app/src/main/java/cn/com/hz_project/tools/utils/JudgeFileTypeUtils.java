@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.net.Uri;
 
 import java.io.File;
+import java.util.logging.Logger;
 
 /**
  * Created by ku on 2016/7/26.
@@ -16,6 +17,7 @@ public class JudgeFileTypeUtils {
      */
     public static Intent openFile(String fileName,String filePath){
 
+        com.orhanobut.logger.Logger.e(filePath);
         // 取得扩展名
         String end=fileName.substring(fileName.lastIndexOf(".") + 1,fileName.length()).toLowerCase();
 

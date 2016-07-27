@@ -10,16 +10,11 @@ import java.util.Vector;
 public class FileUtils {
 
     // 获取当前目录下所有的文件
-    public static Vector<String> getAllFileName(String fileAbsolutePath) {
+    public static Vector<String> getAllFileName(String fileAbsolutePath) throws IOException {
         Vector<String> vecFile = new Vector<String>();
         File file = new File(fileAbsolutePath);
-        if (!file.exists()) {
-            try {
-                file.createNewFile();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
+
+        CreateText(file);
 
         File[] subFile = file.listFiles();
 
@@ -34,6 +29,18 @@ public class FileUtils {
                 }
             }
             return vecFile;
+        }
+    }
+
+    //创建文件夹及文件
+    public static void CreateText(File file) throws IOException {
+        if (!file.exists()) {
+            try {
+                //按照指定的路径创建文件夹
+                file.mkdirs();
+            } catch (Exception e) {
+                // TODO: handle exception
+            }
         }
     }
 }

@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Vector;
@@ -35,7 +36,11 @@ public class FileListAdapter extends BaseAdapter{
         this.list = list;
         this.context = context;
         newList = new ArrayList<>();
-        fileVec = FileUtils.getAllFileName(path);
+        try {
+            fileVec = FileUtils.getAllFileName(path);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
