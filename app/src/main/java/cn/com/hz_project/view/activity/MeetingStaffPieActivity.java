@@ -340,9 +340,9 @@ public class MeetingStaffPieActivity extends Activity implements View.OnClickLis
                 finish();
                 break;
             case R.id.bt_staff_listing:
-//                Intent intent = new Intent(this, MeetingStaffListingActivity.class);
-//                intent.putExtra("meetingIDa", meetingID);
-//                startActivity(intent);
+                Intent intent = new Intent(this, MeetingStaffListingActivity.class);
+                intent.putExtra("meetingIDa", meetingID);
+                startActivity(intent);
 
         }
     }
