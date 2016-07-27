@@ -47,6 +47,7 @@ public class DownLoadUtils {
                         super.onSuccess(file);
                         hDialogBuilder.dismiss();
                         Toast.makeText(context,"下载成功",Toast.LENGTH_LONG).show();
+                            
                     }
 
                     @Override

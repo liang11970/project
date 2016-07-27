@@ -6,33 +6,27 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.GridView;
-import android.widget.SimpleAdapter;
 import android.widget.Toast;
 
 
 import com.orhanobut.logger.Logger;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
-import cn.com.hz_project.model.bean.Login;
-import cn.com.hz_project.model.bean.OnlineQuiz;
 import cn.com.hz_project.model.bean.ServerFile;
 import cn.com.hz_project.model.bean.ServerFileObj;
 import cn.com.hz_project.model.server.LoginService;
 import cn.com.hz_project.tools.url.Urls;
 import cn.com.hz_project.tools.utils.JudgeFileTypeUtils;
 import cn.com.hz_project.tools.utils.LogUtils;
-import cn.com.hz_project.tools.utils.Md5;
+
 import cn.com.hz_project.tools.utils.scalars.DownLoadUtils;
 import cn.com.hz_project.tools.utils.scalars.FileUtils;
 import cn.com.hz_project.view.activity.ViewPagerActivity;
@@ -54,9 +48,9 @@ public class SortFragment extends Fragment {
     private FileListAdapter adapter;
     private DownLoadUtils downLoadUtils;
 
-    private String path = Environment.getExternalStorageDirectory().getAbsolutePath() + File
+        private String path = Environment.getExternalStorageDirectory().getAbsolutePath() + File
             .separator + "Judicial";
-//    private String path1 = Environment.get
+//    private String path = Environment.getDataDirectory().getAbsolutePath() + File.separator + "myfile";
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -145,15 +139,23 @@ public class SortFragment extends Fragment {
 
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                LogUtils.i("------------->", "所有文件" + FileUtils.getAllFileName(path));
-                for (String fileName : FileUtils.getAllFileName(path)) {
-                    if (fileName.equals(list.get(position).getFILE_URL_NAME())) {//如果文件已存在
-                        isExits = true;
-                        Toast.makeText(getActivity(), "此文件已经存在", Toast.LENGTH_SHORT).show();
-                        intent = JudgeFileTypeUtils.openFile(list.get(position).getFILE_URL_NAME(), path);
-                        startActivity(intent);
+
+
+                try {
+                    if (FileUtils.getAllFileName(path) != null) {
+                        for (String fileName : FileUtils.getAllFileName(path)) {
+                            if (fileName.equals(list.get(position).getFILE_URL_NAME())) {//如果文件已存在
+                                isExits = true;
+//                                Toast.makeText(getActivity(), "此文件已经存在", Toast.LENGTH_SHORT).show();
+                                intent = JudgeFileTypeUtils.openFile(list.get(position).getFILE_URL_NAME(), path+"/"+list.get(position).getFILE_URL_NAME());
+                                startActivity(intent);
+                            }
+                        }
                     }
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
+
                 if (isExits == false) {
                     isDownloadDialog(position);
                 }
