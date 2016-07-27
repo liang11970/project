@@ -59,7 +59,7 @@ public class DownloadFragment extends Fragment {
         // TODO Auto-generated method stub
         View view = inflater.inflate(R.layout.download, null);
 
-        ButterKnife.inject(view, getActivity());
+        ButterKnife.inject(this,view);
 
         initView(view);
 
@@ -73,8 +73,8 @@ public class DownloadFragment extends Fragment {
 
         list = new ArrayList<>();
         try {
-            for (String fileNmae : FileUtils.getAllFileName(path)) {
-                list.add(new ServerFileObj("aa","aa","aa","aa","aa","aa","aa",fileNmae));
+            for (String fileName : FileUtils.getAllFileName(path)) {
+                list.add(new ServerFileObj("aa",fileName,"aa","aa","aa","aa","aa","aa"));
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -106,7 +106,8 @@ public class DownloadFragment extends Fragment {
 
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
+                intent = JudgeFileTypeUtils.openFile(list.get(position).getFILE_NAME(), path+"/"+list.get(position).getFILE_NAME());
+                startActivity(intent);
             }
         });
     }

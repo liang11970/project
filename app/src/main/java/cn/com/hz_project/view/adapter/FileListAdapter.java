@@ -74,7 +74,7 @@ public class FileListAdapter extends BaseAdapter{
          */
         if (fileVec != null) {
             for (String fileName : fileVec) {
-                if (list.get(position).getFILE_URL_NAME().equals(fileName)) {
+                if (list.get(position).getFILE_NAME().equals(fileName)) {
                     viewHolder.isDown.setVisibility(View.VISIBLE);
                 }
             }
