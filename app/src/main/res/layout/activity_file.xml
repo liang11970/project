@@ -6,10 +6,13 @@
     tools:context="cn.com.hz_project.view.activity.FileActivity">
 
 
-    <ListView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/listView2"
-        android:layout_centerHorizontal="true"
-        android:layout_alignParentTop="true" />
+    <WebView
+        android:id="@+id/web"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </WebView>
+
+
+
 </RelativeLayout>

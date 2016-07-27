@@ -12,6 +12,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.orhanobut.logger.Logger;
+
 import java.util.ArrayList;
 
 import butterknife.ButterKnife;
@@ -89,6 +91,7 @@ public class NewActivity extends BaseActivity implements NewsContract.View {
                                                public void onClick(View v) {
                                                    Intent intent = new Intent(NewActivity.this,NewContentActivity.class);
                                                    intent.putExtra("id", newslistEntity.getNBD_ID());
+                                                   Logger.e(newslistEntity.getNBD_ID()+"");
                                                    com.orhanobut.logger.Logger.e(newslistEntity.getNBD_ID()+"");
                                                    startActivity(intent);
                                                }

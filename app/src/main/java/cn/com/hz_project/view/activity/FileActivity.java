@@ -1,28 +1,52 @@
 package cn.com.hz_project.view.activity;
 
-import android.support.v7.app.AppCompatActivity;
+import android.app.Activity;
 import android.os.Bundle;
-import android.widget.ListView;
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.webkit.WebView;
 
-import java.util.ArrayList;
+import com.orhanobut.logger.Logger;
 
+import butterknife.ButterKnife;
+import butterknife.InjectView;
+import cn.com.hz_project.view.base.BaseActivity;
 import cn.com.projectdemos.R;
-import retrofit2.Retrofit;
 
-public class FileActivity extends AppCompatActivity{
+public class FileActivity extends Activity {
 
-    private static final String FILENAME = "data.txt";
-    private static final String TAG = "DataStorageActivity";
+    @InjectView(R.id.web)
+    WebView web;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_file);
+        ButterKnife.inject(this);
+        Logger.e("FileActivity-onCreate");
+
+        Bundle extras = getIntent().getExtras();
+        int id = extras.getInt("id");
+
+        getWebview(id);
 
 
 
-        }
 
+
+    }
+
+
+
+    private void getWebview(int id) {
+
+        web.getSettings().setJavaScriptEnabled(true);
+        String ne="http://192.168.2.240:8080/WsbxMobile/newscontext.jsp?id="+id;
+        Logger.e(ne);
+
+        web.loadUrl(ne);
+
+    }
 
 
 }
