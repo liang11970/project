@@ -2,9 +2,13 @@ package cn.com.hz_project.model.server;
 
 import cn.com.hz_project.model.bean.DeleteMeeting;
 import cn.com.hz_project.model.bean.MeetingAddBean;
+import cn.com.hz_project.model.bean.MeetingBean;
 import cn.com.hz_project.model.bean.MeetingListBean;
 import cn.com.hz_project.model.bean.MeetingSignInBean;
 import cn.com.hz_project.model.bean.SignInStaffBean;
+import cn.com.hz_project.model.bean.StaffBean;
+import cn.com.hz_project.model.bean.StaffBeanModle;
+import retrofit2.Call;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
@@ -32,8 +36,8 @@ public interface MeetingService {
                                              @Field("remarks")String remarks);
 
 
-//    @GET("qdUserList")
-//    Observable<StaffBean> getStaffData(@Query("meet_id") String mettingID);
+    @GET("qdUserList")
+    Observable<StaffBeanModle> getStaffData(@Query("meet_id") String mettingID);
 
     @GET("del_meeting")
     Observable<DeleteMeeting> getDeleteMeeting(@Query("MEET_ID") String meetingID);
