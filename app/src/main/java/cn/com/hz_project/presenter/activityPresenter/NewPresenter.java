@@ -2,6 +2,8 @@ package cn.com.hz_project.presenter.activityPresenter;
 
 import android.text.TextUtils;
 
+import com.orhanobut.logger.Logger;
+
 import cn.com.hz_project.model.bean.HttpResult;
 import cn.com.hz_project.model.bean.NewsContext;
 import cn.com.hz_project.model.server.BusinessTask;
@@ -37,11 +39,13 @@ public class NewPresenter implements NewContext.Presenter {
         mNewsTask.geNewsList(new Subscriber<String>() {
             @Override
             public void onCompleted() {
-                LogUtils.e("PicturePresenter", "onCompleted");
+//                LogUtils.e("PicturePresenter", "onCompleted");
+                Logger.e("onCompleted");
             }
             @Override
             public void onError(Throwable e) {
-                LogUtils.e("PicturePresenter", "onError");
+//                LogUtils.e("PicturePresenter", "onError");
+                Logger.e("onError");
             }
             @Override
             public void onNext(String s) {
