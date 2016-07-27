@@ -13,7 +13,7 @@ import java.util.List;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
-import cn.com.hz_project.model.bean.StaffBeanModle;
+import cn.com.hz_project.model.bean.StaffBean;
 import cn.com.hz_project.model.server.MeetingService;
 import cn.com.hz_project.tools.url.Urls;
 import cn.com.hz_project.tools.utils.ToastUtils;
@@ -28,17 +28,20 @@ import rx.schedulers.Schedulers;
 
 public class MeetingStaffListingActivity extends Activity implements View.OnClickListener {
 
+
     @InjectView(R.id.iv_back_meeting)
     ImageView ivBackMeeting;
+    @InjectView(R.id.tv_back)
+    TextView tvBack;
     @InjectView(R.id.title_meeting)
     RelativeLayout titleMeeting;
     @InjectView(R.id.lv_staff_list)
     ListView lvStaffList;
-    @InjectView(R.id.tv_back)
-    TextView tvBack;
-    private List<StaffBeanModle.ObjBean> staffdata;
+    @InjectView(R.id.tv_null)
+    TextView tvNull;
+    private List<StaffBean.ObjBean> staffdata;
     private StaffAdapter staffAdapter;
-    private StaffBeanModle bean;
+    private StaffBean bean;
     private String meetingID;
     private MeetingService meetingService;
 
@@ -55,7 +58,6 @@ public class MeetingStaffListingActivity extends Activity implements View.OnClic
     private void initData() {
 
         meetingID = (String) getIntent().getExtras().get("meetingIDa");
-        com.orhanobut.logger.Logger.e("到场人员列表,会议ID是:"+meetingID);
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(Urls.baseURL)
                 .addConverterFactory(GsonConverterFactory.create())
@@ -68,7 +70,7 @@ public class MeetingStaffListingActivity extends Activity implements View.OnClic
         meetingService.getStaffData(meetingID)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<StaffBeanModle>() {
+                .subscribe(new Subscriber<StaffBean>() {
 
 
                     @Override
@@ -78,14 +80,20 @@ public class MeetingStaffListingActivity extends Activity implements View.OnClic
 
                     @Override
                     public void onError(Throwable e) {
+                        tvNull.setVisibility(View.VISIBLE);
                         ToastUtils.show(getApplicationContext(), "请求数据失败,请检查网络");
+
 
                     }
 
                     @Override
-                    public void onNext(StaffBeanModle staffBeanModle) {
-                        Log.e("饼图", staffBeanModle.getObj().toString());
-                        bean = staffBeanModle;
+                    public void onNext(StaffBean staffBean) {
+                        bean = staffBean;
+                        Log.e("到场人员列表", staffBean.toString());
+                        if (staffBean.getObj().size()<1){
+                            tvNull.setVisibility(View.VISIBLE);
+                            return;
+                        }
 
                         showStaff();
 

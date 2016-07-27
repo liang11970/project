@@ -49,7 +49,6 @@ public class StaffAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        Log.e("staff",mData.toString());
         ViewHolder viewHolder;
         if (convertView == null) {
             convertView = View.inflate(mContext, R.layout.item_meeting_staff, null);
@@ -62,7 +61,6 @@ public class StaffAdapter extends BaseAdapter {
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
-        Logger.e(mData.get(position).getUBD_REAL_NAME() + "");
         viewHolder.tvName.setText(mData.get(position).getUBD_REAL_NAME());
         viewHolder.tvDeptName.setText(mData.get(position).getUBD_DEPT_NAME());
         viewHolder.tvPstnName.setText(mData.get(position).getUBD_PSTN_NAME());

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -24,9 +24,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:paddingTop="5dip"
-            android:paddingBottom="5dip"
             android:layout_toRightOf="@+id/iv_back_meeting"
+            android:paddingBottom="5dip"
+            android:paddingTop="5dip"
             android:text="返回"
             android:textColor="@color/city_item_bg_nor"
 
@@ -44,9 +44,22 @@
     </RelativeLayout>
 
 
+    <TextView
+        android:id="@+id/tv_null"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/title_meeting"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="40dip"
+        android:textSize="18dp"
+        android:text="目前还没有人签到.."
+        android:visibility="invisible"
+        android:textColor="#46769E" />
+
     <ListView
         android:id="@+id/lv_staff_list"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/title_meeting" />
 
-</LinearLayout>
+</RelativeLayout>

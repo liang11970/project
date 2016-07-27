@@ -12,6 +12,7 @@ public class ServerFileObj {
     private String FILE_CRTE_USER;
     private String FILE_UPDATE_TIME;
     private String FILE_UPDATE_USER;
+    private String FILE_URL_NAME;
 
     public String getFILE_ID() {
         return FILE_ID;
@@ -23,6 +24,14 @@ public class ServerFileObj {
 
     public String getFILE_NAME() {
         return FILE_NAME;
+    }
+
+    public String getFILE_URL_NAME() {
+        return FILE_URL_NAME;
+    }
+
+    public void setFILE_URL_NAME(String FILE_URL_NAME) {
+        this.FILE_URL_NAME = FILE_URL_NAME;
     }
 
     public void setFILE_NAME(String FILE_NAME) {

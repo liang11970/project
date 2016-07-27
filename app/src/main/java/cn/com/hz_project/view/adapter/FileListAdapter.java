@@ -1,7 +1,8 @@
 package cn.com.hz_project.view.adapter;
 
 import android.content.Context;
-import android.support.v7.widget.RecyclerView;
+import android.os.Environment;
+import android.provider.ContactsContract;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,12 +10,14 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
-
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Vector;
 
 import cn.com.hz_project.model.bean.ServerFileObj;
+import cn.com.hz_project.tools.utils.LogUtils;
+import cn.com.hz_project.tools.utils.scalars.FileUtils;
 import cn.com.projectdemos.R;
 
 /**
@@ -24,16 +27,20 @@ public class FileListAdapter extends BaseAdapter{
     private ArrayList<ServerFileObj> list;
     private Context context;
     private ArrayList<HashMap<String,String>> newList;
+    private String path = Environment.getExternalStorageDirectory().getAbsolutePath() + File
+            .separator + "Judicial";
+    private Vector<String> fileVec;
 
     public FileListAdapter(ArrayList<ServerFileObj> list, Context context){
         this.list = list;
         this.context = context;
         newList = new ArrayList<>();
+        fileVec = FileUtils.getAllFileName(path);
     }
 
     @Override
     public int getCount() {
-        return list.size();
+        return list == null ? 0 : list.size();
     }
 
     @Override
@@ -57,6 +64,20 @@ public class FileListAdapter extends BaseAdapter{
             viewHolder = (ViewHolder) convertView.getTag();
         }
 
+        /**
+         * 根据文件名判断文件是否本地存在并设置图标
+         */
+        if (fileVec != null) {
+            for (String fileName : fileVec) {
+                if (list.get(position).getFILE_URL_NAME().equals(fileName)) {
+                    viewHolder.isDown.setVisibility(View.VISIBLE);
+                }
+            }
+        }
+
+        /**
+         * 设置文字
+         */
         viewHolder.tv.setText(list.get(position).getFILE_NAME());
 
         return convertView;
@@ -65,10 +86,12 @@ public class FileListAdapter extends BaseAdapter{
     private class ViewHolder{
         ImageView iv;
         TextView tv;
+        ImageView isDown;
 
         public ViewHolder(View view){
             iv = (ImageView) view.findViewById(R.id.imageview);
             tv = (TextView)view.findViewById(R.id.textview);
+            isDown = (ImageView) view.findViewById(R.id.isdown);
         }
     }
 }

@@ -15,6 +15,16 @@ public class StaffBeanModle implements Serializable{
 
     private String msg;
     private boolean success;
+
+    @Override
+    public String toString() {
+        return "StaffBean{" +
+                "msg='" + msg + '\'' +
+                ", success=" + success +
+                ", obj=" + obj +
+                '}';
+    }
+
     /**
      * UBD_DEPT_ID : 1
      * UBD_DEPT_NAME : 测试
@@ -35,6 +45,7 @@ public class StaffBeanModle implements Serializable{
      * UBD_USER_SEX : 1
      * UBD_USER_STATE : 2
      */
+
 
     private List<ObjBean> obj;
 

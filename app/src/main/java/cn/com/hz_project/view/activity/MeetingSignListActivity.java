@@ -101,19 +101,13 @@ public class MeetingSignListActivity extends Activity implements View.OnClickLis
                     @Override
                     public void onError(Throwable e) {
 
-                        Log.e("请求失败", e.getMessage());
                         Toast.makeText(getApplicationContext(), "请求网络失败", Toast.LENGTH_SHORT).show();
                     }
 
                     @Override
                     public void onNext(MeetingListBean meetingBean) {
-                        Log.e("请求成功++", meetingBean.toString());
-                        Log.e("请求成功++", "pageNum===" + pageNum + "");
-
-
                         if (pageNum == 1) {
                             meetList = meetingBean.getObj();
-                            Log.e("请求成功,会议时间",meetingBean.getObj().toString());
                             showData();
                         } else if (pageNum != 1) {
                             page2List = meetingBean.getObj();
@@ -291,7 +285,6 @@ public class MeetingSignListActivity extends Activity implements View.OnClickLis
 
                     @Override
                     public void onNext(DeleteMeeting deleteMeeting) {
-                        Log.e("会议列表",deleteMeeting.toString());
                         ToastUtils.show(MeetingSignListActivity.this,deleteMeeting.getMsg()+"");
 
                     }
