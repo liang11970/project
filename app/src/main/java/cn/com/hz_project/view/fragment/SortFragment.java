@@ -1,7 +1,10 @@
 package cn.com.hz_project.view.fragment;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.v4.app.Fragment;
@@ -11,7 +14,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.GridView;
-import android.widget.Toast;
 
 
 import com.orhanobut.logger.Logger;
@@ -48,9 +50,24 @@ public class SortFragment extends Fragment {
     private FileListAdapter adapter;
     private DownLoadUtils downLoadUtils;
 
-        private String path = Environment.getExternalStorageDirectory().getAbsolutePath() + File
+    private String path = Environment.getExternalStorageDirectory().getAbsolutePath() + File
             .separator + "Judicial";
-//    private String path = Environment.getDataDirectory().getAbsolutePath() + File.separator + "myfile";
+
+    private String UPDATEWEA = "downLoadSuccess";
+
+    /**
+     * 广播接收者，下载成功后通知刷新列表
+     */
+    private BroadcastReceiver receiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            if (intent.getAction().equals(UPDATEWEA)){
+                Logger.e("收到广播啦");
+                adapter = new FileListAdapter(list, getActivity());
+                gview.setAdapter(adapter);
+            }
+        }
+    };
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -67,6 +84,10 @@ public class SortFragment extends Fragment {
     }
 
     private void init(View view) {
+        IntentFilter intentFilter1 = new IntentFilter();
+        intentFilter1.addAction(UPDATEWEA);
+        getActivity().registerReceiver(receiver,intentFilter1);
+
         downLoadUtils = new DownLoadUtils(getActivity());
 
         retrofit = new Retrofit.Builder()
@@ -146,7 +167,6 @@ public class SortFragment extends Fragment {
                         for (String fileName : FileUtils.getAllFileName(path)) {
                             if (fileName.equals(list.get(position).getFILE_URL_NAME())) {//如果文件已存在
                                 isExits = true;
-//                                Toast.makeText(getActivity(), "此文件已经存在", Toast.LENGTH_SHORT).show();
                                 intent = JudgeFileTypeUtils.openFile(list.get(position).getFILE_URL_NAME(), path+"/"+list.get(position).getFILE_URL_NAME());
                                 startActivity(intent);
                             }
@@ -173,7 +193,7 @@ public class SortFragment extends Fragment {
         builder.setPositiveButton("确认", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                downLoadUtils.download(list.get(position).getFILE_URL_NAME());
+                downLoadUtils.download(list.get(position).getFILE_URL_NAME(),list.get(position).getFILE_NAME());
             }
         });
 
@@ -184,5 +204,11 @@ public class SortFragment extends Fragment {
             }
         });
         builder.create().show();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        getActivity().unregisterReceiver(receiver);
     }
 }

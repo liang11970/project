@@ -14,6 +14,17 @@ public class ServerFileObj {
     private String FILE_UPDATE_USER;
     private String FILE_URL_NAME;
 
+    public ServerFileObj(String FILE_ID, String FILE_NAME, String FILE_URL, String FILE_CRTE_TIME, String FILE_CRTE_USER, String FILE_UPDATE_TIME, String FILE_UPDATE_USER, String FILE_URL_NAME) {
+        this.FILE_ID = FILE_ID;
+        this.FILE_NAME = FILE_NAME;
+        this.FILE_URL = FILE_URL;
+        this.FILE_CRTE_TIME = FILE_CRTE_TIME;
+        this.FILE_CRTE_USER = FILE_CRTE_USER;
+        this.FILE_UPDATE_TIME = FILE_UPDATE_TIME;
+        this.FILE_UPDATE_USER = FILE_UPDATE_USER;
+        this.FILE_URL_NAME = FILE_URL_NAME;
+    }
+
     public String getFILE_ID() {
         return FILE_ID;
     }

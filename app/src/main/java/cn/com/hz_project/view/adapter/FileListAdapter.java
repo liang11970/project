@@ -30,7 +30,7 @@ public class FileListAdapter extends BaseAdapter{
     private ArrayList<HashMap<String,String>> newList;
     private String path = Environment.getExternalStorageDirectory().getAbsolutePath() + File
             .separator + "Judicial";
-    private Vector<String> fileVec;
+    private ArrayList<String> fileVec;
 
     public FileListAdapter(ArrayList<ServerFileObj> list, Context context){
         this.list = list;
@@ -74,7 +74,7 @@ public class FileListAdapter extends BaseAdapter{
          */
         if (fileVec != null) {
             for (String fileName : fileVec) {
-                if (list.get(position).getFILE_URL_NAME().equals(fileName)) {
+                if (list.get(position).getFILE_NAME().equals(fileName)) {
                     viewHolder.isDown.setVisibility(View.VISIBLE);
                 }
             }

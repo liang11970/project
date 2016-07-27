@@ -63,7 +63,6 @@
             android:layout_alignParentRight="true"
             android:text="未签到"
             android:layout_margin="5dip"
-            android:layout_alignBottom="@+id/tv_Meeting_Name"
             android:textSize="18dp" />
 
     </RelativeLayout>

@@ -2,6 +2,7 @@ package cn.com.hz_project.tools.utils.scalars;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Environment;
 import android.view.View;
 import android.widget.TextView;
@@ -14,7 +15,6 @@ import cn.com.hz_project.model.HDialogBuilder;
 import cn.com.hz_project.model.server.FileApi;
 import cn.com.hz_project.model.server.FileCallback;
 import cn.com.hz_project.tools.url.Urls;
-import cn.com.hz_project.tools.utils.LogUtils;
 import cn.com.projectdemos.R;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -27,27 +27,33 @@ public class DownLoadUtils {
     private TextView txtProgress;
     private HDialogBuilder hDialogBuilder;
     private Context context;
+    private Intent intent1 = new Intent();
+    private String UPDATEWEA = "downLoadSuccess";
+
 
     public DownLoadUtils(Context context){
         this.context = context;
         hDialogBuilder = new HDialogBuilder(context);
     }
 
-    public void download(String fileName){
+    public void download(String fileName,String fileStoreName){
 
         String fileStoreDir = Environment.getExternalStorageDirectory().getAbsolutePath() + File
                 .separator + "Judicial";
-        String fileStoreName = fileName;
+
         showLoadingDialog();
 
         FileApi.getInstance(Urls.FileURL)
                 .loadFileByName(fileName, new FileCallback(fileStoreDir, fileStoreName) {
+
+
                     @Override
                     public void onSuccess(File file) {
                         super.onSuccess(file);
                         hDialogBuilder.dismiss();
                         Toast.makeText(context,"下载成功",Toast.LENGTH_LONG).show();
-                            
+                        intent1.setAction(UPDATEWEA);
+                        context.sendBroadcast(intent1);
                     }
 
                     @Override
