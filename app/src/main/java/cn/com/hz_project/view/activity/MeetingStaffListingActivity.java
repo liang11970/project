@@ -14,6 +14,7 @@ import java.util.List;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import cn.com.hz_project.model.bean.StaffBean;
+import cn.com.hz_project.model.bean.StaffBeanModle;
 import cn.com.hz_project.model.server.MeetingService;
 import cn.com.hz_project.tools.url.Urls;
 import cn.com.hz_project.tools.utils.ToastUtils;
@@ -39,9 +40,9 @@ public class MeetingStaffListingActivity extends Activity implements View.OnClic
     ListView lvStaffList;
     @InjectView(R.id.tv_null)
     TextView tvNull;
-    private List<StaffBean.ObjBean> staffdata;
+    private List<StaffBeanModle.ObjBean> staffdata;
     private StaffAdapter staffAdapter;
-    private StaffBean bean;
+    private StaffBeanModle bean;
     private String meetingID;
     private MeetingService meetingService;
 
@@ -70,7 +71,7 @@ public class MeetingStaffListingActivity extends Activity implements View.OnClic
         meetingService.getStaffData(meetingID)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<StaffBean>() {
+                .subscribe(new Subscriber<StaffBeanModle>() {
 
 
                     @Override
@@ -87,7 +88,7 @@ public class MeetingStaffListingActivity extends Activity implements View.OnClic
                     }
 
                     @Override
-                    public void onNext(StaffBean staffBean) {
+                    public void onNext(StaffBeanModle staffBean) {
                         bean = staffBean;
                         Log.e("到场人员列表", staffBean.toString());
                         if (staffBean.getObj().size()<1){
@@ -104,7 +105,8 @@ public class MeetingStaffListingActivity extends Activity implements View.OnClic
     }
 
     private void showStaff() {
-        staffAdapter = new StaffAdapter(getApplicationContext(), bean.getObj());
+        staffAdapter = new StaffAdapter(getApplicationContext(),bean.getObj()
+        );
         lvStaffList.setAdapter(staffAdapter);
     }
 
