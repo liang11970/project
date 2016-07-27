@@ -15,7 +15,7 @@ import java.util.List;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
-import cn.com.hz_project.model.bean.StaffBean;
+import cn.com.hz_project.model.bean.StaffBeanModle;
 import cn.com.hz_project.tools.url.Urls;
 import cn.com.projectdemos.R;
 
@@ -24,9 +24,9 @@ import cn.com.projectdemos.R;
  */
 public class StaffAdapter extends BaseAdapter {
     private final Context mContext;
-    private final List<StaffBean.ObjBean> mData;
+    private final List<StaffBeanModle.ObjBean> mData;
 
-    public StaffAdapter(Context context, List<StaffBean.ObjBean> staffdata) {
+    public StaffAdapter(Context context, List<StaffBeanModle.ObjBean> staffdata) {
         this.mContext = context;
         this.mData = staffdata;
     }
@@ -49,7 +49,6 @@ public class StaffAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        Log.e("staff",mData.toString());
         ViewHolder viewHolder;
         if (convertView == null) {
             convertView = View.inflate(mContext, R.layout.item_meeting_staff, null);
@@ -62,7 +61,6 @@ public class StaffAdapter extends BaseAdapter {
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
-        Logger.e(mData.get(position).getUBD_REAL_NAME() + "");
         viewHolder.tvName.setText(mData.get(position).getUBD_REAL_NAME());
         viewHolder.tvDeptName.setText(mData.get(position).getUBD_DEPT_NAME());
         viewHolder.tvPstnName.setText(mData.get(position).getUBD_PSTN_NAME());

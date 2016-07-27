@@ -87,7 +87,6 @@ public class MeetingDetailsActivity extends Activity implements View.OnClickList
     private void initData() {
         extras = getIntent().getExtras();
         meetingId = (String) extras.get("ID").toString();
-        Logger.e("会议详情,会议ID:"+meetingId);
         content = (String) extras.get("content");
         tvMeetingName.setText(extras.get("name") + "");
         String startTime = (String) extras.get("startTime");
@@ -101,7 +100,6 @@ public class MeetingDetailsActivity extends Activity implements View.OnClickList
     private void initView() {
         preferencesService = new PreferencesService(this);
         user_id = preferencesService.getPerferences().get("userId");
-        Log.e("会议签到", "ID为" + qd_user_id);
 
         if (preferencesService.getPerferences().get("roleId").equals("9")) {
             isAdmin = true;
@@ -112,13 +110,8 @@ public class MeetingDetailsActivity extends Activity implements View.OnClickList
             isAdmin = false;
             etPhoneNum.setVisibility(View.INVISIBLE);
             rlMeetingPersonnelList.setVisibility(View.INVISIBLE);
-
-
         }
-        Log.e("会议签到role", preferencesService.getPerferences().get("role") + ""
-        );
-        Log.e("会议签到roleid", preferencesService.getPerferences().get("roleId") + ""
-        );
+
         rlMeetingPersonnelList.setOnClickListener(this);
         btMeetingSignin.setOnClickListener(this);
     }
@@ -167,12 +160,11 @@ public class MeetingDetailsActivity extends Activity implements View.OnClickList
     }
 
     private void signInRequestData() {
-        if (signPhoneNum.length()!=0) {
+        if (signPhoneNum.length() != 0) {
             mark = "2";
         } else {
             mark = "1";
         }
-        Log.e("会议签到","admin"+preferencesService.getPerferences().get("roleId")+"==="+extras.get("ID").toString()+"====="+qd_user_id+"====="+signPhoneNum+"====="+mark);
         meetingService.getMeetingSignIn(extras.get("ID").toString()
                 , user_id
                 , signPhoneNum, mark)
@@ -184,16 +176,10 @@ public class MeetingDetailsActivity extends Activity implements View.OnClickList
                         complete = true;
                         pDialog.dismiss();
 
-
-
-//                        showwDialog();
-//                        showDDialog();
-
                     }
 
                     @Override
                     public void onError(Throwable e) {
-                        Log.e("异常", e.toString());
                         showDDialog("签到失败,请检查网络");
                         pDialog.dismiss();
 
@@ -201,7 +187,6 @@ public class MeetingDetailsActivity extends Activity implements View.OnClickList
 
                     @Override
                     public void onNext(MeetingSignInBean meetingSignInBean) {
-                        Log.e("会议签到,签到返回数据1", meetingSignInBean.getMsg().toString());
                         showDDialog(meetingSignInBean.getMsg());
 
                         etPhoneNum.setText("");

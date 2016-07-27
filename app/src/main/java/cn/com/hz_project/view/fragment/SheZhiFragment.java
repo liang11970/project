@@ -1,6 +1,8 @@
 package cn.com.hz_project.view.fragment;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -60,17 +62,25 @@ public class SheZhiFragment extends Fragment {
         phone.setText(service.getPerferences().get("telPhone"));
         department.setText(service.getPerferences().get("departmentName"));
 
-        Log.i("-------------->","http://116.228.202.122:8080/WsbxMobile"+service.getPerferences().get("imgUrl"));
+//        Log.i("-------------->","http://116.228.202.122:8080/WsbxMobile"+service.getPerferences().get("imgUrl"));
 
         Picasso.with(getActivity()).load("http://116.228.202.122:8080/WsbxMobile"+service.getPerferences().get("imgUrl")).into(photo);
 
         btn_quit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), LoginActivity.class);
-                intent.putExtra("isQuit",true);
-                startActivity(intent);
+
+                SharedPreferences preferences=getContext().getSharedPreferences("logintag", Context.MODE_PRIVATE);
+
+                SharedPreferences.Editor editor=preferences.edit();
+                editor.putBoolean("tag",false);
+                editor.commit();
+
+
                 getActivity().finish();
+
+
+
             }
         });
     }

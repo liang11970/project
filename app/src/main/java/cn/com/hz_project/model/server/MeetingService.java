@@ -5,6 +5,7 @@ import cn.com.hz_project.model.bean.MeetingAddBean;
 import cn.com.hz_project.model.bean.MeetingBean;
 import cn.com.hz_project.model.bean.MeetingListBean;
 import cn.com.hz_project.model.bean.MeetingSignInBean;
+import cn.com.hz_project.model.bean.SignInStaffBean;
 import cn.com.hz_project.model.bean.StaffBean;
 import retrofit2.Call;
 import retrofit2.http.Field;
@@ -39,4 +40,7 @@ public interface MeetingService {
 
     @GET("del_meeting")
     Observable<DeleteMeeting> getDeleteMeeting(@Query("MEET_ID") String meetingID);
+
+    @GET("charMeet")
+    Observable<SignInStaffBean> getSignInStaff(@Query("MEET_ID") String meetingID);
 }

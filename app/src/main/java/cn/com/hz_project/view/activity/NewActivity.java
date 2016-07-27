@@ -22,6 +22,7 @@ import cn.com.hz_project.presenter.activityPresenter.NewsContract;
 import cn.com.hz_project.presenter.activityPresenter.NewsPresenter;
 import cn.com.hz_project.tools.ACache;
 import cn.com.hz_project.tools.utils.LogUtils;
+import cn.com.hz_project.view.base.BaseActivity;
 import cn.com.hz_project.view.base.BaseAdapter;
 import cn.com.hz_project.view.base.ViewHolder;
 import cn.com.hz_project.view.widget.LoadMorRecyclerView;
@@ -29,7 +30,7 @@ import cn.com.hz_project.view.widget.LoadMoreRecyclerView;
 import cn.com.hz_project.view.widget.RecycleViewDivider;
 import cn.com.projectdemos.R;
 
-public class NewActivity extends Activity implements NewsContract.View {
+public class NewActivity extends BaseActivity implements NewsContract.View {
 
 
     @InjectView(R.id.iv_back_meeting)
@@ -61,6 +62,11 @@ public class NewActivity extends Activity implements NewsContract.View {
 
         initView();
         initEvent();
+
+    }
+
+    @Override
+    protected void initViewsAndEvents() {
 
     }
 
