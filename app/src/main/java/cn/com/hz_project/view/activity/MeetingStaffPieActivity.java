@@ -227,10 +227,11 @@ public class MeetingStaffPieActivity extends Activity implements View.OnClickLis
             TextView percentTV = new TextView(this);
             percentTV.setText(percentList.get(i) + "%");
             percentTV.setGravity(Gravity.CENTER);
+
             percentTV.setLayoutParams(tvP);
             layout.addView(percentTV);
 
-            llLegend.addView(layout);//legendLayout为外层布局即整个图例布局，是在xml文件中定义
+            llLegend.addView(layout);
 
         }
     }
