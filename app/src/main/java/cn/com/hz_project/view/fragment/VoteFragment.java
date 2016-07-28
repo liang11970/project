@@ -9,17 +9,25 @@ import android.view.ViewGroup;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.ListView;
+
+import java.util.ArrayList;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
+import cn.com.hz_project.view.adapter.VoteAdapter;
 import cn.com.projectdemos.R;
 
 /**
  * Created by ku on 2016/7/16.
  */
 public class VoteFragment extends Fragment{
-    @InjectView(R.id.wv_vote)
-    WebView wv_vote;
+
+    @InjectView(R.id.list_vote)
+    ListView listVote;
+
+    private ArrayList<String> list;
+    private VoteAdapter voteAdapter;
 
     @Nullable
     @Override
@@ -29,18 +37,13 @@ public class VoteFragment extends Fragment{
 
         ButterKnife.inject(this,view);
 
-        wv_vote.loadUrl("http://mp.weixin.qq.com/s?src=3&timestamp=1468910533&ver=1&signature=RbnX4tUBODpql9qsvp4jJRDrtHc-LSXXm9gSM*BNY*M1iyxZAFmTcAp0BIOouqvvdFBdqnbsKoRVcPUGcUskCOEMeV*UXEaaCZ4zhB-6nc6ZQsmrWOvaLAXsTylb6COHDmQPRiweUDUmNTEqDPJwJsK9dY2X1Nli1Gybroh47NU=");
-        wv_vote.setWebViewClient(new WebViewClient(){
-            @Override
-            public boolean shouldOverrideUrlLoading(WebView view, String url) {
-                view.loadUrl(url);
-                return true;
-            }
-        });
+        list = new ArrayList<>();
+        list.add("aaa");
+        list.add("aaa");
+        list.add("aaa");
 
-        //启用支持javascript
-        WebSettings settings = wv_vote.getSettings();
-        settings.setJavaScriptEnabled(true);
+        voteAdapter = new VoteAdapter(list,getActivity());
+        listVote.setAdapter(voteAdapter);
 
         return view;
     }

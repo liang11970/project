@@ -42,25 +42,29 @@ import cn.com.projectdemos.R;
 
 public class ViewPagerActivity extends FragmentActivity {
     private static final int FILE_SELECT_CODE = 0X111;
-    public final static int num = 4 ;
+    public final static int num = 4;
     public static FragmentManager fragmentManager;
     public static FragmentTransaction transaction;
     private RadioGroup radioGroup;
-private RadioButton qq;
+
+    private Fragment homeFragment = new HomeFragment();
+    private Fragment sortFragment = new SortFragment();
+    private Fragment personFragment = new PersonFragment();
+    private Fragment shezhiFragment = new SheZhiFragment();
+
+    private RadioButton qq;
     public static String lujing;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
         setContentView(R.layout.activity_view_pager);
         fragmentManager = getSupportFragmentManager();
-        radioGroup = (RadioGroup)findViewById(R.id.radioGroup1);
-        ((RadioButton)radioGroup.findViewById(R.id.radio0)).setChecked(true);
+        radioGroup = (RadioGroup) findViewById(R.id.radioGroup1);
+        ((RadioButton) radioGroup.findViewById(R.id.radio0)).setChecked(true);
 
-        transaction = fragmentManager.beginTransaction();
-        Fragment fragment = new HomeFragment();
-        transaction.replace(R.id.content, fragment);
-        transaction.commit();
+        fragmentManager.beginTransaction().add(R.id.content, homeFragment).commit();
 
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
@@ -68,27 +72,81 @@ private RadioButton qq;
                 switch (checkedId) {
                     case R.id.radio0:
                         transaction = fragmentManager.beginTransaction();
-                        Fragment homeFragment = new HomeFragment();
-                        transaction.replace(R.id.content, homeFragment);
+                        if (!homeFragment.isAdded()) {
+                            transaction.add(R.id.content, homeFragment);
+                        }
+                        if (personFragment.isAdded()) {
+                            transaction.hide(personFragment);
+                        }
+                        if (sortFragment.isAdded()) {
+                            transaction.hide(sortFragment);
+                        }
+                        if (shezhiFragment.isAdded()){
+                            transaction.hide(shezhiFragment);
+                        }
+
+                        transaction.show(homeFragment);
                         transaction.commit();
+
                         break;
+
                     case R.id.radio1:
                         transaction = fragmentManager.beginTransaction();
-                        Fragment sortFragment = new SortFragment();
-                        transaction.replace(R.id.content, sortFragment);
+                        if (!sortFragment.isAdded()) {
+                            transaction.add(R.id.content, sortFragment);
+                        }
+                        Logger.e("homeFragment"+homeFragment.isAdded());
+                        if (personFragment.isAdded()) {
+                            transaction.hide(personFragment);
+                        }
+                        if (homeFragment.isAdded()) {
+                            transaction.hide(homeFragment);
+                        }
+                        if (shezhiFragment.isAdded()) {
+                            transaction.hide(shezhiFragment);
+                        }
+                        transaction.show(sortFragment);
                         transaction.commit();
+
                         break;
                     case R.id.radio2:
                         transaction = fragmentManager.beginTransaction();
-                        Fragment personFragment = new PersonFragment();
-                        transaction.replace(R.id.content, personFragment);
+                        if (!personFragment.isAdded()) {
+                            transaction.add(R.id.content, personFragment);
+                        }
+                        if (sortFragment.isAdded()) {
+                            transaction.hide(sortFragment);
+                        }
+                        if (homeFragment.isAdded()) {
+                            transaction.hide(homeFragment);
+                        }
+                        if (shezhiFragment.isAdded()) {
+                            transaction.hide(shezhiFragment);
+                        }
+
+                        transaction.show(personFragment);
                         transaction.commit();
+
                         break;
                     case R.id.radio3:
                         transaction = fragmentManager.beginTransaction();
-                        Fragment shezhiFragment = new SheZhiFragment();
-                        transaction.replace(R.id.content, shezhiFragment);
+                        if (!shezhiFragment.isAdded()) {
+                            transaction.add(R.id.content, shezhiFragment);
+
+                        }
+                        if (sortFragment.isAdded()) {
+                            transaction.hide(sortFragment);
+                        }
+                        if (homeFragment.isAdded()){
+                            transaction.hide(homeFragment);
+                        }
+                        if (personFragment.isAdded()) {
+                            transaction.hide(personFragment);
+                        }
+
+                        transaction.show(shezhiFragment);
                         transaction.commit();
+
                         break;
                 }
 
@@ -98,20 +156,20 @@ private RadioButton qq;
     }
 
 
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        Uri uri=null;
+        Uri uri = null;
 
         if (resultCode == Activity.RESULT_OK) {
             uri = data.getData();
 
         }
-            UpDateFragment.lujing.setText(getImageAbsolutePath(ViewPagerActivity.this, uri));
-            lujing = getImageAbsolutePath(ViewPagerActivity.this, uri);
+        UpDateFragment.lujing.setText(getImageAbsolutePath(ViewPagerActivity.this, uri));
+        lujing = getImageAbsolutePath(ViewPagerActivity.this, uri);
 
     }
+
     public static String getImageAbsolutePath(Activity context, Uri imageUri) {
         if (context == null || imageUri == null)
             return null;
@@ -140,7 +198,7 @@ private RadioButton qq;
                     contentUri = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI;
                 }
                 String selection = MediaStore.Images.Media._ID + "=?";
-                String[] selectionArgs = new String[] { split[1] };
+                String[] selectionArgs = new String[]{split[1]};
                 return getDataColumn(context, contentUri, selection, selectionArgs);
             }
         } // MediaStore (and general)
@@ -156,10 +214,11 @@ private RadioButton qq;
         }
         return null;
     }
+
     public static String getDataColumn(Context context, Uri uri, String selection, String[] selectionArgs) {
         Cursor cursor = null;
         String column = MediaStore.Images.Media.DATA;
-        String[] projection = { column };
+        String[] projection = {column};
         try {
             cursor = context.getContentResolver().query(uri, projection, selection, selectionArgs, null);
             if (cursor != null && cursor.moveToFirst()) {
@@ -204,7 +263,6 @@ private RadioButton qq;
     public static boolean isGooglePhotosUri(Uri uri) {
         return "com.google.android.apps.photos.content".equals(uri.getAuthority());
     }
-
 
 
 }
