@@ -3,7 +3,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-<<<<<<< HEAD
     <ListView
         android:id="@+id/list_vote"
         android:layout_width="match_parent"
@@ -11,13 +10,3 @@
         android:layout_marginLeft="10dp"/>
 
 </RelativeLayout>
-=======
-    <WebView
-        android:id="@+id/wv_vote"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"/>
-
-
-
-</LinearLayout>
->>>>>>> b8349fb495ba1779f43e0422e9c52fa36de339a4

@@ -19,6 +19,7 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
 import cn.com.hz_project.model.server.PreferencesService;
+import cn.com.hz_project.view.activity.AboutAactivity;
 import cn.com.hz_project.view.activity.AdviceActivity;
 import cn.com.projectdemos.R;
 
@@ -41,6 +42,9 @@ public class SheZhiFragment extends Fragment {
 
     @InjectView(R.id.quit)
     Button btn_quit;
+
+    @InjectView(R.id.ivd5)
+    LinearLayout ivd5;
     @InjectView(R.id.iv5)
     LinearLayout iv5;
 
@@ -99,10 +103,18 @@ public class SheZhiFragment extends Fragment {
         ButterKnife.reset(this);
     }
 
-    @OnClick(R.id.iv5)
-    public void onClick() {
 
-        startActivity(new Intent(getContext(), AdviceActivity.class));
+    @OnClick({R.id.ivd5, R.id.iv5})
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.ivd5:
+                startActivity(new Intent(getContext(), AdviceActivity.class));
+
+                break;
+            case R.id.iv5:
+                startActivity(new Intent(getContext(), AboutAactivity.class));
+                break;
+        }
     }
 }
 
