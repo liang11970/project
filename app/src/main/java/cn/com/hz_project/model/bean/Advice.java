@@ -47,5 +47,12 @@ public class Advice {
         this.obj = obj;
     }
 
-
+    @Override
+    public String toString() {
+        return "Advice{" +
+                "success=" + success +
+                ", msg='" + msg + '\'' +
+                ", obj='" + obj + '\'' +
+                '}';
+    }
 }
