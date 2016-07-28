@@ -5,6 +5,7 @@ import cn.com.hz_project.model.bean.OnlineQuiz;
 import cn.com.hz_project.model.bean.Quiz;
 import cn.com.hz_project.model.bean.QuizAnswer;
 import cn.com.hz_project.model.bean.ServerFile;
+import cn.com.hz_project.model.bean.Vote;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
@@ -69,4 +70,12 @@ public interface LoginService {
      */
     @GET("fileList")
     Observable<ServerFile> getFileList();
+
+    /**
+     * 查询投票列表
+     */
+    @FormUrlEncoded
+    @POST("voteList")
+    Observable<Vote> getVoteList(@Field("page") int page);
+
 }
