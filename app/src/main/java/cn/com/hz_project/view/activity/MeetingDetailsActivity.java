@@ -14,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.orhanobut.dialogplus.DialogPlus;
 import com.orhanobut.logger.Logger;
@@ -81,6 +82,8 @@ public class MeetingDetailsActivity extends Activity implements View.OnClickList
 
         initView();
         initData();
+
+
 
     }
 
