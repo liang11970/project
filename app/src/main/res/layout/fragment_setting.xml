@@ -174,6 +174,17 @@
                 android:background="#DBDBDB"/>
 
             <!--帮助与反馈-->
+
+
+            <LinearLayout
+
+                android:id="@+id/ivd5"
+                android:layout_below="@+id/d4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                >
+
             <ImageView
                 android:id="@+id/iv4"
                 android:layout_width="20dp"
@@ -190,15 +201,18 @@
                 android:layout_toRightOf="@+id/iv4"
                 android:layout_alignBottom="@+id/iv4"
                 android:layout_marginLeft="10dp"
-                android:gravity="center_vertical"
+                android:layout_gravity="center"
                 android:textSize="16sp"
                 android:text="帮助与反馈"/>
+
+
+            </LinearLayout>
             <View
                 android:id="@+id/d5"
                 android:layout_width="match_parent"
                 android:layout_height="3px"
                 android:layout_marginTop="5px"
-                android:layout_below="@+id/iv4"
+                android:layout_below="@+id/ivd5"
                 android:background="#DBDBDB"/>
 
             <!--关于我们-->
