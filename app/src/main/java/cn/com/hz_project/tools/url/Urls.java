@@ -32,6 +32,13 @@ public class Urls {
 
     //外网
     public static final String baseURL = "http://116.228.202.122:8080/WsbxMobile/appCtrl/";
+
+    //反馈
+    public static final String ADVICEURL = "http://116.228.202.122:8080/WsbxMobile/kuiCtrl/";
+
+
+
+
     //删除会议
     public static final String DeletMeeting = "http://116.228.202.122:8080/WsbxMobile/appCtrl/";
     //到场人员头像

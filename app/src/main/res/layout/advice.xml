@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<cn.com.hz_project.tools.percent.PercentRelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+
+    <RelativeLayout
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="46dp"
+        android:layout_alignParentTop="true"
+        android:background="#FF3D6D95">
+
+
+        <TextView
+            android:layout_marginLeft="10dp"
+            android:id="@+id/back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18dp"
+            android:text="返回"
+            android:textColor="#ffffff"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:textSize="22sp"
+            android:textColor="#ffff"
+            android:text="反馈"
+            android:id="@+id/textView2" />
+    </RelativeLayout>
+
+
+        <EditText
+            android:layout_marginLeft="35dp"
+            android:paddingTop="10dp"
+            android:gravity="left"
+            android:hint="    请输入您宝贵的意见或建议"
+            android:background="@drawable/edittext"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_below="@+id/title"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="46dp"
+            android:id="@+id/editText" />
+
+      <TextView
+          android:gravity="center"
+        android:textSize="18dp"
+        android:textColor="#000000"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="欢迎您为我们提出宝贵的意见或建议，您留下的任何信息都将用来改善我们的软件!"
+        android:id="@+id/textView"
+        android:layout_below="@+id/editText"
+        android:layout_alignLeft="@+id/editText"
+        android:layout_alignStart="@+id/editText"
+        android:layout_marginTop="36dp"
+        android:layout_alignRight="@+id/editText"
+        android:layout_alignEnd="@+id/editText" />
+    <Button
+        android:id="@+id/bt_submit"
+        android:textColor="#ffffff"
+        android:text="提交"
+        android:background="@drawable/button4"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="52dp"
+        android:layout_below="@+id/textView"
+        android:layout_alignLeft="@+id/textView"
+        android:layout_alignStart="@+id/textView"
+        android:layout_alignRight="@+id/textView"
+        android:layout_alignEnd="@+id/textView" />
+</cn.com.hz_project.tools.percent.PercentRelativeLayout>
