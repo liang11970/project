@@ -30,7 +30,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/tv_quiz_title"
         android:layout_marginLeft="30px"
-        android:layout_marginTop="20px"
+        android:layout_marginTop="15px"
         android:layout_toRightOf="@+id/iv_quiz"
         android:text="时间:2016-7-18"
         android:textSize="40px" />
@@ -41,12 +41,12 @@
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/iv_quiz"
         android:layout_below="@+id/tv_quiz_time"
-        android:layout_marginTop="20px"
+        android:layout_marginTop="15px"
         android:layout_marginLeft="30px"
         android:layout_toRightOf="@+id/iv_quiz"
         android:maxLines="2"
         android:text="这是提问的内容简要信息这是提问的内容简要信息这是提问的内容简要信息这是提问的内容简要信息"
-        android:textSize="40px" />
+        android:textSize="45px" />
 
 
 </com.zhy.autolayout.AutoRelativeLayout>

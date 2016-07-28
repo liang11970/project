@@ -46,7 +46,6 @@ public class DownLoadUtils {
         FileApi.getInstance(Urls.FileURL)
                 .loadFileByName(fileName, new FileCallback(fileStoreDir, fileStoreName) {
 
-
                     @Override
                     public void onSuccess(File file) {
                         super.onSuccess(file);
