@@ -63,7 +63,7 @@ public class PersonFragment extends Fragment {
                 switch (checkedId) {
                     case R.id.rb_vote:
                         if (!voteFragment.isAdded()){
-                            manager.beginTransaction().add(R.id.fm_interact, voteFragment).commit();
+                            manager.beginTransaction().add(R.id.fm_interact, voteFragment).hide(quizFragment).show(voteFragment).commit();
                         }else{
                             manager.beginTransaction().hide(quizFragment).show(voteFragment).commit();
                         }
@@ -71,7 +71,7 @@ public class PersonFragment extends Fragment {
 
                     case R.id.rb_quiz:
                         if (!quizFragment.isAdded()){
-                            manager.beginTransaction().add(R.id.fm_interact, quizFragment).commit();
+                            manager.beginTransaction().add(R.id.fm_interact, quizFragment).hide(voteFragment).show(quizFragment).commit();
                         }else{
                             manager.beginTransaction().hide(voteFragment).show(quizFragment).commit();
                         }

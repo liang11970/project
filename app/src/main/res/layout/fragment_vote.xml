@@ -3,10 +3,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <ListView
-        android:id="@+id/list_vote"
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/id_swiperefresh"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginLeft="10dp"/>
+        android:layout_height="match_parent">
 
+        <ListView
+            android:id="@+id/list_vote"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="10dp" />
+    </android.support.v4.widget.SwipeRefreshLayout>
 </RelativeLayout>
+
+
