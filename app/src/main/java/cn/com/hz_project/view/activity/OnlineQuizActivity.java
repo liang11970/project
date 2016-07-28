@@ -1,6 +1,7 @@
 package cn.com.hz_project.view.activity;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -115,7 +116,15 @@ public class OnlineQuizActivity extends Activity {
                             @Override
                             public void onNext(OnlineQuiz quiz) {
                                 if (quiz.isSuccess() == true){
+
+                                    Intent intent = new Intent();
+                                    intent.setAction("com.xiazdong");
+                                    intent.putExtra("name", "xiazdong");
+                                    OnlineQuizActivity.this.sendBroadcast(intent);
+
                                     Toast.makeText(OnlineQuizActivity.this,quiz.getMsg(),Toast.LENGTH_SHORT).show();
+
+
                                     finish();
                                 }
                             }

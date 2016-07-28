@@ -33,4 +33,7 @@ public interface NewServer {
     @POST("newscontext")
     Observable<String> PostFieldContext(@Field("NBD_ID") int nbd_id);
 
+
+
+
 }
