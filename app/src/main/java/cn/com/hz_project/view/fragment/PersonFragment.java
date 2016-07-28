@@ -62,15 +62,19 @@ public class PersonFragment extends Fragment {
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 switch (checkedId) {
                     case R.id.rb_vote:
-                        transaction = manager.beginTransaction();
-                        transaction.replace(R.id.fm_interact, voteFragment);
-                        transaction.commit();
+                        if (!voteFragment.isAdded()){
+                            manager.beginTransaction().add(R.id.fm_interact, voteFragment).commit();
+                        }else{
+                            manager.beginTransaction().hide(quizFragment).show(voteFragment).commit();
+                        }
                         break;
 
                     case R.id.rb_quiz:
-                        transaction = manager.beginTransaction();
-                        transaction.replace(R.id.fm_interact, quizFragment);
-                        transaction.commit();
+                        if (!quizFragment.isAdded()){
+                            manager.beginTransaction().add(R.id.fm_interact, quizFragment).commit();
+                        }else{
+                            manager.beginTransaction().hide(voteFragment).show(quizFragment).commit();
+                        }
                         break;
                 }
             }
