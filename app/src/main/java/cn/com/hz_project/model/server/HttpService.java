@@ -42,5 +42,8 @@ public interface HttpService {
 
 
 
+    @POST("addFankui")
+    Observable<Advice> getAllVedioByss1(@Body Map<String,String> once_no);
+
 
 }

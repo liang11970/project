@@ -3,11 +3,13 @@ package cn.com.hz_project.view.activity;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -26,6 +28,7 @@ import cn.com.hz_project.model.server.MeetingService;
 import cn.com.hz_project.model.server.PreferencesService;
 import cn.com.hz_project.tools.url.Urls;
 import cn.com.hz_project.tools.utils.ToastUtils;
+import cn.com.hz_project.view.base.BaseActivity;
 import cn.com.projectdemos.R;
 import cn.pedant.SweetAlert.SweetAlertDialog;
 import retrofit2.Retrofit;
@@ -77,7 +80,8 @@ public class MeetingDetailsActivity extends Activity implements View.OnClickList
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_meeting_details);
+        this.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        setContentView(R.layout.activity_meeting_detail);
         ButterKnife.inject(this);
 
         initView();
@@ -86,6 +90,7 @@ public class MeetingDetailsActivity extends Activity implements View.OnClickList
 
 
     }
+
 
     private void initData() {
         extras = getIntent().getExtras();
