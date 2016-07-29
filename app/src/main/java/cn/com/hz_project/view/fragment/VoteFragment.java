@@ -1,5 +1,6 @@
 package cn.com.hz_project.view.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -11,6 +12,7 @@ import android.view.ViewGroup;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -25,6 +27,7 @@ import cn.com.hz_project.model.bean.Vote;
 import cn.com.hz_project.model.bean.VoteObj;
 import cn.com.hz_project.model.server.LoginService;
 import cn.com.hz_project.tools.url.Urls;
+import cn.com.hz_project.view.activity.VoteDetailActivity;
 import cn.com.hz_project.view.adapter.VoteAdapter;
 import cn.com.projectdemos.R;
 import retrofit2.Retrofit;
@@ -51,6 +54,7 @@ public class VoteFragment extends Fragment {
     private LoginService loginService;
     private int PAGE = 1;
     private ArrayList<VoteObj> newList = new ArrayList<>();
+    private Intent mIntent;
 
     @Nullable
     @Override
@@ -92,6 +96,15 @@ public class VoteFragment extends Fragment {
             @Override
             public void onRefresh() {
                 getList(PAGE);
+            }
+        });
+
+        listVote.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                mIntent = new Intent(getActivity(), VoteDetailActivity.class);
+                mIntent.putExtra("url",newList.get(position).getVBD_URL());
+                startActivity(mIntent);
             }
         });
 
