@@ -1,6 +1,8 @@
 package cn.com.hz_project.view.activity;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -30,6 +32,7 @@ import cn.com.hz_project.presenter.activityPresenter.AdvicePresenter;
 import cn.com.hz_project.presenter.activityPresenter.NewsContract;
 import cn.com.hz_project.presenter.activityPresenter.NewsPresenter;
 import cn.com.hz_project.tools.url.Urls;
+import cn.com.hz_project.tools.utils.ToastUtils;
 import cn.com.hz_project.view.base.BaseActivity;
 import cn.com.projectdemos.R;
 import okhttp3.OkHttpClient;
@@ -41,7 +44,7 @@ import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
-public class AdviceActivity extends BaseActivity{
+public class AdviceActivity extends BaseActivity {
 
     @InjectView(R.id.back)
     TextView back;
@@ -59,75 +62,93 @@ public class AdviceActivity extends BaseActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.advice);
         ButterKnife.inject(this);
-          preferencesService = new PreferencesService(this);
-        userId=  preferencesService.getPerferences().get("userId");
+        preferencesService = new PreferencesService(this);
+        userId = preferencesService.getPerferences().get("userId");
 
     }
 
     private void submit(String content) {
 
 
-            //手动创建一个OkHttpClient并设置超时时间
-            okhttp3.OkHttpClient.Builder builder = new OkHttpClient.Builder();
-            builder.connectTimeout(5, TimeUnit.SECONDS);
+        //手动创建一个OkHttpClient并设置超时时间
+        okhttp3.OkHttpClient.Builder builder = new OkHttpClient.Builder();
+        builder.connectTimeout(5, TimeUnit.SECONDS);
 
-            Retrofit retrofit = new Retrofit.Builder()
-                    .client(builder.build())
-                    .addConverterFactory(GsonConverterFactory.create())
-                    .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
-                    .baseUrl(Urls.ADVICEURL)
-                    .build();
+        Retrofit retrofit = new Retrofit.Builder()
+                .client(builder.build())
+                .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                .baseUrl(Urls.ADVICEURL)
+                .build();
 
-            //        加载框
-            final ProgressDialog pd = new ProgressDialog(this);
-
-
-//        Map<String,String> con= new HashMap<String, String>();
-//        con.put("context",content);
-//        con.put("userid",userId);
+        //        加载框
+        final ProgressDialog pd = new ProgressDialog(this);
 
 
+        Map<String,String> con= new HashMap<String, String>();
+        con.put("context",content);
+        con.put("userid",userId);
 
-            HttpService apiService = retrofit.create(HttpService.class);
-            Observable<Advice> observable = apiService.getAllVedioBy(content,userId);
-            observable.subscribeOn(Schedulers.io()).unsubscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(
-                            new Subscriber<Advice>() {
-                                @Override
-                                public void onCompleted() {
-                                    if (pd != null && pd.isShowing()) {
-                                        pd.dismiss();
-                                    }
-                                }
 
-                                @Override
-                                public void onError(Throwable e) {
-                                    if (pd != null && pd.isShowing()) {
-                                        pd.dismiss();
-                                    }
-                                }
-
-                                @Override
-                                public void onNext(Advice retrofitEntity) {
-//                                    tvMsg.setText("无封装：\n" + retrofitEntity.getData().toString());
-                                    Logger.e(retrofitEntity.getMsg());
-                                }
-
-                                @Override
-                                public void onStart() {
-                                    super.onStart();
-                                    pd.show();
+        HttpService apiService = retrofit.create(HttpService.class);
+        Observable<Advice> observable = apiService.getAllVedioByss1(con);
+        observable.subscribeOn(Schedulers.io()).unsubscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                        new Subscriber<Advice>() {
+                            @Override
+                            public void onCompleted() {
+                                if (pd != null && pd.isShowing()) {
+                                    pd.dismiss();
                                 }
                             }
 
-                    );
+                            @Override
+                            public void onError(Throwable e) {
+                                Logger.e("反馈error>>>>>>>" + e.toString());
+                                ToastUtils.show(getApplicationContext(),"Error!");
+                                if (pd != null && pd.isShowing()) {
+                                    pd.dismiss();
+                                    showDDialog("提交失败");
+                                }
+                            }
+
+                            @Override
+                            public void onNext(Advice retrofitEntity) {
+//                                    tvMsg.setText("无封装：\n" + retrofitEntity.getData().toString());
+                                Logger.e(retrofitEntity.toString());
+
+                                editText.setText("");
+                                showDDialog("您的反馈已提交");
 
 
 
+                            }
 
+                            @Override
+                            public void onStart() {
+                                super.onStart();
+                                pd.show();
+                            }
+                        }
+
+                );
 
 
     }
+
+    private void showDDialog(String message) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(AdviceActivity.this);
+        builder.setTitle("提示");
+        builder.setMessage(message);
+        builder.setPositiveButton("确定", new DialogInterface.OnClickListener() { //设置确定按钮
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+        builder.create().show();
+    }
+
 
     @Override
     protected void initViewsAndEvents() {
@@ -142,9 +163,9 @@ public class AdviceActivity extends BaseActivity{
                 break;
             case R.id.bt_submit:
 
-                if(editText.getText().length()==0){
-                    Toast.makeText(this,"请输入内容",Toast.LENGTH_LONG).show();
-                }else {
+                if (editText.getText().length() == 0) {
+                    Toast.makeText(this, "请输入内容", Toast.LENGTH_LONG).show();
+                } else {
                     submit(editText.getText().toString());
                 }
 

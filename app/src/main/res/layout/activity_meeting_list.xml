@@ -8,7 +8,6 @@
     android:background="#ffe8e8e8">
 
 
-
     <RelativeLayout
         android:id="@+id/title_meeting"
         android:layout_width="match_parent"
@@ -60,6 +59,32 @@
 
     </RelativeLayout>
 
+    <RelativeLayout
+        android:id="@+id/rl_progressBar"
+        android:layout_width="match_parent"
+        android:layout_height="120dip"
+        android:layout_below="@+id/title_meeting"
+        android:visibility="invisible">
+
+
+        <ProgressBar
+            android:id="@+id/pb"
+            style="@android:style/Widget.ProgressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dip" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/pb"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dip"
+            android:text="请稍候,正在加载.."
+            android:textSize="15dip" />
+
+    </RelativeLayout>
 
 
     <android.support.v4.widget.SwipeRefreshLayout
@@ -71,6 +96,7 @@
 
         <cn.com.hz_project.view.widget.LoadMoreListview
             android:id="@+id/lv_meeting"
+
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:divider="#ffe8e8e8"
