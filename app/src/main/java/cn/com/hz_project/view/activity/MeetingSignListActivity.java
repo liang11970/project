@@ -2,10 +2,8 @@ package cn.com.hz_project.view.activity;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.AbsListView;
@@ -13,6 +11,7 @@ import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -22,7 +21,6 @@ import java.util.List;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import cn.com.hz_project.model.bean.DeleteMeeting;
-import cn.com.hz_project.model.bean.MeetingBean;
 import cn.com.hz_project.model.bean.MeetingListBean;
 import cn.com.hz_project.model.server.MeetingService;
 import cn.com.hz_project.model.server.PreferencesService;
@@ -31,7 +29,6 @@ import cn.com.hz_project.tools.utils.ToastUtils;
 import cn.com.hz_project.view.adapter.MeetingListAdapter;
 import cn.com.hz_project.view.widget.LoadMoreListview;
 import cn.com.projectdemos.R;
-import cn.com.projectdemos.utils.ColorUtil;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -54,6 +51,12 @@ public class MeetingSignListActivity extends Activity implements View.OnClickLis
     LoadMoreListview lvMeeting;
     @InjectView(R.id.swipeContainer)
     SwipeRefreshLayout swipeContainer;
+    @InjectView(R.id.pb)
+    ProgressBar pb;
+    @InjectView(R.id.rl_progressBar)
+    RelativeLayout rlProgressBar;
+    @InjectView(R.id.rl_meeting_parent)
+    RelativeLayout rlMeetingParent;
     private MeetingService meetingService;
     private int pageNum = 1;
     private List<MeetingListBean.ObjBean> meetList;
@@ -89,23 +92,26 @@ public class MeetingSignListActivity extends Activity implements View.OnClickLis
         meetingService = retrofit.create(MeetingService.class);
 
 
-        meetingService.getMeetData(pageNum,userId)
+        meetingService.getMeetData(pageNum, userId)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<MeetingListBean>() {
                     @Override
                     public void onCompleted() {
+                        rlProgressBar.setVisibility(View.INVISIBLE);
 
                     }
 
                     @Override
                     public void onError(Throwable e) {
+                        rlProgressBar.setVisibility(View.INVISIBLE);
 
                         Toast.makeText(getApplicationContext(), "请求网络失败", Toast.LENGTH_SHORT).show();
                     }
 
                     @Override
                     public void onNext(MeetingListBean meetingBean) {
+                        rlProgressBar.setVisibility(View.INVISIBLE);
                         if (pageNum == 1) {
                             meetList = meetingBean.getObj();
                             showData();
@@ -152,6 +158,8 @@ public class MeetingSignListActivity extends Activity implements View.OnClickLis
     }
 
     private void initView() {
+        rlProgressBar.setVisibility(View.VISIBLE);
+
         ivBackMeeting.setOnClickListener(this);
         tvBack.setOnClickListener(this);
         tvAddMeeting.setOnClickListener(this);
@@ -160,7 +168,7 @@ public class MeetingSignListActivity extends Activity implements View.OnClickLis
         userId = preferencesService.getPerferences().get("userId");
         if (this.preferencesService.getPerferences().get("roleId").equals("9")) {
             tvAddMeeting.setVisibility(View.VISIBLE);
-        }else {
+        } else {
             tvAddMeeting.setVisibility(View.INVISIBLE);
         }
 
@@ -266,9 +274,9 @@ public class MeetingSignListActivity extends Activity implements View.OnClickLis
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .build();
-        MeetingService meetingService =  retrofit.create(MeetingService.class);
+        MeetingService meetingService = retrofit.create(MeetingService.class);
 
-        meetingService.getDeleteMeeting(meetList.get(longClickPosition).getMBD_ID()+"")
+        meetingService.getDeleteMeeting(meetList.get(longClickPosition).getMBD_ID() + "")
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<DeleteMeeting>() {
@@ -279,13 +287,13 @@ public class MeetingSignListActivity extends Activity implements View.OnClickLis
 
                     @Override
                     public void onError(Throwable e) {
-                        ToastUtils.show(MeetingSignListActivity.this,"删除失败,请检查网络");
+                        ToastUtils.show(MeetingSignListActivity.this, "删除失败,请检查网络");
 
                     }
 
                     @Override
                     public void onNext(DeleteMeeting deleteMeeting) {
-                        ToastUtils.show(MeetingSignListActivity.this,deleteMeeting.getMsg()+"");
+                        ToastUtils.show(MeetingSignListActivity.this, deleteMeeting.getMsg() + "");
 
                     }
                 });

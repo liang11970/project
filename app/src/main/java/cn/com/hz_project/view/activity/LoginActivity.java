@@ -1,14 +1,11 @@
 package cn.com.hz_project.view.activity;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.Window;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -24,7 +21,6 @@ import cn.com.hz_project.model.bean.Login;
 import cn.com.hz_project.model.server.LoginService;
 import cn.com.hz_project.model.server.PreferencesService;
 import cn.com.hz_project.tools.url.Urls;
-import cn.com.hz_project.tools.utils.AESUtils;
 import cn.com.hz_project.tools.utils.Md5;
 import cn.com.hz_project.view.base.BaseActivity;
 import cn.com.projectdemos.R;
@@ -113,9 +109,11 @@ public class LoginActivity extends BaseActivity {
      */
     private void login(final SweetAlertDialog pDialog) {
 
-        detectUserChoose();//登录前检测用户选择，并保存信息
+//        detectUserChoose();//登录前检测用户选择，并保存信息
 
         pDialog.show();
+
+
         loginService.PostField(user.getText().toString(), Md5.md5crypt(password.getText().toString()), 2)
                 .doOnNext(login1 -> service.save(login1))
                 .subscribeOn(Schedulers.io())
@@ -128,7 +126,7 @@ public class LoginActivity extends BaseActivity {
 
                     @Override
                     public void onError(Throwable e) {
-                        Log.i("----------", "" + e.toString());
+//                        Log.i("----------", "" + e.toString());
                         pDialog.dismiss();
                     }
 
