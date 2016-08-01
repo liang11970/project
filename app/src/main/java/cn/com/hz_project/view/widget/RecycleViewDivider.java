@@ -8,10 +8,6 @@ import android.graphics.drawable.Drawable;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
-/**
- * 作者：chs on 2016/2/2 15:20
- * 邮箱：657083984@qq.com
- */
 public class RecycleViewDivider extends RecyclerView.ItemDecoration{
     private Drawable drawable;
     public RecycleViewDivider(Context context) {

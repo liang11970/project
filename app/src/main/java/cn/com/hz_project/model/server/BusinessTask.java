@@ -1,6 +1,8 @@
 package cn.com.hz_project.model.server;
 
 
+import com.orhanobut.logger.Logger;
+
 import cn.com.hz_project.model.bean.HttpResult;
 import cn.com.hz_project.tools.utils.HttpUtils;
 import rx.Observable;
@@ -29,6 +31,7 @@ public class BusinessTask {
                 observable = newsService.PostFieldContext(currentPage);
                 break;
             case 3:
+                Logger.e("视频相关"+currentPage);
                 observable = newsService.PostVideo(currentPage);
                 break;
 

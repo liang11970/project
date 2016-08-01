@@ -135,4 +135,6 @@ public abstract class BaseAdapter<T> extends RecyclerView.Adapter<ViewHolder> {
             return TYPE_NORMAL;
         }
     }
+
+
 }

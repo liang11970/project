@@ -3,6 +3,8 @@ package cn.com.hz_project.presenter.activityPresenter;
 import android.text.TextUtils;
 
 
+import com.orhanobut.logger.Logger;
+
 import cn.com.hz_project.model.bean.HttpResult;
 import cn.com.hz_project.model.bean.VideoResult;
 import cn.com.hz_project.model.server.BusinessTask;
@@ -41,6 +43,8 @@ public class NewsPresenter implements NewsContract.Presenter {
                getSport(page,type);
                break;
            case 2:
+               Logger.e("视频在第几页"+page);
+
                getVideo(page,3);
                break;
        }
