@@ -56,7 +56,8 @@
         </activity>
         <activity android:name="cn.com.hz_project.view.activity.NewContentActivity" />
         <activity android:name="cn.com.hz_project.view.activity.ViewPagerActivity" />
-        <activity android:name="cn.com.hz_project.view.activity.OnlineQuizActivity" />
+        <activity android:name="cn.com.hz_project.view.activity.OnlineQuizActivity"
+            android:launchMode="singleTask"/>
         <activity android:name="cn.com.hz_project.view.activity.NewActivity" />
         <activity android:name="cn.com.hz_project.view.activity.FileActivity" />
         <activity android:name="cn.com.hz_project.view.activity.VoteDetailActivity" />
@@ -71,6 +72,11 @@
         <activity android:name="cn.com.hz_project.view.activity.MeetingStaffListingActivity" />
         <activity android:name="cn.com.hz_project.view.activity.QuizItemActivity" />
         <activity android:name="cn.com.hz_project.view.activity.AboutAactivity" />
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> feafa7567f35b61ecd66522a7bd09b6e89756b36
         <activity android:name="cn.com.hz_project.view.activity.AdviceActivity" />
         <activity
             android:name="cn.com.hz_project.view.activity.VideoActivity"

@@ -72,81 +72,23 @@ public class ViewPagerActivity extends FragmentActivity {
                 switch (checkedId) {
                     case R.id.radio0:
                         transaction = fragmentManager.beginTransaction();
-                        if (!homeFragment.isAdded()) {
-                            transaction.add(R.id.content, homeFragment);
-                        }
-                        if (personFragment.isAdded()) {
-                            transaction.hide(personFragment);
-                        }
-                        if (sortFragment.isAdded()) {
-                            transaction.hide(sortFragment);
-                        }
-                        if (shezhiFragment.isAdded()){
-                            transaction.hide(shezhiFragment);
-                        }
-
-                        transaction.show(homeFragment);
+                        transaction.replace(R.id.content, homeFragment);
                         transaction.commit();
-
                         break;
-
                     case R.id.radio1:
                         transaction = fragmentManager.beginTransaction();
-                        if (!sortFragment.isAdded()) {
-                            transaction.add(R.id.content, sortFragment);
-                        }
-                        Logger.e("homeFragment"+homeFragment.isAdded());
-                        if (personFragment.isAdded()) {
-                            transaction.hide(personFragment);
-                        }
-                        if (homeFragment.isAdded()) {
-                            transaction.hide(homeFragment);
-                        }
-                        if (shezhiFragment.isAdded()) {
-                            transaction.hide(shezhiFragment);
-                        }
-                        transaction.show(sortFragment);
+                        transaction.replace(R.id.content, sortFragment);
                         transaction.commit();
-
                         break;
                     case R.id.radio2:
                         transaction = fragmentManager.beginTransaction();
-                        if (!personFragment.isAdded()) {
-                            transaction.add(R.id.content, personFragment);
-                        }
-                        if (sortFragment.isAdded()) {
-                            transaction.hide(sortFragment);
-                        }
-                        if (homeFragment.isAdded()) {
-                            transaction.hide(homeFragment);
-                        }
-                        if (shezhiFragment.isAdded()) {
-                            transaction.hide(shezhiFragment);
-                        }
-
-                        transaction.show(personFragment);
+                        transaction.replace(R.id.content, personFragment);
                         transaction.commit();
-
                         break;
                     case R.id.radio3:
                         transaction = fragmentManager.beginTransaction();
-                        if (!shezhiFragment.isAdded()) {
-                            transaction.add(R.id.content, shezhiFragment);
-
-                        }
-                        if (sortFragment.isAdded()) {
-                            transaction.hide(sortFragment);
-                        }
-                        if (homeFragment.isAdded()){
-                            transaction.hide(homeFragment);
-                        }
-                        if (personFragment.isAdded()) {
-                            transaction.hide(personFragment);
-                        }
-
-                        transaction.show(shezhiFragment);
+                        transaction.replace(R.id.content, shezhiFragment);
                         transaction.commit();
-
                         break;
                 }
 
