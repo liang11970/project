@@ -19,6 +19,7 @@ import cn.com.hz_project.model.bean.OnlineQuiz;
 import cn.com.hz_project.model.server.LoginService;
 import cn.com.hz_project.model.server.PreferencesService;
 import cn.com.hz_project.tools.url.Urls;
+import cn.com.hz_project.tools.utils.ToastUtils;
 import cn.com.projectdemos.R;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
@@ -99,13 +100,23 @@ public class OnlineQuizActivity extends Activity {
         quiz.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (quizContent.length()==0&&quizTitle.length()==0){
+                    ToastUtils.show(getApplicationContext(),"请填写问题的信息");
+                    return;
+                }else if (quizContent.length()==0){
+                    ToastUtils.show(getApplicationContext(),"请输入问题内容");
+                    return;
+                }else if (quizTitle.length()==0){
+                    ToastUtils.show(getApplicationContext(),"请输入问题标题");
+                    return;
+                }
                 loginService.Quiz(preferencesService.getPerferences().get("userId"),quizTitle.getText().toString(),quizContent.getText().toString(),ansObj)
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe(new Subscriber<OnlineQuiz>() {
                             @Override
                             public void onCompleted() {
-                                
+
                             }
 
                             @Override
