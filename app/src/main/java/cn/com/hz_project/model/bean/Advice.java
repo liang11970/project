@@ -47,10 +47,8 @@ public class Advice {
         this.obj = obj;
     }
 
-<<<<<<< HEAD
 
     
-=======
     @Override
     public String toString() {
         return "Advice{" +
@@ -59,5 +57,4 @@ public class Advice {
                 ", obj='" + obj + '\'' +
                 '}';
     }
->>>>>>> 4d861a9cc30a6ab0bce378841d0a9ad830292b57
 }

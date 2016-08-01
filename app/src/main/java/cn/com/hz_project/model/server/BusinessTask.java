@@ -28,6 +28,10 @@ public class BusinessTask {
             case 2:
                 observable = newsService.PostFieldContext(currentPage);
                 break;
+            case 3:
+                observable = newsService.PostVideo(currentPage);
+                break;
+
 
         }
 

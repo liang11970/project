@@ -74,8 +74,6 @@ public class NewActivity extends BaseActivity implements NewsContract.View {
 
     private void initView() {
 
-
-
         mDataList = new ArrayList<>();
         mAdapter = new BaseAdapter<HttpResult.ObjBean>(mContext,R.layout.item_new,mDataList,listView) {
                                        @Override

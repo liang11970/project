@@ -173,6 +173,13 @@
     <!--android:layout_centerVertical="true" />-->
 
 
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
 
 
         <cn.com.hz_project.view.widget.SlideShowView
@@ -182,24 +189,30 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="5dp" />
 
-    <android.support.v4.widget.SwipeRefreshLayout
-        android:id="@+id/id_swiperefresh"
+        <android.support.v4.widget.SwipeRefreshLayout
+            android:id="@+id/id_swiperefresh"
 
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/mediaController"
-        android:layout_marginTop="5dp">
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/mediaController"
+            android:layout_marginTop="5dp">
 
-        <cn.com.hz_project.view.widget.LoadMorRecyclerView
+            <cn.com.hz_project.view.widget.LoadMorRecyclerView
 
-            android:id="@+id/listView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
+                android:id="@+id/listView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
 
-            />
+                />
 
 
-    </android.support.v4.widget.SwipeRefreshLayout>
+        </android.support.v4.widget.SwipeRefreshLayout>
+
+    </RelativeLayout>
+
+
+</ScrollView>
+
 </LinearLayout>

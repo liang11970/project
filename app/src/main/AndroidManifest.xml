@@ -84,7 +84,10 @@
         <activity android:name="cn.com.hz_project.view.activity.QuizItemActivity" />
         <activity android:name="cn.com.hz_project.view.activity.AboutAactivity" />
         <activity android:name="cn.com.hz_project.view.activity.AdviceActivity" />
-        <activity android:name="cn.com.hz_project.view.activity.VideoActivity"></activity>
+        <activity
+            android:name="cn.com.hz_project.view.activity.VideoActivity"
+            android:configChanges="orientation|keyboardHidden|screenLayout|screenSize" />
+        <activity android:name="cn.com.hz_project.view.activity.VideoListActivity"></activity>
     </application>
 
 </manifest>

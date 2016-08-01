@@ -2,6 +2,7 @@ package cn.com.hz_project.presenter.activityPresenter;
 
 
 import cn.com.hz_project.model.bean.HttpResult;
+import cn.com.hz_project.model.bean.VideoResult;
 import cn.com.hz_project.view.base.BasePresenter;
 import cn.com.hz_project.view.base.BaseView;
 
@@ -13,7 +14,14 @@ public interface NewsContract {
     interface View extends BaseView<Presenter> {
         void showInfo(HttpResult entity);
     }
+
+    interface Video extends BaseView<Presenter> {
+        void showVideo(VideoResult entity);
+    }
     interface Presenter extends BasePresenter {
          void start(int page, int type);
     }
+
+
+
 }

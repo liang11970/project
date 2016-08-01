@@ -140,7 +140,7 @@ public class LoginActivity extends BaseActivity {
                             editor.putBoolean("tag",login.isSuccess());
                             editor.commit();
 
-                            startActivity(new Intent(LoginActivity.this, ViewPagerActivity.class));
+                            startActivity(new Intent(LoginActivity.this, VideoListActivity.class));
                             finish();
                         } else {
                             Toast.makeText(LoginActivity.this, "帐号密码有问题检查一下吧", Toast.LENGTH_SHORT).show();
