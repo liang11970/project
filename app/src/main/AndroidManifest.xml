@@ -52,11 +52,7 @@
             android:name=".MeetingListActivity"
             android:label="@string/app_name"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-            <!--<intent-filter>-->
-                <!--<action android:name="android.intent.action.MAIN" />-->
 
-                <!--<category android:name="android.intent.category.LAUNCHER" />-->
-            <!--</intent-filter>-->
         </activity>
         <activity android:name="cn.com.hz_project.view.activity.NewContentActivity" />
         <activity android:name="cn.com.hz_project.view.activity.ViewPagerActivity" />
@@ -64,16 +60,8 @@
         <activity android:name="cn.com.hz_project.view.activity.NewActivity" />
         <activity android:name="cn.com.hz_project.view.activity.FileActivity" />
 
-        <!-- <activity android:name="cn.com.hz_project.view.activity.TwoActivity"></activity> -->
-
-
-        <!-- <activity android:name="cn.com.hz_project.view.activity.TwoActivity" /> -->
-        <!-- <activity android:name="cn.com.hz_project.view.activity.ViewPagerActivity" /> -->
-
         <activity android:name="cn.com.hz_project.view.activity.MeetingSignListActivity" />
-        <activity
-            android:name="cn.com.hz_project.view.activity.MeetingDetailsActivity"
-            />
+        <activity android:name="cn.com.hz_project.view.activity.MeetingDetailsActivity" />
         <activity
             android:name="cn.com.hz_project.view.activity.AddMeetingActivity"
             android:theme="@android:style/Theme.Light.NoTitleBar" />
@@ -83,6 +71,11 @@
         <activity android:name="cn.com.hz_project.view.activity.QuizItemActivity" />
         <activity android:name="cn.com.hz_project.view.activity.AboutAactivity" />
         <activity android:name="cn.com.hz_project.view.activity.AdviceActivity"></activity>
+
+
+        <activity
+            android:name=".TestActivity"
+            android:screenOrientation="portrait"></activity>
     </application>
 
 </manifest>
