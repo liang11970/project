@@ -55,6 +55,7 @@ public class QuizFragment extends Fragment {
     private int PAGE = 1;
     private Intent intent;
     private int currentPage = 1;
+    private int i = 1;
 
     @Nullable
     @Override
@@ -93,6 +94,7 @@ public class QuizFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getContext(), OnlineQuizActivity.class));
+
             }
         });
         adapter = new QuizAdapter(getActivity(), list);

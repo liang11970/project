@@ -90,6 +90,13 @@ public class LoadMorRecyclerView extends RecyclerView {
         }
     }
 
+    public void sethide(){
+        mFootViews.get(0).setVisibility(GONE);
+
+    }
+
+
+
     @Override
     public void onScrollStateChanged(int state) {
         if (state == RecyclerView.SCROLL_STATE_IDLE && mLoadingListener != null) {
@@ -170,10 +177,10 @@ public class LoadMorRecyclerView extends RecyclerView {
     }
 
 
-    public void notifyMoreFinish(boolean hasMore) {
-        setAutoLoadMoreEnable(hasMore);
+    public void notifyMoreFinish() {
+//        setAutoLoadMoreEnable(hasMore);
         getAdapter().notifyItemRemoved(lastVisibleItemPosition);
-        mIsLoadingMore = false;
+//        mIsLoadingMore = false;
     }
 
 
@@ -182,7 +189,15 @@ public class LoadMorRecyclerView extends RecyclerView {
      */
     public void loadComplete(){
         mIsFooterEnable = false;
-        mFootViews.get(0).setVisibility(GONE);
+        View footView = mFootViews.get(0);
+
+        footView.setVisibility(GONE);
+
+
 
     }
+
+
+
+
 }

@@ -48,6 +48,9 @@ public abstract class FileCallback implements Callback<ResponseBody> {
             saveFile(response);
         } catch (IOException e) {
             e.printStackTrace();
+
+
+
         }
     }
 
@@ -65,6 +68,9 @@ public abstract class FileCallback implements Callback<ResponseBody> {
         FileOutputStream fos = null;
         try {
             is = response.body().byteStream();
+
+
+
             File dir = new File(destFileDir);
             if (!dir.exists()) {
                 dir.mkdirs();

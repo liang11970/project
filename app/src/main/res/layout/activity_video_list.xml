@@ -1,15 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:cube_ptr="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context="cn.com.hz_project.view.activity.NewActivity"
-    android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+    tools:context="cn.com.hz_project.view.activity.VideoListActivity">
 
 
-    >
+
+    <!--<cn.com.hz_project.view.widget.LoadMorRecyclerView-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:id="@+id/listView"-->
+        <!--android:layout_centerHorizontal="true"-->
+        <!--android:layout_alignParentTop="true"-->
+        <!--/>-->
+
 
     <RelativeLayout
         android:id="@+id/title_new"
@@ -43,14 +50,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:text="前沿科技"
+            android:text="视频"
             android:textColor="@color/city_item_bg_nor"
             android:textSize="16.0sp" />
 
 
 
     </RelativeLayout>
-
 
     <in.srain.cube.views.ptr.PtrFrameLayout
         android:layout_below="@+id/title_new"
@@ -64,8 +70,6 @@
         cube_ptr:ptr_ratio_of_header_height_to_refresh="1.2"
         cube_ptr:ptr_resistance="1.7">
 
-
-
         <cn.com.hz_project.view.widget.LoadMorRecyclerView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -75,7 +79,7 @@
             />
 
 
-    </in.srain.cube.views.ptr.PtrFrameLayout>
 
+    </in.srain.cube.views.ptr.PtrFrameLayout>
 
 </RelativeLayout>

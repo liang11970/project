@@ -34,6 +34,8 @@ public interface NewServer {
     Observable<String> PostFieldContext(@Field("NBD_ID") int nbd_id);
 
 
-
+    @FormUrlEncoded
+    @POST("videoList")
+    Observable<String> PostVideo(@Field("page") int nbd_id);
 
 }

@@ -2,6 +2,7 @@
     <string name="app_name">司法局</string>
     <string name="copyright">copyright © 2016 上海晓梵科技股份有限公司</string>
     <string name="all">All rights reserved</string>
+    <string name="error">播放出错</string>
 
     <string name="scale_up_show_behavior">com.yanzhenjie.definebehavior.behavior.ScaleUpShowBehavior</string>
     <string name="app_picker_name">Applications</string>

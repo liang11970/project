@@ -3,7 +3,10 @@ package cn.com.hz_project.presenter.activityPresenter;
 import android.text.TextUtils;
 
 
+import com.orhanobut.logger.Logger;
+
 import cn.com.hz_project.model.bean.HttpResult;
+import cn.com.hz_project.model.bean.VideoResult;
 import cn.com.hz_project.model.server.BusinessTask;
 import cn.com.hz_project.tools.url.Urls;
 import cn.com.hz_project.tools.utils.GsonUtil;
@@ -15,9 +18,15 @@ import rx.Subscriber;
 public class NewsPresenter implements NewsContract.Presenter {
     private BusinessTask mNewsTask;
     private NewsContract.View mNewsView;
+    private NewsContract.Video mNewsVideo;
 
     public NewsPresenter(NewsContract.View mNewsView) {
         this.mNewsView = mNewsView;
+        mNewsTask = new BusinessTask();
+    }
+
+    public NewsPresenter(NewsContract.Video mNewsVideo) {
+        this.mNewsVideo = mNewsVideo;
         mNewsTask = new BusinessTask();
     }
 
@@ -33,8 +42,33 @@ public class NewsPresenter implements NewsContract.Presenter {
            case 1:
                getSport(page,type);
                break;
+           case 2:
+               Logger.e("视频在第几页"+page);
+
+               getVideo(page,3);
+               break;
        }
     }
+
+    private void getVideo(int page, int type) {
+        mNewsTask.geNewsList(new Subscriber<String>() {
+            @Override
+            public void onCompleted() {
+//                LogUtils.e("PicturePresenter", "onCompleted");
+            }
+            @Override
+            public void onError(Throwable e) {
+//                LogUtils.e("PicturePresenter", "onError");
+            }
+            @Override
+            public void onNext(String s) {
+                if(!TextUtils.isEmpty(s)){
+                    mNewsVideo.showVideo(GsonUtil.changeGsonToBean(s,VideoResult.class));
+                }
+            }
+        }, page,type,Urls.VIDEO);
+    }
+
     public void getSocial(int page,int type) {
         mNewsTask.geNewsList(new Subscriber<String>() {
             @Override

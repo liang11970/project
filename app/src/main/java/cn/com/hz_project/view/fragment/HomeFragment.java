@@ -30,6 +30,7 @@ import cn.com.hz_project.view.activity.MeetingSignListActivity;
 import cn.com.hz_project.view.activity.NewActivity;
 import cn.com.hz_project.view.activity.NewContentActivity;
 import cn.com.hz_project.view.activity.SecondActivity;
+import cn.com.hz_project.view.activity.VideoListActivity;
 import cn.com.hz_project.view.base.BaseAdapter;
 import cn.com.hz_project.view.base.BaseFragment;
 import cn.com.hz_project.view.base.ViewHolder;
@@ -195,6 +196,7 @@ public class HomeFragment extends Fragment implements NewsContract.View {
         tvTabHot.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+//                startActivity(new Intent(getActivity(), NewActivity.class));
                 startActivity(new Intent(getActivity(), NewActivity.class));
             }
         });

@@ -22,6 +22,7 @@ public class MainActivity extends Activity {
     Animation alphaAnim;
     private int alpha = 255;
     private int b = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -78,6 +79,7 @@ public class MainActivity extends Activity {
 
 
     }
+
     public void updateApp() {
         alpha -= 11;
         //避免出现白屏
