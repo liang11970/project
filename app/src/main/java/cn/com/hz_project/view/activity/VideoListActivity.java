@@ -62,7 +62,7 @@ public class VideoListActivity extends BaseActivity implements NewsContract.Vide
         mPresenter = new NewsPresenter(this);
 
         initView();
-        initEvent();
+
 
 
     }
@@ -225,6 +225,7 @@ public class VideoListActivity extends BaseActivity implements NewsContract.Vide
     @Override
     protected void onResume() {
         super.onResume();
+        initEvent();
 
     }
 

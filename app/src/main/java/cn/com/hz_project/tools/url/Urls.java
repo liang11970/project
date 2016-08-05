@@ -39,6 +39,7 @@ public class Urls {
     //外网
     public static final String baseURL = "http://116.228.202.122:8080/WsbxMobile/appCtrl/";
 
+
     //反馈
     public static final String ADVICEURL = "http://116.228.202.122:8080/WsbxMobile/fankuiCtrl/";
 

@@ -32,7 +32,7 @@ public class BusinessTask {
                 break;
             case 3:
                 Logger.e("视频相关"+currentPage);
-                observable = newsService.PostVideo(currentPage);
+                observable = newsService.PostVideo(currentPage,10);
                 break;
 
             case 4:

@@ -9,6 +9,7 @@ import com.afollestad.easyvideoplayer.EasyVideoPlayer;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.orhanobut.logger.Logger;
 
+import cn.com.hz_project.tools.url.Urls;
 import cn.com.hz_project.tools.utils.ToastUtils;
 import cn.com.hz_project.view.base.BaseActivity;
 import cn.com.projectdemos.R;
@@ -37,7 +38,7 @@ public class VideoActivity extends BaseActivity implements EasyVideoCallback {
 
 Logger.e(id);
 
-        player.setSource(Uri.parse(id));
+        player.setSource(Uri.parse(TEST_URL));
     }
 
     @Override
