@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.orhanobut.logger.Logger;
 
@@ -53,6 +54,7 @@ public class NewActivity extends BaseActivity implements NewsContract.View {
     private NewsPresenter mPresenter;
     private ArrayList<HttpResult.ObjBean> mDataList;
     private int currentPage;
+    private Boolean tag=true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,7 +73,7 @@ public class NewActivity extends BaseActivity implements NewsContract.View {
 
 
         initView();
-        initEvent();
+//        initEvent();
 
     }
 
@@ -116,8 +118,8 @@ public class NewActivity extends BaseActivity implements NewsContract.View {
 
             @Override
             public void onUIRefreshBegin(PtrFrameLayout frame) {
-                currentPage = 1;
-                mPresenter.start(currentPage,0);
+               tag=true;
+                intitdata();
 
             }
 
@@ -164,7 +166,7 @@ public class NewActivity extends BaseActivity implements NewsContract.View {
         listView.setLayoutManager(layoutManager);
         listView.addItemDecoration(new RecycleViewDivider(this));
         listView.setAdapter(mAdapter);
-        intitdata();
+//        intitdata();
 
 
 
@@ -191,17 +193,23 @@ public class NewActivity extends BaseActivity implements NewsContract.View {
     }
 
     private void intitdata() {
-
         currentPage = 1;
-        mPresenter.start(currentPage, 0);
+        if(tag){
+            mPresenter.start(currentPage, 0);
+        }
+
+
     }
 
     private void initEvent() {
         listView.setLoadMoreListener(new LoadMorRecyclerView.LoadMoreListener() {
             @Override
             public void onLoadMore() {
-                currentPage++;
-                mPresenter.start(currentPage, 0);
+                if(tag){
+                    currentPage++;
+                    mPresenter.start(currentPage, 0);
+                }
+
             }
         });
     }
@@ -215,9 +223,9 @@ Logger.e(entity.getObj().size()+"条数据");
 
 //            listView.removeView();
 
-            listView.notifyMoreFinish();
-            listView.sethide();
-            listView.loadComplete();
+            tag=false;
+            Toast.makeText(this,"没有数据了...",Toast.LENGTH_SHORT).show();
+            listView.getChildAt(listView.getChildCount()-1).setVisibility(View.GONE);
             mAdapter.notifyDataSetChanged();
         } else {
             if (currentPage == 1) {
@@ -262,6 +270,8 @@ Logger.e(entity.getObj().size()+"条数据");
 //            }
 //        });
 
+        initEvent();
+        findViewById(R.id.tv_back).setOnClickListener(v -> {this.finish();});
     }
 
 }
