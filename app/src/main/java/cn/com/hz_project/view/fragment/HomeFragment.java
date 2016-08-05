@@ -184,10 +184,8 @@ public class HomeFragment extends Fragment implements NewsContract.View ,Runnabl
 
             super.handleMessage(msg);
             if (msg.what == 0) {
-//                getLatesDailys(true);
             } else if (msg.what == 1) {
-//                hideProgress();
-                mSwipeRefreshLayout.setRefreshing(false);
+//                mSwipeRefreshLayout.setRefreshing(false);
                 finishGetDaily();
             }
         }
@@ -350,7 +348,13 @@ public class HomeFragment extends Fragment implements NewsContract.View ,Runnabl
             }
         });
 
-    }
+        adapter.setOnItemClickListener(new NewsListAdapter.MyItemClickListener() {
+            @Override
+            public void onItemClick(View view, int postion) {
+                Toast.makeText(getActivity(),"第"+postion,Toast.LENGTH_SHORT).show();
+            }
+        });
+}
 
     @Override
     public void onDestroyView() {
@@ -367,7 +371,9 @@ public class HomeFragment extends Fragment implements NewsContract.View ,Runnabl
      *
      */
     private void finishGetDaily() {
-        newsRecycler.setAdapter(mHeaderViewRecyclerAdapter);
+        if (newsRecycler != null && mHeaderViewRecyclerAdapter != null) {
+            newsRecycler.setAdapter(mHeaderViewRecyclerAdapter);
+        }
 //        mRefreshBtn.setVisibility(View.VISIBLE);
         startViewPagerRun();
     }
@@ -397,7 +403,7 @@ public class HomeFragment extends Fragment implements NewsContract.View ,Runnabl
     public void startViewPagerRun() {
         mTimer = new Timer();
         mTimerTask = new BannerTask();
-        mTimer.schedule(mTimerTask, 10000, 10000);
+        mTimer.schedule(mTimerTask, 1000, 10000);
     }
 
     /**
@@ -412,7 +418,8 @@ public class HomeFragment extends Fragment implements NewsContract.View ,Runnabl
         mViewPager.setAdapter(mMainViewPagerAdapter);
         mCircleIndicator.setViewPager(mViewPager);
         size = mTopList.size();
-        mHandler.sendEmptyMessageDelayed(1, 2000);
+        mHandler.sendEmptyMessage(1);
+//        mHandler.sendEmptyMessageDelayed(1, 2000);
     }
 
     private class BannerTask extends TimerTask {
