@@ -5,8 +5,18 @@
 
     <android.support.v4.view.ViewPager
         android:id="@+id/viewPager"
+        android:clickable="true"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
+
+    <TextView
+        android:id="@+id/titletext"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/viewPager"
+        android:background="#78595353"
+        android:padding="10px"
+        android:text="视频1"/>
 
     <LinearLayout android:id="@+id/dotLayout"
         android:layout_width="match_parent"

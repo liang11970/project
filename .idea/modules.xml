@@ -6,7 +6,6 @@
       <module fileurl="file://$PROJECT_DIR$/daogreen/daogreen.iml" filepath="$PROJECT_DIR$/daogreen/daogreen.iml" />
       <module fileurl="file://$PROJECT_DIR$/library/library.iml" filepath="$PROJECT_DIR$/library/library.iml" />
       <module fileurl="file://$PROJECT_DIR$/project.iml" filepath="$PROJECT_DIR$/project.iml" />
-      <module fileurl="file://$PROJECT_DIR$/projectJudicial.iml" filepath="$PROJECT_DIR$/projectJudicial.iml" />
     </modules>
   </component>
 </project>

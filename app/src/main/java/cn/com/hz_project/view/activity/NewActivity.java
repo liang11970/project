@@ -60,7 +60,7 @@ public class NewActivity extends BaseActivity implements NewsContract.View {
         setContentView(R.layout.activity_new);
         ButterKnife.inject(this);
         mContext = this;
-        mPresenter = new NewsPresenter(this);
+        mPresenter = new NewsPresenter(this,false);
 
 //        idSwiperefresh.setColorSchemeResources(R.color.colorPrimary, R.color.colorAccent,
 //                R.color.green);

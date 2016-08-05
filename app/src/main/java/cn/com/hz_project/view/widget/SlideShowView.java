@@ -17,19 +17,24 @@ import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.ImageView.ScaleType;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
+import com.orhanobut.logger.Logger;
 
+import cn.com.hz_project.app.MyApplication;
 import cn.com.hz_project.view.activity.NewContentActivity;
+import cn.com.hz_project.view.activity.VideoActivity;
 import cn.com.projectdemos.R;
 
 
@@ -62,7 +67,9 @@ public class SlideShowView extends FrameLayout implements View.OnClickListener{
         }
         
     };
-    
+    private View layoutView;
+    private TextView titleText;
+
     public SlideShowView(Context context) {
         this(context,null);
         // TODO Auto-generated constructor stub
@@ -103,12 +110,11 @@ public class SlideShowView extends FrameLayout implements View.OnClickListener{
     private void initUI(Context context){
     	if(imageUrls == null || imageUrls.length == 0)
     		return;
-    	
-        LayoutInflater.from(context).inflate(R.layout.layout_slideshow, this, true);
-        
+        layoutView = LayoutInflater.from(context).inflate(R.layout.layout_slideshow, this, true);
+        titleText = (TextView)layoutView.findViewById(R.id.titletext);
+
         LinearLayout dotLayout = (LinearLayout)findViewById(R.id.dotLayout);
         dotLayout.removeAllViews();
-        
 
         for (int i = 0; i < imageUrls.length; i++) {
         	ImageView view =  new ImageView(context);
@@ -130,6 +136,7 @@ public class SlideShowView extends FrameLayout implements View.OnClickListener{
         viewPager.setFocusable(true);
         
         viewPager.setAdapter(new MyPagerAdapter());
+
         viewPager.setOnPageChangeListener(new MyPageChangeListener());
     }
 
@@ -139,7 +146,9 @@ public class SlideShowView extends FrameLayout implements View.OnClickListener{
                         getContext().startActivity(intent);
     }
 
-
+    /**
+     * 适配器
+     */
     private class MyPagerAdapter  extends PagerAdapter{
 
         @Override
@@ -152,6 +161,19 @@ public class SlideShowView extends FrameLayout implements View.OnClickListener{
         @Override
         public Object instantiateItem(View container, int position) {
         	ImageView imageView = imageViewsList.get(position);
+
+            imageView.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    /**
+                     * 处理ViewPager点击事件
+                     */
+                    Intent intent = new Intent(context,VideoActivity.class);
+                    intent.putExtra("url","http://116.228.202.122:8080/WsbxMobile/page/video/1469783954230.mp4");
+//                    com.orhanobut.logger.Logger.e(Urls.touxiang+newslistEntity.getVF_VIDEO_PATH());
+                    context.startActivity(intent);
+                }
+            });
 
 			imageLoader.displayImage(imageView.getTag() + "", imageView);
         	
@@ -196,6 +218,9 @@ public class SlideShowView extends FrameLayout implements View.OnClickListener{
         
     }
 
+    /**
+     * viewPager页面改变监听
+     */
     private class MyPageChangeListener implements OnPageChangeListener{
 
         boolean isAutoPlay = false;
@@ -230,7 +255,8 @@ public class SlideShowView extends FrameLayout implements View.OnClickListener{
         @Override
         public void onPageSelected(int pos) {
             // TODO Auto-generated method stub
-            
+
+            titleText.setText("这是视频"+pos);
             currentItem = pos;
             for(int i=0;i < dotViewsList.size();i++){
                 if(i == pos){
@@ -240,9 +266,7 @@ public class SlideShowView extends FrameLayout implements View.OnClickListener{
                 }
             }
         }
-        
     }
-    
 
     private class SlideShowTask implements Runnable{
 
@@ -254,10 +278,11 @@ public class SlideShowView extends FrameLayout implements View.OnClickListener{
                 handler.obtainMessage().sendToTarget();
             }
         }
-        
     }
-    
 
+    /**
+     * 回收图片
+     */
     private void destoryBitmaps() {
 
         for (int i = 0; i < IMAGE_COUNT; i++) {
@@ -268,16 +293,15 @@ public class SlideShowView extends FrameLayout implements View.OnClickListener{
             }
         }
     }
- 
 
-
+    /**
+     * 异步任务下载图片
+     */
 	class GetListTask extends AsyncTask<String, Integer, Boolean> {
 
 		@Override
 		protected Boolean doInBackground(String... params) {
 			try {
-
-				
 				imageUrls = new String[]{
 						"http://pic25.nipic.com/20121112/5955207_224247025000_2.jpg",
 						"http://img5.imgtn.bdimg.com/it/u=1864751896,666907639&fm=21&gp=0.jpg",

@@ -1,6 +1,7 @@
 package cn.com.hz_project.presenter.activityPresenter;
 
 import android.text.TextUtils;
+import android.util.Log;
 
 
 import com.orhanobut.logger.Logger;
@@ -20,12 +21,17 @@ public class NewsPresenter implements NewsContract.Presenter {
     private NewsContract.View mNewsView;
     private NewsContract.Video mNewsVideo;
 
-    public NewsPresenter(NewsContract.View mNewsView) {
+    public NewsPresenter(NewsContract.View mNewsView,Boolean s) {
         this.mNewsView = mNewsView;
         mNewsTask = new BusinessTask();
     }
 
     public NewsPresenter(NewsContract.Video mNewsVideo) {
+        this.mNewsVideo = mNewsVideo;
+        mNewsTask = new BusinessTask();
+    }
+
+    public NewsPresenter(NewsContract.Video mNewsVideo,int a) {
         this.mNewsVideo = mNewsVideo;
         mNewsTask = new BusinessTask();
     }
@@ -44,8 +50,11 @@ public class NewsPresenter implements NewsContract.Presenter {
                break;
            case 2:
                Logger.e("视频在第几页"+page);
-
                getVideo(page,3);
+               break;
+           case 4://获取首页轮播图相关视频
+               Log.i("------------>","1---走4");
+               getTops(3,4);
                break;
        }
     }
@@ -106,5 +115,29 @@ public class NewsPresenter implements NewsContract.Presenter {
         }, page,type,Urls.NEWS);
     }
 
+    /**
+     * 获取首页轮播图视频列表
+     * @param pageSize
+     * @param type
+     */
+    public void getTops(int pageSize,int type){
+        mNewsTask.geNewsList(new Subscriber<String>() {
+            @Override
+            public void onCompleted() {
+                LogUtils.e("PicturePresenter", "onCompleted");
+            }
+            @Override
+            public void onError(Throwable e) {
+                LogUtils.e("PicturePresenter", "onError");
+            }
+            @Override
+            public void onNext(String s) {
+                if(!TextUtils.isEmpty(s)){
+                    mNewsVideo.showVideo(GsonUtil.changeGsonToBean(s,VideoResult.class));
+                    LogUtils.e("PicturePresenter", "onNext");
+                }
+            }
+        }, pageSize,type,Urls.VIDEO);
+    }
 
 }

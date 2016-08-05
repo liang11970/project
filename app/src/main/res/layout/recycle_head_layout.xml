@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="200dp">
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/main_view_pager"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:overScrollMode="never"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="128dp"
+        android:layout_gravity="top"
+        android:background="@drawable/shadow_gradient"/>
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="84dp"
+        android:layout_gravity="bottom"
+        android:background="@drawable/shadow_gradient_reserve"/>
+
+
+    <cn.com.hz_project.view.widget.CircleIndicator
+        android:id="@+id/pager_indicator"
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"
+        android:layout_gravity="bottom|center"
+        android:layout_marginBottom="5dp"
+        android:visibility="visible"/>
+
+
+</FrameLayout>

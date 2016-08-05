@@ -35,6 +35,9 @@ public class BusinessTask {
                 observable = newsService.PostVideo(currentPage);
                 break;
 
+            case 4:
+                observable = newsService.PostTopsVideo(3,1);
+                break;
 
         }
 

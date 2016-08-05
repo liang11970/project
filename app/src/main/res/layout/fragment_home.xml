@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -14,7 +14,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="5dp"
             android:layout_marginTop="5dp"
-            android:src="@mipmap/title2" />
+            android:src="@mipmap/title2"/>
     </LinearLayout>
 
     <LinearLayout
@@ -29,7 +29,6 @@
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:layout_marginTop="5dp"
-
             >
 
             <LinearLayout
@@ -37,69 +36,69 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_margin="2dp"
+                android:clickable="true"
                 android:orientation="horizontal">
 
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="3dp"
-                    android:src="@mipmap/a1" />
+                    android:src="@mipmap/a1"/>
 
                 <TextView
                     android:id="@+id/tv_tab_1"
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
-                    android:clickable="true"
                     android:gravity="center"
                     android:text="会议签到"
                     android:textColor="@color/lightwhite"
-                    android:textSize="16sp" />
+                    android:textSize="16sp"/>
             </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/buju2"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
+                android:clickable="true"
                 android:layout_margin="2dp">
 
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="3dp"
-                    android:background="@mipmap/a2" />
+                    android:background="@mipmap/a2"/>
 
                 <TextView
                     android:id="@+id/tv_tab_2"
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
-                    android:clickable="true"
                     android:gravity="center"
                     android:text="研发前沿"
                     android:textColor="@color/lightwhite"
-                    android:textSize="16sp" />
+                    android:textSize="16sp"/>
             </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/buju3"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
+                android:clickable="true"
                 android:layout_margin="2dp">
 
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="3dp"
-                    android:background="@mipmap/a3" />
+                    android:background="@mipmap/a3"/>
 
                 <TextView
                     android:id="@+id/tv_tab_3"
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
-                    android:clickable="true"
                     android:gravity="center"
                     android:text="领导架构"
                     android:textColor="@color/lightwhite"
-                    android:textSize="16sp" />
+                    android:textSize="16sp"/>
             </LinearLayout>
 
             <LinearLayout
@@ -108,111 +107,39 @@
                 android:layout_height="fill_parent"
                 android:layout_margin="2dp"
                 android:gravity="center"
+                android:clickable="true"
                 android:orientation="horizontal">
 
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="3dp"
-                    android:background="@mipmap/a4" />
+                    android:background="@mipmap/a4"/>
 
                 <TextView
                     android:id="@+id/tv_tab_4"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:clickable="true"
                     android:text="介绍"
                     android:textColor="@color/lightwhite"
-                    android:textSize="16sp" />
+                    android:textSize="16sp"/>
             </LinearLayout>
         </LinearLayout>
-        <!--
-                <LinearLayout
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="bottom"
-                    android:orientation="vertical"
-                    android:paddingBottom="3dip" >
-
-                    <ImageView
-                        android:id="@+id/iv_bottom_line"
-                        android:layout_width="85dip"
-                        android:layout_height="2dip"
-                        android:scaleType="matrix"
-                        android:src="#1799FB" />
-                </LinearLayout>
-              -->
-    </LinearLayout>
-
-    <!--
-        <android.support.v4.view.ViewPager
-            android:layout_marginTop="5dp"
-            android:id="@+id/vPager"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_weight="1.0"
-            android:background="#ffffff"
-            android:flipInterval="30"
-            android:persistentDrawingCache="animation" />
-
-
-
-
-
-    -->
-
-
-    <!--<io.vov.vitamio.widget.VideoView-->
-    <!--android:id="@+id/surface_view"-->
-    <!--android:layout_width="fill_parent"-->
-    <!--android:layout_height="fill_parent"-->
-    <!--android:layout_centerHorizontal="true"-->
-    <!--android:layout_centerVertical="true" />-->
-
-
-<ScrollView
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-    <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-
-
-        <cn.com.hz_project.view.widget.SlideShowView
-            android:id="@+id/mediaController"
-            android:layout_width="match_parent"
-            android:layout_height="180dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="5dp" />
 
         <android.support.v4.widget.SwipeRefreshLayout
             android:id="@+id/id_swiperefresh"
-
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_below="@+id/mediaController"
-            android:layout_marginTop="5dp">
+            android:layout_height="match_parent">
 
-            <cn.com.hz_project.view.widget.LoadMorRecyclerView
-
-                android:id="@+id/listView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_centerHorizontal="true"
-
-                />
-
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/news_recycle"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:overScrollMode="never"
+                android:scrollbars="none" />
 
         </android.support.v4.widget.SwipeRefreshLayout>
 
-    </RelativeLayout>
-
-
-</ScrollView>
+    </LinearLayout>
 
 </LinearLayout>

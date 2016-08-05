@@ -22,6 +22,4 @@ public interface NewsContract {
          void start(int page, int type);
     }
 
-
-
 }

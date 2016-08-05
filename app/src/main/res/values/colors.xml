@@ -311,5 +311,7 @@
     <color name="ble_bg_color">#FFF7F7F7</color>
     <color name="ble_fg_color">#FF00c698</color>
 
+    <!--头部背景-->
+    <color name="header_background">#151925</color>
 
 </resources>
