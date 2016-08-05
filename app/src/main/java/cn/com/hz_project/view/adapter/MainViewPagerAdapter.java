@@ -73,7 +73,7 @@ public class MainViewPagerAdapter extends PagerAdapter {
                 /**
                  * 点击事件
                  */
-                Toast.makeText(mContext,"点击了第"+position+"项",Toast.LENGTH_SHORT).show();
+//                Toast.makeText(mContext,"点击了第"+position+"项",Toast.LENGTH_SHORT).show();
                 mIntent = new Intent(mContext, VideoActivity.class);
                 mIntent.putExtra("url", tops.get(position).getVF_VIDEO_PATH());
                 mContext.startActivity(mIntent);
