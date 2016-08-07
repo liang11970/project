@@ -45,6 +45,7 @@ Logger.e(id);
     protected void onPause() {
         super.onPause();
         player.pause();
+		//test
     }
 
     @Override
