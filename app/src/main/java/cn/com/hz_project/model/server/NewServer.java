@@ -36,7 +36,7 @@ public interface NewServer {
 
     @FormUrlEncoded
     @POST("videoList")
-    Observable<String> PostVideo(@Field("page") int nbd_id);
+    Observable<String> PostVideo(@Field("page") int nbd_id,@Field("pageSize") int size);
 
     /**
      * 请求头部轮播图
