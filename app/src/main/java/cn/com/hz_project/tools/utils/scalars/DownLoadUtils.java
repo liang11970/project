@@ -44,7 +44,7 @@ public class DownLoadUtils {
         showLoadingDialog();
 
         FileApi.getInstance(Urls.FileURL)
-                .loadFileByName(fileName, new FileCallback(fileStoreDir, fileStoreName) {
+                .loadFileByName(fileName, new FileCallback(fileStoreDir, fileStoreName,context) {
 
                     @Override
                     public void onSuccess(File file) {

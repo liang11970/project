@@ -155,7 +155,7 @@ public class HomeFragment extends Fragment implements NewsContract.View ,Runnabl
     private int size;
 
     /**
-     *
+     *轮播图点
      */
     private CircleIndicator mCircleIndicator;
 
@@ -175,7 +175,7 @@ public class HomeFragment extends Fragment implements NewsContract.View ,Runnabl
     private BannerTask mTimerTask;
 
     /**
-     *
+     *消息机制
      */
     private Handler mHandler = new Handler() {
 
@@ -202,7 +202,6 @@ public class HomeFragment extends Fragment implements NewsContract.View ,Runnabl
         ButterKnife.inject(this, view);
 
         initView(view, headerView);
-        initEvent();
         initListener();
 
         return view;
@@ -248,7 +247,6 @@ public class HomeFragment extends Fragment implements NewsContract.View ,Runnabl
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
 
                 super.onScrolled(recyclerView, dx, dy);
-                //int firstPos = (recyclerView == null || recyclerView.getChildCount() == 0 ? 0 : recyclerView.getChildAt(0).getTop());
 
                 mSwipeRefreshLayout.setEnabled(layoutManager.findFirstCompletelyVisibleItemPosition() == 0);
             }
@@ -295,12 +293,6 @@ public class HomeFragment extends Fragment implements NewsContract.View ,Runnabl
         presenter.start(3,4);
     }
 
-    /**
-     *
-     */
-    private void initEvent() {
-
-    }
 
     /**
      *监听事件
@@ -348,12 +340,26 @@ public class HomeFragment extends Fragment implements NewsContract.View ,Runnabl
             }
         });
 
-        adapter.setOnItemClickListener(new NewsListAdapter.MyItemClickListener() {
+//        adapter.setOnItemClickListener(new NewsListAdapter.MyItemClickListener() {
+//            @Override
+//            public void onItemClick(View view, int postion) {
+//                Toast.makeText(getActivity(),"第"+postion,Toast.LENGTH_SHORT).show();
+//            }
+//        });
+
+        adapter.setOnItemClickLitener(new NewsListAdapter.OnItemClickLitener() {
             @Override
-            public void onItemClick(View view, int postion) {
-                Toast.makeText(getActivity(),"第"+postion,Toast.LENGTH_SHORT).show();
+            public void onItemClick(View view, int position) {
+                Toast.makeText(getActivity(), "被点击了" + position, Toast.LENGTH_SHORT).show();
+                Logger.e("动次打次动次打次动次打次动词打次");
+            }
+
+            @Override
+            public void onItemLongClick(View view, int position) {
+
             }
         });
+
 }
 
     @Override
@@ -374,7 +380,6 @@ public class HomeFragment extends Fragment implements NewsContract.View ,Runnabl
         if (newsRecycler != null && mHeaderViewRecyclerAdapter != null) {
             newsRecycler.setAdapter(mHeaderViewRecyclerAdapter);
         }
-//        mRefreshBtn.setVisibility(View.VISIBLE);
         startViewPagerRun();
     }
 
@@ -403,7 +408,7 @@ public class HomeFragment extends Fragment implements NewsContract.View ,Runnabl
     public void startViewPagerRun() {
         mTimer = new Timer();
         mTimerTask = new BannerTask();
-        mTimer.schedule(mTimerTask, 1000, 10000);
+        mTimer.schedule(mTimerTask, 1000, 1000);
     }
 
     /**
@@ -422,6 +427,9 @@ public class HomeFragment extends Fragment implements NewsContract.View ,Runnabl
 //        mHandler.sendEmptyMessageDelayed(1, 2000);
     }
 
+    /**
+     * 轮播切换页
+     */
     private class BannerTask extends TimerTask {
         @Override
         public void run() {

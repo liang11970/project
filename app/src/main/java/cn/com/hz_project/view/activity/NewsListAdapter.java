@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
+import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,22 +22,13 @@ import java.util.List;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import cn.com.hz_project.model.bean.HttpResult;
+import cn.com.hz_project.view.base.ViewHolder;
 import cn.com.projectdemos.R;
 
 /**
  * Created by hcc on 16/4/2.
  */
 public class NewsListAdapter extends RecyclerView.Adapter<NewsListAdapter.NewsViewHolder> {
-
-    /**
-     *
-     */
-    private static final int ITEM_CONTENT = 0;
-
-    /**
-     *
-     */
-    private static final int ITEM_TIME = 1;
 
     /**
      * 条目布局
@@ -59,14 +51,26 @@ public class NewsListAdapter extends RecyclerView.Adapter<NewsListAdapter.NewsVi
      */
     private Intent mIntent;
 
-    /**
-     * 条目点击接口
-     */
-    private MyItemClickListener mMyItemClickListener;
+//    /**
+//     * 条目点击接口
+//     */
+//    private MyItemClickListener mMyItemClickListener;
 
     public NewsListAdapter(Context context, List<HttpResult.ObjBean> mNewsList) {
         this.newsList = mNewsList;
         this.mContext = context;
+    }
+
+    public interface OnItemClickLitener {
+        void onItemClick(View view, int position);
+
+        void onItemLongClick(View view, int position);
+    }
+
+    private OnItemClickLitener mOnItemClickLitener;
+
+    public void setOnItemClickLitener(OnItemClickLitener mOnItemClickLitener) {
+        this.mOnItemClickLitener = mOnItemClickLitener;
     }
 
     /**
@@ -103,16 +107,29 @@ public class NewsListAdapter extends RecyclerView.Adapter<NewsListAdapter.NewsVi
 //            }
 //        });
 
+        // 如果设置了回调，则设置点击事件
+        if (mOnItemClickLitener != null) {
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int pos = holder.getLayoutPosition();
+                    mOnItemClickLitener.onItemClick(holder.itemView, pos);
+                }
+            });
+        }
     }
 
+    protected int getPosition(RecyclerView.ViewHolder viewHolder) {
+        return viewHolder.getAdapterPosition();
+    }
 
     /**
      * 更新数据并刷新列表
      *
      * @param newsList
      */
-    public void updateData(List<HttpResult.ObjBean> newsList) {
 
+    public void updateData(List<HttpResult.ObjBean> newsList) {
         this.newsList = newsList;
         notifyDataSetChanged();
     }
@@ -138,10 +155,11 @@ public class NewsListAdapter extends RecyclerView.Adapter<NewsListAdapter.NewsVi
         return newsList.size() == 0 ? 0 : newsList.size();
     }
 
+
     /**
      * viewHolder实现条目点击
      */
-    public class NewsViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public class NewsViewHolder extends RecyclerView.ViewHolder {
         @InjectView(R.id.iv_picasso)
         ImageView newsImage;
 
@@ -151,26 +169,38 @@ public class NewsListAdapter extends RecyclerView.Adapter<NewsListAdapter.NewsVi
         @InjectView(R.id.tv_content)
         TextView newsContent;
 
-        public NewsViewHolder(View view) {
-            super(view);
-            ButterKnife.inject(this, view);
+
+        public NewsViewHolder(View v) {
+            super(v);
+            ButterKnife.inject(this, v);
+
+            v.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(mContext, "被点击了" + getPosition(), Toast.LENGTH_SHORT).show();
+                    Logger.e("动次打次动次打次动次打次动词打次");
+                }
+            });
         }
 
-        @Override
-        public void onClick(View v) {
-            if (mMyItemClickListener != null){
-                mMyItemClickListener.onItemClick(view,getPosition());
-                Toast.makeText(mContext,"被点击了"+getPosition(),Toast.LENGTH_SHORT).show();
-            }
-        }
+//        @Override
+//        public void onClick(View v) {
+//            if (mMyItemClickListener != null){
+//                mMyItemClickListener.onItemClick(view,getPosition());
+//                Toast.makeText(mContext,"被点击了"+getPosition(),Toast.LENGTH_SHORT).show();
+//            }
+//        }
+
+
     }
 
-    public interface MyItemClickListener {
-        public void onItemClick(View view, int postion);
-    }
 
-    public void setOnItemClickListener(MyItemClickListener listener){
-        this.mMyItemClickListener = listener;
-    }
+//    public interface MyItemClickListener {
+//        public void onItemClick(View view, int postion);
+//    }
+
+//    public void setOnItemClickListener(MyItemClickListener listener){
+//        this.mMyItemClickListener = listener;
+//    }
 
 }

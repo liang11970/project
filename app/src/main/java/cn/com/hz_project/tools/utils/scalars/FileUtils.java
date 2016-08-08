@@ -7,12 +7,13 @@ import java.util.Vector;
 
 /**
  * Created by ku on 2016/7/25.
+ * 读取本地指定文件夹下文件
  */
 public class FileUtils {
 
     // 获取当前目录下所有的文件
     public static ArrayList<String> getAllFileName(String fileAbsolutePath) throws IOException {
-        ArrayList<String> vecFile = new ArrayList<String>();
+        ArrayList<String> vecFile = new ArrayList<>();
         File file = new File(fileAbsolutePath);
 
         CreateText(file);

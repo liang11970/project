@@ -166,8 +166,6 @@ public class NewActivity extends BaseActivity implements NewsContract.View {
         listView.setAdapter(mAdapter);
         intitdata();
 
-
-
         storeHouseTjPtrFrame.setPtrHandler(new PtrDefaultHandler() {
             @Override
             public void onRefreshBegin(PtrFrameLayout frame) {
@@ -186,8 +184,6 @@ public class NewActivity extends BaseActivity implements NewsContract.View {
                 storeHouseTjPtrFrame.autoRefresh(false);
             }
         }, 100);
-
-
     }
 
     private void intitdata() {
