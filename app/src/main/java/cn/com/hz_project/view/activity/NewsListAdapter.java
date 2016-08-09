@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -95,28 +96,19 @@ public class NewsListAdapter extends RecyclerView.Adapter<NewsListAdapter.NewsVi
     @Override
     public void onBindViewHolder(NewsListAdapter.NewsViewHolder holder, int position) {
         Picasso.with(mContext).load(newsList.get(position).getNBD_PICTURE_URL()).into(holder.newsImage);
+
         holder.newsContent.setText(newsList.get(position).getNBD_TITLE());
+
         holder.newsTime.setText(newsList.get(position).getTIME());
 
-//        view.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                mIntent = new Intent(mContext, NewActivity.class);
-//                mIntent.putExtra("id", newsList.get(position).getNBD_ID());
-//                mContext.startActivity(mIntent);
-//            }
-//        });
-
-        // 如果设置了回调，则设置点击事件
-        if (mOnItemClickLitener != null) {
-            holder.itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    int pos = holder.getLayoutPosition();
-                    mOnItemClickLitener.onItemClick(holder.itemView, pos);
-                }
-            });
-        }
+        holder.layout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mIntent = new Intent(mContext,NewContentActivity.class);
+                mIntent.putExtra("id", newsList.get(position).getNBD_ID());
+                mContext.startActivity(mIntent);
+            }
+        });
     }
 
     protected int getPosition(RecyclerView.ViewHolder viewHolder) {
@@ -169,38 +161,13 @@ public class NewsListAdapter extends RecyclerView.Adapter<NewsListAdapter.NewsVi
         @InjectView(R.id.tv_content)
         TextView newsContent;
 
+        @InjectView(R.id.start_time_repairs)
+        LinearLayout layout;
 
         public NewsViewHolder(View v) {
             super(v);
             ButterKnife.inject(this, v);
 
-            v.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Toast.makeText(mContext, "被点击了" + getPosition(), Toast.LENGTH_SHORT).show();
-                    Logger.e("动次打次动次打次动次打次动词打次");
-                }
-            });
         }
-
-//        @Override
-//        public void onClick(View v) {
-//            if (mMyItemClickListener != null){
-//                mMyItemClickListener.onItemClick(view,getPosition());
-//                Toast.makeText(mContext,"被点击了"+getPosition(),Toast.LENGTH_SHORT).show();
-//            }
-//        }
-
-
     }
-
-
-//    public interface MyItemClickListener {
-//        public void onItemClick(View view, int postion);
-//    }
-
-//    public void setOnItemClickListener(MyItemClickListener listener){
-//        this.mMyItemClickListener = listener;
-//    }
-
 }

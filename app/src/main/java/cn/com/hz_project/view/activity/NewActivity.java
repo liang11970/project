@@ -54,7 +54,7 @@ public class NewActivity extends BaseActivity implements NewsContract.View {
     private NewsPresenter mPresenter;
     private ArrayList<HttpResult.ObjBean> mDataList;
     private int currentPage;
-    private Boolean tag=true;
+    private Boolean tag = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,14 +62,10 @@ public class NewActivity extends BaseActivity implements NewsContract.View {
         setContentView(R.layout.activity_new);
         ButterKnife.inject(this);
         mContext = this;
-        mPresenter = new NewsPresenter(this,false);
+        mPresenter = new NewsPresenter(this, false);
 
 //        idSwiperefresh.setColorSchemeResources(R.color.colorPrimary, R.color.colorAccent,
 //                R.color.green);
-
-
-
-
 
 
         initView();
@@ -118,7 +114,7 @@ public class NewActivity extends BaseActivity implements NewsContract.View {
 
             @Override
             public void onUIRefreshBegin(PtrFrameLayout frame) {
-               tag=true;
+                tag = true;
                 intitdata();
 
             }
@@ -190,7 +186,7 @@ public class NewActivity extends BaseActivity implements NewsContract.View {
 
     private void intitdata() {
         currentPage = 1;
-        if(tag){
+        if (tag) {
             mPresenter.start(currentPage, 0);
         }
 
@@ -201,7 +197,7 @@ public class NewActivity extends BaseActivity implements NewsContract.View {
         listView.setLoadMoreListener(new LoadMorRecyclerView.LoadMoreListener() {
             @Override
             public void onLoadMore() {
-                if(tag){
+                if (tag) {
                     currentPage++;
                     mPresenter.start(currentPage, 0);
                 }
@@ -213,15 +209,15 @@ public class NewActivity extends BaseActivity implements NewsContract.View {
     @Override
     public void showInfo(HttpResult entity) {
 
-Logger.e(entity.getObj().size()+"条数据");
+        Logger.e(entity.getObj().size() + "条数据");
 
         if (entity.getObj().size() == 0) {
 
 //            listView.removeView();
 
-            tag=false;
-            Toast.makeText(this,"没有数据了...",Toast.LENGTH_SHORT).show();
-            listView.getChildAt(listView.getChildCount()-1).setVisibility(View.GONE);
+            tag = false;
+            Toast.makeText(this, "没有数据了...", Toast.LENGTH_SHORT).show();
+            listView.getChildAt(listView.getChildCount() - 1).setVisibility(View.GONE);
             mAdapter.notifyDataSetChanged();
         } else {
             if (currentPage == 1) {
@@ -267,7 +263,9 @@ Logger.e(entity.getObj().size()+"条数据");
 //        });
 
         initEvent();
-        findViewById(R.id.tv_back).setOnClickListener(v -> {this.finish();});
+        findViewById(R.id.tv_back).setOnClickListener(v -> {
+            this.finish();
+        });
     }
 
 }

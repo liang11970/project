@@ -191,7 +191,6 @@ public class HomeFragment extends Fragment implements NewsContract.View ,Runnabl
         }
     };
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -347,18 +346,8 @@ public class HomeFragment extends Fragment implements NewsContract.View ,Runnabl
 //            }
 //        });
 
-        adapter.setOnItemClickLitener(new NewsListAdapter.OnItemClickLitener() {
-            @Override
-            public void onItemClick(View view, int position) {
-                Toast.makeText(getActivity(), "被点击了" + position, Toast.LENGTH_SHORT).show();
-                Logger.e("动次打次动次打次动次打次动词打次");
-            }
+        newsRecycler.setFocusable(true);
 
-            @Override
-            public void onItemLongClick(View view, int position) {
-
-            }
-        });
 
 }
 
@@ -388,7 +377,6 @@ public class HomeFragment extends Fragment implements NewsContract.View ,Runnabl
      */
     @Override
     public void showInfo(HttpResult entity) {
-
         if (currentPage == 1) {
             mDataList.clear();
         }
@@ -399,7 +387,11 @@ public class HomeFragment extends Fragment implements NewsContract.View ,Runnabl
 
     @Override
     public void run() {
-
+        if (mPagerPosition == size - 1) {
+            mViewPager.setCurrentItem(size - 1, false);
+        } else {
+            mViewPager.setCurrentItem(mPagerPosition);
+        }
     }
 
     /**
@@ -408,7 +400,7 @@ public class HomeFragment extends Fragment implements NewsContract.View ,Runnabl
     public void startViewPagerRun() {
         mTimer = new Timer();
         mTimerTask = new BannerTask();
-        mTimer.schedule(mTimerTask, 1000, 1000);
+        mTimer.schedule(mTimerTask, 2000, 2000);
     }
 
     /**
@@ -424,7 +416,6 @@ public class HomeFragment extends Fragment implements NewsContract.View ,Runnabl
         mCircleIndicator.setViewPager(mViewPager);
         size = mTopList.size();
         mHandler.sendEmptyMessage(1);
-//        mHandler.sendEmptyMessageDelayed(1, 2000);
     }
 
     /**

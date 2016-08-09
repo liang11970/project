@@ -16,7 +16,7 @@ import cn.com.projectdemos.R;
 
 public class VideoActivity extends BaseActivity implements EasyVideoCallback {
 
-    private static final String TEST_URL = "http://116.228.202.122:8080/WsbxMobile/page/video/1469783954230.mp4";
+    private static final String TEST_URL = "http://116.228.202.122:8080/WsbxMobile/";
     private EasyVideoPlayer player;
 
     @Override
@@ -27,7 +27,7 @@ public class VideoActivity extends BaseActivity implements EasyVideoCallback {
         player = (EasyVideoPlayer) findViewById(R.id.player);
 
         // Sets the callback to this Activity, since it inherits EasyVideoCallback
-        assert player !=null;
+        assert player != null;
         player.setCallback(this);
 
         // Sets the source to the HTTP URL held in the TEST_URL variable.
@@ -36,16 +36,16 @@ public class VideoActivity extends BaseActivity implements EasyVideoCallback {
         Bundle extras = getIntent().getExtras();
         String id = extras.getString("url");
 
-Logger.e(id);
+        Logger.e(""+Uri.parse(TEST_URL+id));
 
-        player.setSource(Uri.parse(TEST_URL));
+        player.setSource(Uri.parse(TEST_URL+id));
     }
 
     @Override
     protected void onPause() {
         super.onPause();
         player.pause();
-		//test
+        //test
     }
 
     @Override
@@ -84,7 +84,7 @@ Logger.e(id);
 
     @Override
     public void onBuffering(int percent) {
-        Logger.e("onBuffering",percent+"进度");
+        Logger.e("onBuffering", percent + "进度");
     }
 
     @Override
@@ -94,7 +94,7 @@ Logger.e(id);
 //        new MaterialDialog.Builder(this).title(R.string.error).content(e.getMessage()).positiveText(android.R.string.ok).show();
         player.stop();
         player.setSubmitText("播放出错");
-        ToastUtils.show(this,"播放出错");
+        ToastUtils.show(this, "播放出错");
 
     }
 
@@ -114,7 +114,7 @@ Logger.e(id);
     public void onSubmit(EasyVideoPlayer player, Uri source) {
         Logger.e("onSubmit");
         player.stop();
-        player=null;
+        player = null;
         this.finish();
 
     }
