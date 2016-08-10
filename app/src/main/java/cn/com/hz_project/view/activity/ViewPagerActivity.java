@@ -19,9 +19,9 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
 import cn.com.hz_project.view.fragment.HomeFragment;
-import cn.com.hz_project.view.fragment.PersonFragment;
-import cn.com.hz_project.view.fragment.SheZhiFragment;
-import cn.com.hz_project.view.fragment.SortFragment;
+import cn.com.hz_project.view.fragment.InteractionFragment;
+import cn.com.hz_project.view.fragment.SettingFragment;
+import cn.com.hz_project.view.fragment.FileFragment;
 import cn.com.hz_project.view.fragment.UpDateFragment;
 import cn.com.projectdemos.R;
 
@@ -33,9 +33,9 @@ public class ViewPagerActivity extends FragmentActivity {
     private RadioGroup radioGroup;
 
     private Fragment homeFragment = new HomeFragment();
-    private Fragment sortFragment = new SortFragment();
-    private Fragment personFragment = new PersonFragment();
-    private Fragment shezhiFragment = new SheZhiFragment();
+    private Fragment sortFragment = new FileFragment();
+    private Fragment personFragment = new InteractionFragment();
+    private Fragment shezhiFragment = new SettingFragment();
 
     private RadioButton qq;
     public static String lujing;

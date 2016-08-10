@@ -13,7 +13,11 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 import cn.com.projectdemos.R;
 
-public class PersonFragment extends Fragment {
+/**
+ * Created by kaku on 2016/7/15.
+ * 互动碎片
+ */
+public class InteractionFragment extends Fragment {
     @InjectView(R.id.rg_interact)
     RadioGroup rg_interact;
 

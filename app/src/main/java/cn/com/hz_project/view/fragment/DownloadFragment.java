@@ -1,47 +1,32 @@
 package cn.com.hz_project.view.fragment;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
-import android.os.Looper;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.GridView;
-import android.widget.TextView;
-import android.widget.Toast;
 
 
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Vector;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
-import cn.com.hz_project.model.DataManager;
-import cn.com.hz_project.model.HDialogBuilder;
 import cn.com.hz_project.model.bean.ServerFileObj;
-import cn.com.hz_project.model.server.FileApi;
-import cn.com.hz_project.model.server.FileCallback;
-import cn.com.hz_project.model.server.LoginService;
-import cn.com.hz_project.tools.url.Urls;
 import cn.com.hz_project.tools.utils.JudgeFileTypeUtils;
-import cn.com.hz_project.tools.utils.scalars.DownLoadUtils;
 import cn.com.hz_project.tools.utils.scalars.FileUtils;
 import cn.com.hz_project.view.activity.ViewPagerActivity;
 import cn.com.hz_project.view.adapter.FileListAdapter;
 import cn.com.projectdemos.R;
-import okhttp3.ResponseBody;
-import retrofit2.Call;
-import retrofit2.Retrofit;
 
 /**
  * Created by peng on 2016/7/15.
+ * 已下载文献碎片
  */
 public class DownloadFragment extends Fragment {
 
@@ -91,7 +76,7 @@ public class DownloadFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 ViewPagerActivity.transaction = ViewPagerActivity.fragmentManager.beginTransaction();
-                Fragment sortFragment = new SortFragment();
+                Fragment sortFragment = new FileFragment();
                 ViewPagerActivity.transaction.replace(R.id.content, sortFragment);
                 ViewPagerActivity.transaction.commit();
             }

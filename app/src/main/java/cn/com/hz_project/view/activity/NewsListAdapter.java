@@ -120,7 +120,6 @@ public class NewsListAdapter extends RecyclerView.Adapter<NewsListAdapter.NewsVi
      *
      * @param newsList
      */
-
     public void updateData(List<HttpResult.ObjBean> newsList) {
         this.newsList = newsList;
         notifyDataSetChanged();

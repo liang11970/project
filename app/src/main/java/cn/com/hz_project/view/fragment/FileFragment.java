@@ -44,7 +44,11 @@ import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
-public class SortFragment extends Fragment {
+/**
+ * Created by kaku on 2016/7/15.
+ * 文献碎片
+ */
+public class FileFragment extends Fragment {
 
     /**
      * 文件列表

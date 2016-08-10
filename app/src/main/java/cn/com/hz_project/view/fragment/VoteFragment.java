@@ -39,6 +39,7 @@ import rx.schedulers.Schedulers;
 
 /**
  * Created by ku on 2016/7/16.
+ * 投票碎片
  */
 public class VoteFragment extends Fragment {
 

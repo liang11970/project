@@ -24,9 +24,10 @@ import cn.com.hz_project.view.activity.AdviceActivity;
 import cn.com.projectdemos.R;
 
 /**
- * Created by peng on 2016/7/13.
+ * Created by kaku on 2016/7/13.
+ * 设置碎片
  */
-public class SheZhiFragment extends Fragment {
+public class SettingFragment extends Fragment {
 
     @InjectView(R.id.name)
     TextView name;

@@ -61,7 +61,7 @@ public class UpDateFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 ViewPagerActivity.transaction = ViewPagerActivity.fragmentManager.beginTransaction();
-                Fragment sortFragment = new SortFragment();
+                Fragment sortFragment = new FileFragment();
                 ViewPagerActivity.transaction.replace(R.id.content, sortFragment);
                 ViewPagerActivity.transaction.commit();
             }
